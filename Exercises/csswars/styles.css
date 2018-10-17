@@ -1,0 +1,34 @@
+body {
+    background-color: #111111;
+}
+
+h1 {
+    color: #E2E80F;
+    text-align: center;
+    font-size: 40px;
+}
+
+p {
+    color: #eeeeee;
+    font-size: 125%;
+    line-height: 150%;
+}
+
+.credits {
+    text-decoration: underline;
+    color: lightgreen;
+}
+
+.credits:hover {
+    cursor: grab;
+    color: lightblue;
+}
+
+@keyframes flip {
+     
+}
+
+#film-description {
+    font-style: italic;
+    font-size: 98%
+}

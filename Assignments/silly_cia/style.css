@@ -1,0 +1,57 @@
+h1 {
+    color: green;
+    text-align: center;
+    font-size: 45px;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+}
+
+h2 {
+text-align: center;
+font-size: 35px;
+font-family: Georgia, 'Times New Roman', Times, serif;
+color: black;
+}
+
+body {
+    color: black;
+    
+}
+
+.paradiv {
+    border: solid;
+    border-bottom-right-radius: 20px;
+    border-top-right-radius: 20px;
+    margin-left: 295px;
+    
+    
+}
+.div p {
+    line-height: 25px;
+    display: inline;
+    
+}
+
+img {
+    float: left;
+    
+    width: 15%;
+    height: 15%;
+    padding-right: 50px;
+    
+
+}
+
+a {
+    text-decoration: none;
+
+}
+a:hover {
+    text-decoration: underline;
+    
+}
+
+#div2 {
+    text-transform: uppercase;
+    
+
+}
