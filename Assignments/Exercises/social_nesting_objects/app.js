@@ -5,7 +5,7 @@ var friendsWithGames = {
     age: 31,
     favoriteGames: ['Call of Duty', 'Modern Warefare'],
     numberOneGame: function() {
-        console.log(this.favoriteGames);
+        return (this.favoriteGames);
     },
     gamerFriends: [
         {
@@ -13,7 +13,7 @@ var friendsWithGames = {
             age: 27,
             favoriteGames: ['Pocket Tanks', 'Angry Birds'],
             numberOneGame: function() {
-                console.log(this.favoriteGames);
+                return (this.favoriteGames[0]);
             },
             gamerFriends: [
                 {
@@ -40,11 +40,6 @@ var friendsWithGames = {
                             name: 'Freddy',
                             age: 18,
                             favoriteGames: ['BrickBreaker', 'Bejewled'],
-                            gamerFriends: [
-                                name: 'Jane',
-                                age: 22,
-                                favoriteGames: ['Hello Kitty Adventures', 'Pokemon Go',],
-                            ]
                         }, {
                             name: 'Hannah',
                             age: 36,
@@ -59,3 +54,4 @@ var friendsWithGames = {
 }
 
 console.log(friendsWithGames.numberOneGame());
+console.log(friendsWithGames.gamerFriends[0].numberOneGame());
