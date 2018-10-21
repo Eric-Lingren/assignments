@@ -52,7 +52,7 @@ console.log(lessThan20Characters('this string is way too long to e less than 20 
 //Then print the first ‘n’ Fibonacci numbers and return their sum.
 
 
-
+/*
 
 function fibNumbers(x){
     var fibArray = []
@@ -70,7 +70,7 @@ function fibNumbers(x){
 }
 
 console.log(fibNumbers(4));
-
+*/
 
 
 //Write a function to solve the quadratic equation. 
@@ -79,9 +79,40 @@ console.log(fibNumbers(4));
 
 
 function quadraticSolver(a, b, c) {
-    return -b + Math.sqrt((b * b) - (4 * a * c))
+    var negativeB = -b;
+    var bSquared = b*b;
+    var denominator = 2*a;
+    var fourAc = 4*a*c;
+    var rootThis = (bSquared - fourAc);
+    var rootedNumber = Math.sqrt(rootThis);
+    var numerator1 = negativeB + rootedNumber;
+    var numerator2 = negativeB - rootedNumber;
+    var answer1 = numerator1 / denominator;
+    var answer2 = numerator2 / denominator;
+
+    // console.log('negative b = ' + negativeB);
+    // console.log('b squared = ' + bSquared);
+    // console.log('the denominator is ' + denominator);
+    // console.log('4 time a times c is ' + fourAc);
+    // console.log('number to square root is ' + rootThis);
+    // console.log('square rooted number is ' + rootedNumber);
+    // console.log('the numerator1 is ' + numerator1);
+    // console.log('the numerator2 is ' + numerator2);
+    console.log('the answer 1 is ' + answer1);
+    console.log('the answer 2 is ' + answer2);
+    finalQuadraticAnswers.push(answer1);
+    finalQuadraticAnswers.push(answer2);
 }
+var finalQuadraticAnswers = [];
+quadraticSolver(2, -7, 6);
+console.log(finalQuadraticAnswers);
+
 
 //Write a function that accepts a string as a parameter. 
 //Return the most frequently occuring letter in that string.
 
+function mostOccuringLeter(someString){
+    
+}
+
+mostOccuringLeter('');

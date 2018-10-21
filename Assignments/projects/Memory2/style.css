@@ -1,0 +1,140 @@
+* {
+  background-color: black;
+  font-family: 'Courier New', Courier, monospace;
+}
+.wrapper{
+  display: inline;
+  
+
+}
+
+div#leaderboard{
+height: 500px;
+width: 200px;
+float: left;
+margin-right: 50px;
+margin-top: 200px;
+margin-left: 50px;
+margin-bottom: 800px;
+border: dashed lime 3px;
+border-top-left-radius: 20px;
+border-top-right-radius: 20px;
+border-bottom-left-radius: 20px;
+border-bottom-right-radius: 20px;
+}
+
+div#scoreboard{
+  height: 500px;
+  width: 200px;
+  float: right;
+  display: inline;
+  margin-top: 200px;
+  margin-right: 280px;
+  margin-left: 50px;
+  border: dashed lime 3px;
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+  border-bottom-left-radius: 20px;
+  border-bottom-right-radius: 20px;
+}
+h1{
+  color: white;
+  text-align: center;
+  font-size: 275%;
+  display: block;
+ 
+}
+h3{
+  color: white;
+  display: inline-block;
+  font-size: 150%;
+  margin-top: 0px;
+  
+}
+h4{
+  color:white;
+  display: inline-block;
+  text-align: center;
+  font-size: 145%;
+  margin-left: 20px;
+  color: lime; 
+  margin-bottom: 20px;
+}
+h5{
+  color:white;
+  display: inline-block;
+  text-align: center;
+  font-size: 145%;
+  margin-left: 20px;
+  color: #378D10; 
+  margin-top: 0px;
+  margin-bottom: 15px;
+}
+#hdifficulty{
+  margin-left: 130px;
+}
+button{
+  color: white;
+  font-size: 105%;
+  display: inline-block;
+  letter-spacing: 1px;
+  font-weight: bold;
+}
+#easy{
+  margin-left:260px;
+}
+div.front {
+  background-color: silver;
+  height: 150px;
+  width: 150px;
+  display: inline-block;
+  border: solid black 1px;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+  
+}
+
+#front1,#front3,#front5,#front7,#front9,#front11,#front13,#front15,#front17,#front19{
+  background-color: #267df4;
+}
+#front2,#front4,#front6,#front8,#front10,#front12,#front14,#front16,#front18,#front20{
+  background-color: #9126f4;
+}
+
+div.front:hover {
+  animation: twirl 0.5s ease-in forwards;
+}
+div.back {
+  background-color: grey;
+  height: 150px;
+  width: 150px;
+  display: inline-block;
+  transform: rotateY(0deg);
+  border: solid white 2px;
+  border: solid black 1px;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+  color: white;
+  font-size: 30px;
+  text-align: center;
+  
+}
+
+div.back:hover {
+  animation: twirl 0.5s ease-in forwards reverse;
+}
+
+@keyframes twirl {
+  0% {transform: rotateY(0deg)}
+  100% {transform: rotateY(90deg)}
+}
+
+
+
+.back.flip {
+  transform: rotateY(180deg);
+}

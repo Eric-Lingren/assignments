@@ -1,5 +1,3 @@
-
-
 var friendsWithGames = {
     name: 'Bob',
     age: 31,
