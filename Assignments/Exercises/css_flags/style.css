@@ -1,0 +1,360 @@
+body {
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    background-color: silver;
+}
+
+.pagewrapper {
+    margin-left: 10%;
+    margin-right: 10%;
+    margin-top: 50px;
+    margin-bottom: 50px;
+   
+}
+h1 {
+    text-align: center;
+
+}
+h2 {
+    text-align: center;
+
+}
+.flagswrappers{
+    align-items: center;
+
+
+}
+#frblue {
+    background-color: blue;
+    height: 200px;
+    width: 75px;
+    float: left;
+    margin-left: 42.5%;
+    
+
+}
+#frwhite {
+    background-color: white;
+    height: 200px;
+    width: 75px;
+    float: left; 
+}
+#frred {
+    background-color: red;
+    height: 200px;
+    width: 75px;
+    float: left;  
+}
+
+#deblack {
+    background-color: black;
+    height: 65px;
+    width: 225px;
+    margin-left: 42.5%;
+}
+#dered {
+    background-color: red;
+    height: 65px;
+    width: 225px; 
+    margin-left: 42.5%;
+}
+#deyellow {
+    background-color: yellow;
+    height: 65px;
+    width: 225px;
+    margin-left: 42.5%;
+}
+#madagascarred {
+    background-color: #FC3D32;
+    height: 80px;
+    width: 225px; 
+    margin-left: 42.5%;
+}
+#madagascargreen {
+    background-color: #007E3A;
+    height: 80px;
+    width: 225px;
+    margin-left: 42.5%;
+}
+#switzerlandred {
+    background-color: red;
+    height: 225px;
+    width: 225px; 
+    margin-left: 33.5%;
+    position: absolute;
+
+}
+#switzerlandwhite1 {
+    background-color: white;
+    height: 50px;
+    width: 150px;
+    margin-left: 33.5%;
+    position: absolute;
+    margin-top: 90px;
+    margin-left: 675px;
+}
+#switzerlandwhite2 {
+    background-color: white;
+    height: 150px;
+    width: 50px;
+    margin-left: 33.5%;
+    position: absolute;
+    margin-top: 40px;
+    margin-left: 725px;
+}
+#swedenblue {
+    background-color: blue;
+    height: 160px;
+    width: 225px; 
+    margin-left: 33.5%;
+    position: absolute;
+}
+#swedenyellow1 {
+    background-color: yellow;
+    height: 40px;
+    width: 225px;
+    margin-left: 33.5%;
+    position: absolute;
+    margin-top: 3%;
+    
+}
+#swedenyellow2 {
+    background-color: yellow;
+    height: 160px;
+    width: 40px;
+    margin-left: 37%;
+    position: absolute;
+    margin-top: 0%
+}
+
+#gambiared {
+    background-color: #CE1126;
+    height: 65px;
+    width: 225px;
+    margin-left: 42.5%;
+    border-bottom: white 10px solid;
+}
+#gambiablue {
+    background-color: #0C1C8C;
+    height: 45px;
+    width: 225px; 
+    margin-left: 42.5%;
+    border-bottom: white 10px solid;
+}
+#gambiagreen {
+    background-color: #3A7728;
+    height: 65px;
+    width: 225px;
+    margin-left: 42.5%;
+}
+#tongaredbackground {
+    background-color: #C10000;
+    height: 160px;
+    width: 225px; 
+    margin-left: 33.5%;
+    position: absolute;
+
+}
+#tongawhite {
+    background-color: white;
+    height: 80px;
+    width: 90px;
+    margin-left: 33.5%;
+    position: absolute;
+}
+#tongaredcross1 {
+    background-color: #C10000;
+    height: 50px;
+    width: 15px;
+    margin-left: 35.5%;
+    margin-top: .8%;
+    position: absolute;
+}
+#tongaredcross2 {
+    background-color: #C10000;
+    height: 15px;
+    width: 50px;
+    margin-left: 34.6%;
+    margin-top: 1.6%;
+    position: absolute;
+}
+
+#japanwhite {
+    background-color: white;
+    height: 160px;
+    width: 225px; 
+    margin-left: 33.5%;
+    position: absolute;
+}
+#japanred {
+    background-color: red;
+    height: 80px;
+    width: 80px; 
+    margin-left: 37%;
+    margin-top: 2%;
+    position: absolute;
+    border-radius: 50%;
+}
+
+#greecebluehorizontal1 {
+    background-color: #0D5EAF;
+    height: 18px;
+    width: 225px; 
+    margin-left: 33.5%;
+    position: absolute;
+    margin-top: 0px;
+    
+}
+#greecewhitehorizontal1 {
+    background-color: white;
+    height: 18px;
+    width: 225px; 
+    margin-left: 33.5%;
+    position: absolute;
+    margin-top: 18px;
+}
+#greecebluehorizontal2 {
+    background-color: #0D5EAF;
+    height: 18px;
+    width: 225px; 
+    margin-left: 33.5%;
+    position: absolute;
+    margin-top: 36px;
+    
+}
+#greecewhitehorizontal2 {
+    background-color: white;
+    height: 18px;
+    width: 225px; 
+    margin-left: 33.5%;
+    position: absolute;
+    margin-top: 54px;
+}
+#greecebluehorizontal3 {
+    background-color: #0D5EAF;
+    height: 18px;
+    width: 225px; 
+    margin-left: 33.5%;
+    position: absolute;
+    margin-top: 72px;
+    
+}
+#greecewhitehorizontal3 {
+    background-color: white;
+    height: 18px;
+    width: 225px; 
+    margin-left: 33.5%;
+    position: absolute;
+    margin-top: 90px;
+}
+#greecebluehorizontal4 {
+    background-color: #0D5EAF;
+    height: 18px;
+    width: 225px; 
+    margin-left: 33.5%;
+    position: absolute;
+    margin-top: 108px;
+    
+}
+#greecewhitehorizontal4 {
+    background-color: white;
+    height: 18px;
+    width: 225px; 
+    margin-left: 33.5%;
+    position: absolute;
+    margin-top: 126px;
+}
+#greecebluehorizontal5 {
+    background-color: #0D5EAF;
+    height: 18px;
+    width: 225px; 
+    margin-left: 33.5%;
+    position: absolute;
+    margin-top: 144px;  
+}
+#greecebluebox {
+    background-color: #0D5EAF;
+    height: 90px;
+    width: 90px; 
+    margin-left: 33.5%;
+    position: absolute; 
+}
+
+#greececrosswhitehorizontal {
+    background-color: white;
+    height: 18px;
+    width: 90px; 
+    margin-left: 33.5%;
+    position: absolute;
+    margin-top: 36px;
+}
+#greececrosswhitevertical {
+    background-color: white;
+    height: 90px;
+    width: 18px; 
+    margin-left: 35.5%;
+    position: absolute;
+    margin-top:;
+}
+
+#nigerred {
+    background-color: #E05206;
+    height: 65px;
+    width: 225px;
+    margin-left: 33.5%;
+    margin-top: 0%;
+    position: absolute;
+}
+#nigerwhite {
+    background-color: white;
+    height: 65px;
+    width: 225px; 
+    margin-left: 33.5%;
+    margin-top: 3%;
+    position: absolute;
+}
+#nigergreen {
+    background-color: #0DB02B;
+    height: 65px;
+    width: 225px;
+    margin-left: 33.5%;
+    margin-top: 6%;
+    position: absolute;
+}
+#nigercircle {
+    background-color: #E05206;
+    height: 50px;
+    width: 50px; 
+    margin-left: 38%;
+    margin-top: 3.2%;
+    position: absolute;
+    border-radius: 50%;
+}
+
+
+#maldivesred {
+    background-color: #D21034;
+    height: 160px;
+    width: 225px; 
+    margin-left: 33.5%;
+    position: absolute;
+}
+
+#maldivesgreen {
+    background-color: #007E3A;
+    height: 80px;
+    width: 150px; 
+    margin-left: 35.5%;
+    margin-top: 2%;
+    position: absolute;
+}
+
+#maldivescircle {
+    
+    height: 50px;
+    width: 50px; 
+    margin-left: 39%;
+    margin-top: 3%;
+    position: absolute;
+    border-radius: 50%;
+    box-shadow: -12px 0 10px 0 white
+}

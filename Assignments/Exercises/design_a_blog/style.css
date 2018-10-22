@@ -1,0 +1,51 @@
+
+body{
+    background-color: lightgrey;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif
+}
+
+.navbar {
+    background-color: green;
+    color: white;
+    position: fixed;
+}
+
+ul {
+    list-style: none;
+}
+
+li {
+    display: inline;
+    margin: 20px;
+}
+
+#wrapper{
+    margin-left: 20%;
+    margin-right: 20%;
+    
+}
+
+img{
+    width: 300px;
+    height: 200px;
+    float: left;
+}
+
+.blogpostwrapper {
+    margin-top: 10%;
+    border: black solid 3px;
+    margin-left: 20%;
+    margin-right: 20%;
+    background-color: aliceblue;
+    padding: 20px;
+    float: left;
+}
+
+p {
+    display: block;
+    margin: 10px;
+    padding: 10px;
+    position: relative;
+    left: 25px;
+    top: 25px;
+}
