@@ -20,6 +20,7 @@ h2 {
 }
 .flagswrappers{
     align-items: center;
+    border: dashed 5px black;
 
 
 }
@@ -356,5 +357,5 @@ h2 {
     margin-top: 3%;
     position: absolute;
     border-radius: 50%;
-    box-shadow: -12px 0 10px 0 white
+    box-shadow: -15px 0 0 1px white
 }
