@@ -1,0 +1,53 @@
+<!doctype html>
+<html>
+<head>
+    <link rel='stylesheet' type='text/css' href='./style.css'>
+</head>
+
+<body>
+    <div id=pageWrapper>
+
+        <h1> Do Some Math Yo!</h1>
+        <div class='divMath' id='divAdd'>
+            <form name='addForm'>
+                <h2>Add:</h2>
+                <input type='number' name='firstAdd'>
+                <h2>+</h2>
+                <input type='number' name='secondAdd'>
+                <br><br><br>
+                <button>ADD THEM!</button>
+                <h4>The answer is:</h4>
+                <div class='result' id='resultAdd'></div>
+            </form>
+        </div> 
+        <div class='divMath' id='divSubtract'>
+            <form name='subtractForm'>
+                <h2>Subtract:</h2>
+                <input type='number' name='firstSubtract'>
+                <h2>-</h2>
+                <input type='number' name='secondSubtract'>
+                <br><br><br>
+                <button>SUBTRACT THEM!</button>
+                <h4>The answer is:</h4>
+                <div class='result' id='resultSubtract'></div>
+            </form>
+        </div>
+        <div class='divMath' id='divMultiply'>
+            <form name='multiplyForm'>
+                <h2>Multiply:</h2>
+                <input type='number' name='firstMultiply'>
+                <h2>*</h2>
+                <input type='number' name='secondMultiply'>
+                <br><br><br>
+                <button>MULTIPLY THEM!</button>
+                <h4>The answer is:</h4>
+                <div class='result' id='resultMultiply'></div>
+            </form>
+        </div>
+
+    </div>
+
+    <script src='app.js'></script>
+</body>
+
+</html>

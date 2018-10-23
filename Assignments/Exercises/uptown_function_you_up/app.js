@@ -37,10 +37,44 @@ function everyOtherWordString(x){
     lyricsReversed = lyrics.reverse();
         for (i = 0; i < lyricsReversed.length; i++){
             if (i % 2 === 0) {
-                lyricsArray.push(i);
+                lyricsArray.push(lyricsReversed[i]);
             }
         }
         console.log(lyricsArray.join());
 }
 
 everyOtherWordString();
+
+
+
+/*
+// Write a function declaration named isEven that console logs "Its Even!" ehen called.
+
+function isEven(){
+    console.log(' Its Even!');
+}
+
+// Write a function expression named isOdd that console logs "Its Odd!" ehen called.
+
+var isOdd = function() {
+    console.log(' Its Odd!');
+}
+
+//  Write a function expression or declaratrion named checkNumbers that takes a single paramater 'aray'
+//that is an array of numbers.  This function should loop through the arrayand should call its odd or its even.
+
+numArray = [0,1,2,3,4,5,6,7,8,9,10]
+
+function checkNumbers(numArray){
+    for (i = 0; i < numArray.length; i++){
+        if (numArray[i] % 2 === 0){
+            isEven();
+        } else {
+            isOdd();
+        }
+    }
+}
+
+checkNumbers(numArray);
+
+*/
