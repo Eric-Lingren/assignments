@@ -41,3 +41,16 @@
     display: inline-block;
     border: 10px solid white;
 }
+
+@media (max-width: 768px) {
+    #lightpink,
+    .pink,
+    .blue,
+    #green,
+    #orange {
+        display: block;
+        border: 1px solid white;
+        height: 50px;
+        width: 100%;
+    }
+}

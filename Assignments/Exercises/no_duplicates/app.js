@@ -11,22 +11,25 @@ The Extras: "okeerr"
 var myString = 'bookkeeper larry'
 var lettersOnly = 'bookkeeper larry'.split('');
 var removedLetters =[];
+var noDupString = [];
 
 function noDuplicates(x){
     for (i = 0; i < lettersOnly.length; i++){
         if (lettersOnly[i] === lettersOnly[i - 1]) {
             removedLetters.push(lettersOnly[i]);
+        } else {
+            noDupString.push(lettersOnly[i]);
+            finalNoDupString = noDupString.join(' ');
         }
-        console.log(removedLetters);
+        console.log(finalNoDupString);
     }
     //console.log(lettersOnly);
 }
 noDuplicates(myString);
-
-
+console.log(finalNoDupString)
 
 //Create variable that stores the string without duplicates.
-var noDupString = [];
+
 
 //Create a variable that stores the letters removed.
 var removedLetters = [];
