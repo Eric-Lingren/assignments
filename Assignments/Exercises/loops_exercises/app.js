@@ -61,10 +61,12 @@ arrayLoop42();
 
 
 var numberList10 = [3,4,5,6,7,8,9,10,1,2]
+var sortNumberList = numberList10.sort(function(a, b) {return a - b});
+console.log(sortNumberList);
 
 function smallestNumber (){
-    
-}
+    console.log(`The smallest number in this array is ${sortNumberList[0]}`);
+};
 
-
+smallestNumber();
 

@@ -4,7 +4,19 @@
 
 //i.e.  largest([3, 5, 2, 8, 1]) // => 8
 
+var array = [3, 5, 2, 8, 1];
+var sortedArray = array.sort(function(a, b){return a - b});
+console.log(sortedArray);
+console.log(`${sortedArray[0]}`)
 
+function largest(sortedArray){
+    for(i = 0; i < sortedArray.length; i++){
+        
+    }
+    console.log(`The smallest number is ${sortedArray[0]}`);
+};
+
+largest(sortedArray);
 
 //Write a function that takes an array of words and a character and return each word that 
 //has that letter present.
