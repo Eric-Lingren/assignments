@@ -4,17 +4,32 @@
     <link rel='stylesheet' type='text/css' href='./style.css'>
 </head>
 <body>
-    <div class='pageWrapper'>
-        <nav class='navBar'>
-            
-            <div class='navLinks'><a href='./index.html'>Home</a></div>
-            <div class='navLinks'><a href='./about.html'>About</a></div>
-            <div class='navLinks'><a href='./location.html'>Location</a></div>
-            <div class='navLinks'><a href='./menu.html'>Menu</a></div>
-            <div class='navLinks'><a href='./contact.html'>Contact</a></div>
+        <div class='banner' id='pageTop'>
+                <img id='logo' src='./logo.PNG'>  
+                <h4 hidden id='logo2'> Licensed Master Aesthetician </h4>
+                <nav class='navBar' id='menu'>
+                    <div class='navLinks'><a href='./index.html'>Home</a></div>
+                    <div class='navLinks'><a href='./about.html'>About</a></div>
+                    <div class='navLinks'><a href='./menu.html'>Treatments</a></div>
+                    <div class='navLinks' id='locationLink'><a href='./location.html'>Location</a></div>
+                    <div class='navLinks'><a href='./contact.html'>Contact</a></div>
+                </nav>
+            </div>
 
-        </nav>
-        <p> this is location page</p>
+    <div class='pageWrapper' id='wrapper'>
+        
+        <div class='pageContent'>
+            <div id='location'>
+                
+                <div class="mapouter" id='map'>
+                    <div class="gmap_canvas">
+                        <iframe width="600" height="500" id="gmap_canvas" src="https://maps.google.com/maps?q=3661%20South%202245%20East%20Salt%20Lake%20City%2C%20UT%2084109&t=&z=13&ie=UTF8&iwloc=&output=embed" frameborder="0" scrolling="no" marginheight="0" marginwidth="0">
+                        </iframe>                            
+                    </div>        
+                </div>
+            </div>
+        <br>
     </div>
+    <script src='./app.js'></script>
 </body>
 </html>

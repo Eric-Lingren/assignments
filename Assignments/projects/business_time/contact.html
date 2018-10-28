@@ -4,17 +4,40 @@
     <link rel='stylesheet' type='text/css' href='./style.css'>
 </head>
 <body>
-    <div class='pageWrapper'>
-        <nav class='navBar'>
-            
-            <div class='navLinks'><a href='./index.html'>Home</a></div>
-            <div class='navLinks'><a href='./about.html'>About</a></div>
-            <div class='navLinks'><a href='./location.html'>Location</a></div>
-            <div class='navLinks'><a href='./menu.html'>Menu</a></div>
-            <div class='navLinks'><a href='./contact.html'>Contact</a></div>
+        <div class='banner' id='pageTop'>
+                <img id='logo' src='./logo.PNG'>  
+                <h4 hidden id='logo2'> Licensed Master Aesthetician </h4>
+                <nav class='navBar' id='menu'>
+                    <div class='navLinks'><a href='./index.html'>Home</a></div>
+                    <div class='navLinks'><a href='./about.html'>About</a></div>
+                    <div class='navLinks'><a href='./menu.html'>Treatments</a></div>
+                    <div class='navLinks' ><a href='./location.html'>Location</a></div>
+                    <div class='navLinks' id='contactLink'><a href='./contact.html'>Contact</a></div>
+                </nav>
+            </div>
 
-        </nav>
-        <p> this is contact page</p>
+    <div class='pageWrapper' id='wrapper'>
+        <div class='pageContent'>
+                
+            <div id='contact'>
+                
+                <h3>Office: &nbsp&nbsp (801) 274-0693 </h3>
+                <h3>Cell: &nbsp&nbsp&nbsp&nbsp&nbsp (801) 809-7729 </h3>
+                <h3>Email: &nbsp&nbsp&nbsp <a id='email' href='mailto:mprospa@gmail.com'> MProSpaUtah@gmail.com </a> </h3>
+                <br>
+                <a href='http://www.instagram.com'> <img id='instagram' src='./instagram.png'> </a>
+                <a href='http://www.facebook.com'> <img id='facebook' src='./facebook.png'> </a>
+                <p>You can schedule an appointment directly by clicking on the "+" button on the botton right of the calendar. I will contact you to confim, so please ensure you leave your contact info. </p>
+            </div>
+            <div class='responsiveIFrameContainer' id='bigCalendar'>
+                <iframe src="https://calendar.google.com/calendar/b/1/embed?showTitle=0&amp;height=500&amp;wkst=1&amp;bgcolor=%23ffffff&amp;src=mprospautah%40gmail.com&amp;color=%231B887A&amp;ctz=America%2FDenver" style="border:solid 2px #000" width="800" height="600" frameborder="0" scrolling="no"></iframe>
+            </div>
+            <div class='responsiveIFrameContainer' id='smallCalendar'>
+                <iframe src="https://calendar.google.com/calendar/b/1/embed?showTitle=0&amp;mode=AGENDA&amp;height=400&amp;wkst=1&amp;bgcolor=%23FFFFFF&amp;src=mprospautah%40gmail.com&amp;color=%231B887A&amp;ctz=America%2FDenver" style="border-width:0" width="300" height="400" frameborder="0" scrolling="no"></iframe>
+            </div>
+        </div>
+        <br>
     </div>
+    <script src='./app.js'></script>
 </body>
 </html>
