@@ -1,0 +1,31 @@
+
+* {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+.summary {
+    display: flex;
+    justify-content: center;
+
+}
+.wrapper {
+  
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   flex-direction: column-reverse;
+
+}
+
+div {
+   
+    margin: 5px;
+  
+}
+
+.list {
+    border: 1px solid black;
+    padding: 10px;
+}
