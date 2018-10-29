@@ -22,6 +22,8 @@ html, body {
    
 }
 
+
+
 #logo {
     box-shadow: 15px 5px 30px;
     width: 20%;
@@ -59,6 +61,7 @@ html, body {
     display: flex;
     flex-direction: row;
     justify-content: space-evenly;
+    align-items: center;
     background-image: linear-gradient(#373B44, #4286f4);
     box-shadow: 10px 10px 20px;
     border: white solid 4px;
@@ -67,11 +70,9 @@ html, body {
     border-top-right-radius: 10px;
     border-bottom-right-radius: 10px;
     width: 89.5%;
-    /*
-    transition: height 0.3s linear 0s;
-    */
 
 }
+
 .navLinks {
     background-image: linear-gradient(#373B44, #4286f4);
     padding: 10px;
@@ -83,45 +84,7 @@ html, body {
     font-size: 1.6em;    
 }
 
-#signup {
-    margin-top: 500px;
-    position: -webkit-sticky;
-    position: sticky;
-    bottom: 0;
-    width: 1000px;
-    height: 30px;
-    background-image: linear-gradient(#4286f4, #373B44);
-    border: white solid 4px;
-    border-top-left-radius: 10px;
-    border-top-right-radius: 10px;
-    margin-left: auto;
-    margin-right: auto;
-    width: 37%;
-    padding: 10px;
-    font-size: 1.3em;
-    color: #fff;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    
-}
-#form {
-    
-    
-}
-#emailInput {
-    margin-left: 20px;
-    width: 25%;
-    
-}
-button{
-    border-top-left-radius: 7px;
-    border-top-right-radius: 7px;
-    border-bottom-left-radius: 7px;
-    border-bottom-right-radius: 7px;
-    margin-left: 20px;
-    
-}
+
 
 #homeLink{
     padding: 6px;
@@ -133,21 +96,28 @@ button{
     font-weight: bold;
     font-size: 1.6em;  
 }
-#menuLink{
+#menuLink {
     padding: 6px;
     font-weight: bold;
     font-size: 1.6em;  
 }
-#locationLink{
+#locationLink {
     padding: 6px;
     font-weight: bold;
     font-size: 1.6em;  
 }
-#contactLink{
+#contactLink {
     padding: 6px;
     font-weight: bold;
     font-size: 1.6em;  
 }
+
+@media (max-width: 550px) {
+    .navLinks, #homeLink, #aboutLink, #menuLink, #locationLink, #contactLink  {
+        font-size: .9em;
+    }
+}
+
 h4 {
     color: white;
     font-family: Arial, Helvetica, sans-serif;
@@ -163,6 +133,7 @@ h4 {
     position: relative;
     top: 0px;  
 }
+
 
 a {
     color: white;
@@ -181,6 +152,9 @@ a {
     position: relative;
     top: 250px;
 }
+
+/* CONTACT PAGE */
+
 #contact {
     width: 50%;
     margin-left: 50%;
@@ -207,6 +181,15 @@ h2 {
 #facebook {
     width: 8%;
 }
+
+@media (max-width: 720px) {
+    #contact {
+        width: 86%;
+    }
+}
+
+/* LOCATION PAGE */
+
 #bigCalendar {
     margin-top: 5%;
     box-shadow: 10px 10px 15px;
@@ -233,7 +216,7 @@ h2 {
 }
 @media (max-width: 600px) {
     #logo {
-        width: 60%;
+        width: 40%;
     }
 }
 
@@ -242,6 +225,8 @@ h2 {
         width: 25%;
     }
 }
+
+
 
 #location {
     width: 100%;
@@ -307,6 +292,12 @@ h2 {
     border-top-right-radius: 50px;
 }
 
+@media (max-width: 1150px) {
+    .animationwrapper {
+        height: 90px;
+    }
+}
+
 #haveyoubeen {
     margin-left: 5%;
     font-size: 40px;
@@ -347,6 +338,41 @@ h2 {
     animation: showup5 20s infinite, 
                slidein4 20s infinite;
     position: absolute;
+}
+
+#more1 {
+    width: 5%;
+    position: relative;
+    margin-left: 0px;
+    top: 20px;
+    
+}
+#more2 {
+    width: 5%;
+    position: relative;
+    margin-left: 0px;
+    top: 20px;
+    
+}
+
+#aboutParagraph1 {
+    display: none;
+}
+
+#aboutParagraph2 {
+    display: none;
+}
+
+@media (max-width: 1150px) {
+    #haveyoubeen {
+        display: block;
+    }
+}
+
+@media (max-width: 1150px) {
+    #masterEsthetianDiv, #makeupArtistDiv, #medicialAssistantDiv, #microdermabrasionDiv  {
+        padding-left: 15%;
+    }
 }
 
 
@@ -424,7 +450,7 @@ h2 {
 
 
 
-/* MENU PAGE  */
+/* TREATMENTS PAGE  */
 
 .pageContentMenu {
     background-image: url('./bamboo.jpg');
@@ -435,22 +461,26 @@ h2 {
     border: black solid 2px;
     position: relative;
     top: 250px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    
  
 }
-#menuHead {
-    text-align: center;
-}
+
+
+
 #menuText1 {
-    margin-left: 8%;
+    margin-left: 5%;
 }
 
 .menuText {
-    margin-left: 5%;
+    margin-left: 8%;
     margin-right: 5%;
     border: 1px solid white;
-    padding: 50px;
+    padding: 20px;
     margin-top: 50px;
-    padding-top: 15px;
+    padding-top: 45px;
     background: rgba(255, 255, 255, 0.5);
     border-bottom-right-radius: 50px;
     border-top-right-radius: 50px;
@@ -458,9 +488,147 @@ h2 {
     border-bottom-left-radius: 50px;
     line-height: 1.6;
     font-size: 1.1em;
-    height: 650px;
+    height: 750px;
     width: 30%;
-    display: inline-table;
+    display: flex;
+   
+
+}
+
+.priceImage {
+    margin:0 auto;
+    
+}
+
+#priceImage1 {
+    width: 90%;
+}
+
+#priceImage2 {
+    padding-bottom: 30%;
+    width: 90%;
+}
+
+@media (max-width: 1250px) {
+    .pageContentMenu {
+        flex-direction: column;
+        align-items: center;
+    } 
+    .menuText {
+        width: 50%;
+        height: 50%;
+        padding-left: 0px;
+    } 
+    #menuText1 {
+        margin-left: 0px;
+        padding-left: 0px;
+    }
+    #priceImage1 {
+        height: 80%;
+        width: 70%;
+    } 
+    #priceImage2 {
+        height: 80%;
+        width: 70%;
+    }
+}
+
+@media (max-width: 650px) {
+    .menuText {
+        background: none;
+        border: none;
+        margin-top: 5px;
+        padding-top: 5px;
+        margin-left: 0;
+    }
+    #priceImage1 {
+        height: 100%;
+        width: 150%;
+        margin-left: 0%;
+    } 
+    #priceImage2 {
+        height: 100%;
+        width: 150%;
+        margin-left: 0%;
+    } 
+    .pageContentMenu {
+        justify-content: left;
+    }
 }
 
 
+/* Footer Signup */
+
+#signup {
+    
+    margin-top: 195px;
+    position: fixed;
+    left: 24%;
+    bottom: 0;
+    height: 30px;
+    background-image: linear-gradient(#4286f4, #373B44);
+    border: white solid 4px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+    padding: 10px;
+    font-size: 1.3em;
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+#emailInput {
+    margin-left: 20px;
+    width: 25%;  
+}
+
+button{
+    border-top-left-radius: 7px;
+    border-top-right-radius: 7px;
+    border-bottom-left-radius: 7px;
+    border-bottom-right-radius: 7px;
+    margin-left: 20px;
+}
+
+
+
+/* MEDIA QUERIES */ 
+
+@media (max-width: 1425px){
+    #signup{
+        font-size: .9em;
+        padding: 2px;
+    }
+    button {
+        margin-left: 2px;
+    }
+}
+
+@media (max-width: 825px) {
+    #signup{
+        width: 100%;
+    }
+}
+
+
+@media (max-width: 800px) {
+    .banner {
+        height: 100px;
+    }
+}
+@media (max-width: 800px) {
+    .navBar {
+        margin-top: 67px;
+    }
+}
+
+@media (max-width: 600px) {
+    .pageWrapper{ 
+        margin-top: -50px
+    }
+}
