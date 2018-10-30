@@ -1,0 +1,19 @@
+
+
+html{
+    background: url('./robots.jpg') no-repeat center right fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    background-size: cover;
+}
+body {
+    
+}
+#backgroundImage {
+   
+}
+
+
+h1 {
+    color: blue
+}
