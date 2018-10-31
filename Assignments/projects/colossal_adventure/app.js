@@ -8,10 +8,10 @@ var ask = require('readline-sync');
 function Player(hp){
     this.hp = hp;
     // Attack for a random amount
-    this.attack = function() {
-        // returns a random number between 30 - 50
-        return Math.floor(Math.random() * (50 - 30) + 30)
-    }
+    // this.attack = function() {
+    //     // returns a random number between 30 - 50
+    //     return Math.floor(Math.random() * (50 - 30) + 30)
+    // }
     this.inventory = [' shoes', ' fists',];
 }
 
@@ -120,16 +120,30 @@ function encounter(enemy){
                 if (runAwayProbability === 0) {
                     console.log(`Nice job!  You were able to escape ${enemy.name}!`)
                     enemy.isAlive = false;
-                ///  If player wasnt able to run away
+
+                ///  If player wasnt able to run away, they get attacked
                 } else {
-                    console.log(`You couldnt get away from ${enemy.name} this time... \n
+                    var thisEnemyAttack = enemy.attack();
+                    console.log(player1.hp)
+                    console.log(`Unfortunately You couldnt get away from ${enemy.name} this time... \n
                     ${enemy.name} was able to attack you while you were trying to flee! \n
-                    You were dealt ${enemy.attack} damage.  Your health is now at ${player1.hp - enemy.attck}.`)
+                    You were dealt ${thisEnemyAttack} damage.  Your health is now at ${player1.hp}.`)
                 }
 
         } else if (userChoice === 2){
             ///  Attack Sequence
-            console.log(`you are attacking`);
+            console.log(`You have chosen to attack`);
+            //  Attack Enemy
+            var thisAttack = playerAttack();
+            var currentEnemyHealth = enemy.hp - thisAttack
+            console.log(`You dealt ${thisAttack} damage to ${enemy.name}!`)
+                //  Enemy is still alive
+                if (currentEnemyHealth > 0) {
+
+                    //  Enemy is dead
+                } else {
+
+                }
 
         } else if (userChoice === 3){
             console.log(`Here are the items in your inventory: \n
@@ -148,10 +162,11 @@ function encounter(enemy){
 
 
 
-//  Enemy Attack
+//  Player Attack
 
-function enemyAttack(){
-
+function playerAttack(){
+    playerAttack =  Math.floor(Math.random() * (50 - 30) + 30)
+    return playerAttack
 }
 
 
