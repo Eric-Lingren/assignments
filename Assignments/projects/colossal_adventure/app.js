@@ -8,10 +8,10 @@ var ask = require('readline-sync');
 function Player(hp){
     this.hp = hp;
     // Attack for a random amount
-    // this.attack = function() {
-    //     // returns a random number between 30 - 50
-    //     return Math.floor(Math.random() * (50 - 30) + 30)
-    // }
+    this.attack = function() {
+        // returns a random number between 30 - 50
+        return Math.floor(Math.random() * (50 - 30) + 30)
+    }
     this.inventory = [' shoes', ' fists',];
 }
 
@@ -32,6 +32,7 @@ function Enemy(name, hp, isAlive){
 //  GLOBAL VARIABLES
 var player1 = new Player(100);
 var playerChoiceOptions = ['Walk', 'Run' , 'Attack', 'Check Inventory', 'My Stats', ];
+var enemyDrops = [];
 
 
 
@@ -114,7 +115,7 @@ function encounter(enemy){
         } else if (userChoice === 1){
             console.log(`You are trying to run away from ${enemy.name}`);
             var runAwayProbability = Math.floor(Math.random() * 3);
-            console.log(`Run probability is: ${runAwayProbability}`);
+            //console.log(`Run probability is: ${runAwayProbability}`);
             run();
                 /// If player excapes Enemy
                 if (runAwayProbability === 0) {
@@ -132,19 +133,26 @@ function encounter(enemy){
 
         } else if (userChoice === 2){
             ///  Attack Sequence
-            console.log(`You have chosen to attack`);
-            //  Attack Enemy
-            var thisAttack = playerAttack();
-            var currentEnemyHealth = enemy.hp - thisAttack
-            console.log(`You dealt ${thisAttack} damage to ${enemy.name}!`)
-                //  Enemy is still alive
-                if (currentEnemyHealth > 0) {
-
+                console.log(`You have chosen to attack`);
+                //  Player attacks Enemy
+                var thisPlayerAttack = player1.attack();
+                console.log(`You dealt ${thisPlayerAttack} damage to ${enemy.name}!`);
+                enemy.hp = enemy.hp - thisPlayerAttack;
+                // Enemy Attacks Player
+                var thisEnemyAttack = enemy.attack();
+                player1.hp = player1.hp - thisEnemyAttack;
+                console.log(`${enemy.name} dealt you ${thisEnemyAttack} damage!  Your HP is now ${player1.hp}.`);
+                    //  Enemy is still alive
+                    if (enemy.hp > 0) {
+                        console.log(`${enemy.name} is still alive.  Their HP is now ${enemy.hp}`);
+                    
                     //  Enemy is dead
-                } else {
-
-                }
-
+                    } else {
+                        console.log(`${enemy.name} has been killed.  Congratulations!!`);
+                        enemy.isAlive = false;
+                        //  Enemy need to drop something
+                    
+            }
         } else if (userChoice === 3){
             console.log(`Here are the items in your inventory: \n
             ${player1.inventory}`);
@@ -164,10 +172,10 @@ function encounter(enemy){
 
 //  Player Attack
 
-function playerAttack(){
-    playerAttack =  Math.floor(Math.random() * (50 - 30) + 30)
-    return playerAttack
-}
+// function playerAttack(){
+//     playerAttack =  Math.floor(Math.random() * (50 - 30) + 30)
+//     return playerAttack
+// }
 
 
 //////////////////////////////////////////
