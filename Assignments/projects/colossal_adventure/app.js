@@ -12,7 +12,19 @@ function Player(hp){
         // returns a random number between 30 - 50
         return Math.floor(Math.random() * (50 - 30) + 30)
     }
-    this.inventory = [' shoes', ' fists',];
+    this.inventory = [ {
+            name:  'Shoes ',
+            attackBonus: 0,
+            defenseBonus: 0,
+            escapeBonus: 1,
+            }, {
+            name:  'Fists',
+            attackBonus: 1,
+            defenseBonus: 0,  
+            escapeBonus: 0,
+            }
+            ];
+    this.equiped = [];
 }
 
 //  Creates Enemy
@@ -32,7 +44,41 @@ function Enemy(name, hp, isAlive){
 //  GLOBAL VARIABLES
 var player1 = new Player(100);
 var playerChoiceOptions = ['Walk', 'Run' , 'Attack', 'Check Inventory', 'My Stats', ];
-var enemyDrops = [];
+var inventorySelector = [];
+var playerInventoryOptions = [];
+
+var enemyDrops = [ {
+                name:  'a Sword',
+                attackBonus: 3,
+                defenseBonus: 2,
+                escapeBonus: 0,
+                }, {
+                name:  'a Shield',
+                attackBonus: 0,
+                defenseBonus: 6,  
+                escapeBonus: 0,
+                }, {
+                name:  'a Spear',
+                attackBonus: 4,
+                defenseBonus: 1,  
+                escapeBonus: 0,
+                },{
+                name:  'Hiking Boots',
+                attackBonus: 0,
+                defenseBonus: 0,  
+                escapeBonus: 2,
+                }, {
+                name:  'Brass Knuckles',
+                attackBonus: 2,
+                defenseBonus: 0,  
+                escapeBonus: 0,
+                }
+            ];
+
+
+
+
+//  ['Sword', 'Shield', 'Spear', 'Hiking Boots', 'Brass Knuckles', ];
 
 
 
@@ -52,7 +98,8 @@ var enemyDrops = [];
 //  Check Player Stats
 function checkStats(){
     console.log(`Here are your stats: \n
-    Name: ${player1.name}  Current Health: ${player1.hp} HP`)
+    Name: ${player1.name}  Current Health: ${player1.hp} HP \n
+    Equiped with: ${player1.equiped}`)
 }
 
 // Walking
@@ -75,7 +122,68 @@ function walk(){
 // Running
 function run(){
     player1.hp -= 2;
-    console.log(`You chose to run and loose -2 HP.  Your HP is now at: ${player1.hp} `)
+    console.log(`You chose to run and loose 2 HP.  Your HP is now at: ${player1.hp} `)
+};
+
+
+//  Check Inventory
+function checkInventory(){
+    
+    player1.inventory.forEach(function(item){
+        if (playerInventoryOptions.indexOf(item.name) === -1) {
+            playerInventoryOptions.push(item.name);
+        }
+    });
+    
+    ///   Displays the sub-menu for inventory items
+    var isLooking = true;
+    while( isLooking === true) {
+    var inventoryChoice = ask.keyInSelect(playerInventoryOptions, "Would you like to examine an item more closely? \n")
+
+    // Adds the selected item to the global inventory selector variable.
+    var inventorySelector = playerInventoryOptions[inventoryChoice];    
+    
+    console.log(inventorySelector);   
+    //  Displays Item in Inventory Slot 0
+        if (inventoryChoice === 0) {
+            console.log(`${player1.inventory[0].name}: \b
+            Attack Bonus: ${player1.inventory[0].attackBonus} \b
+            Defense Bonus: ${player1.inventory[0].defenseBonus} \b
+            Escape Bonus: ${player1.inventory[0].escapeBonus}`);
+            equip()
+    //  Displays Item in Inventory Slot 0
+        } else if (inventoryChoice === 1) {
+            console.log(`${player1.inventory[1].name}: \b
+            Attack Bonus: ${player1.inventory[1].attackBonus} \b
+            Defense Bonus: ${player1.inventory[1].defenseBonus} \b
+            Escape Bonus: ${player1.inventory[1].escapeBonus}`);
+            equip()
+        } else if (inventoryChoice === 2) {
+            console.log(`${player1.inventory[2].name}: \b
+            Attack Bonus: ${player1.inventory[2].attackBonus} \b
+            Defense Bonus: ${player1.inventory[2].defenseBonus} \b
+            Escape Bonus: ${player1.inventory[2].escapeBonus}`);
+        } else if (inventoryChoice === -1) {
+            isLooking = false;
+        }
+    }
+};
+
+function equip(){
+
+    if (ask.keyInYN('Do you want to equip this item?')) {
+        //player1.equiped.forEach(function(item){
+            //if (player1.equiped.indexOf(item.name) === -1) {
+                player1.equiped.push(inventorySelector);
+                console.log('Great. This item has been equiped.')
+            //} else {
+            //    console.log(`You have already equiped this item.  Look under your stats.`)
+           // }
+       // });
+        
+    } else {
+        console.log('This item has been returned to your inventory')
+    }
 }
 
 //   Meeting Enemies 
@@ -90,13 +198,13 @@ function meet(){
     console.log(` The enemy you encountered is ${randomEnemy}! \n`)
 
         if (randomEnemy === 'Ghost') {
-            console.log(` ${ghost.name} has hp of ${ghost.hp} and does an attack damage under 15 damage. \n
-            You can either walk, run, or fight.  Maybe you have something useful in your inventory...?`)
+            console.log(` ${ghost.name} has hp of ${ghost.hp} and does an attack under 15 damage. \n
+            You can either WALK, RUN, or FIGHT.  Maybe you have something useful in your inventory...?`)
             encounter(ghost);
 
         } else if (randomEnemy === 'Cyclops') {
-            console.log(`${cyclops.name} has hp of ${cyclops.hp} and does an attack damage under 15 damage. \n
-            You can either walk, run, or fight.  Maybe you have something useful in your inventory...? `)
+            console.log(`${cyclops.name} has hp of ${cyclops.hp} and does an attack under 15 damage. \n
+            You can either WALK, RUN, or FIGHT.  Maybe you have something useful in your inventory...? `)
             encounter(cyclops);
         } 
 };
@@ -108,8 +216,8 @@ function encounter(enemy){
         
         // If the user choose to walk away from enemy
         if(userChoice === 0){
-        //  Player has a 1 in 5 chance of walking away.
-            console.log(`Most enemies are too fast to walk away from, but go ahead and take your chances.`)
+        //  Player has a 1 in 10 chance of walking away.
+            console.log(`You chose to walk away.  \n Most enemies are too fast to walk away from, but I guess you wanted to take your chances.`)
         
         //  Player tries to run.  They have a 33% chance of getting away.
         } else if (userChoice === 1){
@@ -125,7 +233,7 @@ function encounter(enemy){
                 ///  If player wasnt able to run away, they get attacked
                 } else {
                     var thisEnemyAttack = enemy.attack();
-                    console.log(player1.hp)
+                    player1.hp = player1.hp - thisEnemyAttack;
                     console.log(`Unfortunately You couldnt get away from ${enemy.name} this time... \n
                     ${enemy.name} was able to attack you while you were trying to flee! \n
                     You were dealt ${thisEnemyAttack} damage.  Your health is now at ${player1.hp}.`)
@@ -141,16 +249,24 @@ function encounter(enemy){
                 // Enemy Attacks Player
                 var thisEnemyAttack = enemy.attack();
                 player1.hp = player1.hp - thisEnemyAttack;
-                console.log(`${enemy.name} dealt you ${thisEnemyAttack} damage!  Your HP is now ${player1.hp}.`);
+                console.log(`But ${enemy.name} also dealt you ${thisEnemyAttack} damage in the fight!  Your HP is now ${player1.hp}.`);
                     //  Enemy is still alive
-                    if (enemy.hp > 0) {
+                    if (player1.hp < 1 ){
+                        console.log(`Sadly you have been killed by ${enemy.name}.  \n 
+                        While you are slowly dying a painfull death, your body gets looted. \n
+                        GAME OVER`);
+                        enemy.isAlive = false;
+
+
+                    } else if (enemy.hp > 0) {
                         console.log(`${enemy.name} is still alive.  Their HP is now ${enemy.hp}`);
                     
                     //  Enemy is dead
                     } else {
                         console.log(`${enemy.name} has been killed.  Congratulations!!`);
+                        var thisdrop = dropItem();
+                        console.log(`They have dropped ${thisdrop.name}.  It has been added to your inventory.`)
                         enemy.isAlive = false;
-                        //  Enemy need to drop something
                     
             }
         } else if (userChoice === 3){
@@ -170,12 +286,13 @@ function encounter(enemy){
 
 
 
-//  Player Attack
+//  Enemy Item Drop
 
-// function playerAttack(){
-//     playerAttack =  Math.floor(Math.random() * (50 - 30) + 30)
-//     return playerAttack
-// }
+function dropItem(){
+    var dropped =  enemyDrops[Math.floor(Math.random() * enemyDrops.length)];
+    player1.inventory.push(dropped);
+    return dropped
+}
 
 
 //////////////////////////////////////////
@@ -209,7 +326,7 @@ Here are some pointers to help get you started: \n
         // If the user choose to walk
         if(userChoice === 0){
             walk() 
-        // Cancel option.  Ends the Game.
+        //  If the user chooses to Run
         } else if (userChoice === 1){
             run();
 
@@ -217,18 +334,20 @@ Here are some pointers to help get you started: \n
             ///  Attack Sequence
             console.log(`There is nothing to attack right now.`)
             
+            // Checks Players Inventory
         } else if (userChoice === 3){
-            console.log(`Here are the items in your inventory: \n
-            ${player1.inventory}`);
+            console.log(`Here are the items in your inventory: \n`)
+            checkInventory();
 
+            //  Checks Players Stats
         } else if (userChoice === 4 ){
             checkStats();
 
+        // Cancel option.  Ends the Game.
         } else if (userChoice === -1) {
             console.log(`${player1.name}, you have chosen to abandon your adventure.  Goodbye. \n`)
             player1.hp = 0
-        }
-
+        } 
     }
     
 
