@@ -1,4 +1,16 @@
 
+/*
+
+NEED TO DO:
+ADD RANDOM MATH FOR WALK AWAY FROM ENEMIES
+FINISH ADDING INVENTORY ITEMS TO EQUIPED
+ADD BATTLE MULTIPLIERS FOR EQUIPED ITEMS TO BATTLES
+
+*/
+
+
+
+
 var ask = require('readline-sync');
 
 ////////////////////////////////////
