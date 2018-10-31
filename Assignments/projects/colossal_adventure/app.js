@@ -2,7 +2,6 @@
 /*
 
 NEED TO DO:
-ADD RANDOM MATH FOR WALK AWAY FROM ENEMIES
 FINISH ADDING INVENTORY ITEMS TO EQUIPED
 ADD BATTLE MULTIPLIERS FOR EQUIPED ITEMS TO BATTLES
 
@@ -131,6 +130,8 @@ function walk(){
         }
 }
 
+
+
 // Running
 function run(){
     player1.hp -= 2;
@@ -140,17 +141,17 @@ function run(){
 
 //  Check Inventory
 function checkInventory(){
-    
+    //  Displays current inventory items
     player1.inventory.forEach(function(item){
         if (playerInventoryOptions.indexOf(item.name) === -1) {
             playerInventoryOptions.push(item.name);
         }
     });
     
-    ///   Displays the sub-menu for inventory items
+    ///   Displays the sub-menu for examining item more closely.
     var isLooking = true;
     while( isLooking === true) {
-    var inventoryChoice = ask.keyInSelect(playerInventoryOptions, "Would you like to examine an item more closely? \n")
+    var inventoryChoice = ask.keyInSelect(playerInventoryOptions, "Which item would you like to examine an item more closely? \n")
 
     // Adds the selected item to the global inventory selector variable.
     var inventorySelector = playerInventoryOptions[inventoryChoice];    
@@ -182,20 +183,26 @@ function checkInventory(){
 };
 
 function equip(){
+    // When player is looking at an item int he inventory...  Do they want to equip item?
+    if (ask.keyInYN('Do you want to equip this item?')) {
 
-    // if (ask.keyInYN('Do you want to equip this item?')) {
-    //     player1.equiped.forEach(function(item){
-    //         if (player1.equiped.indexOf(item.name) === -1) {
-    //             player1.equiped.push(inventorySelector);
-    //             console.log('Great. This item has been equiped.')
-    //         } else {
-    //            console.log(`You have already equiped this item.  Look under your stats.`)
-    //        });
+        // checks to see if item has already been equiped.  
+        player1.equiped.forEach(function(item){
+            if (player1.equiped.indexOf(item.name) === -1) {
+
+                //  If not alread equiped, it alows them to equip.
+                player1.equiped.push(inventorySelector);
+                console.log('Great. This item has been equiped.')
+
+                //  Item has previously been equiped
+            } else {
+               console.log(`You have already equiped this item.  Look under your stats.`)
+            };
         
-    //     } else {
-    //     console.log('This item has been returned to your inventory')
-    //     }
-    // }
+    })} else {
+        console.log('Ok.  This item has been returned to your inventory.')
+    }; 
+
 };
 
 
@@ -209,12 +216,13 @@ function meet(){
     var randomEnemy = enemies[Math.floor(enemies.length * Math.random())];
 
     console.log(` The enemy you encountered is ${randomEnemy}! \n`)
-
+        //  If they meet ghost
         if (randomEnemy === 'Ghost') {
             console.log(` ${ghost.name} has hp of ${ghost.hp} and does an attack under 15 damage. \n
             You can either WALK, RUN, or FIGHT.  Maybe you have something useful in your inventory...?`)
             encounter(ghost);
 
+        //  If they meet Cyclops
         } else if (randomEnemy === 'Cyclops') {
             console.log(`${cyclops.name} has hp of ${cyclops.hp} and does an attack under 15 damage. \n
             You can either WALK, RUN, or FIGHT.  Maybe you have something useful in your inventory...? `)
@@ -229,9 +237,26 @@ function encounter(enemy){
         
         // If the user choose to walk away from enemy
         if(userChoice === 0){
-        //  Player has a 1 in 10 chance of walking away.
-            console.log(`You chose to walk away.  \n Most enemies are too fast to walk away from, but I guess you wanted to take your chances.`)
-        
+            console.log(`You chose to walk away from ${enemy.name}.  \n Most enemies are too fast to walk away from, but I guess you wanted to take your chances.`)
+            
+            //  Player has a 1 in 10 chance of walking away.
+            var walkAwayProbability = Math.floor(Math.random() * 10);
+            console.log(`walk away probability is: ${walkAwayProbability}`);
+
+            /// If player excapes Enemy
+                if (walkAwayProbability === 0) {
+                    console.log(`Nice job!  You were able to escape ${enemy.name}!`)
+                    enemy.isAlive = false;
+
+                ///  If player wasnt able to run away, they get attacked
+                } else {
+                    var thisEnemyAttack = enemy.attack();
+                    player1.hp = player1.hp - thisEnemyAttack;
+                    console.log(`Unfortunately You couldnt get away from ${enemy.name} this time... \n
+                    ${enemy.name} was able to attack you while you were trying to flee! \n
+                    You were dealt ${thisEnemyAttack} damage.  Your health is now at ${player1.hp}.`)
+                }
+
         //  Player tries to run.  They have a 33% chance of getting away.
         } else if (userChoice === 1){
             console.log(`You are trying to run away from ${enemy.name}`);

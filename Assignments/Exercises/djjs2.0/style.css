@@ -1,0 +1,50 @@
+
+
+h1 {
+    color:blue
+}
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-items: center;
+    align-items: center;
+}
+.box  {
+    height: 100px;
+    width: 100px;
+    background-color: brown;
+    margin: 10px;
+    transition-duration: .5s;
+    transition-timing-function: ease-in-out;
+}
+
+#box1:hover {
+    background-color: red;
+}
+
+#box2:hover {
+    background-color: cornflowerblue;
+    border: 5px blue dashed;
+}
+
+#box3:hover {
+    background-color: yellow;
+    box-shadow: 10px 10px 30px;
+   
+}
+
+#box4:hover {
+    background-color: orange;
+    height: 125px;
+    width: 125px;
+}
+
+#box5:hover {
+    background-color: black;
+    margin: 50px;
+}
+
+#box6:hover {
+    background-color: green;
+    opacity: 0.5;
+}
