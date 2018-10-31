@@ -183,20 +183,21 @@ function checkInventory(){
 
 function equip(){
 
-    if (ask.keyInYN('Do you want to equip this item?')) {
-        //player1.equiped.forEach(function(item){
-            //if (player1.equiped.indexOf(item.name) === -1) {
-                player1.equiped.push(inventorySelector);
-                console.log('Great. This item has been equiped.')
-            //} else {
-            //    console.log(`You have already equiped this item.  Look under your stats.`)
-           // }
-       // });
+    // if (ask.keyInYN('Do you want to equip this item?')) {
+    //     player1.equiped.forEach(function(item){
+    //         if (player1.equiped.indexOf(item.name) === -1) {
+    //             player1.equiped.push(inventorySelector);
+    //             console.log('Great. This item has been equiped.')
+    //         } else {
+    //            console.log(`You have already equiped this item.  Look under your stats.`)
+    //        });
         
-    } else {
-        console.log('This item has been returned to your inventory')
-    }
-}
+    //     } else {
+    //     console.log('This item has been returned to your inventory')
+    //     }
+    // }
+};
+
 
 //   Meeting Enemies 
 function meet(){
