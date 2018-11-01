@@ -1,4 +1,6 @@
-
+/*
+Get rid of these extra spaces at the top
+ */
 
 var form = document.marioForm;
 var output = document.getElementById('result');
@@ -13,6 +15,20 @@ form.addEventListener('submit', function(event){
     output.innerHTML = result;
     showImage();
 });
+
+/**
+ * Consider using a for loop to set all of these. You could use `getElementByClassName`
+ * or something similar to get an array of elements from the document, then loop over all
+ * the elements to switch the visibility to "visible"
+ * 
+ * E.g.:
+
+var gifs = document.getElementsByClassName("coinGif")
+for (var i = 0; i < gifs.length; i++) {
+  gifs[i].style.visibility = "visible"
+}
+
+ */
 
 function showImage() {
     document.getElementById('coinGifs1').style.visibility = 'visible'
