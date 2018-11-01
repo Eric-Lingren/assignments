@@ -18,10 +18,7 @@ var ask = require('readline-sync');
 function Player(hp){
     this.hp = hp;
     // Attack for a random amount
-    this.attack = function() {
-        // returns a random number between 30 - 50
-        return Math.floor(Math.random() * (50 - 30) + 30)
-    }
+   // this.attack = attack();
     this.inventory = [ {
         name:  'Shoes ',
         attackBonus: 0,
@@ -35,7 +32,7 @@ function Player(hp){
         defenseBonus: 0,  
         escapeBonus: 0,
         }, {
-            name:  'a Sword',
+            name:  'Sword',
             attackBonus: 3,
             defenseBonus: 2,
             escapeBonus: 1,
@@ -117,10 +114,13 @@ function checkStats(){
     console.log(`Here are your stats: \n
     Name: ${player1.name}    Current Health: ${player1.hp}  \n `)
     //  Outputs the name of each item equiped
+    console.log(`You have equiped:`)
     player1.equiped.forEach(function(item){
-       console.log(`Equiped with: ${item.name} \n`)
+       console.log(` ${item.name}`)
 });
 bonus()
+
+attack()
 }
 
 // Walking
@@ -344,6 +344,37 @@ function dropItem(){
 }
 
 
+//  Attack v2.0
+function attack(){
+    // returns a random number between 30 - 50
+    var baseAttack =  Math.floor(Math.random() * (50 - 30) + 30)
+        //console.log (`Your base attack is ${baseAttack} `)
+
+    //  Access the attack multiplier boune generated from attackBonus()
+        //console.log(`\n${player1.name}'s current attack bonus is  + ${attackMultiplier}`);
+
+    //  Random Base attack plus the attack bonus is the final attack total
+    var finalAttackDamage = baseAttack + attackMultiplier;
+        //console.log('final attack damage is' + finalAttackDamage)
+        return finalAttackDamage;
+};
+
+
+
+//  Player attack bonus
+
+function attackBonus(){
+    //  Lists all atack multipliers
+    var listAttackMultipliers = player1.equiped.map(a => a.attackBonus)
+    //  Returns the sum of all attack multipliers
+    listAttackMultipliers.reduce(function(a,b){
+        attacksCombined = a+b
+    });
+    return attacksCombined
+}
+
+var attackMultiplier = attackBonus();
+
 ///  Player bonus calculator 
 
 function bonus(){
@@ -366,7 +397,7 @@ function bonus(){
         return a+b
     });
 
-    console.log(`${player1.name}'s current attack bonus is  + ${attackMultiplier}`);
+    console.log(`\n${player1.name}'s current attack bonus is  + ${attackMultiplier}`);
     console.log(`${player1.name}'s current defense bonus is  + ${defenseMultiplier}`);
     console.log(`${player1.name}'s current escape bonus is  + ${escapeMultiplier}`);
 
@@ -390,7 +421,7 @@ Here are some pointers to help get you started: \n
 -- Each time you walk there is a chance you may encounter an enemy. \n
 -- Each time you run your hit points will drop by 2, but this gives you a greater chance of avoiding enemies. \n
 -- You start the game with several items in your inventory. \n
--- If you fight an enemy and win they may drop an item that may be useful later on. \n
+-- If you fight an enemy and win they may drop an item that could be useful later on. \n
 -- You can check your stats at anytime. \n` );
 
 //// CONSOLE.LOG PLAYERS STATS /////
