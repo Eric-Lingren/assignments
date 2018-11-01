@@ -6,10 +6,23 @@ DISPLAY FREE SLOTS FOR EQUIPED ITEMS
 MAKE IT SO THEY CAN ONLY EQUIP ONE ITEM IN EACH SLOT
 ADD DEFENSE BONUS TO FIGHTS
 ADD ESCAPE BONUS TO RUNNING AND WALKING AWAY FROM ENEMIES
+Check out sleep and emojis
+
 
 */
 
 var ask = require('readline-sync');
+var player = require('play-sound')(opts = {});
+
+function playIntro() {
+    player.play('./Royal_Entrance.mp3', function(err){
+        if (err) throw err;
+        console.log("Audio finished");
+      });
+    //var audio = new Audio('./Royal_Entrance.mp3');
+    //audio.play(); 
+};
+
 
 ////////////////////////////////////
 //  PLAYERS AND ENEMIES CONSTRUCTIORS
@@ -121,7 +134,7 @@ function checkStats(){
 });
 bonus();
 
-
+playIntro();
 
 }
 
