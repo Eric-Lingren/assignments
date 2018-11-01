@@ -2,10 +2,10 @@
 /*
 
 NEED TO DO:
-ADD BATTLE MULTIPLIERS FOR EQUIPED ITEMS TO BATTLES
-WRITE FUNCTION TO DISPLY INVENTORY STATS FOR FUNCTION BONUS'
 DISPLAY FREE SLOTS FOR EQUIPED ITEMS
 MAKE IT SO THEY CAN ONLY EQUIP ONE ITEM IN EACH SLOT
+ADD DEFENSE BONUS TO FIGHTS
+ADD ESCAPE BONUS TO RUNNING AND WALKING AWAY FROM ENEMIES
 
 */
 
@@ -118,9 +118,10 @@ function checkStats(){
     player1.equiped.forEach(function(item){
        console.log(` ${item.name}`)
 });
-bonus()
+bonus();
 
-attack()
+
+
 }
 
 // Walking
@@ -259,9 +260,15 @@ function encounter(enemy){
                     console.log(`Nice job!  You were able to escape ${enemy.name}!`)
                     enemy.isAlive = false;
 
-                ///  If player wasnt able to run away, they get attacked
+                ///  If player wasnt able to walk away, they get attacked:
                 } else {
-                    var thisEnemyAttack = enemy.attack();
+                    // Generates players defense bonus
+                    defense();
+                    // Generates a random number for enemy attack
+                    var attackOutcome = enemy.attack();
+                    // Total damage to player from attack:
+                    var thisEnemyAttack = attackOutcome - defenseOutcome;
+                    //  Result of the attack:
                     player1.hp = player1.hp - thisEnemyAttack;
                     console.log(`Unfortunately You couldnt get away from ${enemy.name} this time... \n
                     ${enemy.name} was able to attack you while you were trying to flee! \n
@@ -281,7 +288,13 @@ function encounter(enemy){
 
                 ///  If player wasnt able to run away, they get attacked
                 } else {
-                    var thisEnemyAttack = enemy.attack();
+                    // Generates players defense bonus
+                    defense();
+                    // Generates a random number for enemy attack
+                    var attackOutcome = enemy.attack();
+                    // Total damage to player from attack:
+                    var thisEnemyAttack = attackOutcome - defenseOutcome;
+                    //  Result of the attack:
                     player1.hp = player1.hp - thisEnemyAttack;
                     console.log(`Unfortunately You couldnt get away from ${enemy.name} this time... \n
                     ${enemy.name} was able to attack you while you were trying to flee! \n
@@ -291,12 +304,20 @@ function encounter(enemy){
         } else if (userChoice === 2){
             ///  Attack Sequence
                 console.log(`You have chosen to attack`);
-                //  Player attacks Enemy
-                var thisPlayerAttack = player1.attack();
+                //  Player attacks Enemy first
+                var thisPlayerAttack = attack();
                 console.log(`You dealt ${thisPlayerAttack} damage to ${enemy.name}!`);
                 enemy.hp = enemy.hp - thisPlayerAttack;
-                // Enemy Attacks Player
+
+                // Enemy Attacks Player second
                 var thisEnemyAttack = enemy.attack();
+                // Generates players defense bonus
+                defense();
+                // Generates a random number for enemy attack
+                var attackOutcome = enemy.attack();
+                // Total damage to player from attack:
+                var thisEnemyAttack = attackOutcome - defenseOutcome;
+                //  Result of the attack:
                 player1.hp = player1.hp - thisEnemyAttack;
                 console.log(`But ${enemy.name} also dealt you ${thisEnemyAttack} damage in the fight!  Your HP is now ${player1.hp}.`);
                     //  Enemy is still alive
@@ -344,25 +365,7 @@ function dropItem(){
 }
 
 
-//  Attack v2.0
-function attack(){
-    // returns a random number between 30 - 50
-    var baseAttack =  Math.floor(Math.random() * (50 - 30) + 30)
-        //console.log (`Your base attack is ${baseAttack} `)
-
-    //  Access the attack multiplier boune generated from attackBonus()
-        //console.log(`\n${player1.name}'s current attack bonus is  + ${attackMultiplier}`);
-
-    //  Random Base attack plus the attack bonus is the final attack total
-    var finalAttackDamage = baseAttack + attackMultiplier;
-        //console.log('final attack damage is' + finalAttackDamage)
-        return finalAttackDamage;
-};
-
-
-
 //  Player attack bonus
-
 function attackBonus(){
     //  Lists all atack multipliers
     var listAttackMultipliers = player1.equiped.map(a => a.attackBonus)
@@ -372,18 +375,51 @@ function attackBonus(){
     });
     return attacksCombined
 }
-
 var attackMultiplier = attackBonus();
+
+
+//  Attack v2.0
+function attack(){
+    // returns a random number between 30 - 50
+    var baseAttack =  Math.floor(Math.random() * (30 - 15) + 15)
+        //console.log (`Your base attack is ${baseAttack} `)
+
+    //  Access the attack multiplier boune generated from attackBonus()
+        //console.log(`\n${player1.name}'s current attack bonus is  + ${attackMultiplier}`);
+
+    //  Random Base attack plus the attack bonus is the final attack total
+    var finalAttackDamage = baseAttack + attackMultiplier;
+        //console.log('final attack damage is ' + finalAttackDamage)
+        return finalAttackDamage;
+};
+
+
+//  Players Defense Bonus Calculator
+var defenseOutcome;
+function defense(){
+
+   //  Lists all defense multipliers
+   var listDefenseMultipliers = player1.equiped.map(a => a.defenseBonus)
+   //  Returns the sum of all defense multipliers
+   var defenseMultiplier = listDefenseMultipliers.reduce(function(a,b){
+       return a+b
+   });
+   console.log(`${defenseMultiplier}`);
+   defenseOutcome = defenseMultiplier
+     
+}
+
+//var dOutcome = defenseOutcome;
+
+
+  
+
+
 
 ///  Player bonus calculator 
 
 function bonus(){
-    //  Lists all atack multipliers
-    var listAttackMultipliers = player1.equiped.map(a => a.attackBonus)
-    //  Returns the sum of all attack multipliers
-    var attackMultiplier = listAttackMultipliers.reduce(function(a,b){
-        return a+b
-    });
+   
     //  Lists all defense multipliers
     var listDefenseMultipliers = player1.equiped.map(a => a.defenseBonus)
     //  Returns the sum of all defense multipliers
@@ -400,14 +436,10 @@ function bonus(){
     console.log(`\n${player1.name}'s current attack bonus is  + ${attackMultiplier}`);
     console.log(`${player1.name}'s current defense bonus is  + ${defenseMultiplier}`);
     console.log(`${player1.name}'s current escape bonus is  + ${escapeMultiplier}`);
-
-    //     console.log(bonus.attackBonus)
-    // });
-    // var defenseBonus = 
-    // var escapeBonus = 
     
 }
 
+///////////////////////////////////////////
 //////////////////////////////////////////
 
 // GAME PLAY
