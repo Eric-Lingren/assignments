@@ -20,23 +20,24 @@ function Player(hp){
     // Attack for a random amount
    // this.attack = attack();
     this.inventory = [ {
-        name:  'Shoes ',
+        name:  'Morphine',
         attackBonus: 0,
         defenseBonus: 0,
-        escapeBonus: 1,
+        escapeBonus: 0,
+        heal: 10,
         }, 
     ];
     this.equiped = [{
         name:  'Fists',
-        attackBonus: 5,
+        attackBonus: 1,
         defenseBonus: 0,  
         escapeBonus: 0,
         }, {
-            name:  'Sword',
-            attackBonus: 3,
-            defenseBonus: 2,
-            escapeBonus: 1,
-            },
+        name:  'Shoes',
+        attackBonus: 0,
+        defenseBonus: 0,
+        escapeBonus: 1,
+        },
     ];
     this.bonus = []
 }
@@ -62,17 +63,17 @@ var inventorySelector = [];
 var playerInventoryOptions = [];
 
 var enemyDrops = [ {
-                name:  'a Sword',
+                name:  'Sword',
                 attackBonus: 3,
                 defenseBonus: 2,
                 escapeBonus: 0,
                 }, {
-                name:  'a Shield',
+                name:  'Shield',
                 attackBonus: 0,
                 defenseBonus: 6,  
                 escapeBonus: 0,
                 }, {
-                name:  'a Spear',
+                name:  'Spear',
                 attackBonus: 4,
                 defenseBonus: 1,  
                 escapeBonus: 0,
@@ -173,7 +174,8 @@ function checkInventory(){
             console.log(`\n ${player1.inventory[0].name}: \b
             Attack Bonus: ${player1.inventory[0].attackBonus} \b
             Defense Bonus: ${player1.inventory[0].defenseBonus} \b
-            Escape Bonus: ${player1.inventory[0].escapeBonus} \n`);
+            Escape Bonus: ${player1.inventory[0].escapeBonus} \b
+            Heal: ${player1.inventory[0].heal} \n`);
             equip(inventorySelector)
     //  Displays Item in Inventory Slot 0
         } else if (inventoryChoice === 1) {
@@ -253,7 +255,7 @@ function encounter(enemy){
             
             //  Player has a 1 in 10 chance of walking away.
             var walkAwayProbability = Math.floor(Math.random() * 10);
-            console.log(`walk away probability is: ${walkAwayProbability}`);
+            //console.log(`walk away probability is: ${walkAwayProbability}`);
 
             /// If player excapes Enemy
                 if (walkAwayProbability === 0) {
