@@ -2,13 +2,12 @@
 /*
 
 NEED TO DO:
-FINISH ADDING INVENTORY ITEMS TO EQUIPED
 ADD BATTLE MULTIPLIERS FOR EQUIPED ITEMS TO BATTLES
+WRITE FUNCTION TO DISPLY INVENTORY STATS FOR FUNCTION BONUS'
+DISPLAY FREE SLOTS FOR EQUIPED ITEMS
+MAKE IT SO THEY CAN ONLY EQUIP ONE ITEM IN EACH SLOT
 
 */
-
-
-
 
 var ask = require('readline-sync');
 
@@ -24,18 +23,25 @@ function Player(hp){
         return Math.floor(Math.random() * (50 - 30) + 30)
     }
     this.inventory = [ {
-            name:  'Shoes ',
-            attackBonus: 0,
-            defenseBonus: 0,
+        name:  'Shoes ',
+        attackBonus: 0,
+        defenseBonus: 0,
+        escapeBonus: 1,
+        }, 
+    ];
+    this.equiped = [{
+        name:  'Fists',
+        attackBonus: 5,
+        defenseBonus: 0,  
+        escapeBonus: 0,
+        }, {
+            name:  'a Sword',
+            attackBonus: 3,
+            defenseBonus: 2,
             escapeBonus: 1,
-            }, {
-            name:  'Fists',
-            attackBonus: 1,
-            defenseBonus: 0,  
-            escapeBonus: 0,
-            }
-            ];
-    this.equiped = [];
+            },
+    ];
+    this.bonus = []
 }
 
 //  Creates Enemy
@@ -109,13 +115,18 @@ var enemyDrops = [ {
 //  Check Player Stats
 function checkStats(){
     console.log(`Here are your stats: \n
-    Name: ${player1.name}  Current Health: ${player1.hp} HP \n
-    Equiped with: ${player1.equiped}`)
+    Name: ${player1.name}    Current Health: ${player1.hp}  \n `)
+    //  Outputs the name of each item equiped
+    player1.equiped.forEach(function(item){
+       console.log(`Equiped with: ${item.name} \n`)
+});
+bonus()
 }
 
 // Walking
 function walk(){
     console.log("You chose to walk.")
+   
     // Generates a 1 in 4 change for a random enemy
     var generateEnemy = Math.floor(Math.random() * 4);
     // Enemy is generated.  
@@ -141,7 +152,7 @@ function run(){
 
 //  Check Inventory
 function checkInventory(){
-    //  Displays current inventory items
+    //  Displays the name of current inventory items
     player1.inventory.forEach(function(item){
         if (playerInventoryOptions.indexOf(item.name) === -1) {
             playerInventoryOptions.push(item.name);
@@ -153,24 +164,23 @@ function checkInventory(){
     while( isLooking === true) {
     var inventoryChoice = ask.keyInSelect(playerInventoryOptions, "Which item would you like to examine an item more closely? \n")
 
-    // Adds the selected item to the global inventory selector variable.
-    var inventorySelector = playerInventoryOptions[inventoryChoice];    
-    
-    console.log(inventorySelector);   
+    // Adds the selected item to the global inventory selector variable.   
+    var inventorySelector = player1.inventory[inventoryChoice];
+   
     //  Displays Item in Inventory Slot 0
         if (inventoryChoice === 0) {
-            console.log(`${player1.inventory[0].name}: \b
+            console.log(`\n ${player1.inventory[0].name}: \b
             Attack Bonus: ${player1.inventory[0].attackBonus} \b
             Defense Bonus: ${player1.inventory[0].defenseBonus} \b
-            Escape Bonus: ${player1.inventory[0].escapeBonus}`);
-            equip()
+            Escape Bonus: ${player1.inventory[0].escapeBonus} \n`);
+            equip(inventorySelector)
     //  Displays Item in Inventory Slot 0
         } else if (inventoryChoice === 1) {
             console.log(`${player1.inventory[1].name}: \b
             Attack Bonus: ${player1.inventory[1].attackBonus} \b
             Defense Bonus: ${player1.inventory[1].defenseBonus} \b
             Escape Bonus: ${player1.inventory[1].escapeBonus}`);
-            equip()
+            equip(inventorySelector)
         } else if (inventoryChoice === 2) {
             console.log(`${player1.inventory[2].name}: \b
             Attack Bonus: ${player1.inventory[2].attackBonus} \b
@@ -182,24 +192,25 @@ function checkInventory(){
     }
 };
 
-function equip(){
-    // When player is looking at an item int he inventory...  Do they want to equip item?
+function equip(inventorySelector){
+    // When player is looking at a specific item in the inventory...  Do they want to equip item?
     if (ask.keyInYN('Do you want to equip this item?')) {
-
         // checks to see if item has already been equiped.  
-        player1.equiped.forEach(function(item){
-            if (player1.equiped.indexOf(item.name) === -1) {
 
-                //  If not alread equiped, it alows them to equip.
-                player1.equiped.push(inventorySelector);
-                console.log('Great. This item has been equiped.')
+        var objectAlreadyEquiped = player1.equiped.find(function (item){
+            return item === inventorySelector
+        });
 
-                //  Item has previously been equiped
-            } else {
-               console.log(`You have already equiped this item.  Look under your stats.`)
-            };
-        
-    })} else {
+        if (objectAlreadyEquiped === undefined){
+            //  If not alread equiped, it alows them to equip.
+            player1.equiped.push(inventorySelector);
+            console.log('Great. This item has been equiped.')
+
+            //  If the item has previously been equiped:
+        } else {
+            console.log(`You have already equiped this item.  Look under your stats.`)
+        }
+    } else {
         console.log('Ok.  This item has been returned to your inventory.')
     }; 
 
@@ -332,6 +343,39 @@ function dropItem(){
     return dropped
 }
 
+
+///  Player bonus calculator 
+
+function bonus(){
+    //  Lists all atack multipliers
+    var listAttackMultipliers = player1.equiped.map(a => a.attackBonus)
+    //  Returns the sum of all attack multipliers
+    var attackMultiplier = listAttackMultipliers.reduce(function(a,b){
+        return a+b
+    });
+    //  Lists all defense multipliers
+    var listDefenseMultipliers = player1.equiped.map(a => a.defenseBonus)
+    //  Returns the sum of all defense multipliers
+    var defenseMultiplier = listDefenseMultipliers.reduce(function(a,b){
+        return a+b
+    });
+    //  Lists all escape multipliers
+    var listEscapeMultipliers = player1.equiped.map(a => a.escapeBonus)
+    //  Returns the sum of all escape multipliers
+    var escapeMultiplier = listEscapeMultipliers.reduce(function(a,b){
+        return a+b
+    });
+
+    console.log(`${player1.name}'s current attack bonus is  + ${attackMultiplier}`);
+    console.log(`${player1.name}'s current defense bonus is  + ${defenseMultiplier}`);
+    console.log(`${player1.name}'s current escape bonus is  + ${escapeMultiplier}`);
+
+    //     console.log(bonus.attackBonus)
+    // });
+    // var defenseBonus = 
+    // var escapeBonus = 
+    
+}
 
 //////////////////////////////////////////
 
