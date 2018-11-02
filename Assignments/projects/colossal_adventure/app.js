@@ -497,17 +497,31 @@ function bonus(){
 
 // GAME PLAY
 
-console.log(`\n \nGreetings Player 1. You have entered the world of Noxo.  \n` );
+console.log(`\n \nGreetings Player 1. You have entered the Labrynth.  \n` );
 
 player1.name = ask.question('Enter your name to begin your quest! \n \n');
 
-console.log(`Welcome ${player1.name}! \n \n Noxo is a land of mystery. \n 
-Here are some pointers to help get you started: \n 
--- Each time you walk there is a chance you may encounter an enemy. \n
--- Each time you run your hit points will drop by 2, but this gives you a greater chance of avoiding enemies. \n
--- You start the game with several items in your inventory. \n
--- If you fight an enemy and win they may drop an item that could be useful later on. \n
--- You can check your stats at anytime. \n` );
+console.log(`
+|------------------------------------------------------------------------------------------------------------------|
+|                                                                                                                  |
+|     88            88                                 88                     88                                   |
+|     88            88                                 ""              ,d     88                                   |
+|     88            88                                                 88     88                                   |
+|     88 ,adPPYYba, 88,dPPYba,  8b      d8  b,dPPYba,  88 8b,dPPYba, MM88MMM  88,dPPYba,                           |
+|     88 ""      Y8 88P'    "8a  8b     d8  88P    "Y  88 88P'    "8a  88     88P'    "8a                          |
+|     88 ,adPPPPP88 88       d8   8b   d8   88         88 88       88  88     88       88                          |
+|     88 88,    ,88 88b,   ,a8"    8b,d8    88         88 88       88  88,    88       88                          |
+|     88  "8bbdP"Y8 8Y"Ybbd8"'      Y88     88         88 88       88  "Y888  88       88   88  88  88  88  88     |
+|                                   d8                                                                             |
+|                                  d8                                                                              |
+|------------------------------------------------------------------------------------------------------------------|
+
+
+Welcome ${player1.name}! \n \n The Labrynth is a land of mystery. There are twists and turns at every corner.\n 
+There is no map of this dreaded place.  It is full of monsters and all manner of unknown beasts. \n
+Your only hope of escape is to walk as far as you can.  Hopefully you will collect enough trophies to open the portal and make your way to saftey. \n\n 
+Good Luck Adventurer! \n
+(p.s. You can check your stats at anytime by pressing 'w') \n` );
 
 //// CONSOLE.LOG PLAYERS STATS /////
 //console.log(player1);
