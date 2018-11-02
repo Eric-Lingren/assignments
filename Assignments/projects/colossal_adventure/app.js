@@ -133,7 +133,12 @@ function Player(hp, score){
         escapeBonus: 0,
         heal: 10,
         score: 1,
-        }, 
+        }, {
+            name:  'Sword',
+            attackBonus: 1,
+            defenseBonus: 1,
+            escapeBonus: 0,
+            },
     ];
     this.equiped = [{
         name:  'Fists',
@@ -372,6 +377,8 @@ function run(){
 };
 
 
+
+
 //  Check Inventory
 function checkInventory(){
     /// Kills intro music
@@ -382,14 +389,13 @@ function checkInventory(){
         statsAudio.kill()
     }
 
-       
-
     //  Begins inventory soundtrack
     inventoryAudioPlay()
      // Ends music from the stats page if that was the players previous menu.
      if( battleAudio){
         inventoryAudio.kill()
     }
+
     //  Displays the name of current inventory items
     player1.inventory.forEach(function(item){
         if (playerInventoryOptions.indexOf(item.name) === -1) {
@@ -404,36 +410,32 @@ function checkInventory(){
 
     // Adds the selected item to the global inventory selector variable.   
     var inventorySelector = player1.inventory[inventoryChoice];
-   
-    //  Displays Item in Inventory Slot 0
-        if (inventoryChoice === 0) {
-            console.log(`\n ${player1.inventory[0].name}: \b
-            Attack Bonus: ${player1.inventory[0].attackBonus} \b
-            Defense Bonus: ${player1.inventory[0].defenseBonus} \b
-            Escape Bonus: ${player1.inventory[0].escapeBonus} \b
-            Heal: ${player1.inventory[0].heal} \n`);
-            equip(inventorySelector)
-    //  Displays Item in Inventory Slot 0
-        } else if (inventoryChoice === 1) {
-            console.log(`${player1.inventory[1].name}: \b
-            Attack Bonus: ${player1.inventory[1].attackBonus} \b
-            Defense Bonus: ${player1.inventory[1].defenseBonus} \b
-            Escape Bonus: ${player1.inventory[1].escapeBonus}`);
-            equip(inventorySelector)
-        } else if (inventoryChoice === 2) {
-            console.log(`${player1.inventory[2].name}: \b
-            Attack Bonus: ${player1.inventory[2].attackBonus} \b
-            Defense Bonus: ${player1.inventory[2].defenseBonus} \b
-            Escape Bonus: ${player1.inventory[2].escapeBonus}`);
-        } else if (inventoryChoice === -1) {
+
+        //  Display the sub menu of stats from an individual item
+        //  Player gets stuck in a loop here.  We use a line in the equip function to reset the inventory menu.
+        
+            if (inventoryChoice !== -1){
+            console.log(`${player1.inventory[inventoryChoice].name}: \b
+            Attack Bonus: ${player1.inventory[inventoryChoice].attackBonus} \b
+            Defense Bonus: ${player1.inventory[inventoryChoice].defenseBonus} \b
+            Escape Bonus: ${player1.inventory[inventoryChoice].escapeBonus}\b
+            Heal Capability: ${player1.inventory[inventoryChoice].heal}\b
+            Score Value: ${player1.inventory[inventoryChoice].score}`);
+            equip(inventorySelector);
             isLooking = false;
-            // Ends music from the inventory page if that was the players previous menu.
-            if(inventoryAudio){
-                inventoryAudio.kill()
+        
+            } else {
+                isLooking = false;
+                // Ends music from the inventory page if that was the players previous menu.
+                if(inventoryAudio){
+                    inventoryAudio.kill()
+                }
             }
-        }
+        
     }
 };
+
+
 
 function equip(inventorySelector){
     // When player is looking at a specific item in the inventory...  Do they want to equip item?
@@ -449,13 +451,15 @@ function equip(inventorySelector){
             player1.equiped.push(inventorySelector);
             
             console.log('Great. This item has been equiped.')
-            
+            checkInventory()
             //  If the item has previously been equiped:
         } else {
             console.log(`You have already equiped this item.  Look under your stats.`)
+            checkInventory()
         }
     } else {
         console.log('Ok.  This item has been returned to your inventory.')
+        checkInventory()
     }; 
 
 };
@@ -643,6 +647,7 @@ function encounter(enemy){
                         //  Enemy drops a common item upon being killed
                         var thisdrop = dropItem();
                         console.log(`They have dropped ${thisdrop.name}.  It has been added to your inventory.`)
+                        player1.score += 1
                         enemy.isAlive = false;
 
                         achievementAudio();
@@ -883,64 +888,5 @@ Good Luck Adventurer! \n
         }
     }
     
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-//     ///////////////////////////////////////////////
-//     //////////////////////////////////////////////
-
-// // 'for' creates a loop.  it is used to compare instances of something to something else. 
-// //  Most variables are local.
-// //  int y=Loc+4 --> Initiates a new variable called y that is used only for this loop.
-// // y<(Loc+CandlesBack) --> everytime variable y is less than candles back, this loop will run.
-// //  y++  -->  Each time this loop runs, y will be incremented by 1.  
-// //i.e first time y = location +4 then 2nd run y = location + 5, etc
-//  for(int y=Loc+4;y<(Loc+CandlesBack);y++)
-//    {
-
-
-
-
-
-
-
-//     //this line is comparing data. y has a value set by the previos line.  lets just say loc is 5
-//     //  so y is 9 on the first run, 10 on the second run, etc.
-//     //  so if whatever is at position y in the high data set  is greater than
-//       if(High[y]>High[Loc]) break;
-//       int s=y;
-//       for(int z=y-2;z<=y+2;z++)
-//       {
-//          if(High[z]>High[y]){y++; break;}
-//       }
-//       if(s!=y){y--; continue;}
-//       bool OB=false;
-//       for(int k=Loc;k<=y;k++)
-//       {
-
-
-
 
 
