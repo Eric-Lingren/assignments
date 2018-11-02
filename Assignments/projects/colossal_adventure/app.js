@@ -7,6 +7,7 @@ MAKE IT SO THEY CAN ONLY EQUIP ONE ITEM IN EACH SLOT
 ADD DEFENSE BONUS TO FIGHTS
 ADD ESCAPE BONUS TO RUNNING AND WALKING AWAY FROM ENEMIES
 Check out sleep and emojis
+ADD END GAME CREDITS IF PLAYER DIES WHILE RUNNING
 
 
 */
@@ -22,7 +23,7 @@ var enterAudio = player.play('./Royal_Entrance.mp3', function(err){
 
 
 
-   //play music for enemy battle
+//play music for enemy battle
  var battleAudio;
 
  function battleAudioPlay() {
@@ -31,6 +32,39 @@ var enterAudio = player.play('./Royal_Entrance.mp3', function(err){
    });
  
  }
+
+
+//play music when play action is run
+var runMotionAudio;
+
+function runMotionAudioPlay() {
+    creditsAudio = player.play('./runMotion.wav', function(err){
+        if (err && !err.killed) throw err
+        });
+        
+}
+
+//Play music when play action is walk
+var walkMotionAudio;
+
+function walkMotionAudioPlay() {
+    creditsAudio = player.play('./walkMotion.wav', function(err){
+        if (err && !err.killed) throw err
+        });
+        
+}
+
+
+
+//play music for end credits
+var creditsAudio;
+
+function creditsAudioPlay() {
+creditsAudio = player.play('./endCredits.mp3', function(err){
+    if (err && !err.killed) throw err
+    });
+    
+}
 
 
 //  //play music for main menu
@@ -56,15 +90,15 @@ inventoryAudio = player.play('./doIt.mp3', function(err){
 }
 
 
-    //play music for checking player stats
-    var statsAudio;
+//play music for checking player stats
+var statsAudio;
 
 function statsAudioPlay() {
     statsAudio = player.play('./stats.mp3', function(err){
       if (err && !err.killed) throw err
     });
     
-    }
+}
 
 
  //play music for achievement
@@ -82,8 +116,9 @@ battleAudio = player.play('./achievement.mp3', function(err){
 
 
 
-////////////////////////////////////
+/////////////////////////////////////////////////////////////
 //  PLAYERS AND ENEMIES CONSTRUCTIORS
+//////////////////////////////////////////////////////////////////
 
 // Creates Player
 function Player(hp){
@@ -125,7 +160,8 @@ function Enemy(name, hp, isAlive){
     }
 }
 
-// ///////////////////////////////////////////
+//////////////////////////////////////////////
+/////////////////////////////////////////////
 
 //  GLOBAL VARIABLES
 var player1 = new Player(100);
@@ -204,6 +240,15 @@ enterAudio.kill();
 // inventoryAudio.kill();
 
 
+ // Ends music from the stats page if that was the players previous menu.
+ if( inventoryAudio){
+    inventoryAudio.kill()
+}
+//  Doesnt allow stats audio to play if they are in a battle
+if( battleAudio){
+    statsAudio.kill()
+}
+
   
 }
  
@@ -214,14 +259,14 @@ function walk(){
     // ends intro music
     enterAudio.kill();
     // console.log(enterAudio)
-
+    walkMotionAudioPlay();
   // Ends music from the stats page is that was the players previous menu.
   if(statsAudio){
     statsAudio.kill()
   }
  
 
-    console.log("You chose to walk.")
+    console.log("\nYou chose to walk.")
    
     // Generates a 1 in 4 change for a random enemy
     var generateEnemy = Math.floor(Math.random() * 4);
@@ -243,10 +288,29 @@ function walk(){
 
 // Running
 function run(){
-    inventoryAudio.kill()
+    // Ends music from the stats page if that was the players previous menu.
+    if(statsAudio){
+        statsAudio.kill()
+    }
+     // Ends music from the inventory page if that was the players previous menu.
+     if(inventoryAudio){
+        inventoryAudio.kill()
+    }
+    // Ends intro music if run if the players first menu choice on play
     enterAudio.kill();
-    player1.hp -= 2;
-    console.log(`You chose to run and loose 2 HP.  Your HP is now at: ${player1.hp} `)
+    
+    // Decrements the player hp by 2 if they are still alive and choose to run.
+    if (player1.hp > 0) {
+        //  Play sound effect for running
+        runMotionAudioPlay();
+        player1.hp -= 2;
+        console.log(`You chose to run and loose 2 HP.  Your HP is now at: ${player1.hp} `)
+    
+    ///  If player chooses to run and their hp drops below 0, this ends the game.
+    } else {
+        console.log(`\nYou have made a poor decision and ran when your health was too low.  You have run out of health and died.  \n`);
+        endGameCredits();
+    }
 };
 
 
@@ -254,8 +318,20 @@ function run(){
 function checkInventory(){
     /// Kills intro music
     enterAudio.kill();
+    
+    // Ends music from the stats page if that was the players previous menu.
+    if(statsAudio){
+        statsAudio.kill()
+    }
+
+       
+
     //  Begins inventory soundtrack
     inventoryAudioPlay()
+     // Ends music from the stats page if that was the players previous menu.
+     if( battleAudio){
+        inventoryAudio.kill()
+    }
     //  Displays the name of current inventory items
     player1.inventory.forEach(function(item){
         if (playerInventoryOptions.indexOf(item.name) === -1) {
@@ -293,6 +369,10 @@ function checkInventory(){
             Escape Bonus: ${player1.inventory[2].escapeBonus}`);
         } else if (inventoryChoice === -1) {
             isLooking = false;
+            // Ends music from the inventory page if that was the players previous menu.
+            if(inventoryAudio){
+                inventoryAudio.kill()
+            }
         }
     }
 };
@@ -324,6 +404,16 @@ function equip(inventorySelector){
 
 //   Meeting Enemies 
 function meet(){
+
+    // Ends music from the stats page is that was the players previous menu.
+    if(statsAudio){
+     statsAudio.kill()
+    }
+     // Ends music from the stats page if that was the players previous menu.
+    if( inventoryAudio){
+        inventoryAudio.kill()
+    }
+
     //  Creates all enemies
 
     var cyclops = new Enemy('Cyclops', 60, true);
@@ -332,7 +422,7 @@ function meet(){
     var enemies = [cyclops.name, ghost.name];
     var randomEnemy = enemies[Math.floor(enemies.length * Math.random())];
 
-    console.log(` The enemy you encountered is ${randomEnemy}! \n`)
+    console.log(` \nThe enemy you encountered is ${randomEnemy}! \n`)
         //  If they meet ghost
         if (randomEnemy === 'Ghost') {
             console.log(` ${ghost.name} has hp of ${ghost.hp} and does an attack under 15 damage. \n
@@ -379,7 +469,7 @@ function encounter(enemy){
         
         // If the user choose to walk away from enemy
         if(userChoice === 0){
-            console.log(`You chose to walk away from ${enemy.name}.  \n Most enemies are too fast to walk away from, but I guess you wanted to take your chances.`)
+            console.log(`You chose to walk away from ${enemy.name}.  \nMost enemies are too fast to walk away from, but I guess you wanted to take your chances.`)
             
             //  Player has a 1 in 10 chance of walking away.
             var walkAwayProbability = Math.floor(Math.random() * 10);
@@ -387,12 +477,25 @@ function encounter(enemy){
 
             /// If player excapes Enemy
                 if (walkAwayProbability === 0) {
-                    
+                    if( battleAudio){
+                        battleAudio.kill()
+                    }
                     console.log(`Nice job!  You were able to escape ${enemy.name}!`)
                     enemy.isAlive = false;
 
-                ///  If player wasnt able to walk away, they get attacked:
-                } else {
+                ///  //  If player tried to walk away and wasnt able to, but died
+                } else if (player1.hp < 1){
+                    console.log(`\nSadly you have been killed by ${enemy.name}.  \n 
+                    While you are slowly dying a painfull death, your body gets looted. \n`);
+                    
+                    if( battleAudio){
+                        battleAudio.kill()
+                    }
+                    enemy.isAlive = false;
+                    endGameCredits();
+
+                    //  If player tried to walk away and wasnt able to, but is still alive
+                }  else {
                     // Generates players defense bonus
                     defense();
                     // Generates a random number for enemy attack
@@ -436,10 +539,10 @@ function encounter(enemy){
 
         } else if (userChoice === 2){
             ///  Attack Sequence
-                console.log(`You have chosen to attack`);
+                console.log(`\nYou have chosen to attack`);
                 //  Player attacks Enemy first
                 var thisPlayerAttack = attack();
-                console.log(`You dealt ${thisPlayerAttack} damage to ${enemy.name}!`);
+                console.log(`\nYou dealt ${thisPlayerAttack} damage to ${enemy.name}!`);
                 enemy.hp = enemy.hp - thisPlayerAttack;
 
                 // Enemy Attacks Player second
@@ -452,17 +555,17 @@ function encounter(enemy){
                 var thisEnemyAttack = attackOutcome - defenseOutcome;
                 //  Result of the attack:
                 player1.hp = player1.hp - thisEnemyAttack;
-                console.log(`But ${enemy.name} also dealt you ${thisEnemyAttack} damage in the fight!  Your HP is now ${player1.hp}.`);
+                console.log(`But ${enemy.name} also dealt you ${thisEnemyAttack} damage in the fight!  Your HP is now ${player1.hp}.\n`);
                     //  Enemy is still alive
                     if (player1.hp < 1 ){
                         console.log(`Sadly you have been killed by ${enemy.name}.  \n 
-                        While you are slowly dying a painfull death, your body gets looted. \n
-                        GAME OVER`);
+                        While you are slowly dying a painfull death, your body gets looted. \n`);
+                        endGameCredits()
                         enemy.isAlive = false;
 
 
                     } else if (enemy.hp > 0) {
-                        console.log(`${enemy.name} is still alive.  Their HP is now ${enemy.hp}`);
+                        console.log(`\n${enemy.name} is still alive.  Their HP is now ${enemy.hp}`);
                     
                     //  Enemy is dead
                     } else {
@@ -476,7 +579,7 @@ function encounter(enemy){
                     
             }
         } else if (userChoice === 3){
-            console.log(`Here are the items in your inventory: \n
+            console.log(`\nHere are the items in your inventory: \n
             ${player1.inventory}`);
 
         } else if (userChoice === 4 ){
@@ -540,7 +643,7 @@ function defense(){
    var defenseMultiplier = listDefenseMultipliers.reduce(function(a,b){
        return a+b
    });
-   console.log(`${defenseMultiplier}`);
+   //console.log(`${defenseMultiplier}`);
    defenseOutcome = defenseMultiplier
      
 }
@@ -575,6 +678,18 @@ function bonus(){
     
 }
 
+
+
+function endGameCredits(){
+    if( battleAudio){
+        battleAudio.kill()
+    }
+    creditsAudioPlay()
+    console.log(`It has been a  good adventure.  Unfortunately you weren't good enough to make it out of the labrynth.  \n
+    Better luck next time.  Thank you for playing my game.  \n
+    GAME OVER \n
+    Designed and developed by Eric Lingren`)
+}
 ///////////////////////////////////////////
 //////////////////////////////////////////
 
@@ -619,7 +734,7 @@ Good Luck Adventurer! \n
         // play the game
         var userChoice = ask.keyInSelect(playerChoiceOptions, "What would you like to do? \n")
         // If the user choose to walk
-        if(userChoice === 0){
+        if (userChoice === 0){
             walk() 
         //  If the user chooses to Run
         } else if (userChoice === 1){
@@ -640,11 +755,76 @@ Good Luck Adventurer! \n
 
         // Cancel option.  Ends the Game.
         } else if (userChoice === -1) {
-            console.log(`${player1.name}, you have chosen to abandon your adventure.  Goodbye. \n`)
+            console.log(`${player1.name}, you have chosen to abandon your adventure. \n`);
+
+            // Ends music from the stats page is that was the players previous menu.
+            if(statsAudio){
+                statsAudio.kill()
+            }
+            //endGameCredits();
             player1.hp = 0
-        } 
+        } else {
+            console.log( ` \nYou have run out of health and have died. \n`);
+            endGameCredits();
+        }
     }
     
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    ///////////////////////////////////////////////
+    //////////////////////////////////////////////
+
+// 'for' creates a loop.  it is used to compare instances of something to something else. 
+//  Most variables are local.
+//  int y=Loc+4 --> Initiates a new variable called y that is used only for this loop.
+// y<(Loc+CandlesBack) --> everytime variable y is less than candles back, this loop will run.
+//  y++  -->  Each time this loop runs, y will be incremented by 1.  
+//i.e first time y = location +4 then 2nd run y = location + 5, etc
+ for(int y=Loc+4;y<(Loc+CandlesBack);y++)
+   {
+
+
+
+
+
+
+
+    //this line is comparing data. y has a value set by the previos line.  lets just say loc is 5
+    //  so y is 9 on the first run, 10 on the second run, etc.
+    //  so if whatever is at position y in the high data set  is greater than
+      if(High[y]>High[Loc]) break;
+      int s=y;
+      for(int z=y-2;z<=y+2;z++)
+      {
+         if(High[z]>High[y]){y++; break;}
+      }
+      if(s!=y){y--; continue;}
+      bool OB=false;
+      for(int k=Loc;k<=y;k++)
+      {
 
 
 
