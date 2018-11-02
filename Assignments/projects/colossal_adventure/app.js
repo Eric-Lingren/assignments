@@ -121,8 +121,9 @@ battleAudio = player.play('./achievement.mp3', function(err){
 //////////////////////////////////////////////////////////////////
 
 // Creates Player
-function Player(hp){
+function Player(hp, score){
     this.hp = hp;
+    this.score = score;
     // Attack for a random amount
    // this.attack = attack();
     this.inventory = [ {
@@ -131,6 +132,7 @@ function Player(hp){
         defenseBonus: 0,
         escapeBonus: 0,
         heal: 10,
+        score: 1,
         }, 
     ];
     this.equiped = [{
@@ -138,11 +140,13 @@ function Player(hp){
         attackBonus: 1,
         defenseBonus: 0,  
         escapeBonus: 0,
+        score: 1,
         }, {
         name:  'Shoes',
         attackBonus: 0,
         defenseBonus: 0,
         escapeBonus: 1,
+        score: 1,
         },
     ];
     this.bonus = []
@@ -164,40 +168,89 @@ function Enemy(name, hp, isAlive){
 /////////////////////////////////////////////
 
 //  GLOBAL VARIABLES
-var player1 = new Player(100);
+var player1 = new Player(100,0);
 var playerChoiceOptions = ['Walk', 'Run' , 'Attack', 'Check Inventory', 'My Stats', ];
 var inventorySelector = [];
 var playerInventoryOptions = [];
+// Defines weapon, armor, and health items an enemy can drop.  higher percentage than trophies
+var enemyDrops = [  {
+    name:  'Morphine',
+    attackBonus: 0,
+    defenseBonus: 0,
+    escapeBonus: 0,
+    heal: 25,
+    score: 1,
+    }, {
+    name:  'Sword',
+    attackBonus: 1,
+    defenseBonus: 1,
+    escapeBonus: 0,
+    }, {
+    name:  'Shield',
+    attackBonus: 0,
+    defenseBonus: 1,  
+    escapeBonus: 0,
+    }, {
+    name:  'Spear',
+    attackBonus: 1,
+    defenseBonus: 0,  
+    escapeBonus: 0,
+    },{
+    name:  'Hiking Boots',
+    attackBonus: 0,
+    defenseBonus: 0,  
+    escapeBonus: 1,
+    }, {
+    name:  'Brass Knuckles',
+    attackBonus: 1,
+    defenseBonus: 0,  
+    escapeBonus: 0,
+    }, {
+    name:  'Med Kit',
+    attackBonus: 0,
+    defenseBonus: 0,
+    escapeBonus: 0,
+    heal: 50,
+    score: 1,
+    },{
+    name:  'Bandages',
+    attackBonus: 0,
+    defenseBonus: 0,
+    escapeBonus: 0,
+    heal: 10,
+    score: 1,
+    },
+];
 
-var enemyDrops = [ {
-                name:  'Sword',
-                attackBonus: 3,
-                defenseBonus: 2,
-                escapeBonus: 0,
-                }, {
-                name:  'Shield',
-                attackBonus: 0,
-                defenseBonus: 6,  
-                escapeBonus: 0,
-                }, {
-                name:  'Spear',
-                attackBonus: 4,
-                defenseBonus: 1,  
-                escapeBonus: 0,
-                },{
-                name:  'Hiking Boots',
-                attackBonus: 0,
-                defenseBonus: 0,  
-                escapeBonus: 2,
-                }, {
-                name:  'Brass Knuckles',
-                attackBonus: 2,
-                defenseBonus: 0,  
-                escapeBonus: 0,
-                }
-            ];
 
-
+//  Defines the trophy items an emey can drop
+var trophyDrops = [
+    {
+       name:  'hoverboard',
+       attackBonus: 0,
+       defenseBonus: 0,  
+       escapeBonus: 10,
+       score: 1000,
+    },{
+        name:  'lightsaber',
+        attackBonus: 10,
+        defenseBonus: 0,  
+        escapeBonus: 0,
+        score: 1000,
+     },{
+        name:  'Iron Man Armor',
+        attackBonus: 0,
+        defenseBonus: 10,  
+        escapeBonus: 0,
+        score: 1000,
+     }, {
+        name:  'Voight Kampff Machine',
+        attackBonus: 0,
+        defenseBonus: 0,  
+        escapeBonus: 10,
+        score: 1000,
+     }
+]
 
 
 //  ['Sword', 'Shield', 'Spear', 'Hiking Boots', 'Brass Knuckles', ];
@@ -221,7 +274,7 @@ var enemyDrops = [ {
 function checkStats(){
     statsAudioPlay()
     console.log(`Here are your stats: \n
-    Name: ${player1.name}    Current Health: ${player1.hp}  \n `)
+    Name: ${player1.name}    Current Health: ${player1.hp}    Score:  ${player1.score} \n `)
     //  Outputs the name of each item equiped
     console.log(`You have equiped:`)
     player1.equiped.forEach(function(item){
@@ -265,6 +318,8 @@ function walk(){
     statsAudio.kill()
   }
  
+  // Increases player score by 1 each walk
+  player1.score++
 
     console.log("\nYou chose to walk.")
    
@@ -299,6 +354,9 @@ function run(){
     // Ends intro music if run if the players first menu choice on play
     enterAudio.kill();
     
+     // Increases player score by 10 each run
+    player1.score += 10
+
     // Decrements the player hp by 2 if they are still alive and choose to run.
     if (player1.hp > 0) {
         //  Play sound effect for running
@@ -389,8 +447,9 @@ function equip(inventorySelector){
         if (objectAlreadyEquiped === undefined){
             //  If not alread equiped, it alows them to equip.
             player1.equiped.push(inventorySelector);
+            
             console.log('Great. This item has been equiped.')
-
+            
             //  If the item has previously been equiped:
         } else {
             console.log(`You have already equiped this item.  Look under your stats.`)
@@ -400,6 +459,7 @@ function equip(inventorySelector){
     }; 
 
 };
+
 
 
 //   Meeting Enemies 
@@ -556,6 +616,10 @@ function encounter(enemy){
                 //  Result of the attack:
                 player1.hp = player1.hp - thisEnemyAttack;
                 console.log(`But ${enemy.name} also dealt you ${thisEnemyAttack} damage in the fight!  Your HP is now ${player1.hp}.\n`);
+
+                // Increases player score by 10 each attack
+                player1.score += 10
+
                     //  Enemy is still alive
                     if (player1.hp < 1 ){
                         console.log(`Sadly you have been killed by ${enemy.name}.  \n 
@@ -572,10 +636,38 @@ function encounter(enemy){
                         // end battle music
                         battleAudio.kill()
                         console.log(`${enemy.name} has been killed.  Congratulations!!`);
+
+                        // Increases player score by 100 for successful kill
+                        player1.score += 100
+
+                        //  Enemy drops a common item upon being killed
                         var thisdrop = dropItem();
                         console.log(`They have dropped ${thisdrop.name}.  It has been added to your inventory.`)
                         enemy.isAlive = false;
+
                         achievementAudio();
+
+                            //  If enemy drops morphine, automatically update score and hp
+                            if(thisdrop.name === 'Morphine'){
+                                player1.hp += 25;
+                                player1.score += 1;
+                                console.log(`They have dropped ${thisdrop.name}.  It has been used and your hp is increased by 25.`);
+
+                            //  If enemy drops medkit, automatically update score and hp
+                            } else if (thisdrop.name === 'Med Kit') {
+                                player1.hp += 50;
+                                player1.score += 1;
+                                console.log(`They have dropped ${thisdrop.name}.  It has been used and your hp is increased by 50.`);
+                            //  If enemy drops bandages, automatically update score and hp
+                            } else if (thisdrop.name === 'Bandages') {
+                                player1.hp += 10;
+                                player1.score += 1;
+                                console.log(`They have dropped ${thisdrop.name}.  It has been used and your hp is increased by 10.`);
+                            }
+
+                        // var thisTrophyDrop = trophyDropItem();
+                        // console.log(`They have dropped ${thisTrophyDrop.name}.  It has been added to your inventory.`)
+                        trophyDropItem();
                     
             }
         } else if (userChoice === 3){
@@ -595,12 +687,34 @@ function encounter(enemy){
 
 
 
-//  Enemy Item Drop
+//  Enemy Common Item Drop
 
 function dropItem(){
     var dropped =  enemyDrops[Math.floor(Math.random() * enemyDrops.length)];
     player1.inventory.push(dropped);
     return dropped
+
+}
+
+
+
+
+
+//  Enemy Trophy Item Drop
+
+function trophyDropItem(){
+    //  Generates a 1 in 10 chance of droping a trophy when the enemy is killed
+    var trophyPercentage = Math.floor(Math.random() * 1);
+    console.log(`random drop number for trophy was ${trophyPercentage}`)
+    //  Drops trophy if random number is equal to 0 and adds it to the player inventory
+    if(trophyPercentage === 0){
+        var droppedTrophy =  trophyDrops[Math.floor(Math.random() * trophyDrops.length)];
+        player1.inventory.push(droppedTrophy);
+        console.log(`\nThey have also dropped you a special trophy! ${droppedTrophy.name}!  It has been added to your inventory.`)
+        return droppedTrophy
+        
+    }
+
 }
 
 
@@ -794,37 +908,37 @@ Good Luck Adventurer! \n
 
 
 
-    ///////////////////////////////////////////////
-    //////////////////////////////////////////////
+//     ///////////////////////////////////////////////
+//     //////////////////////////////////////////////
 
-// 'for' creates a loop.  it is used to compare instances of something to something else. 
-//  Most variables are local.
-//  int y=Loc+4 --> Initiates a new variable called y that is used only for this loop.
-// y<(Loc+CandlesBack) --> everytime variable y is less than candles back, this loop will run.
-//  y++  -->  Each time this loop runs, y will be incremented by 1.  
-//i.e first time y = location +4 then 2nd run y = location + 5, etc
- for(int y=Loc+4;y<(Loc+CandlesBack);y++)
-   {
-
-
+// // 'for' creates a loop.  it is used to compare instances of something to something else. 
+// //  Most variables are local.
+// //  int y=Loc+4 --> Initiates a new variable called y that is used only for this loop.
+// // y<(Loc+CandlesBack) --> everytime variable y is less than candles back, this loop will run.
+// //  y++  -->  Each time this loop runs, y will be incremented by 1.  
+// //i.e first time y = location +4 then 2nd run y = location + 5, etc
+//  for(int y=Loc+4;y<(Loc+CandlesBack);y++)
+//    {
 
 
 
 
 
-    //this line is comparing data. y has a value set by the previos line.  lets just say loc is 5
-    //  so y is 9 on the first run, 10 on the second run, etc.
-    //  so if whatever is at position y in the high data set  is greater than
-      if(High[y]>High[Loc]) break;
-      int s=y;
-      for(int z=y-2;z<=y+2;z++)
-      {
-         if(High[z]>High[y]){y++; break;}
-      }
-      if(s!=y){y--; continue;}
-      bool OB=false;
-      for(int k=Loc;k<=y;k++)
-      {
+
+
+//     //this line is comparing data. y has a value set by the previos line.  lets just say loc is 5
+//     //  so y is 9 on the first run, 10 on the second run, etc.
+//     //  so if whatever is at position y in the high data set  is greater than
+//       if(High[y]>High[Loc]) break;
+//       int s=y;
+//       for(int z=y-2;z<=y+2;z++)
+//       {
+//          if(High[z]>High[y]){y++; break;}
+//       }
+//       if(s!=y){y--; continue;}
+//       bool OB=false;
+//       for(int k=Loc;k<=y;k++)
+//       {
 
 
 
