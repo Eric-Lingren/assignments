@@ -20,21 +20,57 @@ var enterAudio = player.play('./Royal_Entrance.mp3', function(err){
     if (err && !err.killed) throw err
   })
 
- //play music for enemy battle
+
+
+   //play music for enemy battle
  var battleAudio;
-function battleAudio() {
 
-battleAudio = player.play('./battle.mp3', function(err){
+ function battleAudioPlay() {
+ battleAudio = player.play('./battle.mp3', function(err){
+     if (err && !err.killed) throw err
+   });
+ 
+ }
+
+
+//  //play music for main menu
+//  var menuAudio;
+
+// function menuAudioPlay() {
+// menuAudio = player.play('./menu.mp3', function(err){
+//     if (err && !err.killed) throw err
+//   });
+
+// }
+
+
+
+//play music for checking inventory 
+var inventoryAudio;
+
+function inventoryAudioPlay() {
+inventoryAudio = player.play('./doIt.mp3', function(err){
     if (err && !err.killed) throw err
-  });
-
+ });
+   
 }
+
+
+    //play music for checking player stats
+    var statsAudio;
+
+function statsAudioPlay() {
+    statsAudio = player.play('./stats.mp3', function(err){
+      if (err && !err.killed) throw err
+    });
+    
+    }
 
 
  //play music for achievement
  var achievementAudio;
-function achievementAudio() {
 
+function achievementAudio() {
 battleAudio = player.play('./achievement.mp3', function(err){
     if (err && !err.killed) throw err
   });
@@ -147,6 +183,7 @@ var enemyDrops = [ {
 
 //  Check Player Stats
 function checkStats(){
+    statsAudioPlay()
     console.log(`Here are your stats: \n
     Name: ${player1.name}    Current Health: ${player1.hp}  \n `)
     //  Outputs the name of each item equiped
@@ -160,6 +197,12 @@ bonus();
 enterAudio.kill();
 
 
+//menuAudio.kill();
+
+
+// Kills the inventory audio if that was the players previous menu
+// inventoryAudio.kill();
+
 
   
 }
@@ -168,7 +211,16 @@ enterAudio.kill();
 
 // Walking
 function walk(){
-    
+    // ends intro music
+    enterAudio.kill();
+    // console.log(enterAudio)
+
+  // Ends music from the stats page is that was the players previous menu.
+  if(statsAudio){
+    statsAudio.kill()
+  }
+ 
+
     console.log("You chose to walk.")
    
     // Generates a 1 in 4 change for a random enemy
@@ -177,7 +229,7 @@ function walk(){
     //console.log(`Random enemy chance is ${generateEnemy}`);
         if (generateEnemy === 0) {
            // Generate battle music
-           battleAudio()
+           battleAudioPlay()
             console.log(`You met an enemy!`)
             meet();
 
@@ -191,6 +243,8 @@ function walk(){
 
 // Running
 function run(){
+    inventoryAudio.kill()
+    enterAudio.kill();
     player1.hp -= 2;
     console.log(`You chose to run and loose 2 HP.  Your HP is now at: ${player1.hp} `)
 };
@@ -198,6 +252,10 @@ function run(){
 
 //  Check Inventory
 function checkInventory(){
+    /// Kills intro music
+    enterAudio.kill();
+    //  Begins inventory soundtrack
+    inventoryAudioPlay()
     //  Displays the name of current inventory items
     player1.inventory.forEach(function(item){
         if (playerInventoryOptions.indexOf(item.name) === -1) {
@@ -283,12 +341,37 @@ function meet(){
 
         //  If they meet Cyclops
         } else if (randomEnemy === 'Cyclops') {
-            console.log(`${cyclops.name} has hp of ${cyclops.hp} and does an attack under 15 damage. \n
+            console.log(`
+            
+                                             _......._
+                                         .-'.'.'.'.'.'..-.
+                                       .'.'.'.'.'.'.'.'.'.'.
+                                      /.'.'               '.
+                                      |.'    _.--...--._     |
+                                      |    '._.-.....-._.'   /
+                                      |     _..- .-. -.._   |
+                                   .-.'    '.   ((@))  .'   '.-.
+                                  ( ^ |      '--.   .-'     / ^ )
+                                   |  /         .   .       \  /
+                                   /          .'     '.  .-    \
+                                  ( _.\    \ (_'-._.-'_)    /._\)
+                                   '-' \   ' .--.          / '-'
+                                       |  / /|_| '-._.'\   |
+                                       |   |       |_| |   /-.._
+                                   _..-\   '.--.______.'  |
+                                        \       .....     |
+                                         '.  .'      '.  /
+                                           \           .'
+                                            '-..___..-' \n
+
+            ${cyclops.name} has hp of ${cyclops.hp} and does an attack under 15 damage. \n
             You can either WALK, RUN, or FIGHT.  Maybe you have something useful in your inventory...? `)
             encounter(cyclops);
         } 
 };
 
+
+/////////////////////////////////
 //  Encountering and Interacting with Enemies
 function encounter(enemy){
     while (enemy.isAlive === true){
