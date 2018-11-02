@@ -12,16 +12,38 @@ Check out sleep and emojis
 */
 
 var ask = require('readline-sync');
+
 var player = require('play-sound')(opts = {});
 
-function playIntro() {
-    player.play('./Royal_Entrance.mp3', function(err){
-        if (err) throw err;
-        console.log("Audio finished");
-      });
-    //var audio = new Audio('./Royal_Entrance.mp3');
-    //audio.play(); 
-};
+// Sets variable to play music on game start
+var enterAudio = player.play('./Royal_Entrance.mp3', function(err){
+    if (err && !err.killed) throw err
+  })
+
+ //play music for enemy battle
+ var battleAudio;
+function battleAudio() {
+
+battleAudio = player.play('./battle.mp3', function(err){
+    if (err && !err.killed) throw err
+  });
+
+}
+
+
+ //play music for achievement
+ var achievementAudio;
+function achievementAudio() {
+
+battleAudio = player.play('./achievement.mp3', function(err){
+    if (err && !err.killed) throw err
+  });
+
+}
+
+// battleAudio()
+  //battleAudio.kill();
+
 
 
 ////////////////////////////////////
@@ -134,12 +156,19 @@ function checkStats(){
 });
 bonus();
 
-playIntro();
+  
+enterAudio.kill();
 
+
+
+  
 }
+ 
+
 
 // Walking
 function walk(){
+    
     console.log("You chose to walk.")
    
     // Generates a 1 in 4 change for a random enemy
@@ -147,6 +176,8 @@ function walk(){
     // Enemy is generated.  
     //console.log(`Random enemy chance is ${generateEnemy}`);
         if (generateEnemy === 0) {
+           // Generate battle music
+           battleAudio()
             console.log(`You met an enemy!`)
             meet();
 
@@ -236,6 +267,7 @@ function equip(inventorySelector){
 //   Meeting Enemies 
 function meet(){
     //  Creates all enemies
+
     var cyclops = new Enemy('Cyclops', 60, true);
     var ghost = new Enemy('Ghost', 40, true);
     //  Pulls random enemy
@@ -272,6 +304,7 @@ function encounter(enemy){
 
             /// If player excapes Enemy
                 if (walkAwayProbability === 0) {
+                    
                     console.log(`Nice job!  You were able to escape ${enemy.name}!`)
                     enemy.isAlive = false;
 
@@ -298,6 +331,8 @@ function encounter(enemy){
             run();
                 /// If player excapes Enemy
                 if (runAwayProbability === 0) {
+                    //ends enemy battle music
+                    battleAudio.kill()
                     console.log(`Nice job!  You were able to escape ${enemy.name}!`)
                     enemy.isAlive = false;
 
@@ -348,10 +383,13 @@ function encounter(enemy){
                     
                     //  Enemy is dead
                     } else {
+                        // end battle music
+                        battleAudio.kill()
                         console.log(`${enemy.name} has been killed.  Congratulations!!`);
                         var thisdrop = dropItem();
                         console.log(`They have dropped ${thisdrop.name}.  It has been added to your inventory.`)
                         enemy.isAlive = false;
+                        achievementAudio();
                     
             }
         } else if (userChoice === 3){
