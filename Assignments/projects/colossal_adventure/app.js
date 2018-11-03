@@ -171,8 +171,8 @@ function Enemy(name, hp, isAlive){
     this.isAlive = isAlive;
     // Attack for a random amount
     this.attack = function() {
-        // returns a random number between 5 - 15
-        return Math.floor(Math.random() * (15 - 5) + 5)
+        // returns a random number between 5 - 20
+        return Math.floor(Math.random() * (20 - 5) + 5)
     }
 }
 
@@ -326,7 +326,7 @@ var enemyDrops = [  {
 var trophyDrops = [
     {
        name:  'Hoverboard',
-       attackBonus: 10,
+       attackBonus: 0,
        defenseBonus: 0,  
        escapeBonus: 10,
        heal: 100,
@@ -340,14 +340,14 @@ var trophyDrops = [
         score: 1000,
      },{
         name:  'Iron Man Armor',
-        attackBonus: 15,
+        attackBonus: 5,
         defenseBonus: 10,  
         escapeBonus: 0,
         heal: 100,
         score: 1000,
      }, {
         name:  'Voight Kampff Machine',
-        attackBonus: 10,
+        attackBonus: 5,
         defenseBonus: 5,  
         escapeBonus: 10,
         heal: 100,
@@ -391,7 +391,7 @@ function checkStats(){
 
     //menuAudio.kill();
 
-    //  Ends intro music if that was their previos menu
+    //  Ends intro music if that was their previous menu
     enterAudio.kill();
     // Ends music from the stats page if that was the players previous menu.
     if( inventoryAudio){
@@ -549,7 +549,7 @@ function checkInventory(){
 function equip(inventorySelector){
 
     // When player is looking at a specific item in the inventory...  Do they want to equip item?
-    if (ask.keyInYN('Do you want to equip this item?')) {
+    if (ask.keyInYN('\nDo you want to equip this item?')) {
         // checks to see if item has already been equiped.  
 
         var objectAlreadyEquiped = player1.equiped.find(function (item){
@@ -560,15 +560,15 @@ function equip(inventorySelector){
             //  If not alread equiped, it alows them to equip.
             player1.equiped.push(inventorySelector);
             
-            console.log('Great. This item has been equiped.')
+            console.log('\nGreat. This item has been equiped.')
             checkInventory()
             //  If the item has previously been equiped:
         } else {
-            console.log(`You have already equiped this item.  Look under your stats.`)
+            console.log(`\nYou have already equiped this item.  Look under your stats.`)
             checkInventory()
         }
     } else {
-        console.log('Ok.  This item has been returned to your inventory.')
+        console.log('\nOk.  This item has been returned to your inventory.')
         checkInventory()
     }; 
 
@@ -624,7 +624,7 @@ ___                   )     /~')
     ~~~~~--------,.___     
                       '''''')_
             
-            ${zombie.name} has hp of ${zombie.hp} and does an attack under 15 damage. \n
+            ${zombie.name} has hp of ${zombie.hp} and does an attack under 20 damage. \n
             You can either WALK, RUN, or FIGHT.  Maybe you have something useful in your inventory...?`)
             encounter(zombie);
 
@@ -653,7 +653,7 @@ ___                   )     /~')
                                            \           .'
                                             '-..___..-' \n
 
-            ${cyclops.name} has hp of ${cyclops.hp} and does an attack under 15 damage. \n
+            ${cyclops.name} has hp of ${cyclops.hp} and does an attack under 20 damage. \n
             You can either WALK, RUN, or FIGHT.  Maybe you have something useful in your inventory...? `)
             encounter(cyclops);
         } 
@@ -683,7 +683,7 @@ ___                   )     /~')
              ' :'.     .': '                                                 
               ':  '"""'  :'
 
-            ${dragon.name} has hp of ${dragon.hp} and does an attack under 15 damage. \n
+            ${dragon.name} has hp of ${dragon.hp} and does an attack under 20 damage. \n
             You can either WALK, RUN, or FIGHT.  Maybe you have something useful in your inventory...?`)
             encounter(dragon);
         }
@@ -889,16 +889,18 @@ function dropItem(){
 //  Enemy Trophy Item Drop
 
 function trophyDropItem(){
-    //  Generates a 1 in 10 chance of droping a trophy when the enemy is killed
-    var trophyPercentage = Math.floor(Math.random() * 1);
+    //  Generates a 1 in 5 chance of droping a trophy when the enemy is killed
+    var trophyPercentage = Math.floor(Math.random() * 5);
     
     //  Drops trophy if random number is equal to 0 and adds it to the player inventory
     if(trophyPercentage === 0){
         var droppedTrophy =  trophyDrops[Math.floor(Math.random() * trophyDrops.length)];
         player1.inventory.push(droppedTrophy);
-        console.log(`\nThey have also dropped you a special trophy! ${droppedTrophy.name}!  It has been added to your inventory.`)
+        console.log(`\nThey have also dropped you a special trophy! ${droppedTrophy.name}!  \n This trophy comes with special abilities and also gives your hp a boost of 100!\n
+        It has been added to your inventory. Go check it out!`)
         // adds 1000 points to players score
         player1.score += 1000;
+        player1.hp += 100;
 
         if(player1.score > 4999){
             winGame()
@@ -935,7 +937,7 @@ function attack(){
     // console.log(` the list of attack multipliers is ${listAttackMultipliers} `);
     // console.log(` the list of attack multipliers combined is ${attackBonus()} `);
     // returns a random number between 30 - 50
-    var baseAttack =  Math.floor(Math.random() * (30 - 15) + 15)
+    var baseAttack =  Math.floor(Math.random() * (40 - 15) + 15)
        // console.log (`Your base attack is ${baseAttack} `)
 
     //  Access the attack multiplier boune generated from attackBonus()
