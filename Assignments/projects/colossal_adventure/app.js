@@ -877,6 +877,7 @@ function dropItem(){
     player1.inventory.push(dropped);
         if(player1.score > 4999){
             winGame()
+            endGameCredits()
         }
     return dropped
 
@@ -890,7 +891,7 @@ function dropItem(){
 
 function trophyDropItem(){
     //  Generates a 1 in 5 chance of droping a trophy when the enemy is killed
-    var trophyPercentage = Math.floor(Math.random() * 5);
+    var trophyPercentage = Math.floor(Math.random() * 1);
     
     //  Drops trophy if random number is equal to 0 and adds it to the player inventory
     if(trophyPercentage === 0){
@@ -899,7 +900,7 @@ function trophyDropItem(){
         console.log(`\nThey have also dropped you a special trophy! ${droppedTrophy.name}!  \n This trophy comes with special abilities and also gives your hp a boost of 100!\n
         It has been added to your inventory. Go check it out!`)
         // adds 1000 points to players score
-        player1.score += 1000;
+        player1.score += 5000;
         player1.hp += 100;
 
         if(player1.score > 4999){
@@ -1005,7 +1006,8 @@ function bonus(){
 function winGame(){
     console.log(`\n
     You have collected enough trophies for your score to excede 5,000 points!  Congratulations! You have escaped the labrynth!!
-    `)
+    `);
+    endGameCredits();
 }
 
 
@@ -1013,11 +1015,22 @@ function endGameCredits(){
     if( battleAudio){
         battleAudio.kill()
     }
+    
     creditsAudioPlay()
-    console.log(`It has been a  good adventure.  Unfortunately you weren't good enough to make it out of the labrynth.  \n
-    Better luck next time.  Thank you for playing my game.  \n Your final score was ${player1.score} \n
+    console.log(`It has been a  good adventure.  Thank you for playing my game.  \n Your final score was ${player1.score} \n
     GAME OVER \n
-    Designed and developed by Eric Lingren`)
+    Designed and developed by: \n
+                                        
+    |-----------|   |-------)     |--|   |----------|
+    |  _________|   |  |--)  )    |  |   |  ________| 
+    |  |            |  |   )  )   |  |   |  |
+    |  ----|        |  |__)  /    |  |   |  |
+    |  ----|        |   __   |    |  |   |  |
+    |  |________|   |  |   )  )   |  |   |  |-------|
+    |___________|   |__|    )__]  |__|   |__________|         Lingren
+
+
+    `)
 }
 ///////////////////////////////////////////
 //////////////////////////////////////////
@@ -1122,7 +1135,7 @@ console.log(`Good Luck Brave Adventurer! \n`);
            |     |      |     |      |     |
            " " "" "    " ' "" "     " '  """ "  \n
        You have run out of health and have died. \n`);
-            //endGameCredits();
+            endGameCredits();
         }
     }
     
