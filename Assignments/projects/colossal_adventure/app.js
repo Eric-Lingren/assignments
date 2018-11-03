@@ -186,6 +186,13 @@ var enemyDrops = [  {
     heal: 25,
     score: 1,
     }, {
+    name:  'Morphine',
+    attackBonus: 0,
+    defenseBonus: 0,
+    escapeBonus: 0,
+    heal: 25,
+    score: 1,
+    },{
     name:  'Sword',
     attackBonus: 1,
     defenseBonus: 1,
@@ -224,6 +231,20 @@ var enemyDrops = [  {
     escapeBonus: 0,
     heal: 10,
     score: 1,
+    },{
+    name:  'Bandages',
+    attackBonus: 0,
+    defenseBonus: 0,
+    escapeBonus: 0,
+    heal: 10,
+    score: 1,
+    },{
+    name:  'Bandages',
+    attackBonus: 0,
+    defenseBonus: 0,
+    escapeBonus: 0,
+    heal: 10,
+    score: 1,
     },
 ];
 
@@ -231,27 +252,27 @@ var enemyDrops = [  {
 //  Defines the trophy items an emey can drop
 var trophyDrops = [
     {
-       name:  'hoverboard',
+       name:  'Hoverboard',
        attackBonus: 0,
        defenseBonus: 0,  
        escapeBonus: 10,
        score: 1000,
     },{
-        name:  'lightsaber',
+        name:  'Lightsaber',
         attackBonus: 10,
-        defenseBonus: 0,  
+        defenseBonus: 5,  
         escapeBonus: 0,
         score: 1000,
      },{
         name:  'Iron Man Armor',
-        attackBonus: 0,
+        attackBonus: 5,
         defenseBonus: 10,  
         escapeBonus: 0,
         score: 1000,
      }, {
         name:  'Voight Kampff Machine',
         attackBonus: 0,
-        defenseBonus: 0,  
+        defenseBonus: 5,  
         escapeBonus: 10,
         score: 1000,
      }
@@ -371,7 +392,17 @@ function run(){
     
     ///  If player chooses to run and their hp drops below 0, this ends the game.
     } else {
-        console.log(`\nYou have made a poor decision and ran when your health was too low.  You have run out of health and died.  \n`);
+        console.log(`\nYou have made a poor decision and ran when your health was too low.  You have run out of health and died.  \n
+        
+          +            +            +
+        .-"-.        .-:-.        .-"-.
+       / RIP |      / RIP |      / RIP |
+       |     |      |     |      |     |
+       |     |      |     |      |     |
+       " " "" "    " ' "" "     " '  """ "  \n
+
+        
+        While you are slowly dying a painfull death, your body gets looted. \n`);
         endGameCredits();
     }
 };
@@ -482,8 +513,9 @@ function meet(){
 
     var cyclops = new Enemy('Cyclops', 60, true);
     var ghost = new Enemy('Ghost', 40, true);
+    var dragon = new Enemy('Dragon', 120, true);
     //  Pulls random enemy
-    var enemies = [cyclops.name, ghost.name];
+    var enemies = [cyclops.name, ghost.name, dragon.name,];
     var randomEnemy = enemies[Math.floor(enemies.length * Math.random())];
 
     console.log(` \nThe enemy you encountered is ${randomEnemy}! \n`)
@@ -506,11 +538,11 @@ function meet(){
                                       |     _..- .-. -.._   |
                                    .-.'    '.   ((@))  .'   '.-.
                                   ( ^ |      '--.   .-'     / ^ )
-                                   |  /         .   .       \  /
-                                   /          .'     '.  .-    \
-                                  ( _.\    \ (_'-._.-'_)    /._\)
-                                   '-' \   ' .--.          / '-'
-                                       |  / /|_| '-._.'\   |
+                                   |  /         .   .       )  /
+                                   /          .'     '.  .-    )
+                                  ( _.       (_'-._.-'_)    /.._)
+                                   '-' ]   ' .--.          / '-'
+                                       |  / /|_| '-._.')   |
                                        |   |       |_| |   /-.._
                                    _..-\   '.--.______.'  |
                                         \       .....     |
@@ -522,7 +554,41 @@ function meet(){
             You can either WALK, RUN, or FIGHT.  Maybe you have something useful in your inventory...? `)
             encounter(cyclops);
         } 
+        //  If they meet Dragon
+        else if (randomEnemy === 'Dragon') {
+            console.log(` 
+            
+  .:'                                  ':.                                    
+ ::                                     ::                                   
+:: :.                                .: ::                                  
+':. ':.             .             .:'  .:'                                   
+ '::. '::           !           ::' .::'                                     
+     '::.'::.    .' ! '.    .::'.::'                                         
+       ':.  '::::'':!:''::::'   ::'                                          
+       :'*:::.  .:' ! ':.  .:::*':                                           
+      :: HHH::.   ' ! '   .::HHH ::                                          
+     ::: 'H TH::.  '!'  .::HT H' :::                                         
+     ::..  'THHH:':   :':HHHT'  ..::                                         
+     '::      'T: '. .' :T'      ::'                                         
+       ':. .   :         :   . .:'                                           
+         '::'               '::'                                             
+           :'  .'.  .  .'.  ':                                               
+           :' ::.       .:: ':                                               
+           :' ':::     :::' ':                                               
+            '.  ''     ''  .'                                                
+             :'...........':                                                 
+             ' :'.     .': '                                                 
+              ':  '"""'  :'
+
+            ${dragon.name} has hp of ${dragon.hp} and does an attack under 15 damage. \n
+            You can either WALK, RUN, or FIGHT.  Maybe you have something useful in your inventory...?`)
+            encounter(dragon);
+        }
 };
+
+
+
+
 
 
 /////////////////////////////////
@@ -626,7 +692,16 @@ function encounter(enemy){
 
                     //  Enemy is still alive
                     if (player1.hp < 1 ){
-                        console.log(`Sadly you have been killed by ${enemy.name}.  \n 
+                        console.log(` \n Sadly you have been killed by ${enemy.name}.  \n 
+                        
+                          +            +            +
+                        .-"-.        .-:-.        .-"-.
+                       / RIP |      / RIP |      / RIP |
+                       |     |      |     |      |     |
+                       |     |      |     |      |     |
+                       " " "" "    " ' "" "     " '  """ "  \n
+
+                        
                         While you are slowly dying a painfull death, your body gets looted. \n`);
                         endGameCredits()
                         enemy.isAlive = false;
@@ -805,7 +880,7 @@ function endGameCredits(){
     }
     creditsAudioPlay()
     console.log(`It has been a  good adventure.  Unfortunately you weren't good enough to make it out of the labrynth.  \n
-    Better luck next time.  Thank you for playing my game.  \n
+    Better luck next time.  Thank you for playing my game.  \n Your final score was ${player1.score} \n
     GAME OVER \n
     Designed and developed by Eric Lingren`)
 }
@@ -874,16 +949,33 @@ Good Luck Adventurer! \n
 
         // Cancel option.  Ends the Game.
         } else if (userChoice === -1) {
-            console.log(`${player1.name}, you have chosen to abandon your adventure. \n`);
+            console.log(`${player1.name}, you have chosen to abandon your adventure. \n
+           +            +            +
+            .-"-.        .-:-.        .-"-.
+           / RIP |      / RIP |      / RIP |
+           |     |      |     |      |     |
+           |     |      |     |      |     |
+           " " "" "    " ' "" "     " '  """ "  \n`);
 
             // Ends music from the stats page is that was the players previous menu.
             if(statsAudio){
                 statsAudio.kill()
             }
+            // Ends music from the battle page if player decised to quit.
+            if( battleAudio){
+                battleAudio.kill()
+            }
             //endGameCredits();
             player1.hp = 0
         } else {
-            console.log( ` \nYou have run out of health and have died. \n`);
+            console.log( ` \n 
+              +            +            +
+            .-"-.        .-:-.        .-"-.
+           / RIP |      / RIP |      / RIP |
+           |     |      |     |      |     |
+           |     |      |     |      |     |
+           " " "" "    " ' "" "     " '  """ "  \n
+       You have run out of health and have died. \n`);
             endGameCredits();
         }
     }
