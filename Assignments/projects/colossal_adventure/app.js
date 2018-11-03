@@ -16,6 +16,9 @@ var ask = require('readline-sync');
 
 var player = require('play-sound')(opts = {});
 
+var sleep = require('sleep');
+
+
 // Sets variable to play music on game start
 var enterAudio = player.play('./Royal_Entrance.mp3', function(err){
     if (err && !err.killed) throw err
@@ -127,30 +130,34 @@ function Player(hp, score){
     // Attack for a random amount
    // this.attack = attack();
     this.inventory = [ {
-        name:  'Morphine',
-        attackBonus: 0,
-        defenseBonus: 0,
-        escapeBonus: 0,
-        heal: 10,
-        score: 1,
-        }, {
             name:  'Sword',
             attackBonus: 1,
             defenseBonus: 1,
             escapeBonus: 0,
-            },
+            heal: 0,
+            score: 1,
+            },{
+                name:  'Swat Boots',
+                attackBonus: 0,
+                defenseBonus: 0,  
+                escapeBonus: 2,
+                heal: 0,
+                score: 1,
+                }
     ];
     this.equiped = [{
         name:  'Fists',
         attackBonus: 1,
         defenseBonus: 0,  
         escapeBonus: 0,
+        heal: 0,
         score: 1,
         }, {
         name:  'Shoes',
         attackBonus: 0,
         defenseBonus: 0,
         escapeBonus: 1,
+        heal: 0,
         score: 1,
         },
     ];
@@ -197,27 +204,93 @@ var enemyDrops = [  {
     attackBonus: 1,
     defenseBonus: 1,
     escapeBonus: 0,
+    heal: 0,
+    score: 1,
     }, {
     name:  'Shield',
     attackBonus: 0,
     defenseBonus: 1,  
     escapeBonus: 0,
+    heal: 0,
+    score: 1,
     }, {
     name:  'Spear',
     attackBonus: 1,
     defenseBonus: 0,  
     escapeBonus: 0,
+    heal: 0,
+    score: 1,
     },{
     name:  'Hiking Boots',
     attackBonus: 0,
     defenseBonus: 0,  
     escapeBonus: 1,
+    heal: 0,
+    score: 1,
     }, {
+    name:  'Swat Boots',
+    attackBonus: 0,
+    defenseBonus: 0,  
+    escapeBonus: 2,
+    heal: 0,
+    score: 1,
+    },{
+    name:  'Swat Armor',
+    attackBonus: 0,
+    defenseBonus: 2,  
+    escapeBonus: 0,
+    heal: 0,
+    score: 1,
+    },{
+    name:  'Riot Shield',
+    attackBonus: 0,
+    defenseBonus: 2,  
+    escapeBonus: 0,
+    heal: 0,
+    score: 1,
+    },{
     name:  'Brass Knuckles',
     attackBonus: 1,
     defenseBonus: 0,  
     escapeBonus: 0,
+    heal: 0,
+    score: 1,
     }, {
+    name:  'Pistol',
+    attackBonus: 2,
+    defenseBonus: 0,  
+    escapeBonus: 0,
+    heal: 0,
+    score: 1,
+    }, {
+    name:  'Knife',
+    attackBonus: 1,
+    defenseBonus: 0,  
+    escapeBonus: 0,
+    heal: 0,
+    score: 1,
+    },{
+    name:  'Shotgun',
+    attackBonus: 3,
+    defenseBonus: 0,  
+    escapeBonus: 0,
+    heal: 0,
+    score: 1,
+    },{
+    name:  'AR-15',
+    attackBonus: 4,
+    defenseBonus: 0,  
+    escapeBonus: 0,
+    heal: 0,
+    score: 1,
+    },{
+    name:  'Med Kit',
+    attackBonus: 0,
+    defenseBonus: 0,
+    escapeBonus: 0,
+    heal: 50,
+    score: 1,
+    },{
     name:  'Med Kit',
     attackBonus: 0,
     defenseBonus: 0,
@@ -394,7 +467,7 @@ function run(){
     } else {
         console.log(`\nYou have made a poor decision and ran when your health was too low.  You have run out of health and died.  \n
         
-          +            +            +
+     
         .-"-.        .-:-.        .-"-.
        / RIP |      / RIP |      / RIP |
        |     |      |     |      |     |
@@ -421,7 +494,11 @@ function checkInventory(){
     }
 
     //  Begins inventory soundtrack
-    inventoryAudioPlay()
+    if(inventoryAudio){
+        inventoryAudio.kill()
+    };
+    inventoryAudioPlay();
+
      // Ends music from the stats page if that was the players previous menu.
      if( battleAudio){
         inventoryAudio.kill()
@@ -469,6 +546,7 @@ function checkInventory(){
 
 
 function equip(inventorySelector){
+
     // When player is looking at a specific item in the inventory...  Do they want to equip item?
     if (ask.keyInYN('Do you want to equip this item?')) {
         // checks to see if item has already been equiped.  
@@ -694,7 +772,7 @@ function encounter(enemy){
                     if (player1.hp < 1 ){
                         console.log(` \n Sadly you have been killed by ${enemy.name}.  \n 
                         
-                          +            +            +
+                         
                         .-"-.        .-:-.        .-"-.
                        / RIP |      / RIP |      / RIP |
                        |     |      |     |      |     |
@@ -731,18 +809,18 @@ function encounter(enemy){
                             if(thisdrop.name === 'Morphine'){
                                 player1.hp += 25;
                                 player1.score += 1;
-                                console.log(`They have dropped ${thisdrop.name}.  It has been used and your hp is increased by 25.`);
+                                console.log(`It has been used and your hp is increased by 25.`);
 
                             //  If enemy drops medkit, automatically update score and hp
                             } else if (thisdrop.name === 'Med Kit') {
                                 player1.hp += 50;
                                 player1.score += 1;
-                                console.log(`They have dropped ${thisdrop.name}.  It has been used and your hp is increased by 50.`);
+                                console.log(`It has been used and your hp is increased by 50.`);
                             //  If enemy drops bandages, automatically update score and hp
                             } else if (thisdrop.name === 'Bandages') {
                                 player1.hp += 10;
                                 player1.score += 1;
-                                console.log(`They have dropped ${thisdrop.name}.  It has been used and your hp is increased by 10.`);
+                                console.log(`It has been used and your hp is increased by 10.`);
                             }
 
                         // var thisTrophyDrop = trophyDropItem();
@@ -772,6 +850,9 @@ function encounter(enemy){
 function dropItem(){
     var dropped =  enemyDrops[Math.floor(Math.random() * enemyDrops.length)];
     player1.inventory.push(dropped);
+        if(player1.score > 4999){
+            winGame()
+        }
     return dropped
 
 }
@@ -784,14 +865,20 @@ function dropItem(){
 
 function trophyDropItem(){
     //  Generates a 1 in 10 chance of droping a trophy when the enemy is killed
-    var trophyPercentage = Math.floor(Math.random() * 1);
-    console.log(`random drop number for trophy was ${trophyPercentage}`)
+    var trophyPercentage = Math.floor(Math.random() * 10);
+    
     //  Drops trophy if random number is equal to 0 and adds it to the player inventory
     if(trophyPercentage === 0){
         var droppedTrophy =  trophyDrops[Math.floor(Math.random() * trophyDrops.length)];
         player1.inventory.push(droppedTrophy);
         console.log(`\nThey have also dropped you a special trophy! ${droppedTrophy.name}!  It has been added to your inventory.`)
-        return droppedTrophy
+        // adds 1000 points to players score
+        player1.score += 1000;
+
+        if(player1.score > 4999){
+            winGame()
+        }
+        return droppedTrophy;
         
     }
 
@@ -852,7 +939,13 @@ function defense(){
 ///  Player bonus calculator 
 
 function bonus(){
-   
+   //  Lists all atack multipliers
+   var listAttackMultipliers = player1.equiped.map(a => a.attackBonus)
+   //  Returns the sum of all attack multipliers
+   var attackBonus = listAttackMultipliers.reduce(function(a,b){
+        return a+b
+   });   
+
     //  Lists all defense multipliers
     var listDefenseMultipliers = player1.equiped.map(a => a.defenseBonus)
     //  Returns the sum of all defense multipliers
@@ -866,12 +959,18 @@ function bonus(){
         return a+b
     });
 
-    console.log(`\n${player1.name}'s current attack bonus is  + ${attackMultiplier}`);
+    console.log(`\n${player1.name}'s current attack bonus is  + ${attackBonus}`);
     console.log(`${player1.name}'s current defense bonus is  + ${defenseMultiplier}`);
     console.log(`${player1.name}'s current escape bonus is  + ${escapeMultiplier}`);
     
 }
 
+
+function winGame(){
+    console.log(`\n
+    You have collected enough trophies for your score to excede 5,000 points!  Congratulations! You have escaped the labrynth!!
+    `)
+}
 
 
 function endGameCredits(){
@@ -907,13 +1006,18 @@ console.log(`
 |                                   d8                                                                             |
 |                                  d8                                                                              |
 |------------------------------------------------------------------------------------------------------------------|
+`);
 
 
-Welcome ${player1.name}! \n \n The Labrynth is a land of mystery. There are twists and turns at every corner.\n 
-There is no map of this dreaded place.  It is full of monsters and all manner of unknown beasts. \n
-Your only hope of escape is to walk as far as you can.  Hopefully you will collect enough trophies to open the portal and make your way to saftey. \n\n 
-Good Luck Adventurer! \n
-(p.s. You can check your stats at anytime by pressing 'w') \n` );
+console.log(`Welcome ${player1.name}! \n`);
+console.log(`The Labrynth is a land of mystery. There are twists and turns at every corner.\n `);
+console.log(`There is no map of this dreaded place.  It is full of monsters and all manner of unknown beasts. \n`);
+console.log(`Your only hope of escape is to walk as far as you can.  Hopefully you will collect enough trophies to open the portal and make your way to saftey. \n\n`);
+console.log(`Good Luck Brave Adventurer! \n`);
+
+
+
+
 
 //// CONSOLE.LOG PLAYERS STATS /////
 //console.log(player1);
@@ -924,9 +1028,11 @@ Good Luck Adventurer! \n
     // Player has option to quit at anytime
 
     // While the player is alive
-    while(player1.hp > 0){
+    while(player1.hp > 0 && player1.score < 5000 ){
         // play the game
-        var userChoice = ask.keyInSelect(playerChoiceOptions, "What would you like to do? \n")
+        var userChoice = ask.keyInSelect(playerChoiceOptions, "What would you like to do? \n");
+        
+
         // If the user choose to walk
         if (userChoice === 0){
             walk() 
@@ -950,7 +1056,7 @@ Good Luck Adventurer! \n
         // Cancel option.  Ends the Game.
         } else if (userChoice === -1) {
             console.log(`${player1.name}, you have chosen to abandon your adventure. \n
-           +            +            +
+           
             .-"-.        .-:-.        .-"-.
            / RIP |      / RIP |      / RIP |
            |     |      |     |      |     |
@@ -965,18 +1071,22 @@ Good Luck Adventurer! \n
             if( battleAudio){
                 battleAudio.kill()
             }
+            //  Ends music from the inventory page if that player decided to quit.
+            if(inventoryAudio){
+                inventoryAudio.kill()
+            }
             //endGameCredits();
             player1.hp = 0
         } else {
             console.log( ` \n 
-              +            +            +
+             
             .-"-.        .-:-.        .-"-.
            / RIP |      / RIP |      / RIP |
            |     |      |     |      |     |
            |     |      |     |      |     |
            " " "" "    " ' "" "     " '  """ "  \n
        You have run out of health and have died. \n`);
-            endGameCredits();
+            //endGameCredits();
         }
     }
     
