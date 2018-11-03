@@ -137,13 +137,13 @@ function Player(hp, score){
             heal: 0,
             score: 1,
             },{
-                name:  'Swat Boots',
-                attackBonus: 0,
-                defenseBonus: 0,  
-                escapeBonus: 2,
-                heal: 0,
-                score: 1,
-                }
+            name:  'Swat Boots',
+            attackBonus: 0,
+            defenseBonus: 0,  
+            escapeBonus: 2,
+            heal: 0,
+            score: 1,
+            }
     ];
     this.equiped = [{
         name:  'Fists',
@@ -190,14 +190,14 @@ var enemyDrops = [  {
     attackBonus: 0,
     defenseBonus: 0,
     escapeBonus: 0,
-    heal: 25,
+    heal: 30,
     score: 1,
     }, {
     name:  'Morphine',
     attackBonus: 0,
     defenseBonus: 0,
     escapeBonus: 0,
-    heal: 25,
+    heal: 30,
     score: 1,
     },{
     name:  'Sword',
@@ -302,21 +302,21 @@ var enemyDrops = [  {
     attackBonus: 0,
     defenseBonus: 0,
     escapeBonus: 0,
-    heal: 10,
+    heal: 20,
     score: 1,
     },{
     name:  'Bandages',
     attackBonus: 0,
     defenseBonus: 0,
     escapeBonus: 0,
-    heal: 10,
+    heal: 20,
     score: 1,
     },{
     name:  'Bandages',
     attackBonus: 0,
     defenseBonus: 0,
     escapeBonus: 0,
-    heal: 10,
+    heal: 20,
     score: 1,
     },
 ];
@@ -329,24 +329,28 @@ var trophyDrops = [
        attackBonus: 0,
        defenseBonus: 0,  
        escapeBonus: 10,
+       heal: 100,
        score: 1000,
     },{
         name:  'Lightsaber',
         attackBonus: 10,
         defenseBonus: 5,  
         escapeBonus: 0,
+        heal: 100,
         score: 1000,
      },{
         name:  'Iron Man Armor',
         attackBonus: 5,
         defenseBonus: 10,  
         escapeBonus: 0,
+        heal: 100,
         score: 1000,
      }, {
         name:  'Voight Kampff Machine',
         attackBonus: 0,
         defenseBonus: 5,  
         escapeBonus: 10,
+        heal: 100,
         score: 1000,
      }
 ]
@@ -517,8 +521,8 @@ function checkInventory(){
     var inventoryChoice = ask.keyInSelect(playerInventoryOptions, "Which item would you like to examine an item more closely? \n")
 
     // Adds the selected item to the global inventory selector variable.   
-    var inventorySelector = player1.inventory[inventoryChoice];
-
+    var inventorySelector = (player1.inventory[inventoryChoice]);
+//console.log(inventorySelector);
         //  Display the sub menu of stats from an individual item
         //  Player gets stuck in a loop here.  We use a line in the equip function to reset the inventory menu.
         
@@ -590,18 +594,42 @@ function meet(){
     //  Creates all enemies
 
     var cyclops = new Enemy('Cyclops', 60, true);
-    var ghost = new Enemy('Ghost', 40, true);
-    var dragon = new Enemy('Dragon', 120, true);
+    var zombie = new Enemy('Zombie', 40, true);
+    var dragon = new Enemy('Dragon', 100, true);
     //  Pulls random enemy
-    var enemies = [cyclops.name, ghost.name, dragon.name,];
+    var enemies = [cyclops.name, zombie.name, dragon.name,];
     var randomEnemy = enemies[Math.floor(enemies.length * Math.random())];
 
     console.log(` \nThe enemy you encountered is ${randomEnemy}! \n`)
-        //  If they meet ghost
-        if (randomEnemy === 'Ghost') {
-            console.log(` ${ghost.name} has hp of ${ghost.hp} and does an attack under 15 damage. \n
+        //  If they meet Zombie
+        if (randomEnemy === 'Zombie') {
+            console.log(` 
+            _,--~~~,
+            .'        '.
+            |           ;
+            |           :
+           /_,-==/     .'
+         /'')*  ;      :      
+       :'    '-        :      
+       '~*,'     .     :      
+          :__.,._  ';  :      
+          ')'    )  '  ',     
+              )-/  '     )     
+              :'          ) _
+               '~---,-~    ',)
+___                   )     /~')
+)---__ ';~~~-------------~~~(| _-'    ',
+---, ' )'-._____     _______.---'         )
+)--- '~~-',      ~~~~~~                     ',
+)----      )                                   )
+)----.  __ /                                    '-
+)----'' -~____  
+    ~~~~~--------,.___     
+                      '''''')_
+            
+            ${zombie.name} has hp of ${zombie.hp} and does an attack under 15 damage. \n
             You can either WALK, RUN, or FIGHT.  Maybe you have something useful in your inventory...?`)
-            encounter(ghost);
+            encounter(zombie);
 
         //  If they meet Cyclops
         } else if (randomEnemy === 'Cyclops') {
@@ -865,7 +893,7 @@ function dropItem(){
 
 function trophyDropItem(){
     //  Generates a 1 in 10 chance of droping a trophy when the enemy is killed
-    var trophyPercentage = Math.floor(Math.random() * 10);
+    var trophyPercentage = Math.floor(Math.random() * 1);
     
     //  Drops trophy if random number is equal to 0 and adds it to the player inventory
     if(trophyPercentage === 0){
@@ -902,14 +930,14 @@ var attackMultiplier = attackBonus();
 function attack(){
     // returns a random number between 30 - 50
     var baseAttack =  Math.floor(Math.random() * (30 - 15) + 15)
-        //console.log (`Your base attack is ${baseAttack} `)
+        console.log (`Your base attack is ${baseAttack} `)
 
     //  Access the attack multiplier boune generated from attackBonus()
-        //console.log(`\n${player1.name}'s current attack bonus is  + ${attackMultiplier}`);
+        console.log(`\n${player1.name}'s current attack bonus is  + ${attackMultiplier}`);
 
     //  Random Base attack plus the attack bonus is the final attack total
     var finalAttackDamage = baseAttack + attackMultiplier;
-        //console.log('final attack damage is ' + finalAttackDamage)
+        console.log('final attack damage is ' + finalAttackDamage)
         return finalAttackDamage;
 };
 
@@ -1012,7 +1040,7 @@ console.log(`
 console.log(`Welcome ${player1.name}! \n`);
 console.log(`The Labrynth is a land of mystery. There are twists and turns at every corner.\n `);
 console.log(`There is no map of this dreaded place.  It is full of monsters and all manner of unknown beasts. \n`);
-console.log(`Your only hope of escape is to walk as far as you can.  Hopefully you will collect enough trophies to open the portal and make your way to saftey. \n\n`);
+console.log(`Your only chance of escape is to walk as far as you can.  Hopefully you will collect enough trophies to open the portal and make your way to saftey. \n\n`);
 console.log(`Good Luck Brave Adventurer! \n`);
 
 
