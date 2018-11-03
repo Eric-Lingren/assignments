@@ -326,7 +326,7 @@ var enemyDrops = [  {
 var trophyDrops = [
     {
        name:  'Hoverboard',
-       attackBonus: 0,
+       attackBonus: 10,
        defenseBonus: 0,  
        escapeBonus: 10,
        heal: 100,
@@ -340,14 +340,14 @@ var trophyDrops = [
         score: 1000,
      },{
         name:  'Iron Man Armor',
-        attackBonus: 5,
+        attackBonus: 15,
         defenseBonus: 10,  
         escapeBonus: 0,
         heal: 100,
         score: 1000,
      }, {
         name:  'Voight Kampff Machine',
-        attackBonus: 0,
+        attackBonus: 10,
         defenseBonus: 5,  
         escapeBonus: 10,
         heal: 100,
@@ -378,32 +378,29 @@ function checkStats(){
     statsAudioPlay()
     console.log(`Here are your stats: \n
     Name: ${player1.name}    Current Health: ${player1.hp}    Score:  ${player1.score} \n `)
+    
     //  Outputs the name of each item equiped
     console.log(`You have equiped:`)
     player1.equiped.forEach(function(item){
        console.log(` ${item.name}`)
-});
-bonus();
+    });
+    
+    bonus();
 
-  
-enterAudio.kill();
+    attackBonus();
 
+    //menuAudio.kill();
 
-//menuAudio.kill();
-
-
-// Kills the inventory audio if that was the players previous menu
-// inventoryAudio.kill();
-
-
- // Ends music from the stats page if that was the players previous menu.
- if( inventoryAudio){
-    inventoryAudio.kill()
-}
-//  Doesnt allow stats audio to play if they are in a battle
-if( battleAudio){
-    statsAudio.kill()
-}
+    //  Ends intro music if that was their previos menu
+    enterAudio.kill();
+    // Ends music from the stats page if that was the players previous menu.
+    if( inventoryAudio){
+        inventoryAudio.kill()
+    }
+    //  Doesnt allow stats audio to play if they are in a battle
+    if( battleAudio){
+        statsAudio.kill()
+    }
 
   
 }
@@ -913,31 +910,40 @@ function trophyDropItem(){
 }
 
 
+var playerAttackBonus;
 //  Player attack bonus
 function attackBonus(){
-    //  Lists all atack multipliers
-    var listAttackMultipliers = player1.equiped.map(a => a.attackBonus)
-    //  Returns the sum of all attack multipliers
-    listAttackMultipliers.reduce(function(a,b){
-        attacksCombined = a+b
-    });
-    return attacksCombined
+
+     //  Lists all atack multipliers
+   var listAttackMultipliers = player1.equiped.map(a => a.attackBonus)
+   //  Returns the sum of all attack multipliers
+   playerAttackBonus = listAttackMultipliers.reduce(function(a,b){
+        return a+b
+   });  
+    //console.log(` \nthe list of attack multipliers is ${listAttackMultipliers} `);
+   // console.log(` the list of attack multipliers combined is ${playerAttackBonus} `);
+       
+    return playerAttackBonus
+    
 }
+
 var attackMultiplier = attackBonus();
 
 
 //  Attack v2.0
 function attack(){
+    // console.log(` the list of attack multipliers is ${listAttackMultipliers} `);
+    // console.log(` the list of attack multipliers combined is ${attackBonus()} `);
     // returns a random number between 30 - 50
     var baseAttack =  Math.floor(Math.random() * (30 - 15) + 15)
-        console.log (`Your base attack is ${baseAttack} `)
+       // console.log (`Your base attack is ${baseAttack} `)
 
     //  Access the attack multiplier boune generated from attackBonus()
-        console.log(`\n${player1.name}'s current attack bonus is  + ${attackMultiplier}`);
+        //console.log(`\n${player1.name}'s current attack multiplier is  + ${playerAttackBonus}`);
 
     //  Random Base attack plus the attack bonus is the final attack total
-    var finalAttackDamage = baseAttack + attackMultiplier;
-        console.log('final attack damage is ' + finalAttackDamage)
+    var finalAttackDamage = baseAttack + playerAttackBonus;
+        //console.log('final attack damage is ' + finalAttackDamage)
         return finalAttackDamage;
 };
 
