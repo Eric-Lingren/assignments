@@ -4,11 +4,7 @@
 NEED TO DO:
 DISPLAY FREE SLOTS FOR EQUIPED ITEMS
 MAKE IT SO THEY CAN ONLY EQUIP ONE ITEM IN EACH SLOT
-ADD DEFENSE BONUS TO FIGHTS
-ADD ESCAPE BONUS TO RUNNING AND WALKING AWAY FROM ENEMIES
 Check out sleep and emojis
-ADD END GAME CREDITS IF PLAYER DIES WHILE RUNNING
-
 
 */
 
@@ -16,7 +12,6 @@ var ask = require('readline-sync');
 
 var player = require('play-sound')(opts = {});
 
-var sleep = require('sleep');
 
 
 // Sets variable to play music on game start
@@ -172,7 +167,7 @@ function Enemy(name, hp, isAlive){
     // Attack for a random amount
     this.attack = function() {
         // returns a random number between 5 - 20
-        return Math.floor(Math.random() * (20 - 5) + 5)
+        return Math.floor(Math.random() * (25 - 5) + 5)
     }
 }
 
@@ -356,22 +351,9 @@ var trophyDrops = [
 ]
 
 
-//  ['Sword', 'Shield', 'Spear', 'Hiking Boots', 'Brass Knuckles', ];
-
-
-
-
 //////////////////////////////////////////
 
 // GAME FUNCTIONS
-
-// fighting
-// enemy creation
-// attacking enemy
-// enemy attacking
-// enemy dying (including dropping an item)
-// character dying
-
 
 //  Check Player Stats
 function checkStats(){
@@ -401,11 +383,8 @@ function checkStats(){
     if( battleAudio){
         statsAudio.kill()
     }
-
-  
 }
  
-
 
 // Walking
 function walk(){
@@ -483,7 +462,6 @@ function run(){
 
 
 
-
 //  Check Inventory
 function checkInventory(){
     /// Kills intro music
@@ -516,10 +494,11 @@ function checkInventory(){
     var isLooking = true;
     while( isLooking === true) {
     var inventoryChoice = ask.keyInSelect(playerInventoryOptions, "Which item would you like to examine an item more closely? \n")
+    console.log('inventory choice variable is ' + inventoryChoice)
 
     // Adds the selected item to the global inventory selector variable.   
     var inventorySelector = (player1.inventory[inventoryChoice]);
-//console.log(inventorySelector);
+    //console.log(inventorySelector);
         //  Display the sub menu of stats from an individual item
         //  Player gets stuck in a loop here.  We use a line in the equip function to reset the inventory menu.
         
@@ -540,10 +519,8 @@ function checkInventory(){
                     inventoryAudio.kill()
                 }
             }
-        
     }
 };
-
 
 
 function equip(inventorySelector){
@@ -571,7 +548,6 @@ function equip(inventorySelector){
         console.log('\nOk.  This item has been returned to your inventory.')
         checkInventory()
     }; 
-
 };
 
 
@@ -891,7 +867,7 @@ function dropItem(){
 
 function trophyDropItem(){
     //  Generates a 1 in 5 chance of droping a trophy when the enemy is killed
-    var trophyPercentage = Math.floor(Math.random() * 1);
+    var trophyPercentage = Math.floor(Math.random() * 5);
     
     //  Drops trophy if random number is equal to 0 and adds it to the player inventory
     if(trophyPercentage === 0){
@@ -900,7 +876,7 @@ function trophyDropItem(){
         console.log(`\nThey have also dropped you a special trophy! ${droppedTrophy.name}!  \n This trophy comes with special abilities and also gives your hp a boost of 100!\n
         It has been added to your inventory. Go check it out!`)
         // adds 1000 points to players score
-        player1.score += 5000;
+        player1.score += 1000;
         player1.hp += 100;
 
         if(player1.score > 4999){
@@ -1017,7 +993,7 @@ function endGameCredits(){
     }
     
     creditsAudioPlay()
-    console.log(`It has been a  good adventure.  Thank you for playing my game.  \n Your final score was ${player1.score} \n
+    console.log(`It has been a  good adventure.  Thank you for playing my game.  \n\n Your final score was ${player1.score} \n
     GAME OVER \n
     Designed and developed by: \n
                                         
@@ -1063,9 +1039,6 @@ console.log(`The Labrynth is a land of mystery. There are twists and turns at ev
 console.log(`There is no map of this dreaded place.  It is full of monsters and all manner of unknown beasts. \n`);
 console.log(`Your only chance of escape is to walk as far as you can.  Hopefully you will collect enough trophies to open the portal and make your way to saftey. \n\n`);
 console.log(`Good Luck Brave Adventurer! \n`);
-
-
-
 
 
 //// CONSOLE.LOG PLAYERS STATS /////
@@ -1124,7 +1097,7 @@ console.log(`Good Luck Brave Adventurer! \n`);
             if(inventoryAudio){
                 inventoryAudio.kill()
             }
-            //endGameCredits();
+            endGameCredits();
             player1.hp = 0
         } else {
             console.log( ` \n 
