@@ -1,3 +1,45 @@
 h1 {
     color: red;
 }
+
+.title{
+    color: blue;
+}
+
+#inputForm {
+    border: 1px black dashed;
+    padding: 10px;
+    width: 500px;
+}
+
+#inputTitle {
+    
+    padding: 10px;
+    width: 90%;
+}
+
+#inputDescription {
+    padding: 10px;
+    width: 90%;
+}
+
+#addItem {
+    margin-left: 30%;
+    background-color: silver;
+    padding: 5px;
+    font-size: 1.2em;
+}
+
+
+
+.todo {
+    border: black 1px solid;
+    width: 300px;
+    margin: 10px;
+
+}
+
+.completed{
+    color: blue;
+}
+

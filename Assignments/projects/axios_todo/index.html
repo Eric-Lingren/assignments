@@ -10,11 +10,14 @@
 <body>
 
     <h1>To Do list:</h1>
-
-    <div id='listDiv'>
-        <p id='para1'>
-
-        </p>
+<form id='inputForm' name='listForm'>
+    <input id='inputTitle' placeholder='Title Here'> <br><br>   
+    <input id='inputDescription'  placeholder='description'> <br><br>
+    <input type='number' id='inputPrice'  placeholder='$'> <br><br>
+    <input type='checkbox'> Completed? <button id='addItem'>Add</button>
+</form>
+    <div id='list-container'>
+        
     </div>
     <script src='https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.js'></script>
     <script src=./app.js> </script>

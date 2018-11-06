@@ -5,62 +5,51 @@
 axios.get('https://api.vschool.io/ericlingren/todo').then(function(response){
     var listArray = response.data
     pullArray(listArray)
+   
     }).catch(function(error){
         console.log(error);
     });
 
 
 function pullArray (listArray){
-   // console.log(listArray);
-    //  Pulls the title from each item in the array
-    
-    // listArray.forEach(function(heading) {
-    //     var title = heading.title;
-    //     console.log(title)
-    //     var node = document.createElement('h3');
-    //     var textnode = document.createTextNode(title);
-    //     node.appendChild(textnode);
-    //     document.getElementById('listDiv').appendChild(node);
-        
-    // });
-    // //  Pulls the description from each item in the array
-    // listArray.forEach(function(about) {
-    //     var description = about.description;
-    //     console.log(description)
-    //     var node = document.createElement('h3');
-    //     var textnode = document.createTextNode(description);
-    //     node.appendChild(textnode);
-    //     document.getElementById('listDiv').appendChild(node);
-    // });
-    // //  Pulls the price from each item in the array
-    // listArray.forEach(function(cost) {
-    //     var price = cost.price
-    //     console.log(price)
-    // });
-
+ 
     for (var i = 0; i < listArray.length; i++) {
-        //console.log(listArray[i]);
-        var node = document.createElement('h3');
-        var textnode = document.createTextNode(listArray[i].title);
-        node.appendChild(textnode);
-        document.getElementById('listDiv').appendChild(node);
+        var toDoContainer = document.createElement('div');
+        toDoContainer.classList.add ('todo');
+
+
+            //  Create HTML elements
+        var title = document.createElement('h2');
+            title.classList.add ('description');
+        var description = document.createElement('p');
+            description.classList.add ('description');
+        var completed = document.createElement('p');
+            completed.classList.add ('completed');
+        var image = document.createElement('img');
+
+        image.setAttribute('src', listArray[i].imgUrl)
+
+            //  Put the to-do items inside the div element
+        title.textContent = listArray[i].title;
+        description.textContent = listArray[i].description;
+        completed.textContent = listArray[i].completed;
+
         
-        //console.log(listArray);
-        var node2 = document.createElement('p');
-        var textnode2 = document.createTextNode(listArray[i].description);
-        //console.log(textnode2)
-        node2.appendChild(textnode2);
-        document.getElementById('listDiv').appendChild(node2);
+        
+            // Put the element on the DOM
+        toDoContainer.appendChild(title);
+        toDoContainer.appendChild(description);
+        toDoContainer.appendChild(completed);
+        toDoContainer.appendChild(image);
 
-        var node3 = document.createElement('p');
-        var textnode3 = document.createTextNode(listArray[i].price);
-        //console.log(textnode3)
-        node3.appendChild(textnode3);
-        document.getElementById('listDiv').appendChild(node3);
+        document.getElementById('list-container').appendChild(toDoContainer);
+
+        console.log(completed.textContent);
+            //  Check to see if the item has ben completed.  If so, it crosses off the item.
+        if (completed.textContent === 'true'){
+            title.style.textDecoration = 'line-through'
+        }
+
     }
-    
-
 }
-
-
 
