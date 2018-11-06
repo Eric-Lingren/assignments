@@ -15,12 +15,16 @@ function pullArray (listArray){
     for (var i = 0; i < listArray.length; i++) {
         var toDoContainer = document.createElement('div');
         toDoContainer.classList.add ('todo');
+        var toDoId = listArray[i]._id
+        console.log(toDoId)
 
             //  Create HTML elements
         var title = document.createElement('h3');
             title.classList.add ('description');
         var description = document.createElement('p');
             description.classList.add ('description');
+        var price = document.createElement('p');
+            price.classList.add ('price');
         var isCompleted = document.createElement('p');
             isCompleted.classList.add ('completed');
             //Created a finish button
@@ -39,12 +43,14 @@ function pullArray (listArray){
             //  Put the to-do items inside the div element
         title.textContent = listArray[i].title;
         description.textContent = listArray[i].description;
-        isCompleted.textContent = listArray[i].completed;
+        price.textContent = (`Price: ${listArray[i].price}`);
+        isCompleted.textContent = (`Completed: ${listArray[i].completed}`);
         
 
             // Put the element on the DOM
         toDoContainer.appendChild(title);
         toDoContainer.appendChild(description);
+        toDoContainer.appendChild(price);
         toDoContainer.appendChild(isCompleted);
         toDoContainer.appendChild(completeButton);
         toDoContainer.appendChild(deleteButton);
@@ -55,7 +61,7 @@ function pullArray (listArray){
 
         //console.log(completed.textContent);
             //  Check to see if the item has ben completed.  If so, it crosses off the item.
-        if (isCompleted.textContent === 'true'){
+        if (isCompleted.textContent === 'Completed: true'){
             title.style.textDecoration = 'line-through'
         }  
     }
@@ -74,10 +80,18 @@ var newToDo = {};
     newToDo.title =  inputTitle;
     newToDo.description =  inputDescription;
     newToDo.price =  inputPrice;
-    newToDo.completed =  inputComplete;
+    // newToDo.completed =  inputComplete;
           
 axios.post('https://api.vschool.io/ericlingren/todo', newToDo).then(function(response){
     console.log(response.data);
     });
 });
+
+
+
+
+
+
+
+
 
