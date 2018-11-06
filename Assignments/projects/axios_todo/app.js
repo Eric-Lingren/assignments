@@ -11,7 +11,7 @@ axios.get('https://api.vschool.io/ericlingren/todo').then(function(response){
 
 function pullArray (listArray){
  
-    for (var i = 0; i < listArray.length; i++) {
+    for (let i = 0; i < listArray.length; i++) {
         var toDoContainer = document.createElement('div');
         toDoContainer.classList.add ('todo');
         var toDoId = listArray[i]._id
@@ -34,13 +34,22 @@ function pullArray (listArray){
         var completeText = document.createTextNode('Complete');
         completeButton.appendChild(completeText);
         completeButton.id = toDoId;
-        //creates a function to delete record when clicked
+
+        
+        //creates a function to change record between completed and not completed
         completeButton.addEventListener('click', function(){
-            
+            console.log(listArray[i].completed)
+            if(listArray[i].completed === false) {
             axios.put(`https://api.vschool.io/ericlingren/todo/${this.id}`, { completed: true} ).then(function(response){
             console.log(response.data);
                 });
+            } else {
+                axios.put(`https://api.vschool.io/ericlingren/todo/${this.id}`, { completed: false} ).then(function(response){
+            console.log(response.data);
+                });
+            }
         });
+    
 
          //  Creates an edit item button
          var editButton = document.createElement('img');
@@ -52,7 +61,7 @@ function pullArray (listArray){
 
         //  creates a function to change the text to an input box
          editButton.addEventListener('click', function(){
-            console.log(title);
+            console.log(listArray[i]._id);
             console.log(this);
             //console.log(this.title);
             //title.style.display='none';
@@ -105,6 +114,7 @@ function pullArray (listArray){
         toDoContainer.appendChild(editButton);
         toDoContainer.appendChild(deleteButton);
         toDoContainer.appendChild(image);
+      
       
 
         // toDoContainer.appendChild(image);
