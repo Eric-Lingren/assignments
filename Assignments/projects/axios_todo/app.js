@@ -101,6 +101,7 @@ function pullArray (listArray){
             //  Adds an image to the div element
         var image = document.createElement('img');
         image.setAttribute('src', listArray[i].imgUrl);
+        image.classList.add('urlimage');
             //  doesnt display the broken image link if the image has no image.
         if(!listArray[i].imgUrl) {
             image.style.display='none';
