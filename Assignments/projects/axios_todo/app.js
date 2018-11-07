@@ -12,10 +12,14 @@ axios.get('https://api.vschool.io/ericlingren/todo').then(function(response){
 function pullArray (listArray){
  
     for (let i = 0; i < listArray.length; i++) {
+        var toDoId = listArray[i]._id
         var toDoContainer = document.createElement('div');
         toDoContainer.classList.add ('todo');
-        var toDoId = listArray[i]._id
+        toDoContainer.setAttribute('id', toDoId[i]);
+       
         //console.log(toDoId)
+
+        //container.setAttribute('id', toDoId)
 
             //  Create HTML elements
         var title = document.createElement('h3');
@@ -59,12 +63,18 @@ function pullArray (listArray){
          editButton.appendChild(editText);
          editButton.id = toDoId;
 
+         //create a variable to pull the title element by id
+        //  let titleElementId = document.getElementById(listArray[i].toDoId);
+        //  console.log(titleElementId)
+
         //  creates a function to change the text to an input box
          editButton.addEventListener('click', function(){
-            console.log(listArray[i]._id);
-            console.log(this);
+            //console.log(listArray[i]._id);
+            console.log(listArray[i].title);
+            console.log(document.getElementById(toDoId[i]));
+            let titleElementId = document.getElementById(toDoId[i])
             //console.log(this.title);
-            //title.style.display='none';
+            titleElementId.style.display = 'none';
 
             //  axios.put(`https://api.vschool.io/ericlingren/todo/${this.id}`, { completed: true} ).then(function(response){
             //  console.log(response.data);
