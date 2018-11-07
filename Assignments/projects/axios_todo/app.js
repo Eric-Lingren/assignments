@@ -135,8 +135,8 @@ function pullArray (listArray){
             //  Check to see if the item has been completed.  If so, it crosses off the item.
         if (isCompleted.textContent === 'Completed: true'){
             title.style.textDecoration = 'line-through'
-            title.style.color = 'green'
-            isCompleted.style.color = 'green'
+            title.style.color = 'black'
+            isCompleted.style.color = 'black'
         }  
     }
 }

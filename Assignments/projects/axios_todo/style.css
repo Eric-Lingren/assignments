@@ -1,3 +1,11 @@
+*{
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    letter-spacing: 1px;
+    
+}
+body{
+    background-color: #FFF
+} 
 h1 {
     color: red;
 }
@@ -7,10 +15,12 @@ h1 {
 }
 
 #inputForm {
-    border: 1px black dashed;
+    border: 2px black dashed;
     padding: 10px;
     width: 80%;
     align-content: center;
+    background-color: #B5C689;
+    color: #0D3D56;
     
 }
 
@@ -25,6 +35,7 @@ h1 {
     padding: 5px;
     width: 20%;
     margin: 5px;
+  
 }
 #imageURL {
     padding: 5px;
@@ -39,12 +50,34 @@ h1 {
 
 #addItem {
     margin-left: 2%;
-    background-color: silver;
+    background-color: #0D3D56;
     padding: 5px;
+    padding-left: 20px;
+    padding-right: 20px;
     font-size: 1.2em;
+    color: #FFF;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+
 }
 
+.wrapper{
+    border: black 3px solid;
+    margin: 10px;
+    padding: 10px;
+    display: flex;
 
+}
+.listHolder {
+    border: black 3px solid;
+    margin: 20px;
+    width: 475px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
 
 .todo {
     border: black 3px solid;
@@ -56,6 +89,9 @@ h1 {
     height: 145px;
     margin: 10px;
     padding: 10px;
+    background-color: #43ABC9;
+    color: white;
+   
 
 }
 
