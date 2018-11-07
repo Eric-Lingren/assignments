@@ -119,18 +119,17 @@ h3{
     width: 35px;
     margin-left: 64%;
     padding: 5px;
-    display: inline-block;
-    position: relative;
-    bottom: 40px;
+    position: absolute;
+    left: -570px;
+    
     
 }  
 
 .deleteButton {
     height: 37px;
     width: 37px;
-    display: inline-block;
-    position: relative;
-    bottom: 40px;
+    position: absolute;
+    left: 450px;
     
 }
 
@@ -139,11 +138,19 @@ h3{
     width: 35px;
     margin-left: 10px;
     margin-right: 10px;
+    position: absolute;
+    left: 390px;
+}
+.publishButton {
+    height: 35px;
+    width: 35px;
+    margin-left: 10px;
+    margin-right: 10px;
     display: inline-block;
     position: relative;
     bottom: 40px;
-   
 }
+
 
 .completeButton:hover {
     height: 40px;
@@ -159,4 +166,12 @@ h3{
 .editButton:hover {
     height: 40px;
     width: 40px;
+}
+
+.editField {
+    margin: 10px;
+    padding: 2px;
+    padding-left: 10px;
+    width: 55%;
+    border-radius: 10px;
 }

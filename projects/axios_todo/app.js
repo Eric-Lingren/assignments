@@ -12,8 +12,8 @@ axios.get('https://api.vschool.io/ericlingren/todo').then(function(response){
 function pullArray (listArray){
  
     for (let i = 0; i < listArray.length; i++) {
-        var toDoId = listArray[i]._id
-        var toDoContainer = document.createElement('div');
+        let toDoId = listArray[i]._id
+        const toDoContainer = document.createElement('div');
         toDoContainer.classList.add ('todo');
         toDoContainer.setAttribute('id', toDoId[i]);
        
@@ -23,7 +23,7 @@ function pullArray (listArray){
 
             //  Create HTML elements
         var title = document.createElement('h3');
-            title.classList.add ('description');
+            title.classList.add ('title');
         var description = document.createElement('p');
             description.classList.add ('description');
         var price = document.createElement('p');
@@ -63,68 +63,100 @@ function pullArray (listArray){
          editButton.appendChild(editText);
          editButton.id = toDoId;
 
-         //create a variable to pull the title element by id
-        //  let titleElementId = document.getElementById(listArray[i].toDoId);
-        //  console.log(titleElementId)
+        //  Creates an publish item button
+        var publishButton = document.createElement('img');
+        publishButton.setAttribute('src', './publish.png');
+        publishButton.classList.add ('publishButton');
+        var publishText = document.createTextNode('publish');
+        publishButton.appendChild(publishText);
+        publishButton.id = toDoId;
+        publishButton.style.visibility = 'hidden';
 
+        //////////////////////////
+        //To Create the edit fields for the to do list item
+        //////////////////////////
+        
+
+        // Creates a form in the div
+        let editForm = document.createElement('form');
+        //Sets the name for the new form
+        editForm.setAttribute('editForm', '');
+        toDoContainer.appendChild(editForm);
+
+        //  Creates the edit fields for title
+        let editTitle = document.createElement('input');
+        //Sets the name for the new title input field
+        editTitle.setAttribute('editTitle', '');
+        //  Sets the placeholder in the new title input
+        editTitle.setAttribute('placeholder', listArray[i].title);
+        editTitle.classList.add ('editField');
+        editTitle.value = listArray[i].title;
+        //  Hide the element when it is created
+        editTitle.style.display = 'none';
+
+        //  Creates the edit fields for description
+        let editDescription = document.createElement('input');
+        //Sets the name for the new description input field
+        editDescription.setAttribute('editDescription', '');
+        //  Sets the placeholder in the new description input
+        editDescription.setAttribute('placeholder', listArray[i].description);
+        editDescription.classList.add ('editField');
+        editDescription.value = listArray[i].description;
+         //  Hide the element when it is created
+        editDescription.style.display = 'none';
+
+        //  Creates the edit fields for price
+        let editPrice = document.createElement('input');
+        //Sets the name for the new Price input field
+        editPrice.setAttribute('editPrice', '');
+        //  Sets the placeholder in the new Price input
+        editPrice.setAttribute('placeholder', listArray[i].price);
+        editPrice.classList.add ('editField');
+        editPrice.value = listArray[i].price;
+         //  Hide the element when it is created
+        editPrice.style.display = 'none';
+
+
+        //  Creates the edit fields for Image
+        let editImage = document.createElement('input');
+        //Sets the name for the new Image input field
+        editImage.setAttribute('editImage', '');
+        //  Sets the placeholder in the new Image input
+        editImage.setAttribute('placeholder', listArray[i].imgUrl);
+        editImage.classList.add ('editField');
+        editImage.value = listArray[i].imgUrl;
+         //  Hide the element when it is created
+        editImage.style.display = 'none';
+
+        //  Adds the newly created form elements into the form
+        editForm.appendChild(editTitle);
+        editForm.appendChild(editDescription);
+        editForm.appendChild(editPrice);
+        editForm.appendChild(editImage);
+
+    
         //  creates a function to change the text to an input box
          editButton.addEventListener('click', function(){
-            //console.log(listArray[i]._id);
-            //console.log(listArray[i].title);
-            //console.log(document.getElementById(toDoId[i]));
-            //let titleElementId = document.getElementById(toDoId[i])
-            //console.log(this.title);
-
-
-            // Creates a form in the div
-            let editForm = document.createElement('form');
-            toDoContainer.appendChild(editForm);
-           
-
-            //////////////////////////
-            //To Create the edit fields for the to do list item
-            //////////////////////////
-            //  Creates the edit fields for title
-            let editTitle = document.createElement('input');
-            //Sets the name for the new title input field
-            editTitle.setAttribute('editTitle', '');
-            //  Sets the placeholder in the new title input
-            editTitle.setAttribute('placeholder', listArray[i].title);
-
-             //  Creates the edit fields for description
-             let editDescription = document.createElement('input');
-             //Sets the name for the new description input field
-             editDescription.setAttribute('editDescription', '');
-             //  Sets the placeholder in the new description input
-             editDescription.setAttribute('placeholder', listArray[i].description);
-
-             //  Creates the edit fields for price
-             let editPrice = document.createElement('input');
-             //Sets the name for the new Price input field
-             editPrice.setAttribute('editPrice', '');
-             //  Sets the placeholder in the new Price input
-             editPrice.setAttribute('placeholder', listArray[i].price);
-
-             //  Creates the edit fields for Image
-             let editImage = document.createElement('input');
-             //Sets the name for the new Image input field
-             editImage.setAttribute('editImage', '');
-             //  Sets the placeholder in the new Image input
-             editImage.setAttribute('placeholder', listArray[i].image);
-
-            //  Adds the newly created form elements into the form
-            form.appendChild(editTitle);
-            form.appendChild(editDescription);
-            form.appendChild(editPrice);
-            form.appendChild(editImage);
-
-
-
-            //  Removes the elemts from displaying
-            //titleElementId.style.display = 'none';
+            this.style.display = 'none'; 
+            this.parentNode.children[1].style.display = 'none';
+            this.parentNode.children[2].style.display = 'none';
+            this.parentNode.children[3].style.display = 'none';
+            this.parentNode.children[4].style.display = 'none';
+            //  Show the elements when the edit button is clicked
+            editTitle.style.display = 'block';
+            editDescription.style.display = 'block';
+            editPrice.style.display = 'block';
+            editImage.style.display = 'block';
+            publishButton.style.visibility = 'visible';
+            //  Hide the title element when clicked
+            console.log(listArray[i].title);
+           // let myTitle = listArray[i].title
+            // console.log(listArray[i]);
+            // console.log(myTitle);
+            //console.log(toDoContainer)
+            console.log(title)
 
             
-
             //  axios.put(`https://api.vschool.io/ericlingren/todo/${this.id}`, { completed: true} ).then(function(response){
             //  console.log(response.data);
             //      });
@@ -174,6 +206,7 @@ function pullArray (listArray){
         toDoContainer.appendChild(editButton);
         toDoContainer.appendChild(deleteButton);
         toDoContainer.appendChild(image);
+        toDoContainer.appendChild(publishButton);
       
       
 
