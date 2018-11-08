@@ -91,7 +91,13 @@ h1 {
     padding: 10px;
     background-color: #43ABC9;
     color: white;
-   
+    display: grid;
+    grid-template-areas: 
+        't t t t t i i'
+        'd d d d d i i'
+        'p p p p p i i'
+        'c c c c b x e'
+ 
 
 }
 
@@ -102,60 +108,102 @@ h1 {
 h3{
     margin:0;
     text-decoration: underline;
+    
+}
+.title{
+    grid-area: t;
+    margin: 0;
+    padding: 0;
+}
+.editTitle{
+    grid-area: t;
+    width: 100%;
+}
+.editDescription{
+    grid-area: d;
+    width: 100%;
+}
+.editPrice{
+    grid-area: p;
+    width: 100%;
+}
+.editImage{
+    grid-area: c;
+    width: 100%;
+    
+}
+.description{
+    grid-area: d;
+    margin: 0;
+    padding: 0;
+}
+.price {
+    grid-area: p;
+    margin: 0;
+    padding: 0;
+}
+.completed{
+    grid-area: c;
+    margin: 0;
+    padding: 0;
 }
 
 .urlimage{
     width: 100px;
     height: 100px;
-    margin-left: 40px;
     border-radius: 50%;
-    position: relative;
-    bottom: 190px;
-    float: right;
+    grid-area: i;
+    margin: 0;
+    padding: 0;
+    justify-self: right;
 
 }
 .completeButton {
     height: 35px;
     width: 35px;
-    margin-left: 64%;
-    padding: 5px;
-    position: absolute;
-    left: -570px;
-    
+    grid-area: b;
+    margin: 0;
+    padding: 0;
+    justify-self: right;
     
 }  
 
 .deleteButton {
     height: 37px;
     width: 37px;
-    position: absolute;
-    left: 450px;
+    grid-area: x;
+    margin: 0;
+    padding: 0;
+    justify-self: right;
     
 }
 
 .editButton {
     height: 35px;
     width: 35px;
-    margin-left: 10px;
-    margin-right: 10px;
-    position: absolute;
-    left: 390px;
+    grid-area: e;
+    margin: 0;
+    padding: 0;
+    justify-self: right;
 }
+
 .publishButton {
     height: 35px;
     width: 35px;
-    margin-left: 10px;
-    margin-right: 10px;
-    display: inline-block;
-    position: relative;
-    bottom: 40px;
+    grid-area: e;
+    margin: 0;
+    padding: 0;
+    justify-self: right;
+    
 }
 
-
+.publishButton:hover {
+    height: 40px;
+    width: 40px;
+}
 .completeButton:hover {
     height: 40px;
     width: 40px;
-    
 }
 
 .deleteButton:hover {
@@ -172,6 +220,6 @@ h3{
     margin: 10px;
     padding: 2px;
     padding-left: 10px;
-    width: 55%;
+    width: 100%;
     border-radius: 10px;
 }
