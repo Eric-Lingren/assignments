@@ -14,5 +14,10 @@
     "play-sound": "^1.1.2",
     "readline-sync": "^1.4.9",
     "sleep": "^5.2.3"
+  },
+  "devDependencies": {
+    "@types/howler": "2.0.5",
+    "@types/readline-sync": "1.4.3",
+    "@types/sleep": "0.0.7"
   }
 }
