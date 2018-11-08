@@ -1,7 +1,7 @@
 
 // var axios = require('axios');
 
-axios.get('https://api.vschool.io/ericlingren/todo').then(function(response){
+    axios.get('https://api.vschool.io/ericlingren/todo').then(function(response){
     var listArray = response.data
     pullArray(listArray)
    
@@ -21,20 +21,18 @@ function pullArray (listArray){
         toDoContainer.addEventListener('dragstart', dragStart);
         toDoContainer.addEventListener('dragend', dragEnd);
         
+
         //  Create empty recieving containers
         let doneContainer = document.getElementById('done-container');
-
-            for (let j = 0; j < 3; j++){
-                let empties = document.createElement('div');
-                empties.classList.add('snap')
-                empties.addEventListener('dragover', dragOver);
-                empties.addEventListener('dragenter', dragEnter);
-                empties.addEventListener('dragleave', dragLeave);
-                empties.addEventListener('drop', dragDrop);
-                doneContainer.appendChild(empties);
-            }
-     
-        //  Drag functions
+        let empties = document.createElement('div');
+        empties.classList.add('snap')
+        empties.addEventListener('dragover', dragOver);
+        empties.addEventListener('dragenter', dragEnter);
+        empties.addEventListener('dragleave', dragLeave);
+        empties.addEventListener('drop', dragDrop);
+        doneContainer.appendChild(empties);
+            
+        //  Initialize Drag and Drop Functions
         function dragStart(){
             setTimeout(() => this.className = 'invisible', 0);
         };
@@ -56,10 +54,8 @@ function pullArray (listArray){
             this.append(toDoContainer);
         }
         
-       
-        
 
-            //  Create HTML elements
+            //  Create HTML elements for Text
         var title = document.createElement('h3');
             title.classList.add ('title');
         var description = document.createElement('p');
@@ -68,6 +64,7 @@ function pullArray (listArray){
             price.classList.add ('price');
         var isCompleted = document.createElement('p');
             isCompleted.classList.add ('completed');
+
 
             //Created a complete item button
         var completeButton = document.createElement('img');
@@ -101,6 +98,7 @@ function pullArray (listArray){
          editButton.appendChild(editText);
          editButton.id = toDoId;
 
+
         //  Creates an publish item button
         var publishButton = document.createElement('img');
         publishButton.setAttribute('src', './publish.png');
@@ -110,20 +108,20 @@ function pullArray (listArray){
         publishButton.id = toDoId;
         publishButton.style.display = 'none';
 
-        //////////////////////////
-        //To Create the edit fields for the to do list item
-        //////////////////////////
-        
 
-        // Creates a form in the div
+          /////////////////////////////////////////////////////////////
+         ///   To Create the edit fields for the to do list item   ///
+        /////////////////////////////////////////////////////////////
+
+        // Creates a form in the div that allows input to edit
         let editForm = document.createElement('form');
         //Sets the name for the new form
         editForm.setAttribute('name', 'editForm');
         toDoContainer.appendChild(editForm);
 
-        //  Creates the edit fields for title
+        //  Creates the edit fields for the item title title
         let editTitle = document.createElement('input');
-        //Sets the name for the new title input field
+        //Sets the name for the new title input field in the form
         editTitle.setAttribute('name', 'editTitle');
         //  Sets the placeholder in the new title input
         editTitle.setAttribute('placeholder', listArray[i].title);
@@ -132,9 +130,9 @@ function pullArray (listArray){
         //  Hide the element when it is created
         editTitle.style.display = 'none';
 
-        //  Creates the edit fields for description
+        //  Creates the edit fields for then item description
         let editDescription = document.createElement('input');
-        //Sets the name for the new description input field
+        //Sets the name for the new description input field in the form
         editDescription.setAttribute('name', 'editDescription');
         //  Sets the placeholder in the new description input
         editDescription.setAttribute('placeholder', listArray[i].description);
@@ -145,7 +143,7 @@ function pullArray (listArray){
 
         //  Creates the edit fields for price
         let editPrice = document.createElement('input');
-        //Sets the name for the new Price input field
+        //Sets the name for the new Price input field in the form
         editPrice.setAttribute('name', 'editPrice');
         //  Sets the placeholder in the new Price input
         editPrice.setAttribute('placeholder', listArray[i].price);
@@ -157,8 +155,8 @@ function pullArray (listArray){
 
         //  Creates the edit fields for Image
         let editImage = document.createElement('input');
-        //Sets the name for the new Image input field
-        editImage.setAttribute('editImage', '');
+        //Sets the name for the new Image input field in the form
+        editImage.setAttribute('name', 'editImage');
         //  Sets the placeholder in the new Image input
         editImage.setAttribute('placeholder', listArray[i].imgUrl);
         editImage.classList.add ('editImage');
@@ -173,11 +171,13 @@ function pullArray (listArray){
         editForm.appendChild(editImage);
         editForm.appendChild(publishButton);
 
-    
-        //  creates a function to change the text to an input box
-         editButton.addEventListener('click', function(){
-            this.style.display = 'none';
-            console.dir(this);
+
+    ////////////////////////////////////////////////////////////////////////////
+    ///              WHEN THE EDIT BUTTON GETS CLICKED                      ///
+    //////////////////////////////////////////////////////////////////////////
+
+        //  Creates a function to change the text to an input box
+        editButton.addEventListener('click', function(){
             //   Hides edit button
             this.parentNode.children[6].style.display = 'none';
             //  Displays publish button
@@ -191,75 +191,64 @@ function pullArray (listArray){
             // Hides URL
             this.parentNode.children[4].style.display = 'none';
 
-
-            //  Show the elements when the edit button is clicked
+            //  Shows the edit form elements in the page
             editTitle.style.display = 'block';
             editDescription.style.display = 'block';
             editPrice.style.display = 'block';
             editImage.style.display = 'block';
             
-            
             console.log('edit button was clicked')
-         });
+        });
  
 
-         //  creates a function to publish the edits
+    ////////////////////////////////////////////////////////////////////////////
+    ///           WHEN THE PUBLISH BUTTON GETS CLICKED                      ///
+    //////////////////////////////////////////////////////////////////////////
+
          publishButton.addEventListener('click', function(){
-            //  Hides publish button on click
-            //this.style.display = 'none';
-            //  Shows edit button again
-            console.log (this.parentNode)
+                //  Shows edit button again
             this.parentNode.children[6].style.display = 'block';
-             //   Hides edit button
-             //this.parentNode.children[6].style.display = 'none';
-             //  hides publish button
-             this.parentNode.children[9].style.display = 'none';
-              //  Show the elements when the edit button is clicked
+            //  Hides publish button
+            this.parentNode.children[9].style.display = 'none';
+
+              //  Hides the to edit items form again
             editTitle.style.display = 'none';
             editDescription.style.display = 'none';
             editPrice.style.display = 'none';
             editImage.style.display = 'none';
-              // Shows Title
-              this.parentNode.children[1].style.display = 'block';
-              //  Shows Description
-              this.parentNode.children[2].style.display = 'block';
-              //  Showsprice
-              this.parentNode.children[3].style.display = 'block';
-              // Shows URL
-              this.parentNode.children[4].style.display = 'block';
-           
 
+              // Re-displays Item Title
+            this.parentNode.children[1].style.display = 'block';
+              //  Re-displays Item Description
+            this.parentNode.children[2].style.display = 'block';
+              //  Re-displays Item Price
+            this.parentNode.children[3].style.display = 'block';
+              // Re-displays Item Completed Status
+            this.parentNode.children[4].style.display = 'block';
 
-            var myEditForm = document.editForm;
-   
-            myEditForm.addEventListener('submit', function(event){
-            event.preventDefault();
-            var editInputTitle = myEditForm.title.value;
-            var editInputDescription = myEditForm.description.value;
-            var editInputPrice = myEditForm.price.value;
-            var editInputImage = myEditForm.image.value;
-            var editInputComplete = myEditForm.complete.checked;
- 
+            var editInputTitle = editForm.editTitle.value;
+            var editInputDescription = editForm.editDescription.value;
+            var editInputPrice = editForm.editPrice.value;
+            var editInputImage = editForm.editImage.value;
+            
+            //console.log(editInputTitle)
+
             var editToDo = {};
             editToDo.title =  editInputTitle;
             editToDo.description =  editInputDescription;
             editToDo.price =  editInputPrice;
             editToDo.imgUrl =  editInputImage;
-            editToDo.completed =  editInputComplete;
+
+            console.log(this.id)
           
-            axios.put(`https://api.vschool.io/ericlingren/${this.id}`, editToDo).then(function(response){
+            axios.put(`https://api.vschool.io/ericlingren/todo/${this.id}`, editToDo).then(function(response){
                 console.log(response.data);
             });
 
-            });
-
-
-        //  axios.put(`https://api.vschool.io/ericlingren/todo/${this.id}`, { completed: true} ).then(function(response){
-            //  console.log(response.data);
-            //      });
         });
 
         
+
             // Creates a delete button
         var deleteButton = document.createElement('img');
         deleteButton.setAttribute('src', './delete.png');
@@ -337,16 +326,10 @@ var newToDo = {};
     newToDo.imgUrl =  inputImage;
     newToDo.completed =  inputComplete;
           
-axios.post('https://api.vschool.io/ericlingren/todo', newToDo).then(function(response){
+    axios.post('https://api.vschool.io/ericlingren/todo', newToDo).then(function(response){
     console.log(response.data);
     });
 });
-
-
-
-
-
-
 
 
 
