@@ -71,9 +71,9 @@ h1 {
 
 }
 .listHolder {
-    border: black 3px solid;
+    
     margin: 20px;
-    width: 475px;
+    width: 400px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -85,7 +85,7 @@ h1 {
     border-top-right-radius: 25px;
     border-bottom-right-radius: 25px;
     border-bottom-left-radius: 25px;
-    width: 400px;
+    width: 350px;
     height: 145px;
     margin: 10px;
     padding: 10px;
@@ -222,4 +222,38 @@ h3{
     padding-left: 10px;
     width: 100%;
     border-radius: 10px;
+}
+
+.listHolder{
+    box-shadow: 0px 0px 20px 2px;
+}
+
+.done-container{
+    height: 500px;
+}
+
+.snap{
+    border-top-left-radius: 25px;
+    border-top-right-radius: 25px;
+    border-bottom-right-radius: 25px;
+    border-bottom-left-radius: 25px;
+    width: 360px;
+    height: 155px;
+    margin: 10px;
+    padding: 10px;
+    display: inline-block;
+}
+
+.hovered{
+    background-color: cornflowerblue;
+    opacity: .5;
+    
+}
+
+.hold{
+    border: solid grey 4px;
+
+}
+.invisible {
+    display: none;
 }

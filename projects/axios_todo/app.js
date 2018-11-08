@@ -14,12 +14,51 @@ function pullArray (listArray){
     for (let i = 0; i < listArray.length; i++) {
         let toDoId = listArray[i]._id
         const toDoContainer = document.createElement('div');
-        toDoContainer.classList.add ('todo');
+        toDoContainer.classList.add('todo');
+        toDoContainer.setAttribute('draggable', true);
         toDoContainer.setAttribute('id', toDoId[i]);
-       
-        //console.log(toDoId)
+        //  add drag listeners
+        toDoContainer.addEventListener('dragstart', dragStart);
+        toDoContainer.addEventListener('dragend', dragEnd);
+        
+        //  Create empty recieving containers
+        let doneContainer = document.getElementById('done-container');
 
-        //container.setAttribute('id', toDoId)
+            for (let j = 0; j < 3; j++){
+                let empties = document.createElement('div');
+                empties.classList.add('snap')
+                empties.addEventListener('dragover', dragOver);
+                empties.addEventListener('dragenter', dragEnter);
+                empties.addEventListener('dragleave', dragLeave);
+                empties.addEventListener('drop', dragDrop);
+                doneContainer.appendChild(empties);
+            }
+     
+        //  Drag functions
+        function dragStart(){
+            this.className += ' hold';
+            setTimeout(() => this.className = 'invisible', 0);
+        };
+        function dragEnd(){
+            this.className = 'todo';
+        }; 
+        function dragOver(e){
+            e.preventDefault();
+        }
+        function dragEnter(e){
+            e.preventDefault();
+            this.className += ' hovered';
+        }
+        function dragLeave(){
+            this.className = 'empty';            
+        }
+        function dragDrop(){
+            this.className = 'empty';
+            this.append(toDoContainer);
+        }
+        
+       
+        
 
             //  Create HTML elements
         var title = document.createElement('h3');
@@ -241,6 +280,7 @@ function pullArray (listArray){
         var image = document.createElement('img');
         image.setAttribute('src', listArray[i].imgUrl);
         image.classList.add('urlimage');
+        
             //  doesnt display the broken image link if the image has no image.
         if(!listArray[i].imgUrl) {
             image.style.display='none';
