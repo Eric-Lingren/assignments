@@ -36,7 +36,6 @@ function pullArray (listArray){
      
         //  Drag functions
         function dragStart(){
-            this.className += ' hold';
             setTimeout(() => this.className = 'invisible', 0);
         };
         function dragEnd(){
@@ -50,7 +49,7 @@ function pullArray (listArray){
             this.className += ' hovered';
         }
         function dragLeave(){
-            this.className = 'empty';            
+            this.className = 'snap';            
         }
         function dragDrop(){
             this.className = 'empty';

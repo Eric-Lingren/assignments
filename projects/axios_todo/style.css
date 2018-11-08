@@ -4,10 +4,14 @@
     
 }
 body{
-    background-color: #FFF
+    background-color: wheat;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 } 
 h1 {
-    color: red;
+    color: black;
+    
 }
 
 .title{
@@ -17,7 +21,7 @@ h1 {
 #inputForm {
     border: 2px black dashed;
     padding: 10px;
-    width: 80%;
+    width: 60%;
     align-content: center;
     background-color: #B5C689;
     color: #0D3D56;
@@ -44,7 +48,7 @@ h1 {
 }
 #inputPrice{
     padding: 5px;
-    width: 10%;
+    width: 5%;
     margin: 5px;
 }
 
@@ -64,21 +68,24 @@ h1 {
 }
 
 .wrapper{
-    border: black 3px solid;
     margin: 10px;
     padding: 10px;
     display: flex;
 
 }
 .listHolder {
-    
+    background-color: aliceblue;
     margin: 20px;
     width: 400px;
     display: flex;
     flex-direction: column;
     align-items: center;
+    box-shadow: 0px 0px 20px 2px;
 }
-
+h2{
+    margin: 0;
+    padding: 10px;
+}
 .todo {
     border: black 3px solid;
     border-top-left-radius: 25px;
@@ -224,13 +231,7 @@ h3{
     border-radius: 10px;
 }
 
-.listHolder{
-    box-shadow: 0px 0px 20px 2px;
-}
 
-.done-container{
-    height: 500px;
-}
 
 .snap{
     border-top-left-radius: 25px;
@@ -241,19 +242,14 @@ h3{
     height: 155px;
     margin: 10px;
     padding: 10px;
-    display: inline-block;
 }
 
 .hovered{
     background-color: cornflowerblue;
     opacity: .5;
-    
 }
 
-.hold{
-    border: solid grey 4px;
 
-}
 .invisible {
     display: none;
 }
