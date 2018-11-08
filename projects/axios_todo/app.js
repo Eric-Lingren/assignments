@@ -1,13 +1,10 @@
 
-// var axios = require('axios');
-
-    axios.get('https://api.vschool.io/ericlingren/todo').then(function(response){
+axios.get('https://api.vschool.io/ericlingren/todo').then(function(response){
     var listArray = response.data
     pullArray(listArray)
-   
-    }).catch(function(error){
-        console.log(error);
-    });
+}).catch(function(error){
+    console.log(error);
+});
 
 function pullArray (listArray){
  
@@ -22,7 +19,17 @@ function pullArray (listArray){
         toDoContainer.addEventListener('dragend', dragEnd);
         
 
-        //  Create empty recieving containers
+        //  Create empty recieving containers in the in-progress category
+        let inProgress = document.getElementById('inProgress-container');
+        let empties2 = document.createElement('div');
+        empties2.classList.add('snap')
+        empties2.addEventListener('dragover', dragOver);
+        empties2.addEventListener('dragenter', dragEnter);
+        empties2.addEventListener('dragleave', dragLeave);
+        empties2.addEventListener('drop', dragDrop);
+        inProgress.appendChild(empties2);
+
+        //  Create empty recieving containers in the done category
         let doneContainer = document.getElementById('done-container');
         let empties = document.createElement('div');
         empties.classList.add('snap')
