@@ -202,24 +202,51 @@ span{
 
 ul{
     list-style-type: none;
-}
-.credits{
+    background: #edf4f0;
+    margin-top: 0px;
+    margin-bottom: 0px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    padding-left: 7%;
     
 }
 
+li{
+    padding: 10px;
+    
+}
 .creditsTitle{
     font-family: 'Juliussansone';
-    color: black;
     font-size: 1em;
+    padding: 0px;
+    color: #607476;
     
 }
 .creditsBy{
-    color: black;
+    color: #607476;
     font-family: 'Libre Baskerville Italics';
-    font-size: 1em;
+    font-size: .8em;
+    padding: 0px;
+    opacity: .4;
 }
 .creditsName{
-    color: black;
     font-family: "Libre Baskerville";
-    font-size: 1em;
+    font-size: .8em;
+    padding: 0px;
+    color: #607476;
+}
+.creditsRight{
+    grid-column-start: 1;
+    grid-column-end: 2;
+    
+}
+.creditsLeft{
+    grid-column-start: 2;
+    grid-column-end: 3;
+
+}
+
+.container{
+    display: grid;
+    
 }
