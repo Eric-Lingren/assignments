@@ -1,3 +1,225 @@
+
+@font-face {
+    font-family: 'Libre Baskerville';
+    src: url(fonts/kmKnZrc3Hgbbcjq75U4uslyuy4kn0qNZaxMaC82U.woff2);
+}
+
+@font-face {
+    font-family: 'Juliussansone';
+    src: url(fonts/1Pt2g8TAX_SGgBGUi0tGOYEga5WOwnsXy6KHHg.woff2);  
+}
+
+@font-face {
+    font-family: 'Libre Baskerville Italics';
+    src: url(fonts/kmKhZrc3Hgbbcjq75U4uslyuy4kn0qNcWxEQDO-Wyrs.woff2);
+}
+@font-face {
+    font-family: 'Verde Moderna';
+    src: url(fonts/verdemoderna.woff);
+}
+body{
+    margin: 0px;
+    padding: 0px;
+}
+.thinGreen{
+    width: 100%;
+    height: 10px;
+    background-color: #325050;
+}
 h1{
-    color: red
+    font-family: 'Juliussansone';
+    margin-top: 15px;
+    font-weight: 100;
+    font-size: 1.75em;
+    margin-bottom: 10px;
+}
+
+h2{
+    font-family: 'Libre Baskerville Italics';
+    font-weight: 100;
+    font-size: 1.1em;
+    color: rgba(255, 255, 255, .6);
+    margin-top: 0px;
+}
+
+h3{
+    font-family: 'Juliussansone';
+    font-size: 1.2em;
+    font-weight: 100;
+    padding-left: 10%;
+    margin-top: 40px;
+    margin-bottom: 0px;
+    padding-bottom: 0px;
+    color: #325050;
+
+}
+h4{
+    font-family: 'Juliussansone';
+    letter-spacing: 1px;
+    font-weight: 100;
+    text-align: center;
+    margin-top: 0px;
+    margin-bottom: 0px;
+    padding-bottom: 0px;
+    color: rgba(255, 255, 255, .6)
+}
+
+p{
+    font-family: "Libre Baskerville";
+    padding-left: 10%;
+    padding-right: 10%;
+    font-size: .83em;
+    line-height: 2.2em;
+    color: #325050;
+}
+#logo{
+    height: 21%;
+    margin-top: 20px;
+    opacity: .6;
+}
+
+#banner{
+    background:   
+        url(214/contours-opaque.png) 0px 0px no-repeat, 
+        url(214/gridlines.png) 0px 0px repeat, 
+        url(214/huntington.jpg) 0px 0px no-repeat;
+    background-size: 200px 200px, 200px 200px, cover;
+        
+    color: white;
+    height: 240px;
+    margin-top: 0px;
+    padding-top: 0px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 30px;
+}
+
+#designsContainer{
+    display: flex;
+    width: 100%;
+    position: relative;
+    top: 13px;
+ 
+}
+
+#designsBanner{
+    background-color: rgba(255, 255, 255, .2);
+    width: 70%;
+    height: 70px;
+    color: white;
+    display: inline-block;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-bottom: 10px;
+    padding-top: 0px;
+   
+
+}
+
+#designsBannerArrow{
+    background-color: rgba(255, 255, 255, .2);
+    height: 70px;
+    width: 14%;
+    display: flex;
+    flex: 1;
+    display: inline-block;
+    align-items: center;
+    justify-content: center;
+    font-size: 5em;
+    font-weight: bolder;
+    padding-bottom: 0px;
+    padding-top: 0px;
+    margin-bottom: 0px;
+    
+   
+}
+
+.bamboo{
+    background:   
+        url(214/bamboo.png);
+    background-color: rgba(138, 188, 159, .5);
+    background-attachment: fixed;
+    padding-bottom: 25px;
+    padding-top: 1px;
+
+}
+.footer{
+    background:   
+        url(214/contours-opaque.png) 0px 0px no-repeat, 
+        url(214/gridlines.png) 0px 0px repeat, 
+        url(214/koi.jpg) 0px 0px no-repeat;
+    background-size: 200px 200px, 200px 200px, 425px 220px;
+  
+    height: 220px;
+    margin-top: 0px;
+    padding-top: 0px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 0px;
+}
+
+.footerParagraph{
+    color: rgba(255, 255, 255, .5);
+    margin-bottom: 0px;
+    padding-bottom: 0px;
+    font-family: 'Libre Baskerville Italics';
+    font-size: 1.3em;
+    text-align: center;
+  
+}
+.footerHighlights{
+    color: rgba(255, 255, 255, .8);
+    font-family: "Libre Baskerville";
+    font-size: 1.1em;
+    padding: 0px;
+    
+}
+
+.footerLinks{
+    background-color: #134347;
+    width: 100%;
+    height: 110px;
+    margin-top: 0px;
+    padding-top: 0px;
+    margin-bottom: 0px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+span{
+    font-size: 2.3em;
+    color: rgba(255, 255, 255, .5);
+    font-family: 'Verde Moderna';
+    padding: 9px;
+}
+
+ul{
+    list-style-type: none;
+}
+.credits{
+    
+}
+
+.creditsTitle{
+    font-family: 'Juliussansone';
+    color: black;
+    font-size: 1em;
+    
+}
+.creditsBy{
+    color: black;
+    font-family: 'Libre Baskerville Italics';
+    font-size: 1em;
+}
+.creditsName{
+    color: black;
+    font-family: "Libre Baskerville";
+    font-size: 1em;
 }
