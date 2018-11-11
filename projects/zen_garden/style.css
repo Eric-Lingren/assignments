@@ -523,6 +523,8 @@ span{
     #footerBottom{
         grid-area: footer;
         height: 320px;
+        display: flex;
+        align-items: center;
     }
     #footerLinksBottom{
         grid-area: footerL;
@@ -531,9 +533,12 @@ span{
         font-size: 175%;
    
     }
-    .footerParagraph{
-        padding-left: 10%;
+    .footerParagraph{ 
         font-size: 170%;
+        padding: 0px;
+        width: 70%;
+        padding-right: 20%;
+        padding-left: 10%;
         
     }
     span{
