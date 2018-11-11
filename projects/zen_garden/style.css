@@ -442,5 +442,76 @@ span{
         height: 125px;
     }
    
+}
+
+@media (min-width: 1023px) {
+    #pageContainer{
+        display: grid;
+        grid-template-columns: 2fr 1fr ;
+        grid-template-areas: 
+        'thin thin'
+        'banner banner'
+        'intro credits'
+        'bamboo designsFooter'
+        'requirements empty'
+        'footer footer'
+        'footerL footerL';
+        
+    }
     
+    #topThinGreen{
+        grid-area: thin;
+    }
+    #banner{
+        grid-area: banner;
+    }
+    #intro{
+        grid-area: intro;
+        padding-left: 0%;
+        padding-right: 0%;
+        margin-right: 0px;
+    }
+    #allCredits{
+        grid-area: credits;
+        grid-template-columns: 1fr ;
+
+    }
+    #bambooDiv{
+        grid-area: bamboo;
+        padding-left: 0%;
+    }
+    #designsFooterDiv{
+        grid-area: designsFooter;
+        grid-template-columns: 1fr;
+    }
+    #requirements{
+        grid-area: requirements;
+        padding-left: 0%;
+    }
+    #emptySide{
+        grid-area: empty;
+        background-color: rgba(138, 188, 159, .5);
+    }
+    #footerBottom{
+        grid-area: footer;
+        height: 320px;
+        
+        
+    }
+    #footerLinksBottom{
+        grid-area: footerL;
+        padding-left: 0%;
+        height: 176px;
+        font-size: 175%;
+   
+    }
+    .footerParagraph{
+        padding-left: 0%;
+        font-size: 170%;
+        
+    }
+    span{
+        padding: 2.7%;
+    }
+
 }
