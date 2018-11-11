@@ -152,7 +152,7 @@ p{
         url(214/contours-opaque.png) 0px 0px no-repeat, 
         url(214/gridlines.png) 0px 0px repeat, 
         url(214/koi.jpg) 0px 0px no-repeat;
-    background-size: 200px 200px, 200px 200px, 425px 220px;
+    background-size: 200px 200px, 200px 200px, cover;
   
     height: 220px;
     margin-top: 0px;
@@ -200,21 +200,7 @@ span{
     padding: 9px;
 }
 
-ul{
-    list-style-type: none;
-    background: #edf4f0;
-    margin-top: 0px;
-    margin-bottom: 0px;
-    padding-top: 20px;
-    padding-bottom: 20px;
-    padding-left: 7%;
-    
-}
 
-li{
-    padding: 10px;
-    
-}
 .creditsTitle{
     font-family: 'Juliussansone';
     font-size: 1em;
@@ -234,19 +220,74 @@ li{
     font-size: .8em;
     padding: 0px;
     color: #607476;
+    
+}
+
+.creditsContainer{
+    padding: 0px;
+    margin: 0px;
+    width: 100%;
+    background: #edf4f0;
+    padding-bottom: 20px;   
+}
+
+.nameDiv{
+    padding-top: 20px;
+    width: 80%;
+}
+
+.creditsLeft{
+    display: inline-block;
+    padding: 0px;
+    margin: 0px;
+    margin-left: 7%;
+    margin-top: 0px;
+    padding-top: 0px;
+    
+  
 }
 .creditsRight{
-    grid-column-start: 1;
-    grid-column-end: 2;
+    display: inline-block;
+    padding: 0px;
+    margin: 0px;
+    padding-top: 0px;
+}
+
+#floral{
+    padding-top: 0px;
+    margin-top: 0px;
     
 }
-.creditsLeft{
-    grid-column-start: 2;
-    grid-column-end: 3;
+
+.designsFooter{
+    background:   
+        url(214/bamboo.png);
+    background-color: rgba(138, 188, 159, .5);
+    background-attachment: fixed;
+    grid-template-areas: 
+        'l r';
+        width: 100%;
+}
+.designLink{
+    font-family: 'Juliussansone';
+    font-size: 1em;
+    padding: 0px;
+    color: #607476;
+    
+}
+
+.designsFooterLeft{
+    grid-area: l;
+    width: 40%;
+
+}
+.designsFooterRight{
+    grid-area: r;
+    width: 40%;
 
 }
 
-.container{
-    display: grid;
-    
+#viewThisDesign{
+    margin-top: 0px;
+    padding-top: 10px;
 }
