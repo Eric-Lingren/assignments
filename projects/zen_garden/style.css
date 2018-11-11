@@ -474,6 +474,7 @@ span{
     #allCredits{
         grid-area: credits;
         grid-template-columns: 1fr ;
+        grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr ;
 
     }
     #bambooDiv{
@@ -483,6 +484,7 @@ span{
     #designsFooterDiv{
         grid-area: designsFooter;
         grid-template-columns: 1fr;
+        grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
     }
     #requirements{
         grid-area: requirements;
@@ -495,8 +497,6 @@ span{
     #footerBottom{
         grid-area: footer;
         height: 320px;
-        
-        
     }
     #footerLinksBottom{
         grid-area: footerL;
@@ -506,12 +506,55 @@ span{
    
     }
     .footerParagraph{
-        padding-left: 0%;
+        padding-left: 10%;
         font-size: 170%;
         
     }
     span{
         padding: 2.7%;
     }
+    #theDiary{
+        border-bottom: #a0b9ad solid 1px;
+        padding-left: 3em;
+        margin-left: -3em;
+        padding-right: 3em;
+        margin-right: -3em;
+        padding-bottom: 20px;
+    }
+    #logo{
+        height: 30%;
+        margin-top: 20px;
+        opacity: .6;
+    }
+   
+    #banner{
+        height: 310px;
+        margin-bottom: 0px;
+        display: grid;
+        grid-template-columns: 1fr 3fr 1fr;
+        grid-template-areas: 
+        'logo heading'
+        'logo heading2';
+    }
+    #heading{
+        grid-area: heading;
+        font-size: 300%;
+        align-self: flex-end;
+        padding-left: 3%;
 
+    }
+    #logo{
+        height:55%;
+        margin-top: 0px;
+        opacity: .6;
+        grid-area: logo;
+        align-self: center;
+        padding-left: 40%;
+    }
+    #heading2{
+        grid-area: heading2;
+        align-self: flex-start;
+        padding-left: 3%;
+        font-size: 150%;
+    }
 }
