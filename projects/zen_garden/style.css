@@ -110,7 +110,7 @@ p{
 }
 
 #designsBanner{
-    background-color: rgba(255, 255, 255, .2);
+    background-color: rgba(255, 255, 255, .1);
     width: 70%;
     height: 70px;
     color: white;
@@ -125,7 +125,7 @@ p{
 }
 
 .arrows{
-    background-color: rgba(255, 255, 255, .2);
+    background-color: rgba(255, 255, 255, .1);
     height: 70px;
     width: 14%;
     display: flex;
@@ -297,11 +297,13 @@ span{
     grid-template-columns: 1fr 1fr;
     grid-template-rows: 1fr 1fr 1fr;
     width: 100%;
-    height: 100%;
     padding-left: 10%;
-    padding-top: 5%;
-    grid-column-gap: 10%;
+    padding-top: 1%;
+    grid-column-gap: 0%;
     align-content: center;
+    align-items: center;
+    padding-bottom: 0%;
+    margin-bottom: 0px;
 }
 
 
@@ -320,7 +322,9 @@ span{
     margin-left: -3em;
     padding-right: 3em;
     margin-right: -3em;
-    padding-bottom: 10%;
+    padding: 0px;
+    margin: 0px;
+    padding-bottom: 0px;
     
 }
 
@@ -330,6 +334,9 @@ span{
     margin-left: -3em;
     padding-right: 3em;
     margin-right: -3em;
+    padding: 0px;
+    margin: 0px;
+    padding-bottom: 0px;
 }
 
 #faq{
@@ -338,6 +345,9 @@ span{
     margin-left: -3em;
     padding-right: 3em;
     margin-right: -3em;
+    padding: 0px;
+    margin: 0px;
+    padding-bottom: 0px;
 }
 #submitDesign{
     border-bottom: #a0b9ad solid 1px;
@@ -345,12 +355,20 @@ span{
     margin-left: -3em;
     padding-right: 3em;
     margin-right: -3em;
+    padding: 0px;
+    margin: 0px;
+    padding-bottom: 0px;
 }
 #translations{
     padding-left: 3em;
     margin-left: -3em;
     padding-right: 3em;
     margin-right: -3em;
+    margin-bottom: 0px;
+    padding-bottom: 0px;
+    padding: 0px;
+    margin: 0px;
+    padding-bottom: 0px;
 }
 #none{
     margin-bottom: 0px;
@@ -358,6 +376,9 @@ span{
     padding-bottom: 0px;
     margin-top: 0px;
     margin-bottom: 0px;
+    padding: 0px;
+    margin: 0px;
+    padding-bottom: 0px;
 }
 
 @media (max-width: 320px) {
@@ -483,16 +504,21 @@ span{
     }
     #designsFooterDiv{
         grid-area: designsFooter;
-        grid-template-columns: 1fr;
-        grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
+        background-color: rgba(138, 188, 159, .7);
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        padding-top: 15%;
+        font-size: 110%;
     }
+ 
     #requirements{
         grid-area: requirements;
         padding-left: 0%;
     }
     #emptySide{
         grid-area: empty;
-        background-color: rgba(138, 188, 159, .5);
+        background-color: #edf4f0;
     }
     #footerBottom{
         grid-area: footer;
@@ -512,6 +538,15 @@ span{
     }
     span{
         padding: 2.7%;
+    }
+    .creditsTitle{
+        font-size: 110%;
+    }
+    .creditsBy{
+        font-size: 103%;
+    }
+    .creditsName{
+        font-size: 95%;
     }
     #theDiary{
         border-bottom: #a0b9ad solid 1px;
@@ -571,24 +606,44 @@ span{
         justify-contents: center;
         
     }
-    #designsBannerArrowLeft{
-        
-    }
     #designsBanner{
         height: 70px;
         padding: 0px;
         width: 65%;
     }
+    h3{
+        font-size: 1.9em;
+    }
     h4{
         font-size: 60%;
         padding: 0px;
-        margin: 0px;
-    
-        
+        margin: 0px;  
+    }
+    p{
+        font-size: 1em;
     }
     #viewAllDesignsTag{
         font-size: 120%;
         
         
+    }
+    #viewThisDesign{
+        padding-bottom: 2%;
+    }
+    #resource{
+        padding-top: 2%;
+        padding-bottom: 2%;
+    }
+    #faq{
+        padding-top: 2%;
+        padding-bottom: 2%;
+    }
+    #submitDesign{
+        padding-top: 2%;
+        padding-bottom: 2%;
+    }
+    #translations{
+        padding-top: 2%;
+        padding-bottom: 2%;
     }
 }
