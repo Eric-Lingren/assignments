@@ -124,7 +124,7 @@ p{
 
 }
 
-#designsBannerArrow{
+.arrows{
     background-color: rgba(255, 255, 255, .2);
     height: 70px;
     width: 14%;
@@ -531,10 +531,10 @@ span{
         height: 310px;
         margin-bottom: 0px;
         display: grid;
-        grid-template-columns: 1fr 3fr 1fr;
+        grid-template-columns: 1fr 2fr 1.5fr;
         grid-template-areas: 
-        'logo heading'
-        'logo heading2';
+        'logo heading viewDesigns'
+        'logo heading2 viewDesigns';
     }
     #heading{
         grid-area: heading;
@@ -556,5 +556,39 @@ span{
         align-self: flex-start;
         padding-left: 3%;
         font-size: 150%;
+    }
+    #designsContainer{
+        align-self: center;
+        grid-area: viewDesigns;
+        width: 85%;
+        margin-left: 5%;
+    }
+    .arrows{
+        height: 70px;;
+        align-content: center;
+        margin: 1px;
+        display: flex;
+        justify-contents: center;
+        
+    }
+    #designsBannerArrowLeft{
+        
+    }
+    #designsBanner{
+        height: 70px;
+        padding: 0px;
+        width: 65%;
+    }
+    h4{
+        font-size: 60%;
+        padding: 0px;
+        margin: 0px;
+    
+        
+    }
+    #viewAllDesignsTag{
+        font-size: 120%;
+        
+        
     }
 }
