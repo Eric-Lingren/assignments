@@ -119,9 +119,12 @@ p{
     align-items: center;
     justify-content: center;
     padding-bottom: 10px;
-    padding-top: 0px;
-   
+    padding-top: 0px; 
 
+}
+#designsBanner:hover{
+    background-color: rgba(255, 255, 255, .3);
+    cursor: pointer;
 }
 
 .arrows{
@@ -138,8 +141,53 @@ p{
     padding-bottom: 0px;
     padding-top: 0px;
     margin-bottom: 0px;
-    
    
+}
+.arrows:hover{
+    background-color: rgba(255, 255, 255, .3);
+    cursor: pointer;
+
+}
+.downloadIcon{
+    display: inline-block;
+    width: 2%;
+    padding-bottom: 0px;
+    margin-bottom: 0px;
+    height: 1%;
+    color: rgba(138, 188, 159);
+    border: 1px solid rgba(138, 188, 159);
+    padding: 2px;
+    border-bottom-left-radius: 3px;
+    border-bottom-right-radius: 3px;
+    border-top-right-radius: 3px;
+    border-top-left-radius: 3px;
+ 
+}
+.downloadIcon:hover{
+    background-color: #0599c2;
+    color: #fff;
+ 
+}
+.htmlcssDownloadLink{
+    cursor: pointer;
+    color: rgba(138, 188, 159);
+    font-family: 'Juliussansone';
+    font-size: 110%;
+    padding: 5px;
+    padding-top: 13px;
+}
+.htmlcssDownloadLink:hover{
+    color: #FFF;
+    background-color: #0599c2;
+
+}
+.pLinkHover{
+    color: #0599c2;
+
+}
+.pLinkHover:hover{
+    text-decoration: underline;
+    cursor: pointer;
 }
 
 .bamboo{
@@ -157,7 +205,6 @@ p{
         url(214/gridlines.png) 0px 0px repeat, 
         url(214/koi.jpg) 0px 0px no-repeat;
     background-size: 200px 200px, 200px 200px, cover;
-    
     height: 220px;
     margin-top: 0px;
     padding-top: 0px;
@@ -186,6 +233,11 @@ p{
     padding: 0px;
     
 }
+.footerHighlights:hover{
+    text-decoration: underline;
+    cursor: pointer;
+
+}
 
 .footerLinks{
     background-color: #134347;
@@ -198,13 +250,19 @@ p{
     justify-content: center;
     align-items: center;
 }
-span{
+#iconLink{
     font-size: 2.3em;
     color: rgba(255, 255, 255, .5);
     font-family: 'Verde Moderna';
     padding: 9px;
+    background: #134347
 }
 
+#iconLink:hover{
+    background: rgba(255, 255, 255, .5);
+    color: #134347;
+
+}
 
 .creditsTitle{
     font-family: 'Juliussansone';
@@ -212,6 +270,10 @@ span{
     padding: 0px;
     color: #607476;
      
+}
+.creditsTitle:hover{
+    cursor: pointer;
+    color: #357d93;
 }
 .creditsBy{
     color: #607476;
@@ -224,8 +286,11 @@ span{
     font-family: "Libre Baskerville";
     font-size: .8em;
     padding: 0px;
-    color: #607476;
-    
+    color: #607476; 
+}
+.creditsName:hover{
+    cursor: pointer;
+    color: #357d93;
 }
 
 .creditsContainer{
@@ -306,15 +371,16 @@ span{
     margin-bottom: 0px;
 }
 
-
-
 .designLink{
     font-family: 'Juliussansone';
     font-size: 1em;
     padding: 0px;
     color: #607476;  
 }
-
+.designLink:hover{
+    cursor: pointer;
+    color: #357d93;
+}
 #viewThisDesign{
     line-height: 20px;
     border-bottom: #a0b9ad solid 1px;
@@ -437,6 +503,7 @@ span{
     }
     #floral{
         padding-bottom: 20px;
+
     }
     #lonelyFlower{
         padding-bottom: 20px;
@@ -541,12 +608,13 @@ span{
         padding-left: 10%;
         
     }
-    span{
+    #iconLink{
         padding: 2.7%;
     }
     .creditsTitle{
         font-size: 110%;
     }
+
     .creditsBy{
         font-size: 103%;
     }
@@ -560,6 +628,10 @@ span{
         padding-right: 3em;
         margin-right: -3em;
         padding-bottom: 20px;
+    }
+    #floral{
+        padding-top: 10%;
+
     }
     #logo{
         height: 30%;
