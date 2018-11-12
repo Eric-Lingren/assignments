@@ -37,8 +37,8 @@ h1 {
     padding: 5px;
     width: 20%;
     margin: 5px;
-  
 }
+
 #imageURL {
     padding: 5px;
     width: 20%;
@@ -62,15 +62,14 @@ h1 {
     border-bottom-right-radius: 10px;
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
-
 }
 
 .wrapper{
     margin: 10px;
     padding: 10px;
     display: flex;
-
 }
+
 .listHolder {
     background-color: aliceblue;
     margin: 20px;
@@ -80,12 +79,14 @@ h1 {
     align-items: center;
     box-shadow: 0px 0px 20px 2px;
 }
+
 h2{
     margin: 0;
     padding: 10px;
 }
+
 .todo {
-    border: black 3px solid;
+    border: silver 3px solid;
     border-top-left-radius: 25px;
     border-top-right-radius: 25px;
     border-bottom-right-radius: 25px;
@@ -101,9 +102,12 @@ h2{
         't t t t t i i'
         'd d d d d i i'
         'p p p p p i i'
-        'c c c c b x e'
- 
+        'c c c c b x e';
+}
 
+.todo:hover{
+    cursor: all-scroll;
+    border: black 3px solid;
 }
 
 .completed{
@@ -112,41 +116,47 @@ h2{
 
 h3{
     margin:0;
-    text-decoration: underline;
-    
+    text-decoration: underline; 
 }
+
 .title{
     grid-area: t;
     margin: 0;
     padding: 0;
 }
+
 .editTitle{
     grid-area: t;
     width: 100%;
 }
+
 .editDescription{
     grid-area: d;
     width: 100%;
 }
+
 .editPrice{
     grid-area: p;
     width: 100%;
 }
+
 .editImage{
     grid-area: c;
     width: 100%;
-    
 }
+
 .description{
     grid-area: d;
     margin: 0;
     padding: 0;
 }
+
 .price {
     grid-area: p;
     margin: 0;
     padding: 0;
 }
+
 .completed{
     grid-area: c;
     margin: 0;
@@ -161,17 +171,22 @@ h3{
     margin: 0;
     padding: 0;
     justify-self: right;
-
 }
+
 .completeButton {
     height: 35px;
     width: 35px;
     grid-area: b;
     margin: 0;
     padding: 0;
-    justify-self: right;
-    
+    justify-self: right; 
 }  
+
+.completeButton:hover{
+    height: 40px;
+    width: 40px;
+    cursor: pointer;
+}
 
 .deleteButton {
     height: 37px;
@@ -179,8 +194,13 @@ h3{
     grid-area: x;
     margin: 0;
     padding: 0;
-    justify-self: right;
-    
+    justify-self: right;   
+}
+
+.deleteButton:hover{
+    height: 40px;
+    width: 40px;
+    cursor: pointer;
 }
 
 .editButton {
@@ -192,33 +212,25 @@ h3{
     justify-self: right;
 }
 
+.editButton:hover{
+    height: 40px;
+    width: 40px;
+    cursor: pointer;
+}
+
 .publishButton {
     height: 35px;
     width: 35px;
     grid-area: e;
     margin: 0;
     padding: 0;
-    justify-self: right;
-    
+    justify-self: right;  
 }
 
 .publishButton:hover {
     height: 40px;
     width: 40px;
-}
-.completeButton:hover {
-    height: 40px;
-    width: 40px;
-}
-
-.deleteButton:hover {
-    height: 40px;
-    width: 40px;
-}
-
-.editButton:hover {
-    height: 40px;
-    width: 40px;
+    cursor: pointer;
 }
 
 .editField {
@@ -228,8 +240,6 @@ h3{
     width: 100%;
     border-radius: 10px;
 }
-
-
 
 .snap{
     border-top-left-radius: 25px;

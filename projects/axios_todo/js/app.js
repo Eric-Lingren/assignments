@@ -18,6 +18,15 @@ function pullArray (listArray){
         toDoContainer.addEventListener('dragstart', dragStart);
         toDoContainer.addEventListener('dragend', dragEnd);
         
+        //  Create empty recieving containers in the done category
+        let listContainer = document.getElementById('list-container');
+        let empties3 = document.createElement('div');
+        empties3.classList.add('snap')
+        empties3.addEventListener('dragover', dragOver);
+        empties3.addEventListener('dragenter', dragEnter);
+        empties3.addEventListener('dragleave', dragLeave);
+        empties3.addEventListener('drop', dragDrop);
+        listContainer.appendChild(empties3);
 
         //  Create empty recieving containers in the in-progress category
         let inProgress = document.getElementById('inProgress-container');
@@ -38,7 +47,7 @@ function pullArray (listArray){
         empties.addEventListener('dragleave', dragLeave);
         empties.addEventListener('drop', dragDrop);
         doneContainer.appendChild(empties);
-            
+        
         //  Initialize Drag and Drop Functions
         function dragStart(){
             setTimeout(() => this.className = 'invisible', 0);
@@ -60,7 +69,6 @@ function pullArray (listArray){
             this.className = 'empty';
             this.append(toDoContainer);
         }
-        
 
             //  Create HTML elements for Text
         var title = document.createElement('h3');
@@ -72,10 +80,9 @@ function pullArray (listArray){
         var isCompleted = document.createElement('p');
             isCompleted.classList.add ('completed');
 
-
             //Created a complete item button
         var completeButton = document.createElement('img');
-        completeButton.setAttribute('src', './complete.png');
+        completeButton.setAttribute('src', 'css/images/complete.png');
         completeButton.classList.add ('completeButton');
         var completeText = document.createTextNode('Complete');
         completeButton.appendChild(completeText);
@@ -99,7 +106,7 @@ function pullArray (listArray){
 
          //  Creates an edit item button
          var editButton = document.createElement('img');
-         editButton.setAttribute('src', './edit.png');
+         editButton.setAttribute('src', 'css/images/edit.png');
          editButton.classList.add ('editButton');
          var editText = document.createTextNode('edit');
          editButton.appendChild(editText);
@@ -108,7 +115,7 @@ function pullArray (listArray){
 
         //  Creates an publish item button
         var publishButton = document.createElement('img');
-        publishButton.setAttribute('src', './publish.png');
+        publishButton.setAttribute('src', 'css/images/publish.png');
         publishButton.classList.add ('publishButton');
         var publishText = document.createTextNode('publish');
         publishButton.appendChild(publishText);
@@ -258,7 +265,7 @@ function pullArray (listArray){
 
             // Creates a delete button
         var deleteButton = document.createElement('img');
-        deleteButton.setAttribute('src', './delete.png');
+        deleteButton.setAttribute('src', 'css/images/delete.png');
         deleteButton.classList.add ('deleteButton');
         var deleteText = document.createTextNode('delete');
         deleteButton.appendChild(deleteText);
@@ -341,4 +348,7 @@ var newToDo = {};
 
 
 
+    
+        
+        
 

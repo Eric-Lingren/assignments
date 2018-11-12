@@ -84,9 +84,9 @@ p{
 
 #banner{
     background:   
-        url(214/contours-opaque.png) 0px 0px repeat, 
-        url(214/gridlines.png) 0px 0px repeat, 
-        url(214/huntington.jpg) 0px 0px no-repeat;
+        url(images/contours-opaque.png) 0px 0px repeat, 
+        url(images/gridlines.png) 0px 0px repeat, 
+        url(images/huntington.jpg) 0px 0px no-repeat;
     background-size: 200px 200px, 200px 200px, cover;
         
     color: white;
@@ -208,9 +208,9 @@ p{
 
 .bamboo{
     background: 
-    url(214/contours-opaque.png) 0px 0px repeat, 
-    url(214/gridlines.png) 0px 0px repeat,   
-        url(214/bamboo.png);
+    url(images/contours-opaque.png) 0px 0px repeat, 
+    url(images/gridlines.png) 0px 0px repeat,   
+        url(images/bamboo.png);
     background-color: rgba(138, 188, 159, .5);
     background-attachment: fixed;
     padding-bottom: 25px;
@@ -219,9 +219,9 @@ p{
 }
 .footer{
     background:   
-        url(214/contours-opaque.png) 0px 0px repeat, 
-        url(214/gridlines.png) 0px 0px repeat, 
-        url(214/koi.jpg) 0px 0px no-repeat;
+        url(images/contours-opaque.png) 0px 0px repeat, 
+        url(images/gridlines.png) 0px 0px repeat, 
+        url(images/koi.jpg) 0px 0px no-repeat;
     background-size: 200px 200px, 200px 200px, cover;
     height: 220px;
     margin-top: 0px;
@@ -378,9 +378,9 @@ p{
 }
 .designsFooter{
     background:   
-        url(214/contours-opaque.png) 0px 0px repeat, 
-        url(214/gridlines.png) 0px 0px repeat, 
-        url(214/bamboo.png) 0px 0px no-repeat;
+        url(images/contours-opaque.png) 0px 0px repeat, 
+        url(images/gridlines.png) 0px 0px repeat, 
+        url(images/bamboo.png) 0px 0px no-repeat;
     background-size: 200px 200px, 200px 200px, cover;  
     background-color: rgba(138, 188, 159, .5);
     background-attachment: fixed;
