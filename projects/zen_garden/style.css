@@ -84,7 +84,7 @@ p{
 
 #banner{
     background:   
-        url(214/contours-opaque.png) 0px 0px no-repeat, 
+        url(214/contours-opaque.png) 0px 0px repeat, 
         url(214/gridlines.png) 0px 0px repeat, 
         url(214/huntington.jpg) 0px 0px no-repeat;
     background-size: 200px 200px, 200px 200px, cover;
@@ -110,6 +110,8 @@ p{
 }
 
 #designsBanner{
+    transition-timing-function: ease-out;
+    transition: .5s;
     background-color: rgba(255, 255, 255, .1);
     width: 70%;
     height: 70px;
@@ -123,11 +125,15 @@ p{
 
 }
 #designsBanner:hover{
+    transition-timing-function: ease-in;
+    transition: .5s;
     background-color: rgba(255, 255, 255, .3);
     cursor: pointer;
 }
 
 .arrows{
+    transition-timing-function: ease-out;
+    transition: .5s;
     background-color: rgba(255, 255, 255, .1);
     height: 70px;
     width: 14%;
@@ -144,11 +150,15 @@ p{
    
 }
 .arrows:hover{
+    transition-timing-function: ease-in;
+    transition: .5s;
     background-color: rgba(255, 255, 255, .3);
     cursor: pointer;
 
 }
 .downloadIcon{
+    transition-timing-function: ease-out;
+    transition: .5s;
     display: inline-block;
     width: 2%;
     padding-bottom: 0px;
@@ -164,11 +174,15 @@ p{
  
 }
 .downloadIcon:hover{
+    transition-timing-function: ease-in;
+    transition: .5s;
     background-color: #0599c2;
     color: #fff;
  
 }
 .htmlcssDownloadLink{
+    transition-timing-function: ease-out;
+    transition: .5s;
     cursor: pointer;
     color: rgba(138, 188, 159);
     font-family: 'Juliussansone';
@@ -177,6 +191,8 @@ p{
     padding-top: 13px;
 }
 .htmlcssDownloadLink:hover{
+    transition-timing-function: ease-in;
+    transition: .5s;
     color: #FFF;
     background-color: #0599c2;
 
@@ -191,7 +207,9 @@ p{
 }
 
 .bamboo{
-    background:   
+    background: 
+    url(214/contours-opaque.png) 0px 0px repeat, 
+    url(214/gridlines.png) 0px 0px repeat,   
         url(214/bamboo.png);
     background-color: rgba(138, 188, 159, .5);
     background-attachment: fixed;
@@ -201,7 +219,7 @@ p{
 }
 .footer{
     background:   
-        url(214/contours-opaque.png) 0px 0px no-repeat, 
+        url(214/contours-opaque.png) 0px 0px repeat, 
         url(214/gridlines.png) 0px 0px repeat, 
         url(214/koi.jpg) 0px 0px no-repeat;
     background-size: 200px 200px, 200px 200px, cover;
@@ -251,6 +269,8 @@ p{
     align-items: center;
 }
 #iconLink{
+    transition-timing-function: ease-out;
+    transition: .5s;
     font-size: 2.3em;
     color: rgba(255, 255, 255, .5);
     font-family: 'Verde Moderna';
@@ -259,9 +279,12 @@ p{
 }
 
 #iconLink:hover{
+    transition-timing-function: ease-in;
+    transition: .5s;
     background: rgba(255, 255, 255, .5);
     color: #134347;
 
+    
 }
 
 .creditsTitle{
@@ -355,7 +378,10 @@ p{
 }
 .designsFooter{
     background:   
-        url(214/bamboo.png);
+        url(214/contours-opaque.png) 0px 0px repeat, 
+        url(214/gridlines.png) 0px 0px repeat, 
+        url(214/bamboo.png) 0px 0px no-repeat;
+    background-size: 200px 200px, 200px 200px, cover;  
     background-color: rgba(138, 188, 159, .5);
     background-attachment: fixed;
     display: grid;
@@ -552,6 +578,18 @@ p{
     }
     #banner{
         grid-area: banner;
+        overflow: hidden;
+    }
+    #bannerGlass{
+        background-color: rgba(255, 255 , 255, .05);
+        height: 310px;
+        width: 33.333%;
+        position: absolute;
+        right: 0px;
+
+
+
+        
     }
     #intro{
         grid-area: intro;
@@ -563,6 +601,7 @@ p{
         grid-area: credits;
         grid-template-columns: 1fr ;
         grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr ;
+        width: 90%;
 
     }
     #bambooDiv{
@@ -577,6 +616,7 @@ p{
         align-items: flex-start;
         padding-top: 15%;
         font-size: 110%;
+        width: 90%;
     }
  
     #requirements{
@@ -601,7 +641,7 @@ p{
    
     }
     .footerParagraph{ 
-        font-size: 170%;
+        font-size: 180%;
         padding: 0px;
         width: 70%;
         padding-right: 20%;
