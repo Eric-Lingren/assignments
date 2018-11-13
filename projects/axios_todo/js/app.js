@@ -1,10 +1,11 @@
 
-axios.get('https://api.vschool.io/ericlingren/todo').then(function(response){
+ axios.get('https://api.vschool.io/ericlingren/todo').then(function(response){
     var listArray = response.data
     pullArray(listArray)
 }).catch(function(error){
     console.log(error);
 });
+
 
 function pullArray (listArray){
  
@@ -15,61 +16,68 @@ function pullArray (listArray){
         toDoContainer.setAttribute('draggable', true);
         toDoContainer.setAttribute('id', toDoId[i]);
         //  add drag listeners
-        toDoContainer.addEventListener('dragstart', dragStart);
-        toDoContainer.addEventListener('dragend', dragEnd);
+        // toDoContainer.addEventListener('dragstart', dragStart);
+        // toDoContainer.addEventListener('dragend', dragEnd);
         
-        //  Create empty recieving containers in the done category
-        let listContainer = document.getElementById('list-container');
-        let empties3 = document.createElement('div');
-        empties3.classList.add('snap')
-        empties3.addEventListener('dragover', dragOver);
-        empties3.addEventListener('dragenter', dragEnter);
-        empties3.addEventListener('dragleave', dragLeave);
-        empties3.addEventListener('drop', dragDrop);
-        listContainer.appendChild(empties3);
+        // //  Create empty recieving containers in the 'to-do' category
+        // let listContainer = document.getElementById('list-container');
+        // let empties3 = document.createElement('div');
+        // empties3.classList.add('snap')
+        // empties3.addEventListener('dragover', dragOver);
+        // empties3.addEventListener('dragenter', dragEnter);
+        // empties3.addEventListener('dragleave', dragLeave);
+        // empties3.addEventListener('drop', dragDrop);
+        // listContainer.appendChild(empties3);
 
-        //  Create empty recieving containers in the in-progress category
-        let inProgress = document.getElementById('inProgress-container');
-        let empties2 = document.createElement('div');
-        empties2.classList.add('snap')
-        empties2.addEventListener('dragover', dragOver);
-        empties2.addEventListener('dragenter', dragEnter);
-        empties2.addEventListener('dragleave', dragLeave);
-        empties2.addEventListener('drop', dragDrop);
-        inProgress.appendChild(empties2);
+        // //  Create empty recieving containers in the 'in-progress' category
+        // let inProgress = document.getElementById('inProgress-container');
+        // let empties2 = document.createElement('div');
+        // empties2.classList.add('snap')
+        // empties2.addEventListener('dragover', dragOver);
+        // empties2.addEventListener('dragenter', dragEnter);
+        // empties2.addEventListener('dragleave', dragLeave);
+        // empties2.addEventListener('drop', dragDrop);
+        // inProgress.appendChild(empties2);
 
-        //  Create empty recieving containers in the done category
-        let doneContainer = document.getElementById('done-container');
-        let empties = document.createElement('div');
-        empties.classList.add('snap')
-        empties.addEventListener('dragover', dragOver);
-        empties.addEventListener('dragenter', dragEnter);
-        empties.addEventListener('dragleave', dragLeave);
-        empties.addEventListener('drop', dragDrop);
-        doneContainer.appendChild(empties);
+        // //  Create empty recieving containers in the 'done' category
+        // let doneContainer = document.getElementById('done-container');
+        // let empties = document.createElement('div');
+        // empties.classList.add('snap')
+        // empties.addEventListener('dragover', dragOver);
+        // empties.addEventListener('dragenter', dragEnter);
+        // empties.addEventListener('dragleave', dragLeave);
+        // empties.addEventListener('drop', dragDrop);
+        // doneContainer.appendChild(empties);
+
+        // //  Initialize Drag and Drop Functions
+        // function dragStart(){
+        //     setTimeout(() => this.className = 'invisible', 0);  
+        // }
+
+        // function dragEnd(){
+        //     this.className = 'todo';
+        // } 
+
+        // function dragOver(e){
+        //     e.preventDefault(); 
+        // }
+
+        // function dragEnter(e){
+        //     e.preventDefault();
+        //     this.className += ' hovered';
+        // }
+
+        // function dragLeave(){         
+        //     this.className = 'snap';            
+        // }
+
+        // function dragDrop(){
+        //     this.className = 'none';
+        //     this.append(toDoContainer);
+            
+        // }
+
         
-        //  Initialize Drag and Drop Functions
-        function dragStart(){
-            setTimeout(() => this.className = 'invisible', 0);
-        };
-        function dragEnd(){
-            this.className = 'todo';
-        }; 
-        function dragOver(e){
-            e.preventDefault();
-        }
-        function dragEnter(e){
-            e.preventDefault();
-            this.className += ' hovered';
-        }
-        function dragLeave(){
-            this.className = 'snap';            
-        }
-        function dragDrop(){
-            this.className = 'empty';
-            this.append(toDoContainer);
-        }
-
             //  Create HTML elements for Text
         var title = document.createElement('h3');
             title.classList.add ('title');
@@ -96,11 +104,13 @@ function pullArray (listArray){
             axios.put(`https://api.vschool.io/ericlingren/todo/${this.id}`, { completed: true} ).then(function(response){
             console.log(response.data);
                 });
+                newRequest()
             } else {
                 axios.put(`https://api.vschool.io/ericlingren/todo/${this.id}`, { completed: false} ).then(function(response){
             console.log(response.data);
                 });
-            }
+                newRequest()
+            }   
         });
     
 
@@ -165,7 +175,6 @@ function pullArray (listArray){
         editPrice.value = listArray[i].price;
          //  Hide the element when it is created
         editPrice.style.display = 'none';
-
 
         //  Creates the edit fields for Image
         let editImage = document.createElement('input');
@@ -244,24 +253,18 @@ function pullArray (listArray){
             var editInputDescription = editForm.editDescription.value;
             var editInputPrice = editForm.editPrice.value;
             var editInputImage = editForm.editImage.value;
-            
-            //console.log(editInputTitle)
 
             var editToDo = {};
             editToDo.title =  editInputTitle;
             editToDo.description =  editInputDescription;
             editToDo.price =  editInputPrice;
             editToDo.imgUrl =  editInputImage;
-
-            console.log(this.id)
           
             axios.put(`https://api.vschool.io/ericlingren/todo/${this.id}`, editToDo).then(function(response){
                 console.log(response.data);
             });
 
         });
-
-        
 
             // Creates a delete button
         var deleteButton = document.createElement('img');
@@ -288,14 +291,12 @@ function pullArray (listArray){
             image.style.display='none';
         } 
 
-
             //  Put the to-do items inside the div element
         title.textContent = listArray[i].title;
         description.textContent = listArray[i].description;
         price.textContent = (`Price: ${listArray[i].price}`);
         isCompleted.textContent = (`Completed: ${listArray[i].completed}`);
 
-       
 
             // Put the element on the DOM
         toDoContainer.appendChild(title);
@@ -307,20 +308,27 @@ function pullArray (listArray){
         toDoContainer.appendChild(deleteButton);
         toDoContainer.appendChild(image);
         toDoContainer.appendChild(publishButton);
-      
-      
 
-        // toDoContainer.appendChild(image);
 
-        document.getElementById('list-container').appendChild(toDoContainer);
+        
 
             //  Check to see if the item has been completed.  If so, it crosses off the item.
         if (isCompleted.textContent === 'Completed: true'){
             title.style.textDecoration = 'line-through'
             title.style.color = 'black'
             isCompleted.style.color = 'black'
-        }  
+            // Places item in the done container if it is marked completed
+            document.getElementById('done-container').appendChild(toDoContainer);
+           
+        }  else {
+            title.style.color = 'black'
+            // Places item in the to-do container if it has not been completed
+            document.getElementById('list-container').appendChild(toDoContainer);
+            
+        }
     }
+
+
 }
 
 var form = document.listForm;
@@ -348,7 +356,5 @@ var newToDo = {};
 
 
 
-    
-        
-        
+
 

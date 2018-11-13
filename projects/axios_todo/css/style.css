@@ -106,12 +106,12 @@ h2{
 }
 
 .todo:hover{
-    cursor: all-scroll;
+    cursor: grab;
     border: black 3px solid;
 }
 
 .completed{
-    color: red;
+    color: yellow;
 }
 
 h3{
@@ -249,7 +249,7 @@ h3{
     width: 360px;
     height: 155px;
     margin: 10px;
-    padding: 10px;
+    /* padding: 10px; */
 }
 
 .hovered{
