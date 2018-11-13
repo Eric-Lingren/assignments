@@ -1,11 +1,11 @@
-
- axios.get('https://api.vschool.io/ericlingren/todo').then(function(response){
-    var listArray = response.data
-    pullArray(listArray)
-}).catch(function(error){
-    console.log(error);
+const refreshPage = function () {
+    axios.get('https://api.vschool.io/ericlingren/todo').then(function(response){
+        var listArray = response.data
+        pullArray(listArray)
+    }).catch(function(error){
+        console.log(error);
 });
-
+}
 
 function pullArray (listArray){
  
@@ -96,7 +96,11 @@ function pullArray (listArray){
         completeButton.appendChild(completeText);
         completeButton.id = toDoId;
 
-        
+
+        /////////////////////////////////////////////////////////
+        ///      WHEN THE COMPLETE BUTTON GETS CHECKED       ///
+        ///////////////////////////////////////////////////////
+
         //creates a function to change record between completed and not completed
         completeButton.addEventListener('click', function(){
             console.log(listArray[i].completed)
@@ -104,12 +108,16 @@ function pullArray (listArray){
             axios.put(`https://api.vschool.io/ericlingren/todo/${this.id}`, { completed: true} ).then(function(response){
             console.log(response.data);
                 });
-                newRequest()
+                document.getElementById('list-container').innerHTML = '';
+                //document.getElementById('done-container').innerHTML = '';
+                refreshPage()
             } else {
                 axios.put(`https://api.vschool.io/ericlingren/todo/${this.id}`, { completed: false} ).then(function(response){
             console.log(response.data);
                 });
-                newRequest()
+                //document.getElementById('list-container').innerHTML = '';
+                document.getElementById('done-container').innerHTML = '';
+                refreshPage()
             }   
         });
     
@@ -357,4 +365,4 @@ var newToDo = {};
 
 
 
-
+refreshPage();

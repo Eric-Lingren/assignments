@@ -13,23 +13,28 @@
     font-family: 'Libre Baskerville Italics';
     src: url(fonts/kmKhZrc3Hgbbcjq75U4uslyuy4kn0qNcWxEQDO-Wyrs.woff2);
 }
+
 @font-face {
     font-family: 'Verde Moderna';
     src: url(fonts/verdemoderna.woff);
 }
+
 html{
     margin: 0px;
     padding: 0px; 
 }
+
 body{
     margin: 0px;
     padding: 0px;
 }
+
 .thinGreen{
     width: 100%;
     height: 10px;
     background-color: #325050;
 }
+
 h1{
     font-family: 'Juliussansone';
     margin-top: 15px;
@@ -55,8 +60,8 @@ h3{
     margin-bottom: 0px;
     padding-bottom: 0px;
     color: #325050;
-
 }
+
 h4{
     font-family: 'Juliussansone';
     letter-spacing: 1px;
@@ -76,6 +81,7 @@ p{
     line-height: 2.2em;
     color: #325050;
 }
+
 #logo{
     height: 21%;
     margin-top: 20px;
@@ -122,8 +128,8 @@ p{
     justify-content: center;
     padding-bottom: 10px;
     padding-top: 0px; 
-
 }
+
 #designsBanner:hover{
     transition-timing-function: ease-in;
     transition: .5s;
@@ -147,15 +153,15 @@ p{
     padding-bottom: 0px;
     padding-top: 0px;
     margin-bottom: 0px;
-   
 }
+
 .arrows:hover{
     transition-timing-function: ease-in;
     transition: .5s;
     background-color: rgba(255, 255, 255, .3);
     cursor: pointer;
-
 }
+
 .downloadIcon{
     transition-timing-function: ease-out;
     transition: .5s;
@@ -171,15 +177,15 @@ p{
     border-bottom-right-radius: 3px;
     border-top-right-radius: 3px;
     border-top-left-radius: 3px;
- 
 }
+
 .downloadIcon:hover{
     transition-timing-function: ease-in;
     transition: .5s;
     background-color: #0599c2;
     color: #fff;
- 
 }
+
 .htmlcssDownloadLink{
     transition-timing-function: ease-out;
     transition: .5s;
@@ -195,12 +201,13 @@ p{
     transition: .5s;
     color: #FFF;
     background-color: #0599c2;
-
 }
+
 .pLinkHover{
     color: #0599c2;
-
+    cursor: pointer;
 }
+
 .pLinkHover:hover{
     text-decoration: underline;
     cursor: pointer;
@@ -215,8 +222,8 @@ p{
     background-attachment: fixed;
     padding-bottom: 25px;
     padding-top: 1px;
-
 }
+
 .footer{
     background:   
         url(images/contours-opaque.png) 0px 0px repeat, 
@@ -241,7 +248,6 @@ p{
     font-family: 'Libre Baskerville Italics';
     font-size: 1.3em;
     text-align: center;
-  
 }
 
 .footerHighlights{
@@ -249,12 +255,11 @@ p{
     font-family: "Libre Baskerville";
     font-size: 1.1em;
     padding: 0px;
-    
 }
+
 .footerHighlights:hover{
     text-decoration: underline;
     cursor: pointer;
-
 }
 
 .footerLinks{
@@ -268,14 +273,16 @@ p{
     justify-content: center;
     align-items: center;
 }
+
 #iconLink{
     transition-timing-function: ease-out;
     transition: .5s;
     font-size: 2.3em;
     color: rgba(255, 255, 255, .5);
     font-family: 'Verde Moderna';
-    padding: 9px;
-    background: #134347
+    background: #134347;
+    border-radius: 50%;
+    margin: 2.7%;
 }
 
 #iconLink:hover{
@@ -283,21 +290,21 @@ p{
     transition: .5s;
     background: rgba(255, 255, 255, .5);
     color: #134347;
-
-    
+    cursor: pointer;
 }
 
 .creditsTitle{
     font-family: 'Juliussansone';
     font-size: 1em;
     padding: 0px;
-    color: #607476;
-     
+    color: #607476;  
 }
+
 .creditsTitle:hover{
     cursor: pointer;
     color: #357d93;
 }
+
 .creditsBy{
     color: #607476;
     font-family: 'Libre Baskerville Italics';
@@ -311,6 +318,7 @@ p{
     padding: 0px;
     color: #607476; 
 }
+
 .creditsName:hover{
     cursor: pointer;
     color: #357d93;
@@ -319,7 +327,7 @@ p{
 .creditsContainer{
     padding: 0px;
     margin: 0px;
-    width: 100%;
+    width: 90%;
     background: #edf4f0; 
     display: grid;
     padding-bottom: 5px;
@@ -335,47 +343,52 @@ p{
 
 #floral{
     border-bottom: #a0b9ad solid 1px;
-    padding-left: 3em;
-    margin-left: -3em;
-    padding-right: 3em;
-    margin-right: -3em;
+    padding-left: 2.5em;
+    margin-left: -2.5em;
+    padding-right: 2.5em;
+    margin-right: -2.5em;
 }
 
 #leggo{
     border-bottom: #a0b9ad solid 1px;
-    padding-left: 3em;
-    margin-left: -3em;
-    padding-right: 3em;
+    padding-left: 2.5em;
+    margin-left: -2.5em;
+    padding-right: 2.5em;
     margin-right: -3em;  
 }
+
 #eleganceInSimplicity{
     border-bottom: #a0b9ad solid 1px;
-    padding-left: 3em;
-    margin-left: -3em;
-    padding-right: 3em;
-    margin-right: -3em;
+    padding-left: 2.5em;
+    margin-left: -2.5em;
+    padding-right: 2.5em;
+    margin-right: -2.5em;
 }
+
 #lugozee{
     border-bottom: #a0b9ad solid 1px;
-    padding-left: 3em;
-    margin-left: -3em;
-    padding-right: 3em;
-    margin-right: -3em;
+    padding-left: 2.5em;
+    margin-left: -2.5em;
+    padding-right: 2.5em;
+    margin-right: -2.5em;
 }
+
 #dazzlingBeauty{
     border-bottom: #a0b9ad solid 1px;
-    padding-left: 3em;
-    margin-left: -3em;
-    padding-right: 3em;
-    margin-right: -3em;
+    padding-left: 2.5em;
+    margin-left: -2.5em;
+    padding-right: 2.5em;
+    margin-right: -2.5em;
 }
+
 #darkRose{
     border-bottom: #a0b9ad solid 1px;
-    padding-left: 3em;
-    margin-left: -3em;
-    padding-right: 3em;
-    margin-right: -3em;
+    padding-left: 2.5em;
+    margin-left: -2.5em;
+    padding-right: 2.5em;
+    margin-right: -2.5em;
 }
+
 .designsFooter{
     background:   
         url(images/contours-opaque.png) 0px 0px repeat, 
@@ -387,7 +400,7 @@ p{
     display: grid;
     grid-template-columns: 1fr 1fr;
     grid-template-rows: 1fr 1fr 1fr;
-    width: 100%;
+    width: 90%;
     padding-left: 10%;
     padding-top: 1%;
     grid-column-gap: 0%;
@@ -403,10 +416,12 @@ p{
     padding: 0px;
     color: #607476;  
 }
+
 .designLink:hover{
     cursor: pointer;
     color: #357d93;
 }
+
 #viewThisDesign{
     line-height: 20px;
     border-bottom: #a0b9ad solid 1px;
@@ -416,8 +431,7 @@ p{
     margin-right: -3em;
     padding: 0px;
     margin: 0px;
-    padding-bottom: 0px;
-    
+    padding-bottom: 7px;
 }
 
 #resource{
@@ -441,6 +455,7 @@ p{
     margin: 0px;
     padding-bottom: 0px;
 }
+
 #submitDesign{
     border-bottom: #a0b9ad solid 1px;
     padding-left: 3em;
@@ -451,6 +466,7 @@ p{
     margin: 0px;
     padding-bottom: 0px;
 }
+
 #translations{
     padding-left: 3em;
     margin-left: -3em;
@@ -462,6 +478,7 @@ p{
     margin: 0px;
     padding-bottom: 0px;
 }
+
 #none{
     margin-bottom: 0px;
     padding-top: 0px;
@@ -503,6 +520,7 @@ p{
     }
     .creditsContainer{
         grid-template-columns: 1fr;
+        
     }
     #theDiary{
         border-bottom: #a0b9ad solid 1px;
@@ -555,7 +573,9 @@ p{
     .footer{
         height: 125px;
     }
-   
+    .pLinkHover{
+        font-size: 1em;
+    }
 }
 
 @media (min-width: 1023px) {
@@ -570,9 +590,7 @@ p{
         'requirements empty'
         'footer footer'
         'footerL footerL';
-        
     }
-    
     #topThinGreen{
         grid-area: thin;
     }
@@ -585,11 +603,7 @@ p{
         height: 310px;
         width: 33.333%;
         position: absolute;
-        right: 0px;
-
-
-
-        
+        right: 0px; 
     }
     #intro{
         grid-area: intro;
@@ -602,7 +616,6 @@ p{
         grid-template-columns: 1fr ;
         grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr ;
         width: 90%;
-
     }
     #bambooDiv{
         grid-area: bamboo;
@@ -618,7 +631,6 @@ p{
         font-size: 110%;
         width: 90%;
     }
- 
     #requirements{
         grid-area: requirements;
         padding-left: 0%;
@@ -638,7 +650,6 @@ p{
         padding-left: 0%;
         height: 176px;
         font-size: 175%;
-   
     }
     .footerParagraph{ 
         font-size: 180%;
@@ -646,15 +657,13 @@ p{
         width: 70%;
         padding-right: 20%;
         padding-left: 10%;
-        
     }
     #iconLink{
-        padding: 2.7%;
+        margin: 2.7%;
     }
     .creditsTitle{
         font-size: 110%;
     }
-
     .creditsBy{
         font-size: 103%;
     }
@@ -671,14 +680,12 @@ p{
     }
     #floral{
         padding-top: 10%;
-
     }
     #logo{
         height: 30%;
         margin-top: 20px;
         opacity: .6;
     }
-   
     #banner{
         height: 310px;
         margin-bottom: 0px;
@@ -693,7 +700,6 @@ p{
         font-size: 300%;
         align-self: flex-end;
         padding-left: 3%;
-
     }
     #logo{
         height:55%;
@@ -721,7 +727,6 @@ p{
         margin: 1px;
         display: flex;
         justify-contents: center;
-        
     }
     #designsBanner{
         height: 70px;
@@ -740,9 +745,7 @@ p{
         font-size: 1em;
     }
     #viewAllDesignsTag{
-        font-size: 120%;
-        
-        
+        font-size: 120%; 
     }
     #viewThisDesign{
         padding-bottom: 2%;
