@@ -64,4 +64,3 @@ function getRandomNumber(min, max){
 setInterval(getRandomNumber, 2000);
 
 
-console.log();

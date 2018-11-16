@@ -5,22 +5,25 @@
 //  Return how many times the word code appears in a string.
 //  Return the count, including any substitutions for the letter "d".
 
-// function countCode(string) {  
-//   var counter = string.includes('code');
-//   console.log(counter);
-// }
-
-// countCode("aaacodebbb") // returns 1
-// countCode("codexxcode") // returns 2
-// countCode("cozexxcope") // returns 2
-
-
 function countCode(string) {  
+  var counter = string.includes('code');
+  // return counter
+var n = string.search('code');
+  return n
   
-  if(typeof string !== 'string'){
-    return 'You must provide a string as an argument'
-  }
-
 }
 
-module.exports = countCode
+console.log(countCode("aaacodebbb"))// returns 1
+console.log(countCode("codexxcode")) // returns 2
+console.log(countCode("cozexxcope")) // returns 2
+
+
+// function countCode(string) {  
+  
+//   if(typeof string !== 'string'){
+//     return 'You must provide a string as an argument'
+//   }
+
+// }
+
+// module.exports = countCode
