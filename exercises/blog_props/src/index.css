@@ -1,9 +1,7 @@
 body {
   margin: 0;
   padding: 0;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
-    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
-    sans-serif;
+  font-family: Lora,'Times New Roman',serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -11,4 +9,124 @@ body {
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
+}
+@font-face{
+  font-family: 'opensansBold';
+  src: url('./mem5YaGs126MiZpBA-UN8rsOUuhp.woff2')
+}
+@font-face{
+  font-family: 'opensansNormal';
+  src: url('./mem5YaGs126MiZpBA-UN_r8OUuhp.woff2')
+}
+@font-face{
+  font-family: 'loraNormal';
+  src: url('./0QIvMX1D_JOuMwr7Iw.woff2')
+}
+@font-face{
+  font-family: 'loraItalics';
+  src: url('./0QIhMX1D_JOuMw_LIftL.woff2')
+}
+
+
+.backgroundPic{
+  position: absolute;
+}
+
+.header{
+  background-image: url('homeBG.jpg');
+  background-repeat: none;
+  background-size: cover;
+  background-position: center;
+  text-align: center;
+  height: 520px;
+  color: #FFF;
+  display: flex;
+ 
+
+}
+.shade{
+  width: 100%;
+  height: 520px;
+  background: rgba(0,0,0,0.4);
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+ul{
+  font-family: 'opensansBold';
+  list-style: none;
+  display: grid;
+  grid-template-columns: 5fr 1fr 1fr 1fr 1fr;
+}
+.headerTitle{
+  font-family: 'opensansBold';
+  font-size: 5em;
+  margin-top: 10%;
+  margin-bottom: 0px;
+  padding-bottom: 0px;
+}
+
+.headerSubtitle{
+  font-family: 'opensansNormal';
+  font-weight: 100;
+  margin-top: 0px;
+  padding-top: 0px;
+}
+
+.blogList{
+  width: 44%;
+  margin-left: auto;
+  margin-right: auto;
+  display: flex;
+  flex-direction: column;
+  margin-top: 40px;
+  
+ 
+}
+
+.blogEntry{
+
+}
+.blogEntry:hover{
+  color:#0085a1
+}
+.blogTitle{
+  font-family: 'opensansBold';
+  font-size: 2.4em;
+  margin-bottom: 0px;
+  padding-bottom: 0px;
+  line-height: 1.1em;
+  font-weight: bold;
+  
+}
+.blogTitle:hover{
+
+}
+.blogSubtitle{
+  font-family: 'opensansNormal';
+  margin-top: 10px;
+  padding-top: 0px;
+  font-size: 1.8em;
+  font-weight: 100;
+  margin-bottom: 0px;
+  padding-bottom: 0px;
+}
+.blogSubtitle:hover{
+  
+}
+.blogDate{
+  font-family: 'loraItalics';
+  font-size: 1.1em;
+  margin-top: 10px;
+  padding-top: 0px;
+  font-weight: 100;
+}
+.blogDate:hover{
+  color: black;
+}
+.footer{
+  display: flex;
+
+  justify-content: center;
 }
