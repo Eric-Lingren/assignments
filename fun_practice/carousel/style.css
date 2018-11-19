@@ -1,0 +1,15 @@
+
+.wrapper{
+    width: 100%;
+    height: 100vh;
+    background-color: silver;
+    
+}
+img{
+    margin-top: 20%;
+    width: 10%;
+    padding: 5%;
+}
+#gitLogo{
+    transform: rotateY(90deg);
+}

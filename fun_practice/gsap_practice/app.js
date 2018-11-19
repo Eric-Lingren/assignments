@@ -22,9 +22,9 @@ function wait() {
 
 //TweenMax.to(gitHubLogo, 2, {rotationY:90, x:1000});
 TweenMax.to(gitHubLogo1, 3, {delay:wait(), ease:Power2.easeOut, rotationY:360, rotationX:360, x:10, y:10, height:200, width:200});
-TweenMax.to(gitHubLogo2, 3, {delay:wait(), ease:Power2.easeOut, rotationY:360, rotationX:360, x:winW/4, y:winH/4, height:200, width:200});
-TweenMax.to(gitHubLogo3, 3, {delay:wait(), ease:Power2.easeOut, rotationY:360, rotationX:360, x:28, y:425, height:200, width:200});
-TweenMax.to(gitHubLogo4, 3, {delay:wait(), ease:Power2.easeOut, rotationY:360, rotationX:360, x:-180, y:425, height:200, width:200});
-TweenMax.to(gitHubLogo5, 3, {delay:wait(), ease:Power2.easeOut, rotationY:360, rotationX:360, x:470, y:240, height:300, width:300});
+TweenMax.to(gitHubLogo2, 3, {delay:wait(), ease:Power2.easeOut, rotationY:360, rotationX:360, x:10, y:10, height:200, width:200});
+TweenMax.to(gitHubLogo3, 3, {delay:wait(), ease:Power2.easeOut, rotationY:360, rotationX:360, x:10, y:10, height:200, width:200});
+TweenMax.to(gitHubLogo4, 3, {delay:wait(), ease:Power2.easeOut, rotationY:360, rotationX:360, x:10, y:10, height:200, width:200});
+TweenMax.to(gitHubLogo5, 3, {delay:wait(), ease:Power2.easeOut, rotationY:360, rotationX:360, x:10, y:10, height:300, width:300});
 
 
