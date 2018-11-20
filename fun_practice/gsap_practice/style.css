@@ -21,12 +21,16 @@ img{
     display: flex;
     justify-content: space-evenly;
     align-items: center;
-    
-
 }
 #gitLogo{
     opacity: 0; 
     transform: perspective(1000px) rotateY(-45deg);
+    
+}
+#portfolioLogo{
+    opacity: 1; 
+    width: 20%;
+    transform: perspective(1000px) rotateY(0deg);
     
 }
 #linkedinLogo{
