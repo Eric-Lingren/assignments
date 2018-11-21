@@ -1,31 +1,31 @@
-import React from 'react';
+import React, {Component} from 'react';
 import SuperHero from './SuperHero';
 import heroList from './Heros.json';
 
 console.log(heroList)
 
-const App = () => {
-
-  const mappedHeros = heroList.Hero.map(person => 
-    <SuperHero 
-      key={person.id}
-      name={person.name}
-      picture={person.image}
-      phrase={person.catchPhrase}
-
-    />
-  )
-
+class App extends Component{
+  constructor(){
+    super()
+  }
   
+  render(){
+    const mappedHeros = heroList.Hero.map(person => 
+      <SuperHero 
+        key={person.id}
+        name={person.name}
+        picture={person.image}
+        phrase={person.catchPhrase}
+      />
+    )
 
-    return (
-      <div>
-        {mappedHeros}
-        <SuperHero />
-
-      </div>
-    );
-
+  return (
+    <div>
+      {mappedHeros}
+      <SuperHero />
+    </div>
+  );
+  }
 }
 
 export default App;

@@ -13,7 +13,7 @@ class MyComponent extends Component {
 
   componentDidMount(){
     // use the node ref to create the animation
-    this.myTween = TweenLite.to(this.myElement, 1, {x: 100, y: 100});
+    this.myTween = TweenLite.to(this.myElement, 1, {x: 300, y: 300});
   }
 
   render(){
