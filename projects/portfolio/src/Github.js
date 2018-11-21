@@ -3,15 +3,13 @@ import githubIcon from './css/images/githubIcon.png'
 
 
 
+
 const Github = () => {
 
     return (
   
-      <div >
-        test
-        <img src={githubIcon} className='gitIcon'></img>
-        
-      </div>
+        <img className='icon' id='gitIcon' src={githubIcon} alt='GitHub Icon'></img>
+     
     );
 }
 

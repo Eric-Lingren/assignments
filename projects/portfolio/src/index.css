@@ -1,6 +1,9 @@
-body {
+
+html, body {
   margin: 0;
   padding: 0;
+  height: 100vh;
+  width: 100vw;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
     "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
     sans-serif;
@@ -13,7 +16,39 @@ code {
     monospace;
 }
 
-.gitIcon{
-  height: 20%;
-  width: 20%;
+.pageWrapper{
+  background-color: grey;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.iconWrapper{
+  width: 100vw;
+  height: 60vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: silver;
+}
+
+.icon{
+  width: 15%;
+  height: auto;
+  margin: 1%;
+}
+
+#gitIcon{
+
+}
+
+#infoIcon{
+
+}
+#resumeIcon{
+  width: 12%;
+  height: auto;
+  margin-right: 5%;
+  
 }

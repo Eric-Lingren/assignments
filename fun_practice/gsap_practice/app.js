@@ -115,73 +115,80 @@ function wait() {
     return delay
 }
 
-function initPosition(){
-gitHubLogo1.style.position = 'absolute';
-gitHubLogo1.style.left = Math.round(Math.random() * document.body.scrollHeight) + 'px';
-gitHubLogo1.style.top = Math.round(Math.random() * document.body.scrollHeight) + 'px';
-document.body.appendChild(gitHubLogo1);
+// function initPosition(){
+// gitHubLogo1.style.position = 'absolute';
+// gitHubLogo1.style.left = Math.round(Math.random() * document.body.scrollHeight) + 'px';
+// gitHubLogo1.style.top = Math.round(Math.random() * document.body.scrollHeight) + 'px';
+// document.body.appendChild(gitHubLogo1);
 
-gitHubLogo2.style.position = 'absolute';
-gitHubLogo2.style.left = Math.round(Math.random() * document.body.scrollHeight) + 'px';
-gitHubLogo2.style.top = Math.round(Math.random() * document.body.scrollHeight) + 'px';
-document.body.appendChild(gitHubLogo2);
+// gitHubLogo2.style.position = 'absolute';
+// gitHubLogo2.style.left = Math.round(Math.random() * document.body.scrollHeight) + 'px';
+// gitHubLogo2.style.top = Math.round(Math.random() * document.body.scrollHeight) + 'px';
+// document.body.appendChild(gitHubLogo2);
 
-gitHubLogo3.style.position = 'absolute';
-gitHubLogo3.style.left = Math.round(Math.random() * document.body.scrollHeight) + 'px';
-gitHubLogo3.style.top = Math.round(Math.random() * document.body.scrollHeight) + 'px';
-document.body.appendChild(gitHubLogo3);
+// gitHubLogo3.style.position = 'absolute';
+// gitHubLogo3.style.left = Math.round(Math.random() * document.body.scrollHeight) + 'px';
+// gitHubLogo3.style.top = Math.round(Math.random() * document.body.scrollHeight) + 'px';
+// document.body.appendChild(gitHubLogo3);
 
-gitHubLogo4.style.position = 'absolute';
-gitHubLogo4.style.left = Math.round(Math.random() * document.body.scrollHeight) + 'px';
-gitHubLogo4.style.top = Math.round(Math.random() * document.body.scrollHeight) + 'px';
-document.body.appendChild(gitHubLogo4);
+// gitHubLogo4.style.position = 'absolute';
+// gitHubLogo4.style.left = Math.round(Math.random() * document.body.scrollHeight) + 'px';
+// gitHubLogo4.style.top = Math.round(Math.random() * document.body.scrollHeight) + 'px';
+// document.body.appendChild(gitHubLogo4);
 
-gitHubLogo5.style.position = 'absolute';
-gitHubLogo5.style.left = Math.round(Math.random() * document.body.scrollHeight) + 'px';
-gitHubLogo5.style.top = Math.round(Math.random() * document.body.scrollHeight) + 'px';
-document.body.appendChild(gitHubLogo5);
+// gitHubLogo5.style.position = 'absolute';
+// gitHubLogo5.style.left = Math.round(Math.random() * document.body.scrollHeight) + 'px';
+// gitHubLogo5.style.top = Math.round(Math.random() * document.body.scrollHeight) + 'px';
+// document.body.appendChild(gitHubLogo5);
 
-linkedinLogo1.style.position = 'absolute';
-linkedinLogo1.style.left = Math.round(Math.random() * document.body.scrollHeight) + 'px';
-linkedinLogo1.style.top = Math.round(Math.random() * document.body.scrollHeight) + 'px';
-document.body.appendChild(linkedinLogo1);
+// linkedinLogo1.style.position = 'absolute';
+// linkedinLogo1.style.left = Math.round(Math.random() * document.body.scrollHeight) + 'px';
+// linkedinLogo1.style.top = Math.round(Math.random() * document.body.scrollHeight) + 'px';
+// document.body.appendChild(linkedinLogo1);
 
-linkedinLogo2.style.position = 'absolute';
-linkedinLogo2.style.left = Math.round(Math.random() * document.body.scrollHeight) + 'px';
-linkedinLogo2.style.top = Math.round(Math.random() * document.body.scrollHeight) + 'px';
-document.body.appendChild(linkedinLogo2);
+// linkedinLogo2.style.position = 'absolute';
+// linkedinLogo2.style.left = Math.round(Math.random() * document.body.scrollHeight) + 'px';
+// linkedinLogo2.style.top = Math.round(Math.random() * document.body.scrollHeight) + 'px';
+// document.body.appendChild(linkedinLogo2);
 
-linkedinLogo3.style.position = 'absolute';
-linkedinLogo3.style.left = Math.round(Math.random() * document.body.scrollHeight) + 'px';
-linkedinLogo3.style.top = Math.round(Math.random() * document.body.scrollHeight) + 'px';
-document.body.appendChild(linkedinLogo3);
+// linkedinLogo3.style.position = 'absolute';
+// linkedinLogo3.style.left = Math.round(Math.random() * document.body.scrollHeight) + 'px';
+// linkedinLogo3.style.top = Math.round(Math.random() * document.body.scrollHeight) + 'px';
+// document.body.appendChild(linkedinLogo3);
 
-linkedinLogo4.style.position = 'absolute';
-linkedinLogo4.style.left = Math.round(Math.random() * document.body.scrollHeight) + 'px';
-linkedinLogo4.style.top = Math.round(Math.random() * document.body.scrollHeight) + 'px';
-document.body.appendChild(linkedinLogo4);
-}
-initPosition()
+// linkedinLogo4.style.position = 'absolute';
+// linkedinLogo4.style.left = Math.round(Math.random() * document.body.scrollHeight) + 'px';
+// linkedinLogo4.style.top = Math.round(Math.random() * document.body.scrollHeight) + 'px';
+// document.body.appendChild(linkedinLogo4);
+// }
+// initPosition()
 
 //TweenMax.to(gitHubLogo, 2, {rotationY:90, x:1000});
 
-TweenMax.to(infoLogo, 3,  { 
-    bezier: {
-        type: 'thru',
-        values: [
-            {left: '0%', top: '0%'},
-            {left: '20%', top: '20%'},
-        ],
-        autoRotate: false
-    },
+// TweenMax.to(infoLogo, 3,  { 
+//     bezier: {
+//         type: 'thru',
+//         values: [
+//             {left: '0%', top: '0%'},
+//             {left: '20%', top: '20%'},
+//         ],
+//         autoRotate: false
+//     },
  
-    delay:wait(),
-    height: winH/(2.3),
-    width: winW/5,
-    onComplete: function(){
-        TweenMax.to(infoLogo, .1, {autoAlpha: 1});
-    },
-});
+//     delay:wait(),
+//     height: winH/(2.3),
+//     width: winW/5,
+//     onComplete: function(){
+//         TweenMax.to(infoLogo, .1, {autoAlpha: 1});
+//     },
+// });
+
+function loadPageImages() {
+    TweenMax.to(infoLogo, .1, {autoAlpha: 1});
+}
+
+
+loadPageImages();
 
 TweenMax.to(gitHubLogo, 3,  { 
     bezier: {
@@ -201,11 +208,11 @@ TweenMax.to(gitHubLogo, 3,  {
 
 //  function to move the portfilio icon on hover
 function scrollPortfolioRight() {
-    TweenMax.to(infoLogo, .5, {rotationY:-40, transformOrigin:"right 20% 200", transformPerspective:300, x:'40%', y:'', height:'60%'})
-    TweenMax.to(gitHubLogo, .5, {rotationY:00, transformOrigin:"left 20% -1000", transformPerspective:300, x:'100%', y:''})
-    TweenMax.to(portfolioLogo, .5, {rotationY:20, transformOrigin:"left 20% -1000", transformPerspective:400, x:'5%', y:'3%', height:'65%'})
-    TweenMax.to(linkedinLogo, .5, {rotationY:50, transformOrigin:"left 20% -250", transformPerspective:400, x:'10%', y:'-5%', height:'50%'})
-    TweenMax.to(resumeLogo, .5, {rotationY:120, transformOrigin:"left 20% -100", transformPerspective:100, x:'-50%', y:'0%'})
+    TweenMax.to(infoLogo, 1, {rotationY:-40, transformOrigin:"right 20% 200", transformPerspective:300, x:'40%', y:'', height:'60%', ease:Power1.easeOut,})
+    TweenMax.to(gitHubLogo, 1, {rotationY:00, transformOrigin:"left 20% -1000", transformPerspective:300, x:'100%', y:'', ease:Power1.easeOut,})
+    TweenMax.to(portfolioLogo, 1, {rotationY:20, transformOrigin:"left 20% -1000", transformPerspective:400, x:'15%', y:'3%', height:'65%', ease:Power1.easeOut,})
+    TweenMax.to(linkedinLogo, 1, {rotationY:50, transformOrigin:"left 20% -250", transformPerspective:400, x:'10%', y:'-5%', height:'50%', ease:Power1.easeOut,})
+    TweenMax.to(resumeLogo, 1, {rotationY:120, transformOrigin:"left 20% -100", transformPerspective:100, x:'-60%', y:'0%', ease:Power1.easeOut,})
 }
 //  Calls the move portfolio icon on mouse over
 // portfolioLogo.onmouseover = function() {
