@@ -27,10 +27,22 @@ window.addEventListener('mousemove', function(event){
     //let rightHalf = ((winW/2) + (winW*.1))
     // console.log(mouse)
     console.log('mouse x cordinate is: ' + mouse.x)
-    console.log('mouse y cordinate is: ' + mouse.y)
-    rightHalfWindow();
+    console.log('mouse y cordinate is: ' + mouse.y);
     leftHalfWindow();
-    isInsideTheBox();
+    rightHalfWindow();
+    
+    isInsideTheRightBox();
+
+
+
+    let leftHalfXMax  = ((winW/2) - (winW*.12))
+    let leftHalfXMin  = ((winW/8))
+    let leftHalfPositiveY  = ((winH/2) - ((winH/2)*.5))
+    let leftHalfNegativeY  = ((winH/2) + ((winH/2)*.5))
+    console.log("this is the left side X max var: " + leftHalfXMax)
+    console.log("this is the left side X min var: " + leftHalfXMin)
+    console.log("this is the left side +Y var: " + leftHalfPositiveY)
+    console.log("this is the left side -Y var: " + leftHalfNegativeY)
     
     //console.log("this is the right side var: " + rightHalf)
 })
@@ -40,7 +52,7 @@ let rightHalfXMax  = (winW - (winW/6))
 let rightHalfPositiveY  = ((winH/2) - ((winH/2)*.5))
 let rightHalfNegativeY  = ((winH/2) + ((winH/2)*.5))
 
-//  Sets variable values for the right half of the window box for the icon scoll to happen
+//  Sets variable values for the Right half of the window box for the icon scoll to happen
 function rightHalfWindow() {
     let winW = window.innerWidth;
     let winH = window.innerHeight;
@@ -48,14 +60,29 @@ function rightHalfWindow() {
     let rightHalfXMax  = (winW - (winW/6))
     let rightHalfPositiveY  = ((winH/2) - ((winH/2)*.5))
     let rightHalfNegativeY  = ((winH/2) + ((winH/2)*.5))
-    console.log("this is the right side X min var: " + rightHalfXMin)
-    console.log("this is the right side X max var: " + rightHalfXMax)
-    console.log("this is the right side +Y var: " + rightHalfPositiveY)
-    console.log("this is the right side -Y var: " + rightHalfNegativeY)
+    // console.log("this is the right side X min var: " + rightHalfXMin)
+    // console.log("this is the right side X max var: " + rightHalfXMax)
+    // console.log("this is the right side +Y var: " + rightHalfPositiveY)
+    // console.log("this is the right side -Y var: " + rightHalfNegativeY)
+}
+
+//  Sets variable values for the LEFT half of the window box for the icon scoll to happen
+function leftHalfWindow() {
+    console.log('test')
+    let winW = window.innerWidth;
+    let winH = window.innerHeight;
+    let leftHalfXMin  = ((winW/2) - (winW*.12))
+    let leftHalfXMax  = (winW + (winW/6))
+    let leftHalfPositiveY  = ((winH/2) - ((winH/2)*.5))
+    let leftHalfNegativeY  = ((winH/2) + ((winH/2)*.5))
+    console.log("this is the left side X min var: " + leftHalfXMin)
+    console.log("this is the left side X max var: " + leftHalfXMax)
+    console.log("this is the left side +Y var: " + leftHalfPositiveY)
+    console.log("this is the left side -Y var: " + leftHalfNegativeY)
 }
 
 // Checks to see if the mouse is inside the imaginary scroll box
-function isInsideTheBox() {
+function isInsideTheRightBox() {
     if(mouse.x > rightHalfXMin && mouse.x < rightHalfXMax && mouse.y < rightHalfNegativeY  && mouse.y > rightHalfPositiveY ){
         console.log('The Mouse is in the box!!!');
         scrollPortfolioRight()
@@ -178,7 +205,7 @@ function scrollPortfolioRight() {
     TweenMax.to(gitHubLogo, .5, {rotationY:00, transformOrigin:"left 20% -1000", transformPerspective:300, x:'100%', y:''})
     TweenMax.to(portfolioLogo, .5, {rotationY:20, transformOrigin:"left 20% -1000", transformPerspective:400, x:'5%', y:'3%', height:'65%'})
     TweenMax.to(linkedinLogo, .5, {rotationY:50, transformOrigin:"left 20% -250", transformPerspective:400, x:'10%', y:'-5%', height:'50%'})
-    TweenMax.to(resumeLogo, .5, {rotationY:110, transformOrigin:"left 20% -100", transformPerspective:100, x:'-60%', y:'-10%'})
+    TweenMax.to(resumeLogo, .5, {rotationY:120, transformOrigin:"left 20% -100", transformPerspective:100, x:'-50%', y:'0%'})
 }
 //  Calls the move portfolio icon on mouse over
 // portfolioLogo.onmouseover = function() {
