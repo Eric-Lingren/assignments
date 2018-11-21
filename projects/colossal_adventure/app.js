@@ -115,7 +115,7 @@ battleAudio = player.play('./achievement.mp3', function(err){
 
 
 /////////////////////////////////////////////////////////////
-//  PLAYERS AND ENEMIES CONSTRUCTIORS
+//  PLAYERS AND ENEMIES CONSTRUCTORS
 //////////////////////////////////////////////////////////////////
 
 // Creates Player
@@ -124,6 +124,9 @@ function Player(hp, score){
     this.score = score;
     // Attack for a random amount
    // this.attack = attack();
+   /**
+    * Careful with your indentations here
+    */
     this.inventory = [ {
             name:  'Sword',
             attackBonus: 1,
@@ -501,7 +504,9 @@ function checkInventory(){
     //console.log(inventorySelector);
         //  Display the sub menu of stats from an individual item
         //  Player gets stuck in a loop here.  We use a line in the equip function to reset the inventory menu.
-        
+        /**
+         * Watch indentation here again
+         */
             if (inventoryChoice !== -1){
             console.log(`${player1.inventory[inventoryChoice].name}: \b
             Attack Bonus: ${player1.inventory[inventoryChoice].attackBonus} \b
@@ -768,7 +773,10 @@ function encounter(enemy){
 
                 // Increases player score by 10 each attack
                 player1.score += 10
-
+                    /**
+                     * This is the second place you've got this visual and text. Consider putting it into a function
+                     * and reusing it whenever you need it.
+                     */
                     //  Enemy is still alive
                     if (player1.hp < 1 ){
                         console.log(` \n Sadly you have been killed by ${enemy.name}.  \n 
