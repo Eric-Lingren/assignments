@@ -5,8 +5,84 @@ const gitHubLogo3 = document.getElementById('gitLogo3');
 const gitHubLogo4 = document.getElementById('gitLogo4');
 const gitHubLogo5 = document.getElementById('gitLogo5');
 
-const winW = window.innerWidth;
-const winH = window.innerHeight;
+
+const infoLogo = document.getElementById('infoLogo');
+const portfolioLogo = document.getElementById('portfolioLogo');
+const resumeLogo = document.getElementById('resumeLogo');
+
+//  Set variable for mouse location on the page
+let mouse = {
+    x: undefined,
+    y: undefined
+}
+
+//  Creates variables for the users window height and width
+let winW = window.innerWidth;
+let winH = window.innerHeight;
+
+//  Function tracks the location of mouse on the page and sets the cordinates to the mose object above upon move
+window.addEventListener('mousemove', function(event){
+    mouse.x = event.x;
+    mouse.y = event.y;
+    //let rightHalf = ((winW/2) + (winW*.1))
+    // console.log(mouse)
+    console.log('mouse x cordinate is: ' + mouse.x)
+    console.log('mouse y cordinate is: ' + mouse.y)
+    rightHalfWindow();
+    leftHalfWindow();
+    isInsideTheBox();
+    
+    //console.log("this is the right side var: " + rightHalf)
+})
+
+let rightHalfXMin  = ((winW/2) + (winW*.12))
+let rightHalfXMax  = (winW - (winW/6))
+let rightHalfPositiveY  = ((winH/2) - ((winH/2)*.5))
+let rightHalfNegativeY  = ((winH/2) + ((winH/2)*.5))
+
+//  Sets variable values for the right half of the window box for the icon scoll to happen
+function rightHalfWindow() {
+    let winW = window.innerWidth;
+    let winH = window.innerHeight;
+    let rightHalfXMin  = ((winW/2) + (winW*.12))
+    let rightHalfXMax  = (winW - (winW/6))
+    let rightHalfPositiveY  = ((winH/2) - ((winH/2)*.5))
+    let rightHalfNegativeY  = ((winH/2) + ((winH/2)*.5))
+    console.log("this is the right side X min var: " + rightHalfXMin)
+    console.log("this is the right side X max var: " + rightHalfXMax)
+    console.log("this is the right side +Y var: " + rightHalfPositiveY)
+    console.log("this is the right side -Y var: " + rightHalfNegativeY)
+}
+
+// Checks to see if the mouse is inside the imaginary scroll box
+function isInsideTheBox() {
+    if(mouse.x > rightHalfXMin && mouse.x < rightHalfXMax && mouse.y < rightHalfNegativeY  && mouse.y > rightHalfPositiveY ){
+        console.log('The Mouse is in the box!!!');
+        scrollPortfolioRight()
+    } else{
+        console.log('not there')
+    }
+}
+
+//  sets a variable value for the right half of the window + 11%
+function leftHalfWindow() {
+    let winW = window.innerWidth;
+    let rightHalfX = ((winW/2) - (winW*.10))
+    //console.log("this is the left side var: " + rightHalfX)
+}
+window.addEventListener('resize', function(){
+    rightHalfWindow();
+    leftHalfWindow();
+})
+//  Create a variable for the mouse postion on the right portion of the icons
+
+
+//  Create a variable for the mouse postion on the left portion of the icons
+
+
+
+
+//  Creates a random wait time for animation functions
 function wait() { 
     let delay = Math.random()*.5 
     return delay
@@ -62,7 +138,7 @@ initPosition()
 
 //TweenMax.to(gitHubLogo, 2, {rotationY:90, x:1000});
 
-TweenMax.to(gitHubLogo, 3,  { 
+TweenMax.to(infoLogo, 3,  { 
     bezier: {
         type: 'thru',
         values: [
@@ -73,10 +149,59 @@ TweenMax.to(gitHubLogo, 3,  {
     },
  
     delay:wait(),
-    height: winH/2,
-    width: winW/4,
+    height: winH/(2.3),
+    width: winW/5,
+    onComplete: function(){
+        TweenMax.to(infoLogo, .1, {autoAlpha: 1});
+    },
+});
+
+TweenMax.to(gitHubLogo, 3,  { 
+    bezier: {
+        type: 'thru',
+        values: [
+            {left: '0%', top: '0%'},
+            {left: '20%', top: '20%'},
+        ],
+    },
+    delay:wait(),
+    height: winH/(2.3),
+    width: winW/5,
     onComplete: function(){
         TweenMax.to(gitHubLogo, .1, {autoAlpha: 1});
+    },
+});
+
+//  function to move the portfilio icon on hover
+function scrollPortfolioRight() {
+    TweenMax.to(infoLogo, .5, {rotationY:-40, transformOrigin:"right 20% 200", transformPerspective:300, x:'40%', y:'', height:'60%'})
+    TweenMax.to(gitHubLogo, .5, {rotationY:00, transformOrigin:"left 20% -1000", transformPerspective:300, x:'100%', y:''})
+    TweenMax.to(portfolioLogo, .5, {rotationY:20, transformOrigin:"left 20% -1000", transformPerspective:400, x:'5%', y:'3%', height:'65%'})
+    TweenMax.to(linkedinLogo, .5, {rotationY:50, transformOrigin:"left 20% -250", transformPerspective:400, x:'10%', y:'-5%', height:'50%'})
+    TweenMax.to(resumeLogo, .5, {rotationY:110, transformOrigin:"left 20% -100", transformPerspective:100, x:'-60%', y:'-10%'})
+}
+//  Calls the move portfolio icon on mouse over
+// portfolioLogo.onmouseover = function() {
+//     scrollPortfolioRight()
+// }
+
+
+
+TweenMax.to(portfolioLogo, 3,  { 
+    bezier: {
+        type: 'thru',
+        values: [
+            {left: '0%', top: '0%'},
+            {left: '20%', top: '20%'},
+        ],
+        autoRotate: false
+    },
+ 
+    delay:wait(),
+    height: winH/(2.3),
+    width: winW/5,
+    onComplete: function(){
+        TweenMax.to(portfolioLogo, .1, {autoAlpha: 1});
     },
 });
 
@@ -90,15 +215,33 @@ TweenMax.to(linkedinLogo, 3,  {
         autoRotate: false
     },
     delay:wait(),
-    height: winH/2,
-    width: winW/4,
+    height: winH/(2.3),
+    width: winW/5,
     onComplete: function(){
         TweenMax.to(linkedinLogo, .1, {autoAlpha: 1});
     },
 });
 
+TweenMax.to(resumeLogo, 3,  { 
+    bezier: {
+        type: 'thru',
+        values: [
+            {left: '0%', top: '0%'},
+            {left: '20%', top: '20%'},
+        ],
+        autoRotate: false
+    },
+ 
+    delay:wait(),
+    height: winH/(2.3),
+    width: winW/6,
+    onComplete: function(){
+        TweenMax.to(resumeLogo, .1, {autoAlpha: 1});
+    },
+});
 
-TweenMax.to(gitHubLogo1, 3,  { 
+
+TweenMax.to(gitHubLogo1, .1,  { 
     bezier: {
         type: 'thru',
         values: [
@@ -119,7 +262,7 @@ TweenMax.to(gitHubLogo1, 3,  {
     },
 });
 
-TweenMax.to(gitHubLogo2, 3,  { 
+TweenMax.to(gitHubLogo2, .1,  { 
     bezier: {
         type: 'thru',
         values: [
@@ -140,7 +283,7 @@ TweenMax.to(gitHubLogo2, 3,  {
     },
 });
 
-TweenMax.to(gitHubLogo3, 3,  { 
+TweenMax.to(gitHubLogo3, .1,  { 
     bezier: {
         type: 'thru',
         values: [
@@ -160,7 +303,7 @@ TweenMax.to(gitHubLogo3, 3,  {
         TweenMax.to(gitHubLogo3, .5, {autoAlpha: 0});
     },
 });
-TweenMax.to(gitHubLogo4, 3,  { 
+TweenMax.to(gitHubLogo4, .1,  { 
     bezier: {
         type: 'thru',
         values: [
@@ -181,7 +324,7 @@ TweenMax.to(gitHubLogo4, 3,  {
     },
 });
 
-TweenMax.to(gitHubLogo5, 3,  { 
+TweenMax.to(gitHubLogo5, .1,  { 
     bezier: {
         type: 'thru',
         values: [
@@ -204,7 +347,7 @@ TweenMax.to(gitHubLogo5, 3,  {
 
 
 
-TweenMax.to(linkedinLogo1, 3,  { 
+TweenMax.to(linkedinLogo1, .1,  { 
     bezier: {
         type: 'thru',
         values: [
@@ -225,7 +368,7 @@ TweenMax.to(linkedinLogo1, 3,  {
     },
 });
 
-TweenMax.to(linkedinLogo2, 3,  { 
+TweenMax.to(linkedinLogo2, .1,  { 
     bezier: {
         type: 'thru',
         values: [
@@ -246,7 +389,7 @@ TweenMax.to(linkedinLogo2, 3,  {
     },
 });
 
-TweenMax.to(linkedinLogo3, 3,  { 
+TweenMax.to(linkedinLogo3, .1,  { 
     bezier: {
         type: 'thru',
         values: [
@@ -267,7 +410,7 @@ TweenMax.to(linkedinLogo3, 3,  {
     },
 });
 
-TweenMax.to(linkedinLogo4, 3,  { 
+TweenMax.to(linkedinLogo4, .1,  { 
     bezier: {
         type: 'thru',
         values: [

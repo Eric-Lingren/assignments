@@ -14,29 +14,51 @@ img{
     height: 100%;
     background-color: silver;
 }
+
 .iconWrapper{
-    width: 100%;
+    width: 90%;
     height: 70%;
     border: 2px solid blue;
     display: flex;
-    justify-content: space-evenly;
+    justify-content: center;
     align-items: center;
 }
-#gitLogo{
+
+#infoLogo{
+    /* 
+    transform: perspective(1000px) rotateY(-75deg);
+    margin-right: -130px; 
+    */
     opacity: 0; 
-    transform: perspective(1000px) rotateY(-45deg);
-    
 }
+#gitLogo{
+    /* 
+    transform: perspective(800px) rotateY(-50deg); 
+    */
+    opacity: 0; 
+}
+
 #portfolioLogo{
-    opacity: 1; 
-    width: 20%;
-    transform: perspective(1000px) rotateY(0deg);
-    
+    /* 
+    transform: perspective(1000px) rotateY(0deg); 
+    margin: -10px;
+    */
+    opacity: 0; 
 }
 #linkedinLogo{
+    /* 
+    transform: perspective(800px) rotateY(50deg);
+    */
     opacity: 0; 
-    transform: perspective(1000px) rotateY(45deg);
 }
+#resumeLogo{
+    /* 
+    transform: perspective(1000px) rotateY(80deg);
+    margin-left: -140px;
+    */
+    opacity: 0; 
+}
+
 #gitLogo1{
     width: 10%;
     height: 10%;

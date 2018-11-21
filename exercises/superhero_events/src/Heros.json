@@ -1,0 +1,14 @@
+{
+    "Hero": [
+        {
+            "name": "Batman",
+            "image": "https://upload.wikimedia.org/wikipedia/en/thumb/1/17/Batman-BenAffleck.jpg/200px-Batman-BenAffleck.jpg",
+            "catchPhrase": "I'm Batman"
+        },
+        {
+            "name": "Superman",
+            "image": "https://www.vanguardngr.com/wp-content/uploads/2018/06/Screen-Shot-2018-06-01-at-13.14.31-e1527855319347.png",
+            "catchPhrase": "Up, up, and Away!"
+        }
+    ]
+}
