@@ -10,6 +10,8 @@ class App extends Component{
   }
   
   render(){
+    
+
     const mappedHeros = heroList.Hero.map(person => 
       <SuperHero 
         key={person.id}

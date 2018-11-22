@@ -17,9 +17,11 @@ class MyComponent extends Component {
   }
 
   render(){
-    return <div ref={div => this.myElement = div} />;
-    
+    console.log(this)
+    return <div  ref={div => this.myElement = div} />
+  
   }
 }
+// style={{ width: 500, height: 500, backgroundColor: 'blue' }}
 
 export default MyComponent;

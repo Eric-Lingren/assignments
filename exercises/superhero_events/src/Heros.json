@@ -4,11 +4,15 @@
             "name": "Batman",
             "image": "https://upload.wikimedia.org/wikipedia/en/thumb/1/17/Batman-BenAffleck.jpg/200px-Batman-BenAffleck.jpg",
             "catchPhrase": "I'm Batman"
-        },
-        {
-            "name": "Superman",
+        }, {
+            "name": "Super Man",
             "image": "https://www.vanguardngr.com/wp-content/uploads/2018/06/Screen-Shot-2018-06-01-at-13.14.31-e1527855319347.png",
             "catchPhrase": "Up, up, and Away!"
+        }, {
+            "name": "Spider Man",
+            "image": "https://upload.wikimedia.org/wikipedia/en/thumb/2/21/Web_of_Spider-Man_Vol_1_129-1.png/250px-Web_of_Spider-Man_Vol_1_129-1.png",
+            "catchPhrase": "My Spider-Sense is tingling."
         }
     ]
+
 }
