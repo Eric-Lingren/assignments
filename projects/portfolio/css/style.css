@@ -1,0 +1,74 @@
+body, html{
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    width: 100vw;
+}
+
+.pageWrapper{
+    background-color: gray;
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    align-items: center;
+}
+
+.iconWrapper{
+    width: 100%;
+    height: 60%;
+    background-color: silver;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.icon{
+  height: auto;
+  width: 27%; 
+  margin: 1%;
+}
+
+#infoLogo{
+    height: auto;
+    width: 13%; 
+    transform: perspective(500px) rotateY(-75deg) translateY(-7%);
+    margin-right: -10%;
+    padding-right: 10px;
+}
+
+#gitLogo{
+    height: auto;
+    width: 19%; 
+    transform: perspective(600px) rotateY(-55deg) translateY(-3%);
+    margin-right: -1%;
+    /*
+    box-shadow: 15px 0px 5px rgba(0,0,0,0.3);
+    */
+ 
+}
+
+#portfolioLogo{
+    /*
+    border-radius: 20%;
+    box-shadow: 10px 0px 5px rgba(0,0,0,0.3);
+    */
+}
+
+#linkedinLogo{
+    height: auto;
+    width: 19%;
+    transform: perspective(600px) rotateY(55deg) translateY(-3%) ;
+    margin-left: -1%;
+    
+}
+#resumeLogo{
+    height: auto;
+    width: 10%; 
+    transform: perspective(500px) rotateY(80deg) translateY(-7%);
+    margin-left: -9%;
+    padding-left: 10px;
+    
+}
+
+
