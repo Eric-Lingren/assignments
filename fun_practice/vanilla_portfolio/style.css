@@ -1,0 +1,130 @@
+img{
+    width: 50px;
+ }
+ 
+ .body{
+     padding: 0;
+     margin: 0;
+     height: 100vh;
+ }
+ .pageWrapper{
+     display: flex;
+     justify-content: center;
+     align-items: center;
+     height: 100%;
+     background-color: silver;
+ }
+ 
+ .iconWrapper{
+     width: 90%;
+     height: 70%;
+     border: 2px solid blue;
+     display: flex;
+     justify-content: center;
+     align-items: center;
+ }
+ 
+ #infoLogo{
+     /* 
+     transform: perspective(1000px) rotateY(-75deg);
+     margin-right: -130px; 
+     */
+     opacity: 0; 
+ }
+ #gitLogo{
+     /* 
+     transform: perspective(800px) rotateY(-50deg); 
+     */
+     opacity: 0; 
+ }
+ 
+ #portfolioLogo{
+     /* 
+     transform: perspective(1000px) rotateY(0deg); 
+     margin: -10px;
+     */
+     opacity: 0; 
+ }
+ #linkedinLogo{
+     /* 
+     transform: perspective(800px) rotateY(50deg);
+     */
+     opacity: 0; 
+ }
+ #resumeLogo{
+     /* 
+     transform: perspective(1000px) rotateY(80deg);
+     margin-left: -140px;
+     */
+     opacity: 0; 
+ }
+ 
+ #gitLogo1{
+     width: 10%;
+     height: 10%;
+     padding: 0;
+     margin: 0;
+     position: absolute;
+  
+ }  
+ #gitLogo2{
+     width: 50px;
+     height: 50px;
+     padding: 0;
+     margin: 0;
+     position: absolute;
+ } 
+ #gitLogo3{
+     width: 50px;
+     height: 50px;
+     position: absolute;
+     
+     
+ } 
+ #gitLogo4{
+     width: 50px;
+     height: 50px;
+     position: absolute;
+     
+     
+ } 
+ #gitLogo5{
+     width: 100px;
+     height: 100px;
+     position: absolute;
+     
+ } 
+ 
+ #linkedinLogo1{
+     width: 10%;
+     height: 10%;
+     padding: 0;
+     margin: 0;
+     position: absolute;
+  
+ }  
+ #linkedinLogo2{
+     width: 10%;
+     height: 10%;
+     padding: 0;
+     margin: 0;
+     position: absolute;
+  
+ }  
+ #linkedinLogo3{
+     width: 10%;
+     height: 10%;
+     padding: 0;
+     margin: 0;
+     position: absolute;
+  
+ }  
+ #linkedinLogo4{
+     width: 10%;
+     height: 10%;
+     padding: 0;
+     margin: 0;
+     position: absolute;
+  
+ }  
+ 
