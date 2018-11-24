@@ -1,14 +1,12 @@
 import React from 'react';
 
 
-const Button = () => {
+const Button = (props) => {
     
-function whatsup(){
-    alert('hey!')
-}
+
     return (
       <div>
-        <button className='myButton' onClick={whatsup}> Touch Me! </button>
+        <button onClick={props.changeColor}> Touch Me! </button>
       </div>
     )
   
