@@ -49,7 +49,7 @@ body, html{
 #infoLogo{
     height: auto;
     width: 13%; 
-    transform: perspective(500px) rotateY(-75deg) translateY(-7%);
+    transform: perspective(500px) rotateY(-75deg) translateY(-5%);
     margin-right: -10%;
     padding-right: 10px;
 }
@@ -66,6 +66,7 @@ body, html{
 }
 
 #portfolioLogo{
+    transform: perspective(600px) rotateY(0deg) translateY(-0%);
     /*
     border-radius: 20%;
     box-shadow: 10px 0px 5px rgba(0,0,0,0.3);

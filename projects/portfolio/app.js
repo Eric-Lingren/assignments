@@ -41,17 +41,31 @@ function scrollPortfolioRight() {
 
     TweenMax.to(info, .5, {rotationY:-55, height:'auto', width:'19%', x:'15%', y:'-3%', translateY:'-3%', transformPerspective: 600, ease: Power1.easeOut});
 
-    TweenMax.to(linkedin, .5, {rotationY:80, height:'auto', width:'13%', x:'15%', y:'-10%', translateY:'-7%', transformPerspective: 500, ease: Power1.easeOut});
+    TweenMax.to(linkedin, .5, {rotationY:80, height:'auto', width:'12%', x:'15%', y:'-10%', translateY:'-7%', transformPerspective: 500, ease: Power1.easeOut});
 
-    TweenMax.to(resume, .5, {rotationY:105, height:'auto', width:'8%', x:'-45%', y:'-15%', translateY:'-7%', transformPerspective: 500, ease: Power1.easeOut});
+    TweenMax.to(resume, .5, {rotationY:90, height:'auto', width:'8%', x:'-5%', y:'-20%', translateY:'-7%', transformPerspective: 500, ease: Power1.easeOut});
 
-    //TweenMax.to(resume, .5, {opacity:0.7}) 
 }
+
+function scrollPortfolioFarRight() {
+
+    TweenMax.to(linkedin, .5, {rotationY:90, height:'auto', width:'9%', x:'75%', y:'-20%', translateY:'-7%', transformPerspective: 600, ease: Power1.easeOut});
+
+    infoCenter()
+
+    TweenMax.to(portfolio, .5, {rotationY:80, height:'auto', width:'12%', x:'145%', y:'-10%', translateY:'-7%', transformPerspective: 500, ease: Power1.easeOut});
+
+    TweenMax.to(git, .5, {rotationY:55, height:'auto', width:'19%', x:'136%', y:'-3%', translateY:'-3%', transformPerspective: 600, ease: Power1.easeOut});
+
+    TweenMax.to(resume, .5, {rotationY:90, height:'auto', width:'10%', x:'30%', y:'-30%', translateY:'-7%', transformPerspective: 500, ease: Power1.easeOut});
+    
+}
+
 
 const linkedinCenter = () => {
     gitTitle.style.display = 'none'
     portfolioTitle.style.display = 'none'
-    TweenMax.to(linkedin, .5, {rotationY:0, height:'auto', width:'27%', x:'-48%', y:'0%', translateY:'-3%', transformPerspective: 600, ease: Power1.easeOut, onComplete: function(){linkedinTitle.style.display = 'block'} }); 
+    TweenMax.to(linkedin, .5, {rotationY:0, height:'auto', width:'27%', x:'-42%', y:'0%', translateY:'-3%', transformPerspective: 600, ease: Power1.easeOut, onComplete: function(){linkedinTitle.style.display = 'block'} }); 
 } 
 
 const gitCenter = () => {
@@ -60,14 +74,25 @@ const gitCenter = () => {
     TweenMax.to(git, .5, {rotationY:0, height:'auto', width:'26%', x:'43%', y:'0%', translateY:'-3%', transformPerspective: 600, ease: Power1.easeOut, onComplete: function(){gitTitle.style.display = 'block'}});
 }
 
+const resumeCenter = () => {
+    linkedinTitle.style.display = 'none'
+    portfolioTitle.style.display = 'none'
+    TweenMax.to(resume, .5, {rotationY:0, height:'auto', width:'19%', x:'-90%', y:'0%', translateY:'-3%', transformPerspective: 600, ease: Power1.easeOut, onComplete: function(){gitTitle.style.display = 'block'}});
+}
+const infoCenter = () => {
+    linkedinTitle.style.display = 'none'
+    portfolioTitle.style.display = 'none'
+    TweenMax.to(info, .5, {rotationY:0, height:'auto', width:'27%', x:'65%', y:'0%', translateY:'-3%', transformPerspective: 600, ease: Power1.easeOut, onComplete: function(){gitTitle.style.display = 'block'}});
+}
+
 function scrollPortfolioLeft() {
 
     TweenMax.to(portfolio, .5, 
         {rotationY:-55, 
             height:'auto', width:'19%', 
-            x:'-68%', y:'-3%', 
+            x:'-60%', y:'-3%', 
             translateY:'-3%', 
-            ease: Power1.easeOut, 
+            ease: Power1.easeOut,
             onComplete: function(){
                 TweenMax.to(portfolio, .01, {transformPerspective: 600, ease: Power1.easeInOut, }) }  
         }
@@ -75,15 +100,30 @@ function scrollPortfolioLeft() {
 
     linkedinCenter()
 
-    TweenMax.to(resume, .5, {rotationY:60, height:'auto', width:'16%', x:'-35%', y:'-3%', translateY:'-3%', transformPerspective: 600, ease: Power1.easeOut});
+    TweenMax.to(resume, .5, {rotationY:60, height:'auto', width:'15%', x:'-27%', y:'-3%', translateY:'-3%', transformPerspective: 600, ease: Power1.easeOut});
 
-    TweenMax.to(git, .5, {rotationY:-80, height:'auto', width:'13%', x:'-30%', y:'-10%', translateY:'-7%', transformPerspective: 500, ease: Power1.easeOut});
+    TweenMax.to(git, .5, {rotationY:-80, height:'auto', width:'12%', x:'-25%', y:'-10%', translateY:'-7%', transformPerspective: 500, ease: Power1.easeOut});
 
-    TweenMax.to(info, .5, {rotationY:-105, height:'auto', width:'10%', x:'20%', y:'-20%', translateY:'-7%', transformPerspective: 500, ease: Power1.easeOut});
+    TweenMax.to(info, .5, {rotationY:-90, height:'auto', width:'10%', x:'5%', y:'-5%', translateY:'-7%', transformPerspective: 500, ease: Power1.easeOut, });
 
     //TweenMax.to(info, .5, {opacity:.5})
     
 }
+
+function scrollPortfolioFarLeft() {
+
+    TweenMax.to(linkedin, .5, {rotationY:-45, height:'auto', width:'19%', x:'-140%', y:'-3%', translateY:'-3%', transformPerspective: 600, ease: Power1.easeOut});
+
+    resumeCenter()
+
+    TweenMax.to(portfolio, .5, {rotationY:-75, height:'auto', width:'12%', x:'-165%', y:'-12%', translateY:'-7%', transformPerspective: 500, ease: Power1.easeOut});
+
+    TweenMax.to(git, .5, {rotationY:-90, height:'auto', width:'10%', x:'-95%', y:'-15%', translateY:'-7%', transformPerspective: 500, ease: Power1.easeOut});
+
+    TweenMax.to(info, .5, {rotationY:-90, height:'auto', width:'10%', x:'30%', y:'-30%', translateY:'-7%', transformPerspective: 500, ease: Power1.easeOut});
+    
+}
+
 
 
 
@@ -116,4 +156,6 @@ function scrollPortfolioCenter() {
 
 git.addEventListener('click', scrollPortfolioRight)
 linkedin.addEventListener('click', scrollPortfolioLeft)
+resume.addEventListener('click', scrollPortfolioFarLeft)
 portfolio.addEventListener('click', scrollPortfolioCenter)
+info.addEventListener('click', scrollPortfolioFarRight)
