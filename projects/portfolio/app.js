@@ -26,10 +26,16 @@ const winW = window.innerWidth;
 console.log(resume)
 
 function scrollPortfolioRight() {
-    // TweenMax.to(info, .5, {rotationY:-40, transformOrigin:"right 20% 200", transformPerspective:300, x:'40%', y:'', height:'60%'})
-    // TweenMax.to(git, .5, {rotationY:00, transformOrigin:"left 20% -1000", transformPerspective:300, x:'100%', y:''})
-    
-    TweenMax.to(portfolio, .5, {rotationY:55, height:'auto', width:'19%', x:'55%', y:'-3%', translateY:'-3%', transformPerspective: 600, ease: Power1.easeOut});
+   
+    TweenMax.to(portfolio, .5, 
+        {rotationY:55, 
+            height:'auto', width:'19%', 
+            x:'55%', y:'-3%', 
+            translateY:'-3%', 
+            ease: Power1.easeOut,
+            onComplete: function(){
+                TweenMax.to(portfolio, .01, {transformPerspective: 600, ease: Power1.easeInOut, }) }
+        });
 
     gitCenter();
 
@@ -79,5 +85,35 @@ function scrollPortfolioLeft() {
     
 }
 
+
+
+function scrollPortfolioCenter() {
+    // TweenMax.to(info, .5, {rotationY:-40, transformOrigin:"right 20% 200", transformPerspective:300, x:'40%', y:'', height:'60%'})
+    // TweenMax.to(git, .5, {rotationY:00, transformOrigin:"left 20% -1000", transformPerspective:300, x:'100%', y:''})
+    
+    TweenMax.to(portfolio, .5, 
+        {rotationY:0, 
+        height:'auto', width:'27%', 
+        x:'0%', y:'0%', 
+        translateY:'0%',  
+        ease: Power1.easeOut,
+        onComplete: function(){
+            TweenMax.to(portfolio, .01, {transformPerspective: 0, ease: Power1.easeInOut, }) }
+    });
+
+    TweenMax.to(git, .5, {rotationY:-55, height:'auto', width:'19%', x:'0%', y:'-3%', translateY:'-3%', transformPerspective: 600, ease: Power1.easeOut});
+
+    TweenMax.to(info, .5, {rotationY:-75, height:'auto', width:'13%', x:'0%', y:'-7%', translateY:'-7%', transformPerspective: 500, ease: Power1.easeOut});
+
+    TweenMax.to(linkedin, .5, {rotationY:55, height:'auto', width:'19%', x:'0%', y:'-3%', translateY:'-3%', transformPerspective: 600, ease: Power1.easeOut});
+
+    TweenMax.to(resume, .5, {rotationY:80, height:'auto', width:'10%', x:'0%', y:'-7%', translateY:'-7%', transformPerspective: 500, ease: Power1.easeOut});
+
+    //TweenMax.to(resume, .5, {opacity:0.7}) 
+}
+
+
+
 git.addEventListener('click', scrollPortfolioRight)
 linkedin.addEventListener('click', scrollPortfolioLeft)
+portfolio.addEventListener('click', scrollPortfolioCenter)
