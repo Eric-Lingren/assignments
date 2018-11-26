@@ -10,6 +10,16 @@ const linkedinTitle = document.getElementById('linkedinTitle')
 const gitTitle = document.getElementById('gitTitle')
 
 
+const audio1 = new Audio('./sound1.wav');
+const audio2 = new Audio('./sound2.wav');
+const audio3 = new Audio('./sound3.mp3');
+const audio4 = new Audio('./sound4.wav');
+const audio5 = new Audio('./sound5.wav');
+const audio6 = new Audio('./sound6.wav');
+const audio7 = new Audio('./sound7.mp3');
+const audio8 = new Audio('./sound8.wav');
+const audio9 = new Audio('./sound9.wav');
+
 // const exit1 = document.getElementById('exit1')
 // const exit2 = document.getElementById('exit2')
 
@@ -48,7 +58,7 @@ const resumeCenter = () => {
     linkedinTitle.style.display = 'none'
     portfolioTitle.style.display = 'none'
     infoTitle.style.display = 'none'
-    TweenMax.to(resume, .5, {rotationY:0, height:'auto', width:'21%', x:'-85%', y:'0%', translateY:'-3%', transformPerspective: 600, ease: Power1.easeOut, onComplete: function(){resumeTitle.style.display = 'block', resumeTitle.style.marginLeft = '-2%'}});
+    TweenMax.to(resume, .5, {rotationY:0, height:'auto', width:'21%', x:'-85%', y:'0%', translateY:'-3%', transformPerspective: 600, ease: Power1.easeOut, onComplete: function(){resumeTitle.style.display = 'block', resumeTitle.style.marginLeft = '-3.5%'}});
 }
 const infoCenter = () => {
     whereIsCenter = 'infoIsCenter';
@@ -70,6 +80,7 @@ const portfolioInCenterPosition = () => {
 }
 
 function scrollPortfolioCenter() {
+    //audio1.play() // Best Option i think
 
     portfolioInCenterPosition();
 
@@ -84,6 +95,7 @@ function scrollPortfolioCenter() {
 }
 
 function scrollPortfolioRight() {
+    //audio1.play()
     gitCenter();
 
     TweenMax.to(portfolio, .5, {rotationY:55, height:'auto', width:'19%', x:'55%', y:'-3%', translateY:'-3%', transformPerspective: 600, ease: Power1.easeOut, });
@@ -96,6 +108,7 @@ function scrollPortfolioRight() {
 }
 
 function scrollPortfolioFarRight() {
+    //audio1.play()
     infoCenter();
 
     TweenMax.to(linkedin, .5, {rotationY:90, height:'auto', width:'9%', x:'75%', y:'-20%', translateY:'-7%', transformPerspective: 600, ease: Power1.easeOut});
@@ -105,12 +118,13 @@ function scrollPortfolioFarRight() {
 
     TweenMax.to(git, .5, {rotationY:55, height:'auto', width:'19%', x:'136%', y:'-3%', translateY:'-3%', transformPerspective: 600, ease: Power1.easeOut});
 
-    TweenMax.to(resume, .5, {rotationY:90, height:'auto', width:'10%', x:'30%', y:'-30%', translateY:'-7%', transformPerspective: 500, ease: Power1.easeOut});
+    TweenMax.to(resume, .5, {rotationY:90, height:'auto', width:'10%', x:'50%', y:'-20%', translateY:'-7%', transformPerspective: 500, ease: Power1.easeOut});
     
 }
 
 
 function scrollPortfolioLeft() {
+    //audio1.play()
     linkedinCenter()
 
     TweenMax.to(portfolio, .5, {rotationY:-55, height:'auto', width:'19%', x:'-60%', y:'-3%', translateY:'-3%',transformPerspective: 600, ease: Power1.easeOut});
@@ -123,6 +137,7 @@ function scrollPortfolioLeft() {
 }
 
 function scrollPortfolioFarLeft() {
+    //audio1.play()
     resumeCenter();
 
     TweenMax.to(linkedin, .5, {rotationY:-45, height:'auto', width:'19%', x:'-140%', y:'-3%', translateY:'-3%', transformPerspective: 600, ease: Power1.easeOut});
@@ -131,7 +146,7 @@ function scrollPortfolioFarLeft() {
 
     TweenMax.to(git, .5, {rotationY:-90, height:'auto', width:'10%', x:'-95%', y:'-15%', translateY:'-7%', transformPerspective: 500, ease: Power1.easeOut});
 
-    TweenMax.to(info, .5, {rotationY:-90, height:'auto', width:'10%', x:'30%', y:'-30%', translateY:'-7%', transformPerspective: 500, ease: Power1.easeOut});
+    TweenMax.to(info, .5, {rotationY:-90, height:'auto', width:'10%', x:'-70%', y:'-20%', translateY:'-7%', transformPerspective: 500, ease: Power1.easeOut});
     
 }
 
@@ -192,5 +207,12 @@ function scrollWheelAction(e){
         scrollPortfolioFarLeft();
     } else if (e.deltaY > 0 && whereIsCenter === 'resumeIsCenter') {
         scrollPortfolioLeft();
+    }
+}
+
+//  Navigate to github if git log is clicked and git is the center icon
+function changetoGithub(){
+    if (whereIsCenter === 'gitIsCenter'){
+
     }
 }
