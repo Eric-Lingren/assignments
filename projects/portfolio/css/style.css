@@ -37,7 +37,8 @@ body, html{
 }
 .titles{
     position: absolute;
-    top: 73%;
+    top: 55%;
+    left: 48.5%
 }
 
 .icon{

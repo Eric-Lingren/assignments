@@ -23,35 +23,83 @@ const gitTitle = document.getElementById('gitTitle')
 const winH = window.innerHeight;
 const winW = window.innerWidth;
 
-console.log(resume)
+let whereIsCenter = 'portfolioIsCenter';
+
+const linkedinCenter = () => {
+    whereIsCenter = 'linkedinIsCenter';
+    gitTitle.style.display = 'none'
+    portfolioTitle.style.display = 'none'
+    infoTitle.style.display = 'none'
+    resumeTitle.style.display = 'none'
+    TweenMax.to(linkedin, .5, {rotationY:0, height:'auto', width:'27%', x:'-42%', y:'0%', translateY:'-3%', transformPerspective: 600, ease: Power1.easeOut, onComplete: function(){linkedinTitle.style.display = 'block'} }); 
+} 
+
+const gitCenter = () => {
+    whereIsCenter = 'gitIsCenter';
+    linkedinTitle.style.display = 'none'
+    portfolioTitle.style.display = 'none'
+    infoTitle.style.display = 'none'
+    resumeTitle.style.display = 'none'
+    TweenMax.to(git, .5, {rotationY:0, height:'auto', width:'26%', x:'43%', y:'0%', translateY:'-3%', transformPerspective: 600, ease: Power1.easeOut, onComplete: function(){gitTitle.style.display = 'block'}});
+}
+
+const resumeCenter = () => {
+    whereIsCenter = 'resumeIsCenter';
+    linkedinTitle.style.display = 'none'
+    portfolioTitle.style.display = 'none'
+    infoTitle.style.display = 'none'
+    TweenMax.to(resume, .5, {rotationY:0, height:'auto', width:'21%', x:'-85%', y:'0%', translateY:'-3%', transformPerspective: 600, ease: Power1.easeOut, onComplete: function(){resumeTitle.style.display = 'block', resumeTitle.style.marginLeft = '-2%'}});
+}
+const infoCenter = () => {
+    whereIsCenter = 'infoIsCenter';
+    gitTitle.style.display = 'none'
+    linkedinTitle.style.display = 'none'
+    portfolioTitle.style.display = 'none'
+    resumeTitle.style.display = 'none'
+    TweenMax.to(info, .5, {rotationY:0, height:'auto', width:'27%', x:'65%', y:'0%', translateY:'-3%', transformPerspective: 600, ease: Power1.easeOut, onComplete: function(){infoTitle.style.display = 'block'}});
+}
+
+const portfolioInCenterPosition = () => {
+    whereIsCenter = 'portfolioIsCenter';
+    gitTitle.style.display = 'none'
+    linkedinTitle.style.display = 'none'
+    infoTitle.style.display = 'none'
+    resumeTitle.style.display = 'none'
+    TweenMax.to(portfolio, .5, {rotationY:0, height:'auto', width:'27%', x:'0%', y:'0%', translateY:'0%', transformPerspective: 600, ease: Power1.easeOut, onComplete: function(){ portfolioTitle.style.display = 'block' }
+    });
+}
+
+function scrollPortfolioCenter() {
+
+    portfolioInCenterPosition();
+
+    TweenMax.to(git, .5, {rotationY:-55, height:'auto', width:'19%', x:'0%', y:'-3%', translateY:'-3%', transformPerspective: 600, ease: Power1.easeOut});
+
+    TweenMax.to(info, .5, {rotationY:-75, height:'auto', width:'13%', x:'0%', y:'-7%', translateY:'-7%', transformPerspective: 500, ease: Power1.easeOut});
+
+    TweenMax.to(linkedin, .5, {rotationY:55, height:'auto', width:'19%', x:'0%', y:'-3%', translateY:'-3%', transformPerspective: 600, ease: Power1.easeOut});
+
+    TweenMax.to(resume, .5, {rotationY:80, height:'auto', width:'10%', x:'0%', y:'-7%', translateY:'-7%', transformPerspective: 500, ease: Power1.easeOut});
+
+}
 
 function scrollPortfolioRight() {
-   
-    TweenMax.to(portfolio, .5, 
-        {rotationY:55, 
-            height:'auto', width:'19%', 
-            x:'55%', y:'-3%', 
-            translateY:'-3%', 
-            ease: Power1.easeOut,
-            onComplete: function(){
-                TweenMax.to(portfolio, .01, {transformPerspective: 600, ease: Power1.easeInOut, }) }
-        });
-
     gitCenter();
+
+    TweenMax.to(portfolio, .5, {rotationY:55, height:'auto', width:'19%', x:'55%', y:'-3%', translateY:'-3%', transformPerspective: 600, ease: Power1.easeOut, });
 
     TweenMax.to(info, .5, {rotationY:-55, height:'auto', width:'19%', x:'15%', y:'-3%', translateY:'-3%', transformPerspective: 600, ease: Power1.easeOut});
 
     TweenMax.to(linkedin, .5, {rotationY:80, height:'auto', width:'12%', x:'15%', y:'-10%', translateY:'-7%', transformPerspective: 500, ease: Power1.easeOut});
 
     TweenMax.to(resume, .5, {rotationY:90, height:'auto', width:'8%', x:'-5%', y:'-20%', translateY:'-7%', transformPerspective: 500, ease: Power1.easeOut});
-
 }
 
 function scrollPortfolioFarRight() {
+    infoCenter();
 
     TweenMax.to(linkedin, .5, {rotationY:90, height:'auto', width:'9%', x:'75%', y:'-20%', translateY:'-7%', transformPerspective: 600, ease: Power1.easeOut});
 
-    infoCenter()
 
     TweenMax.to(portfolio, .5, {rotationY:80, height:'auto', width:'12%', x:'145%', y:'-10%', translateY:'-7%', transformPerspective: 500, ease: Power1.easeOut});
 
@@ -62,59 +110,22 @@ function scrollPortfolioFarRight() {
 }
 
 
-const linkedinCenter = () => {
-    gitTitle.style.display = 'none'
-    portfolioTitle.style.display = 'none'
-    TweenMax.to(linkedin, .5, {rotationY:0, height:'auto', width:'27%', x:'-42%', y:'0%', translateY:'-3%', transformPerspective: 600, ease: Power1.easeOut, onComplete: function(){linkedinTitle.style.display = 'block'} }); 
-} 
-
-const gitCenter = () => {
-    linkedinTitle.style.display = 'none'
-    portfolioTitle.style.display = 'none'
-    TweenMax.to(git, .5, {rotationY:0, height:'auto', width:'26%', x:'43%', y:'0%', translateY:'-3%', transformPerspective: 600, ease: Power1.easeOut, onComplete: function(){gitTitle.style.display = 'block'}});
-}
-
-const resumeCenter = () => {
-    linkedinTitle.style.display = 'none'
-    portfolioTitle.style.display = 'none'
-    TweenMax.to(resume, .5, {rotationY:0, height:'auto', width:'19%', x:'-90%', y:'0%', translateY:'-3%', transformPerspective: 600, ease: Power1.easeOut, onComplete: function(){gitTitle.style.display = 'block'}});
-}
-const infoCenter = () => {
-    linkedinTitle.style.display = 'none'
-    portfolioTitle.style.display = 'none'
-    TweenMax.to(info, .5, {rotationY:0, height:'auto', width:'27%', x:'65%', y:'0%', translateY:'-3%', transformPerspective: 600, ease: Power1.easeOut, onComplete: function(){gitTitle.style.display = 'block'}});
-}
-
 function scrollPortfolioLeft() {
-
-    TweenMax.to(portfolio, .5, 
-        {rotationY:-55, 
-            height:'auto', width:'19%', 
-            x:'-60%', y:'-3%', 
-            translateY:'-3%', 
-            ease: Power1.easeOut,
-            onComplete: function(){
-                TweenMax.to(portfolio, .01, {transformPerspective: 600, ease: Power1.easeInOut, }) }  
-        }
-    );
-
     linkedinCenter()
+
+    TweenMax.to(portfolio, .5, {rotationY:-55, height:'auto', width:'19%', x:'-60%', y:'-3%', translateY:'-3%',transformPerspective: 600, ease: Power1.easeOut});
 
     TweenMax.to(resume, .5, {rotationY:60, height:'auto', width:'15%', x:'-27%', y:'-3%', translateY:'-3%', transformPerspective: 600, ease: Power1.easeOut});
 
     TweenMax.to(git, .5, {rotationY:-80, height:'auto', width:'12%', x:'-25%', y:'-10%', translateY:'-7%', transformPerspective: 500, ease: Power1.easeOut});
 
     TweenMax.to(info, .5, {rotationY:-90, height:'auto', width:'10%', x:'5%', y:'-5%', translateY:'-7%', transformPerspective: 500, ease: Power1.easeOut, });
-
-    //TweenMax.to(info, .5, {opacity:.5})
-    
 }
 
 function scrollPortfolioFarLeft() {
+    resumeCenter();
 
     TweenMax.to(linkedin, .5, {rotationY:-45, height:'auto', width:'19%', x:'-140%', y:'-3%', translateY:'-3%', transformPerspective: 600, ease: Power1.easeOut});
-
-    resumeCenter()
 
     TweenMax.to(portfolio, .5, {rotationY:-75, height:'auto', width:'12%', x:'-165%', y:'-12%', translateY:'-7%', transformPerspective: 500, ease: Power1.easeOut});
 
@@ -125,37 +136,61 @@ function scrollPortfolioFarLeft() {
 }
 
 
-
-
-function scrollPortfolioCenter() {
-    // TweenMax.to(info, .5, {rotationY:-40, transformOrigin:"right 20% 200", transformPerspective:300, x:'40%', y:'', height:'60%'})
-    // TweenMax.to(git, .5, {rotationY:00, transformOrigin:"left 20% -1000", transformPerspective:300, x:'100%', y:''})
-    
-    TweenMax.to(portfolio, .5, 
-        {rotationY:0, 
-        height:'auto', width:'27%', 
-        x:'0%', y:'0%', 
-        translateY:'0%',  
-        ease: Power1.easeOut,
-        onComplete: function(){
-            TweenMax.to(portfolio, .01, {transformPerspective: 0, ease: Power1.easeInOut, }) }
-    });
-
-    TweenMax.to(git, .5, {rotationY:-55, height:'auto', width:'19%', x:'0%', y:'-3%', translateY:'-3%', transformPerspective: 600, ease: Power1.easeOut});
-
-    TweenMax.to(info, .5, {rotationY:-75, height:'auto', width:'13%', x:'0%', y:'-7%', translateY:'-7%', transformPerspective: 500, ease: Power1.easeOut});
-
-    TweenMax.to(linkedin, .5, {rotationY:55, height:'auto', width:'19%', x:'0%', y:'-3%', translateY:'-3%', transformPerspective: 600, ease: Power1.easeOut});
-
-    TweenMax.to(resume, .5, {rotationY:80, height:'auto', width:'10%', x:'0%', y:'-7%', translateY:'-7%', transformPerspective: 500, ease: Power1.easeOut});
-
-    //TweenMax.to(resume, .5, {opacity:0.7}) 
-}
-
-
-
 git.addEventListener('click', scrollPortfolioRight)
 linkedin.addEventListener('click', scrollPortfolioLeft)
 resume.addEventListener('click', scrollPortfolioFarLeft)
 portfolio.addEventListener('click', scrollPortfolioCenter)
 info.addEventListener('click', scrollPortfolioFarRight)
+
+
+
+//  Adds an event listener to the keyboard for the entire window
+window.addEventListener("keydown", checkKeyPressed, false);
+window.addEventListener("keypress", checkKeyPressed, false);
+
+//  Checks if an arrow key is pressed right or left, checks the center image position, 
+//   and then the correct scroll functions execute
+function checkKeyPressed(e) {
+    if (e.keyCode == "37" && whereIsCenter === 'portfolioIsCenter') {
+        scrollPortfolioRight();
+     } else if (e.keyCode == "37" && whereIsCenter === 'gitIsCenter') {
+        scrollPortfolioFarRight();
+     } else if (e.keyCode == "39" && whereIsCenter === 'infoIsCenter') {
+        scrollPortfolioRight();
+     } else if (e.keyCode == "39" && whereIsCenter === 'gitIsCenter') {
+        scrollPortfolioCenter();
+     } else if (e.keyCode == "39" && whereIsCenter === 'portfolioIsCenter'){
+         scrollPortfolioLeft()
+    } else if (e.keyCode == "39" && whereIsCenter === 'linkedinIsCenter'){
+        scrollPortfolioFarLeft()
+    } else if (e.keyCode == "37" && whereIsCenter === 'resumeIsCenter'){
+        scrollPortfolioLeft()
+    } else if (e.keyCode == "37" && whereIsCenter === 'linkedinIsCenter'){
+        scrollPortfolioCenter()
+    }
+}
+
+// Adds an event listener to the mouse scroll wheel for the entire window
+window.addEventListener('wheel', scrollWheelAction);
+
+//  Checks if the mouse wheel is cscrolled up or down, checks the center image position, 
+//   and then the correct scroll functions execute
+function scrollWheelAction(e){
+    if (e.deltaY > 0 && whereIsCenter === 'portfolioIsCenter') {
+        scrollPortfolioRight();
+    } else if (e.deltaY > 0 && whereIsCenter === 'gitIsCenter') {
+        scrollPortfolioFarRight();
+    } else if (e.deltaY < 0 && whereIsCenter === 'infoIsCenter') {
+        scrollPortfolioRight();
+    } else if (e.deltaY < 0 && whereIsCenter === 'gitIsCenter') {
+        scrollPortfolioCenter();
+    } else if (e.deltaY < 0 && whereIsCenter === 'portfolioIsCenter') {
+        scrollPortfolioLeft();
+    } else if (e.deltaY > 0 && whereIsCenter === 'linkedinIsCenter') {
+        scrollPortfolioCenter();
+    } else if (e.deltaY < 0 && whereIsCenter === 'linkedinIsCenter') {
+        scrollPortfolioFarLeft();
+    } else if (e.deltaY > 0 && whereIsCenter === 'resumeIsCenter') {
+        scrollPortfolioLeft();
+    }
+}
