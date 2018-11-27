@@ -1,0 +1,59 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+    monospace;
+}
+.banner{
+  width: 100%;
+  height: 100px;
+  background-color: black;
+  display: flex;
+  align-items: center;
+  
+}
+.bannerPic {
+  height: 100%;
+  width: 10%;
+  float: left;
+  
+}
+.heading{
+  margin-top: 0;
+  padding-top: 0;
+  color: red;
+  font-weight: 300;
+  font-size: 1.5em;
+  margin-left: 5%;
+}
+.everyPersonContainer{
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  padding-left: 20%;
+  padding-right: 20%;
+  
+}
+.individualPersonContainer{
+  border: 1px solid black;
+  width: 80%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.personImage{
+  height: 220px;
+  width: 200px;
+}
+.personHeading{
+  background-color: lightblue;
+  width: 100%;
+  text-align: center;
+}

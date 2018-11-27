@@ -1,7 +1,7 @@
 const info = document.getElementById('infoLogo')
 const git = document.getElementById('gitLogo')
-const portfolio = document.getElementById('portfolioLogo')
-const linkedin = document.getElementById('linkedinLogo')
+const portfolio = document.getElementById('portfolioImageURL')
+const linkedin = document.getElementById('linkedinImageURL')
 const resume = document.getElementById('resumeLogo')
 const iconBox = document.getElementById('allIcons')
 
