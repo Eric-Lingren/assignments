@@ -1,8 +1,8 @@
-const info = document.getElementById('infoLogo')
-const git = document.getElementById('gitLogo')
+const info = document.getElementById('infoImageURL')
+const git = document.getElementById('gitImageURL')
 const portfolio = document.getElementById('portfolioImageURL')
 const linkedin = document.getElementById('linkedinImageURL')
-const resume = document.getElementById('resumeLogo')
+const resume = document.getElementById('resumeImageURL')
 const iconBox = document.getElementById('allIcons')
 
 const portfolioTitle = document.getElementById('portfolioTitle')
@@ -46,6 +46,7 @@ const linkedinCenter = () => {
 
 const gitCenter = () => {
     whereIsCenter = 'gitIsCenter';
+
     linkedinTitle.style.display = 'none'
     portfolioTitle.style.display = 'none'
     infoTitle.style.display = 'none'
@@ -188,7 +189,7 @@ function checkKeyPressed(e) {
 // Adds an event listener to the mouse scroll wheel for the entire window
 window.addEventListener('wheel', scrollWheelAction);
 
-//  Checks if the mouse wheel is cscrolled up or down, checks the center image position, 
+//  Checks if the mouse wheel is scrolled up or down, checks the center image position, 
 //   and then the correct scroll functions execute
 function scrollWheelAction(e){
     if (e.deltaY > 0 && whereIsCenter === 'portfolioIsCenter') {
@@ -211,8 +212,12 @@ function scrollWheelAction(e){
 }
 
 //  Navigate to github if git log is clicked and git is the center icon
-function changetoGithub(){
-    if (whereIsCenter === 'gitIsCenter'){
-
+function makeGithubClickable(){
+    if (whereIsCenter !== 'gitIsCenter'){
+        git.disabled = true
+        git.style.cursor = 'default'
     }
 }
+
+//  Checks if the image is in the center position, and only allows the url tag in the image to be clickable if it is
+
