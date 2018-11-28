@@ -76,6 +76,7 @@ body, html{
     padding: 0;
     margin: 0;
     transform: perspective(600px) rotateY(0deg) translateY(-0%);
+    cursor: pointer;
 }
 #portfolioLogo{
     
@@ -93,6 +94,7 @@ body, html{
     padding: 0;
     margin: 0;
     margin-left: -1%;
+    cursor: default;
     
 }
 
@@ -121,6 +123,7 @@ body, html{
     transform: perspective(500px) rotateY(-75deg) translateY(-5%);
     margin-right: -9%;
     padding-right: 10px;
+    cursor: default;
     
 }
 #infoLogo{
@@ -134,6 +137,7 @@ body, html{
     transform: perspective(500px) rotateY(80deg) translateY(-7%);
     margin-left: -8.5%;
     padding-left: 10px; 
+    cursor: default;
     
 }
 #resumeLogo{

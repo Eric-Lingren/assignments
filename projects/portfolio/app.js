@@ -41,8 +41,8 @@ const linkedinCenter = () => {
     gitTitle.style.display = 'none'
     infoTitle.style.display = 'none'
     whereIsCenter = 'linkedinIsCenter';
-    git.style.cursor = 'default'
     TweenMax.to(linkedin, .5, {rotationY:0, height:'auto', width:'27%', x:'-42%', y:'0%', translateY:'-3%', transformPerspective: 600, ease: Power1.easeOut, onComplete: function(){linkedinTitle.style.display = 'block'} }); 
+    isLinkClickable()
 } 
 
 const gitCenter = () => {
@@ -52,36 +52,36 @@ const gitCenter = () => {
     resumeTitle.style.display = 'none'
     whereIsCenter = 'gitIsCenter';
     TweenMax.to(git, .5, {rotationY:0, height:'auto', width:'26%', x:'40%', y:'0%', translateY:'-3%', transformPerspective: 600, ease: Power1.easeOut, onComplete: function(){gitTitle.style.display = 'block'}});
-    makeGithubURLClickable()
+    isLinkClickable()
 }
 
 const resumeCenter = () => {
-    whereIsCenter = 'resumeIsCenter';
     linkedinTitle.style.display = 'none';
     portfolioTitle.style.display = 'none';
     infoTitle.style.display = 'none';
-    git.style.cursor = 'default';
+    whereIsCenter = 'resumeIsCenter';
     TweenMax.to(resume, .5, {rotationY:0, height:'auto', width:'21%', x:'-85%', y:'0%', translateY:'-3%', transformPerspective: 600, ease: Power1.easeOut, onComplete: function(){resumeTitle.style.display = 'block', resumeTitle.style.marginLeft = '-3.5%'}});
+    isLinkClickable()
 }
 const infoCenter = () => {
-    whereIsCenter = 'infoIsCenter';
     gitTitle.style.display = 'none'
     linkedinTitle.style.display = 'none'
     portfolioTitle.style.display = 'none'
     resumeTitle.style.display = 'none'
-    git.style.cursor = 'default';
+    whereIsCenter = 'infoIsCenter';
     TweenMax.to(info, .5, {rotationY:0, height:'auto', width:'27%', x:'65%', y:'0%', translateY:'-3%', transformPerspective: 600, ease: Power1.easeOut, onComplete: function(){infoTitle.style.display = 'block'}});
+    isLinkClickable()
 }
 
 const portfolioInCenterPosition = () => {
-    whereIsCenter = 'portfolioIsCenter';
     gitTitle.style.display = 'none'
     linkedinTitle.style.display = 'none'
     infoTitle.style.display = 'none'
     resumeTitle.style.display = 'none'
-    git.style.cursor = 'default';
+    whereIsCenter = 'portfolioIsCenter';
     TweenMax.to(portfolio, .5, {rotationY:0, height:'auto', width:'27%', x:'0%', y:'0%', translateY:'0%', transformPerspective: 600, ease: Power1.easeOut, onComplete: function(){ portfolioTitle.style.display = 'block' }
     });
+    isLinkClickable()
 }
 
 function scrollPortfolioCenter() {
@@ -216,10 +216,78 @@ function scrollWheelAction(e){
 }
 
 //  Navigate to github if git log is clicked and git is the center icon
-function makeGithubURLClickable(){
-        git.onclick = "return true"
-        git.style.cursor = 'pointer'
+// function makeGithubURLClickable(){
+//     git.onclick = "return true"
+//     git.style.cursor = 'pointer'
+// }
+
+// function makeGitURLNotClickable(){
+//     git.onclick = "return false"
+//     git.style.cursor = 'default'
+// }
+
+//  Limits the onclick function to fire in order to navigate to another page only if the image is in the center position
+function isLinkClickable(){
+
+    console.log(git)
+    if (whereIsCenter === 'portfolioIsCenter'){
+        //  Only alows the mouse to be a pointer if the image is in the center position
+        portfolio.style.cursor = 'pointer';
+        git.style.cursor = 'default';
+        info.style.cursor = 'default';
+        linkedin.style.cursor = 'default';
+        resume.style.cursor = 'default';
+      
+
+    } else if (whereIsCenter === 'gitIsCenter'){
+        //  Only alows the mouse to be a pointer if the image is in the center position
+        portfolio.style.cursor = 'default';
+        git.style.cursor = 'pointer';
+        info.style.cursor = 'default';
+        linkedin.style.cursor = 'default';
+        resume.style.cursor = 'default';
+        //git.tagName = "DIV" //'A'
+        //git.href='https://github.com/Eric-Lingren';
+
+    } else if (whereIsCenter === 'infoIsCenter'){
+        //  Only alows the mouse to be a pointer if the image is in the center position
+        portfolio.style.cursor = 'default';
+        git.style.cursor = 'default';
+        info.style.cursor = 'pointer';
+        linkedin.style.cursor = 'default';
+        resume.style.cursor = 'default';
+       
+        
+
+    }else if (whereIsCenter === 'linkedinIsCenter'){
+        //  Only alows the mouse to be a pointer if the image is in the center position
+        portfolio.style.cursor = 'default';
+        git.style.cursor = 'default';
+        info.style.cursor = 'default';
+        linkedin.style.cursor = 'pointer';
+        resume.style.cursor = 'default';
+        
+
+    }else if (whereIsCenter === 'resumeIsCenter'){
+        //  Only alows the mouse to be a pointer if the image is in the center position
+        portfolio.style.cursor = 'default';
+        git.style.cursor = 'default';
+        info.style.cursor = 'default';
+        linkedin.style.cursor = 'default';
+        resume.style.cursor = 'pointer';
+       
+        
+    }
 }
+
+
+
+
+
+// function insertGitUrl(){
+// git.href='https://github.com/Eric-Lingren';
+// }
+
 
 //  Checks if the image is in the center position, and only allows the url tag in the image to be clickable if it is
 
