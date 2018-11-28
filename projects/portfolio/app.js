@@ -35,136 +35,238 @@ const winW = window.innerWidth;
 
 let whereIsCenter = 'portfolioIsCenter';
 
-const linkedinCenter = () => {
+
+
+  /////////////////////////////////////////////////////////////////////////////////////////////////////
+ ////       ANIMATION FUNCTIONS FOR ALL THE IMAGES THAT ARE FINISHING IN THE CENTER POSTION       ////
+/////////////////////////////////////////////////////////////////////////////////////////////////////
+
+//  Function that move the INFORMATION IMAGE to the center and then applys atributes and usability to that image
+const infoInCenter = () => {
+    //  Remove the previous word underneath the image
+    gitTitle.style.display = 'none'
+    linkedinTitle.style.display = 'none'
     portfolioTitle.style.display = 'none'
     resumeTitle.style.display = 'none'
+    //  Reassign the variable that denotes the current central image
+    whereIsCenter = 'infoIsCenter';
+    //  Remove the href from all anchor containers except the one in the center position
+    git.removeAttribute('href');
+    portfolio.removeAttribute('href');
+    linkedin.removeAttribute('href');
+    resume.removeAttribute('href');
+    //  Animation to move the info tile into the center position
+    TweenMax.to(info, .5, 
+        {rotationY:0, height:'auto', width:'27%', x:'65%', y:'0%', 
+        translateY:'-3%', transformPerspective: 600, ease: Power1.easeOut, 
+        onComplete: function(){infoTitle.style.display = 'block';
+            info.href="./info.html"}
+    });
+    //  Makes the mouse cursor change depending wither the href tag has been added or removed from the image   
+    isLinkClickable()
+}
+
+//  Function that move the GITHUB IMAGE to the center and then applys atributes and usability to that image
+const gitInCenter = () => {
+    //  Remove the previous word underneath the image
+    portfolioTitle.style.display = 'none';
+    infoTitle.style.display = 'none';
+    linkedinTitle.style.display = 'none';
+    resumeTitle.style.display = 'none';
+    //  Reassign the variable that denotes the current central image
+    whereIsCenter = 'gitIsCenter';
+    //  Remove the href from all anchor containers except the one in the center position
+    info.removeAttribute('href');
+    portfolio.removeAttribute('href');
+    linkedin.removeAttribute('href');
+    resume.removeAttribute('href');
+    //  Animation to move the git tile into the center position
+    TweenMax.to(git, .5, {rotationY:0, height:'auto', width:'26%', x:'40%', y:'0%', 
+        translateY:'-3%', transformPerspective: 600, ease: Power1.easeOut, 
+        onComplete: function(){gitTitle.style.display = 'block'; 
+            git.href="https://github.com/Eric-Lingren"} 
+    });
+    //  Makes the mouse cursor change depending wither the href tag has been added or removed from the image    
+    isLinkClickable()
+}
+
+//  Function that move the PORTFOLIO IMAGE to the center and then applys atributes and usability to that image
+const portfolioInCenterPosition = () => {
+    //  Remove the previous word underneath the image
     gitTitle.style.display = 'none'
+    linkedinTitle.style.display = 'none'
     infoTitle.style.display = 'none'
+    resumeTitle.style.display = 'none'
+    //  Reassign the variable that denotes the current central image
+    whereIsCenter = 'portfolioIsCenter';
+    //  Remove the href from all anchor containers except the one in the center position
+    info.removeAttribute('href');
+    git.removeAttribute('href');
+    linkedin.removeAttribute('href');
+    resume.removeAttribute('href');
+    //  Animation to move the portfolio tile into the center position
+    TweenMax.to(portfolio, .5, 
+        {rotationY:0, height:'auto', width:'27%', x:'0%', y:'0%', 
+        translateY:'0%', transformPerspective: 600, ease: Power1.easeOut, 
+        onComplete: function(){ portfolioTitle.style.display = 'block';
+            portfolio.href="./portfolio.html" }
+    });
+    //  Makes the mouse cursor change depending wither the href tag has been added or removed from the image   
+    isLinkClickable()
+}
+
+//  Function that move the LINKEDIN IMAGE to the center and then applys atributes and usability to that image
+const linkedinInCenter = () => {
+    //  Remove the previous word underneath the image
+    portfolioTitle.style.display = 'none';
+    resumeTitle.style.display = 'none';
+    gitTitle.style.display = 'none';
+    infoTitle.style.display = 'none';
+    //  Reassign the variable that denotes the current central image
     whereIsCenter = 'linkedinIsCenter';
-    TweenMax.to(linkedin, .5, {rotationY:0, height:'auto', width:'27%', x:'-42%', y:'0%', translateY:'-3%', transformPerspective: 600, ease: Power1.easeOut, onComplete: function(){linkedinTitle.style.display = 'block'} }); 
+    //  Remove the href from all anchor containers except the one in the center position
+    info.removeAttribute('href');
+    git.removeAttribute('href');
+    portfolio.removeAttribute('href');
+    resume.removeAttribute('href');
+    //  Animation to move the linkedin tile into the center position
+    TweenMax.to(linkedin, .5, 
+        {rotationY:0, height:'auto', width:'27%', x:'-35%', y:'0%', 
+        translateY:'-3%', transformPerspective: 600, ease: Power1.easeOut, 
+        onComplete: function(){linkedinTitle.style.display = 'block';
+            linkedin.href="https://www.linkedin.com/in/ericlingren/"} 
+    }); 
+    //  Makes the mouse cursor change depending wither the href tag has been added or removed from the image   
     isLinkClickable()
 } 
 
-const gitCenter = () => {
-    portfolioTitle.style.display = 'none'
-    infoTitle.style.display = 'none'
-    linkedinTitle.style.display = 'none'
-    resumeTitle.style.display = 'none'
-    whereIsCenter = 'gitIsCenter';
-    TweenMax.to(git, .5, {rotationY:0, height:'auto', width:'26%', x:'40%', y:'0%', translateY:'-3%', transformPerspective: 600, ease: Power1.easeOut, onComplete: function(){gitTitle.style.display = 'block'}});
-    isLinkClickable()
-}
-
-const resumeCenter = () => {
+//  Function that move the RESUME IMAGE to the center and then applys atributes and usability to that image
+const resumeInCenter = () => {
+    //  Remove the previous word underneath the image
     linkedinTitle.style.display = 'none';
     portfolioTitle.style.display = 'none';
     infoTitle.style.display = 'none';
+    //  Reassign the variable that denotes the current central image
     whereIsCenter = 'resumeIsCenter';
-    TweenMax.to(resume, .5, {rotationY:0, height:'auto', width:'21%', x:'-85%', y:'0%', translateY:'-3%', transformPerspective: 600, ease: Power1.easeOut, onComplete: function(){resumeTitle.style.display = 'block', resumeTitle.style.marginLeft = '-3.5%'}});
-    isLinkClickable()
-}
-const infoCenter = () => {
-    gitTitle.style.display = 'none'
-    linkedinTitle.style.display = 'none'
-    portfolioTitle.style.display = 'none'
-    resumeTitle.style.display = 'none'
-    whereIsCenter = 'infoIsCenter';
-    TweenMax.to(info, .5, {rotationY:0, height:'auto', width:'27%', x:'65%', y:'0%', translateY:'-3%', transformPerspective: 600, ease: Power1.easeOut, onComplete: function(){infoTitle.style.display = 'block'}});
-    isLinkClickable()
-}
-
-const portfolioInCenterPosition = () => {
-    gitTitle.style.display = 'none'
-    linkedinTitle.style.display = 'none'
-    infoTitle.style.display = 'none'
-    resumeTitle.style.display = 'none'
-    whereIsCenter = 'portfolioIsCenter';
-    TweenMax.to(portfolio, .5, {rotationY:0, height:'auto', width:'27%', x:'0%', y:'0%', translateY:'0%', transformPerspective: 600, ease: Power1.easeOut, onComplete: function(){ portfolioTitle.style.display = 'block' }
+    //  Remove the href from all anchor containers except the one in the center position
+    info.removeAttribute('href');
+    git.removeAttribute('href');
+    portfolio.removeAttribute('href');
+    linkedin.removeAttribute('href');
+    //  Animation to move the resume tile into the center position
+    TweenMax.to(resume, .5, 
+        {rotationY:0, height:'auto', width:'21%', x:'-85%', y:'0%', 
+        translateY:'-3%', transformPerspective: 600, ease: Power1.easeOut, 
+        onComplete: function(){resumeTitle.style.display = 'block', resumeTitle.style.marginLeft = '-3.5%';
+            resume.href="./resume.html"}
     });
+    //  Makes the mouse cursor change depending wither the href tag has been added or removed from the image   
     isLinkClickable()
 }
 
+
+  /////////////////////////////////////////////////////////////////////////////////////////////////////
+ ////     ANIMATION FUNCTIONS FOR ALL THE IMAGES THAT ARE NOT FINISHING IN THE CENTER POSTION     ////
+/////////////////////////////////////////////////////////////////////////////////////////////////////
+
+//  Animates the 4 other images when the PORTFOLIO IMAGE is scrolled into the center position
 function scrollPortfolioCenter() {
     //audio1.play() // Best Option i think
-
     portfolioInCenterPosition();
-
-    TweenMax.to(git, .5, {rotationY:-55, height:'auto', width:'19%', x:'0%', y:'-3%', translateY:'-3%', transformPerspective: 600, ease: Power1.easeOut});
-
-    TweenMax.to(info, .5, {rotationY:-75, height:'auto', width:'13%', x:'0%', y:'-7%', translateY:'-7%', transformPerspective: 500, ease: Power1.easeOut});
-
-    TweenMax.to(linkedin, .5, {rotationY:55, height:'auto', width:'19%', x:'0%', y:'-3%', translateY:'-3%', transformPerspective: 600, ease: Power1.easeOut});
-
-    TweenMax.to(resume, .5, {rotationY:80, height:'auto', width:'10%', x:'0%', y:'-7%', translateY:'-7%', transformPerspective: 500, ease: Power1.easeOut});
-
+    TweenMax.to(git, .5, 
+        {rotationY:-55, height:'auto', width:'19%', x:'0%', y:'-3%', 
+        translateY:'-3%', transformPerspective: 600, ease: Power1.easeOut});
+    TweenMax.to(info, .5, 
+        {rotationY:-75, height:'auto', width:'13%', x:'0%', y:'-7%', 
+        translateY:'-7%', transformPerspective: 500, ease: Power1.easeOut});
+    TweenMax.to(linkedin, .5, 
+        {rotationY:55, height:'auto', width:'19%', x:'0%', y:'-3%', 
+        translateY:'-3%', transformPerspective: 600, ease: Power1.easeOut});
+    TweenMax.to(resume, .5, 
+        {rotationY:80, height:'auto', width:'10%', x:'0%', y:'-7%', 
+        translateY:'-7%', transformPerspective: 500, ease: Power1.easeOut});
 }
 
+//  Animates the 4 other images when the GITHUB IMAGE is scrolled into the center position
 function scrollPortfolioRight() {
     //audio1.play()
-    gitCenter();
-
-    TweenMax.to(portfolio, .5, {rotationY:55, height:'auto', width:'19%', x:'55%', y:'-3%', translateY:'-3%', transformPerspective: 600, ease: Power1.easeOut, });
-
-    TweenMax.to(info, .5, {rotationY:-55, height:'auto', width:'19%', x:'15%', y:'-3%', translateY:'-3%', transformPerspective: 600, ease: Power1.easeOut});
-
-    TweenMax.to(linkedin, .5, {rotationY:80, height:'auto', width:'12%', x:'24%', y:'-10%', translateY:'-7%', transformPerspective: 500, ease: Power1.easeOut});
-
-    TweenMax.to(resume, .5, {rotationY:90, height:'auto', width:'8%', x:'20%', y:'-20%', translateY:'-7%', transformPerspective: 500, ease: Power1.easeOut});
+    gitInCenter();
+    TweenMax.to(portfolio, .5, 
+        {rotationY:55, height:'auto', width:'19%', x:'55%', y:'-3%', 
+        translateY:'-3%', transformPerspective: 600, ease: Power1.easeOut, });
+    TweenMax.to(info, .5, 
+        {rotationY:-55, height:'auto', width:'19%', x:'16%', y:'-3%', 
+        translateY:'-3%', transformPerspective: 600, ease: Power1.easeOut});
+    TweenMax.to(linkedin, .5, 
+        {rotationY:80, height:'auto', width:'12%', x:'24%', y:'-10%', 
+        translateY:'-7%', transformPerspective: 500, ease: Power1.easeOut});
+    TweenMax.to(resume, .5, 
+        {rotationY:90, height:'auto', width:'8%', x:'20%', y:'-20%', 
+        translateY:'-7%', transformPerspective: 500, ease: Power1.easeOut});
 }
 
+//  Animates the 4 other images when the INFORMATION IMAGE is scrolled into the center position
 function scrollPortfolioFarRight() {
     //audio1.play()
-    infoCenter();
-
-    TweenMax.to(linkedin, .5, {rotationY:90, height:'auto', width:'9%', x:'75%', y:'-20%', translateY:'-7%', transformPerspective: 600, ease: Power1.easeOut});
-
-
-    TweenMax.to(portfolio, .5, {rotationY:80, height:'auto', width:'12%', x:'150%', y:'-10%', translateY:'-7%', transformPerspective: 500, ease: Power1.easeOut});
-
-    TweenMax.to(git, .5, {rotationY:55, height:'auto', width:'19%', x:'136%', y:'-3%', translateY:'-3%', transformPerspective: 600, ease: Power1.easeOut});
-
-    TweenMax.to(resume, .5, {rotationY:90, height:'auto', width:'10%', x:'50%', y:'-20%', translateY:'-7%', transformPerspective: 500, ease: Power1.easeOut});
-    
+    infoInCenter();
+    TweenMax.to(linkedin, .5, 
+        {rotationY:90, height:'auto', width:'9%', x:'105%', y:'-20%', 
+        translateY:'-7%', transformPerspective: 600, ease: Power1.easeOut});
+    TweenMax.to(portfolio, .5, 
+        {rotationY:80, height:'auto', width:'12%', x:'150%', y:'-10%', 
+        translateY:'-7%', transformPerspective: 500, ease: Power1.easeOut});
+    TweenMax.to(git, .5, 
+        {rotationY:55, height:'auto', width:'19%', x:'136%', y:'-3%', 
+        translateY:'-3%', transformPerspective: 600, ease: Power1.easeOut});
+    TweenMax.to(resume, .5, 
+        {rotationY:90, height:'auto', width:'10%', x:'50%', y:'-20%', 
+        translateY:'-7%', transformPerspective: 500, ease: Power1.easeOut}); 
 }
 
-
+//  Animates the 4 other images when the LINKEDIN IMAGE is scrolled into the center position
 function scrollPortfolioLeft() {
     //audio1.play()
-    linkedinCenter()
-
-    TweenMax.to(portfolio, .5, {rotationY:-55, height:'auto', width:'19%', x:'-60%', y:'-3%', translateY:'-3%',transformPerspective: 600, ease: Power1.easeOut});
-
-    TweenMax.to(resume, .5, {rotationY:60, height:'auto', width:'15%', x:'-35%', y:'-3%', translateY:'-3%', transformPerspective: 600, ease: Power1.easeOut});
-
-    TweenMax.to(git, .5, {rotationY:-80, height:'auto', width:'12%', x:'-30%', y:'-10%', translateY:'-7%', transformPerspective: 500, ease: Power1.easeOut});
-
-    TweenMax.to(info, .5, {rotationY:-90, height:'auto', width:'10%', x:'-25%', y:'-15%', translateY:'-7%', transformPerspective: 500, ease: Power1.easeOut, });
+    linkedinInCenter()
+    TweenMax.to(portfolio, .5, 
+        {rotationY:-55, height:'auto', width:'19%', x:'-54%', y:'-3%', 
+        translateY:'-3%',transformPerspective: 600, ease: Power1.easeOut});
+    TweenMax.to(resume, .5, 
+        {rotationY:60, height:'auto', width:'15%', x:'-21%', y:'-3%', 
+        translateY:'-3%', transformPerspective: 600, ease: Power1.easeOut});
+    TweenMax.to(git, .5, 
+        {rotationY:-80, height:'auto', width:'12%', x:'-22%', y:'-10%', 
+        translateY:'-7%', transformPerspective: 500, ease: Power1.easeOut});
+    TweenMax.to(info, .5, 
+        {rotationY:-90, height:'auto', width:'10%', x:'-12%', y:'-15%', 
+        translateY:'-7%', transformPerspective: 500, ease: Power1.easeOut, });
 }
 
+//  Animates the 4 other images when the RESUME IMAGE is scrolled into the center position
 function scrollPortfolioFarLeft() {
     //audio1.play()
-    resumeCenter();
-
-    TweenMax.to(linkedin, .5, {rotationY:-45, height:'auto', width:'19%', x:'-140%', y:'-3%', translateY:'-3%', transformPerspective: 600, ease: Power1.easeOut});
-
-    TweenMax.to(portfolio, .5, {rotationY:-75, height:'auto', width:'12%', x:'-170%', y:'-12%', translateY:'-7%', transformPerspective: 500, ease: Power1.easeOut});
-
-    TweenMax.to(git, .5, {rotationY:-90, height:'auto', width:'10%', x:'-95%', y:'-15%', translateY:'-7%', transformPerspective: 500, ease: Power1.easeOut});
-
-    TweenMax.to(info, .5, {rotationY:-90, height:'auto', width:'10%', x:'-70%', y:'-20%', translateY:'-7%', transformPerspective: 500, ease: Power1.easeOut});
-    
+    resumeInCenter();
+    TweenMax.to(linkedin, .5, 
+        {rotationY:-45, height:'auto', width:'19%', x:'-140%', y:'-3%', 
+        translateY:'-3%', transformPerspective: 600, ease: Power1.easeOut});
+    TweenMax.to(portfolio, .5, 
+        {rotationY:-75, height:'auto', width:'12%', x:'-170%', y:'-7%', 
+        translateY:'-7%', transformPerspective: 500, ease: Power1.easeOut});
+    TweenMax.to(git, .5, 
+        {rotationY:-90, height:'auto', width:'10%', x:'-120%', y:'-15%', 
+        translateY:'-7%', transformPerspective: 500, ease: Power1.easeOut});
+    TweenMax.to(info, .5, 
+        {rotationY:-90, height:'auto', width:'10%', x:'-70%', y:'-20%', 
+        translateY:'-7%', transformPerspective: 500, ease: Power1.easeOut});
 }
 
-
+//  Calls sroll animation functions when an image is clicked on.  Moves the carousel one slot at a time
 git.addEventListener('click', scrollPortfolioRight)
 linkedin.addEventListener('click', scrollPortfolioLeft)
 resume.addEventListener('click', scrollPortfolioFarLeft)
 portfolio.addEventListener('click', scrollPortfolioCenter)
 info.addEventListener('click', scrollPortfolioFarRight)
 
-
-
-//  Adds an event listener to the keyboard for the entire window
+//  Adds an event listener to the keyboard arrows to enable scrolling through images
 window.addEventListener("keydown", checkKeyPressed, false);
 window.addEventListener("keypress", checkKeyPressed, false);
 
@@ -190,7 +292,7 @@ function checkKeyPressed(e) {
     }
 }
 
-// Adds an event listener to the mouse scroll wheel for the entire window
+//  Adds an event listener to themouse scroll wheel to enable scrolling through images
 window.addEventListener('wheel', scrollWheelAction);
 
 //  Checks if the mouse wheel is scrolled up or down, checks the center image position, 
@@ -215,79 +317,49 @@ function scrollWheelAction(e){
     }
 }
 
-//  Navigate to github if git log is clicked and git is the center icon
-// function makeGithubURLClickable(){
-//     git.onclick = "return true"
-//     git.style.cursor = 'pointer'
-// }
-
-// function makeGitURLNotClickable(){
-//     git.onclick = "return false"
-//     git.style.cursor = 'default'
-// }
-
-//  Limits the onclick function to fire in order to navigate to another page only if the image is in the center position
+//  Changes the mouse to pointer if over a valid center positioned image to denote an active link
+//  Changes the mouse to a default cursor under all other circumstances
 function isLinkClickable(){
-
-    console.log(git)
+    //  Only alows the mouse to be a pointer if the PORTFOLIO IMAGE is in the center position
     if (whereIsCenter === 'portfolioIsCenter'){
-        //  Only alows the mouse to be a pointer if the image is in the center position
         portfolio.style.cursor = 'pointer';
         git.style.cursor = 'default';
         info.style.cursor = 'default';
         linkedin.style.cursor = 'default';
         resume.style.cursor = 'default';
-      
-
+    //  Only alows the mouse to be a pointer if the GITHUB IMAGE is in the center position
     } else if (whereIsCenter === 'gitIsCenter'){
-        //  Only alows the mouse to be a pointer if the image is in the center position
         portfolio.style.cursor = 'default';
         git.style.cursor = 'pointer';
         info.style.cursor = 'default';
         linkedin.style.cursor = 'default';
         resume.style.cursor = 'default';
-        //git.tagName = "DIV" //'A'
-        //git.href='https://github.com/Eric-Lingren';
-
+    //  Only alows the mouse to be a pointer if the INFORMATION IMAGE is in the center position
     } else if (whereIsCenter === 'infoIsCenter'){
-        //  Only alows the mouse to be a pointer if the image is in the center position
         portfolio.style.cursor = 'default';
         git.style.cursor = 'default';
         info.style.cursor = 'pointer';
         linkedin.style.cursor = 'default';
         resume.style.cursor = 'default';
-       
-        
-
+    //  Only alows the mouse to be a pointer if the LINKEDIN IMAGE is in the center position
     }else if (whereIsCenter === 'linkedinIsCenter'){
-        //  Only alows the mouse to be a pointer if the image is in the center position
         portfolio.style.cursor = 'default';
         git.style.cursor = 'default';
         info.style.cursor = 'default';
         linkedin.style.cursor = 'pointer';
         resume.style.cursor = 'default';
         
-
+    //  Only alows the mouse to be a pointer if the RESUME IMAGE is in the center position
     }else if (whereIsCenter === 'resumeIsCenter'){
-        //  Only alows the mouse to be a pointer if the image is in the center position
         portfolio.style.cursor = 'default';
         git.style.cursor = 'default';
         info.style.cursor = 'default';
         linkedin.style.cursor = 'default';
-        resume.style.cursor = 'pointer';
-       
-        
+        resume.style.cursor = 'pointer';   
     }
 }
 
 
 
 
-
-// function insertGitUrl(){
-// git.href='https://github.com/Eric-Lingren';
-// }
-
-
-//  Checks if the image is in the center position, and only allows the url tag in the image to be clickable if it is
 
