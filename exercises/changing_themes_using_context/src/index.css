@@ -35,6 +35,14 @@ h3{
 p{
   font-size: 1.5em;
 }
+button{
+  padding: 10px;
+  margin: 25px;
+}
+select{
+  width: 200px;
+  height: 5%;
+}
 .dark-navbar {
   text-align: center;
   background-color: grey;
@@ -138,14 +146,14 @@ p{
 .green-navbar{
   text-align: center;
   background-color: #30A064;
-  height: 10vh;
+  height: 20vh;
   color: yellow;
   
 }
 .green-main {
   text-align: center;
   background-color: #75E0A7;
-  height: 80vh;
+  height: 70vh;
   color: #000;
   border-top: 2px solid black;
   border-bottom: 2px solid black;

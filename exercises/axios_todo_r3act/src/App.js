@@ -44,9 +44,7 @@ class App extends Component {
   }
 
   handleDelete = (id) => {
-    // console.log(id)
     axios.delete(`https://api.vschool.io/ericlingren/todo/${id}`).then(response => {
-      console.log(response)
       this.setState(prevState => {
         return {
           data: prevState.data.filter(item => item._id !== id)
@@ -55,8 +53,17 @@ class App extends Component {
     })
   }
 
+  handleEdit = (id, updates) => {
+    axios.put(`https://api.vschool.io/ericlingren/todo/${id}`, updates).then(response => {
+      this.setState(prevState => {
+        return {
+          data: prevState.data.map(item => item._id === id ? response.data : item)
+        }
+      })
+    })
+  }
+
   render() {
-    console.log(this.state.data)
     return (
       <div >
         <TodoForm handleChange={this.handleChange} handleSubmit={this.handleSubmit} />
@@ -70,6 +77,7 @@ class App extends Component {
             image={item.imgUrl}
             key={item._id}
             handleDelete={this.handleDelete}
+            handleEdit={this.handleEdit}
             id={item._id}
           />
         ) 

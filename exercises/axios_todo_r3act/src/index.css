@@ -17,6 +17,7 @@ code {
 
 }
 .todoItem{
+  margin-left: 10%;
   border: 1px solid black;
   width: 300px;
 }
