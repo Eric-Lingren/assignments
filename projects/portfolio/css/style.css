@@ -87,6 +87,11 @@ body, html{
     padding-bottom: .1vh;
     padding-left: 1vw;
     padding-right: 1vw;
+
+    font-size: 2vw;
+    font-weight: bolder;
+    text-align: center;
+    
 }
 
 .textURL:hover{

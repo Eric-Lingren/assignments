@@ -372,5 +372,3 @@ const exit7 = document.getElementById('exit7')
 const exit8 = document.getElementById('exit8')
 const exit9 = document.getElementById('exit9')
 const exit10 = document.getElementById('exit10')
-
-
