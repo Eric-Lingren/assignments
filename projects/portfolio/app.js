@@ -56,7 +56,7 @@ const infoInCenter = () => {
     linkedin.removeAttribute('href');
     resume.removeAttribute('href');
     //  Animation to move the info tile into the center position
-    TweenMax.to(info, .5, 
+    TweenMax.to(info, .25, 
         {rotationY:0, height:'auto', width:'27%', x:'65%', y:'0%', 
         translateY:'-3%', transformPerspective: 600, ease: Power1.easeOut, 
         onComplete: function(){infoTitle.style.display = 'block';
@@ -81,7 +81,7 @@ const gitInCenter = () => {
     linkedin.removeAttribute('href');
     resume.removeAttribute('href');
     //  Animation to move the git tile into the center position
-    TweenMax.to(git, .5, {rotationY:0, height:'auto', width:'26%', x:'40%', y:'0%', 
+    TweenMax.to(git, .25, {rotationY:0, height:'auto', width:'26%', x:'40%', y:'0%', 
         translateY:'-3%', transformPerspective: 600, ease: Power1.easeOut, 
         onComplete: function(){gitTitle.style.display = 'block'; 
             git.href="https://github.com/Eric-Lingren"} 
@@ -105,7 +105,7 @@ const portfolioInCenterPosition = () => {
     linkedin.removeAttribute('href');
     resume.removeAttribute('href');
     //  Animation to move the portfolio tile into the center position
-    TweenMax.to(portfolio, .5, 
+    TweenMax.to(portfolio, .25, 
         {rotationY:0, height:'auto', width:'27%', x:'0%', y:'0%', 
         translateY:'0%', transformPerspective: 600, ease: Power1.easeOut, 
         onComplete: function(){ portfolioTitle.style.display = 'block';
@@ -130,7 +130,7 @@ const linkedinInCenter = () => {
     portfolio.removeAttribute('href');
     resume.removeAttribute('href');
     //  Animation to move the linkedin tile into the center position
-    TweenMax.to(linkedin, .5, 
+    TweenMax.to(linkedin, .25, 
         {rotationY:0, height:'auto', width:'27%', x:'-35%', y:'0%', 
         translateY:'-3%', transformPerspective: 600, ease: Power1.easeOut, 
         onComplete: function(){linkedinTitle.style.display = 'block';
@@ -154,7 +154,7 @@ const resumeInCenter = () => {
     portfolio.removeAttribute('href');
     linkedin.removeAttribute('href');
     //  Animation to move the resume tile into the center position
-    TweenMax.to(resume, .5, 
+    TweenMax.to(resume, .25, 
         {rotationY:0, height:'auto', width:'21%', x:'-85%', y:'0%', 
         translateY:'-3%', transformPerspective: 600, ease: Power1.easeOut, 
         onComplete: function(){resumeTitle.style.display = 'block', resumeTitle.style.marginLeft = '-3.5%';
@@ -173,16 +173,16 @@ const resumeInCenter = () => {
 function scrollPortfolioCenter() {
     //audio1.play() // Best Option i think
     portfolioInCenterPosition();
-    TweenMax.to(git, .5, 
+    TweenMax.to(git, .25, 
         {rotationY:-55, height:'auto', width:'19%', x:'0%', y:'-3%', 
         translateY:'-3%', transformPerspective: 600, ease: Power1.easeOut});
-    TweenMax.to(info, .5, 
+    TweenMax.to(info, .25, 
         {rotationY:-75, height:'auto', width:'13%', x:'0%', y:'-7%', 
         translateY:'-7%', transformPerspective: 500, ease: Power1.easeOut});
-    TweenMax.to(linkedin, .5, 
+    TweenMax.to(linkedin, .25, 
         {rotationY:55, height:'auto', width:'19%', x:'0%', y:'-3%', 
         translateY:'-3%', transformPerspective: 600, ease: Power1.easeOut});
-    TweenMax.to(resume, .5, 
+    TweenMax.to(resume, .25, 
         {rotationY:80, height:'auto', width:'10%', x:'0%', y:'-7%', 
         translateY:'-7%', transformPerspective: 500, ease: Power1.easeOut});
 }
@@ -191,16 +191,16 @@ function scrollPortfolioCenter() {
 function scrollPortfolioRight() {
     //audio1.play()
     gitInCenter();
-    TweenMax.to(portfolio, .5, 
+    TweenMax.to(portfolio, .25, 
         {rotationY:55, height:'auto', width:'19%', x:'55%', y:'-3%', 
         translateY:'-3%', transformPerspective: 600, ease: Power1.easeOut, });
-    TweenMax.to(info, .5, 
+    TweenMax.to(info, .25, 
         {rotationY:-55, height:'auto', width:'19%', x:'16%', y:'-3%', 
         translateY:'-3%', transformPerspective: 600, ease: Power1.easeOut});
-    TweenMax.to(linkedin, .5, 
+    TweenMax.to(linkedin, .25, 
         {rotationY:80, height:'auto', width:'12%', x:'24%', y:'-10%', 
         translateY:'-7%', transformPerspective: 500, ease: Power1.easeOut});
-    TweenMax.to(resume, .5, 
+    TweenMax.to(resume, .25, 
         {rotationY:90, height:'auto', width:'8%', x:'20%', y:'-20%', 
         translateY:'-7%', transformPerspective: 500, ease: Power1.easeOut});
 }
@@ -209,16 +209,16 @@ function scrollPortfolioRight() {
 function scrollPortfolioFarRight() {
     //audio1.play()
     infoInCenter();
-    TweenMax.to(linkedin, .5, 
+    TweenMax.to(linkedin, .25, 
         {rotationY:90, height:'auto', width:'9%', x:'105%', y:'-20%', 
         translateY:'-7%', transformPerspective: 600, ease: Power1.easeOut});
-    TweenMax.to(portfolio, .5, 
+    TweenMax.to(portfolio, .25, 
         {rotationY:80, height:'auto', width:'12%', x:'150%', y:'-10%', 
         translateY:'-7%', transformPerspective: 500, ease: Power1.easeOut});
-    TweenMax.to(git, .5, 
+    TweenMax.to(git, .25, 
         {rotationY:55, height:'auto', width:'19%', x:'136%', y:'-3%', 
         translateY:'-3%', transformPerspective: 600, ease: Power1.easeOut});
-    TweenMax.to(resume, .5, 
+    TweenMax.to(resume, .25, 
         {rotationY:90, height:'auto', width:'10%', x:'50%', y:'-20%', 
         translateY:'-7%', transformPerspective: 500, ease: Power1.easeOut}); 
 }
@@ -227,16 +227,16 @@ function scrollPortfolioFarRight() {
 function scrollPortfolioLeft() {
     //audio1.play()
     linkedinInCenter()
-    TweenMax.to(portfolio, .5, 
+    TweenMax.to(portfolio, .25, 
         {rotationY:-55, height:'auto', width:'19%', x:'-54%', y:'-3%', 
         translateY:'-3%',transformPerspective: 600, ease: Power1.easeOut});
-    TweenMax.to(resume, .5, 
+    TweenMax.to(resume, .25, 
         {rotationY:60, height:'auto', width:'15%', x:'-21%', y:'-3%', 
         translateY:'-3%', transformPerspective: 600, ease: Power1.easeOut});
-    TweenMax.to(git, .5, 
+    TweenMax.to(git, .25, 
         {rotationY:-80, height:'auto', width:'12%', x:'-22%', y:'-10%', 
         translateY:'-7%', transformPerspective: 500, ease: Power1.easeOut});
-    TweenMax.to(info, .5, 
+    TweenMax.to(info, .25, 
         {rotationY:-90, height:'auto', width:'10%', x:'-12%', y:'-15%', 
         translateY:'-7%', transformPerspective: 500, ease: Power1.easeOut, });
 }
@@ -245,16 +245,16 @@ function scrollPortfolioLeft() {
 function scrollPortfolioFarLeft() {
     //audio1.play()
     resumeInCenter();
-    TweenMax.to(linkedin, .5, 
+    TweenMax.to(linkedin, .25, 
         {rotationY:-45, height:'auto', width:'19%', x:'-140%', y:'-3%', 
         translateY:'-3%', transformPerspective: 600, ease: Power1.easeOut});
-    TweenMax.to(portfolio, .5, 
+    TweenMax.to(portfolio, .25, 
         {rotationY:-75, height:'auto', width:'12%', x:'-170%', y:'-7%', 
         translateY:'-7%', transformPerspective: 500, ease: Power1.easeOut});
-    TweenMax.to(git, .5, 
+    TweenMax.to(git, .25, 
         {rotationY:-90, height:'auto', width:'10%', x:'-120%', y:'-15%', 
         translateY:'-7%', transformPerspective: 500, ease: Power1.easeOut});
-    TweenMax.to(info, .5, 
+    TweenMax.to(info, .25, 
         {rotationY:-90, height:'auto', width:'10%', x:'-70%', y:'-20%', 
         translateY:'-7%', transformPerspective: 500, ease: Power1.easeOut});
 }
@@ -360,6 +360,17 @@ function isLinkClickable(){
 }
 
 
+//  grabs the exit divs and sets them to variables
 
+const exit1 = document.getElementById('exit1')
+const exit2 = document.getElementById('exit2')
+const exit3 = document.getElementById('exit3')
+const exit4 = document.getElementById('exit4')
+const exit5 = document.getElementById('exit5')
+const exit6 = document.getElementById('exit6')
+const exit7 = document.getElementById('exit7')
+const exit8 = document.getElementById('exit8')
+const exit9 = document.getElementById('exit9')
+const exit10 = document.getElementById('exit10')
 
 
