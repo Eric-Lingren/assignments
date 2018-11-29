@@ -1,3 +1,10 @@
+///  CURRENT BUGS TO FIX:
+//  Not responsive at all in IE.  Nothing moves and only portfolio is clickable
+//  Mozilla - click to scroll highlights the image.
+//  Mozilla - arrow key scroll moves 2 spaces instead of 1.
+
+
+
 const info = document.getElementById('infoImageURL')
 const git = document.getElementById('gitImageURL')
 const portfolio = document.getElementById('portfolioImageURL')
@@ -10,31 +17,13 @@ const linkedinTitle = document.getElementById('linkedinTitle')
 const gitTitle = document.getElementById('gitTitle')
 
 
+const sound1 = new Audio('./audio1.wav');
 const audio1 = new Audio('./sound1.wav');
-const audio2 = new Audio('./sound2.wav');
-const audio3 = new Audio('./sound3.mp3');
-const audio4 = new Audio('./sound4.wav');
-const audio5 = new Audio('./sound5.wav');
-const audio6 = new Audio('./sound6.wav');
-const audio7 = new Audio('./sound7.mp3');
-const audio8 = new Audio('./sound8.wav');
-const audio9 = new Audio('./sound9.wav');
-
-// const exit1 = document.getElementById('exit1')
-// const exit2 = document.getElementById('exit2')
-
-// gitTitle.addEventListener('click', fadeOut);
-
-// function fadeout(){
-//     exit1.style.display = 'block'
-//     exit2.style.display = 'block'
-// }
 
 const winH = window.innerHeight;
 const winW = window.innerWidth;
 
 let whereIsCenter = 'portfolioIsCenter';
-
 
 
   /////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -157,7 +146,7 @@ const resumeInCenter = () => {
     TweenMax.to(resume, .25, 
         {rotationY:0, height:'auto', width:'21%', x:'-85%', y:'0%', 
         translateY:'-3%', transformPerspective: 600, ease: Power1.easeOut, 
-        onComplete: function(){resumeTitle.style.display = 'block', resumeTitle.style.marginLeft = '-3.5%';
+        onComplete: function(){resumeTitle.style.display = 'block', resumeTitle.style.marginLeft = '-7%';
             resume.href="./resume.html"}
     });
     //  Makes the mouse cursor change depending wither the href tag has been added or removed from the image   
@@ -171,7 +160,7 @@ const resumeInCenter = () => {
 
 //  Animates the 4 other images when the PORTFOLIO IMAGE is scrolled into the center position
 function scrollPortfolioCenter() {
-    //audio1.play() // Best Option i think
+    sound1.play() 
     portfolioInCenterPosition();
     TweenMax.to(git, .25, 
         {rotationY:-55, height:'auto', width:'19%', x:'0%', y:'-3%', 
@@ -189,7 +178,7 @@ function scrollPortfolioCenter() {
 
 //  Animates the 4 other images when the GITHUB IMAGE is scrolled into the center position
 function scrollPortfolioRight() {
-    //audio1.play()
+    sound1.play()
     gitInCenter();
     TweenMax.to(portfolio, .25, 
         {rotationY:55, height:'auto', width:'19%', x:'55%', y:'-3%', 
@@ -207,7 +196,7 @@ function scrollPortfolioRight() {
 
 //  Animates the 4 other images when the INFORMATION IMAGE is scrolled into the center position
 function scrollPortfolioFarRight() {
-    //audio1.play()
+    sound1.play()
     infoInCenter();
     TweenMax.to(linkedin, .25, 
         {rotationY:90, height:'auto', width:'9%', x:'105%', y:'-20%', 
@@ -225,7 +214,7 @@ function scrollPortfolioFarRight() {
 
 //  Animates the 4 other images when the LINKEDIN IMAGE is scrolled into the center position
 function scrollPortfolioLeft() {
-    //audio1.play()
+    sound1.play()
     linkedinInCenter()
     TweenMax.to(portfolio, .25, 
         {rotationY:-55, height:'auto', width:'19%', x:'-54%', y:'-3%', 
@@ -243,7 +232,7 @@ function scrollPortfolioLeft() {
 
 //  Animates the 4 other images when the RESUME IMAGE is scrolled into the center position
 function scrollPortfolioFarLeft() {
-    //audio1.play()
+    sound1.play()
     resumeInCenter();
     TweenMax.to(linkedin, .25, 
         {rotationY:-45, height:'auto', width:'19%', x:'-140%', y:'-3%', 
@@ -298,6 +287,7 @@ window.addEventListener('wheel', scrollWheelAction);
 //  Checks if the mouse wheel is scrolled up or down, checks the center image position, 
 //   and then the correct scroll functions execute
 function scrollWheelAction(e){
+    sound1.play() 
     if (e.deltaY > 0 && whereIsCenter === 'portfolioIsCenter') {
         scrollPortfolioRight();
     } else if (e.deltaY > 0 && whereIsCenter === 'gitIsCenter') {
