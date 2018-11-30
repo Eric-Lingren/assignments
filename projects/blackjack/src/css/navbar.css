@@ -2,9 +2,8 @@
     border: 1px solid black;
     display: flex;
     justify-content: space-evenly;
-    height: 6vh;
+    height: 35px;
     align-items: center;
-    font-size: 1.2em;
     background-color: #000;
     opacity: .6;
     
@@ -17,6 +16,7 @@
     padding-right: 5px;
     text-decoration: none;
     border-bottom: #FFF 3px solid;
+    font-size: 1.2em;
 }
 
 .navLinks:hover{

@@ -64,6 +64,25 @@ class App extends Component {
     })
   }
 
+  dealOneCard= (e) => {
+    e.preventDefault();
+    axios.get(`https://deckofcardsapi.com/api/deck/${this.state.deckID}/draw/?count=1`).then(response => {
+      const oneCardDealt = response.data.cards[0].code;
+      const remainingCards = response.data.remaining;
+      this.setState({
+          remainingCards: remainingCards 
+      })
+      this.setState(prevState => {
+        return {
+          playerHand: [...prevState.playerHand, oneCardDealt],
+        }
+      })
+      console.log('player hand is currently ' + this.state.playerHand)
+      console.log('there are cards left  ' + this.state.remainingCards)
+    })
+  }
+
+
 
   render() {
     
@@ -73,7 +92,10 @@ class App extends Component {
 
         <Switch>
           <Route exact path="/" component={Home}/>
-          <Route path="/play" render={props => <Play {...props} dealHand={this.dealHand}/>}/>
+          <Route path="/play" render={props => 
+              <Play {...props} 
+              dealHand={this.dealHand}
+              dealOneCard={this.dealOneCard} />}/>
           <Route path="/train" component={Train}/>
           <Route path="/learn" component={Learn}/>
         </Switch>
