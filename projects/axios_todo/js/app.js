@@ -167,6 +167,20 @@ function pullArray (listArray){
         });
  
 
+        const titleDiv = document.getElementById('title')
+        const myH1Tag = document.createElement('h1');
+        const myH1Text = document.createTextNode('Hello World');
+        myH1Tag.appendChild(myH1Text);
+        titleDiv.appendChild(myH1Tag);
+       
+        const titleDiv = document.getElementById('title')
+        titleDiv.addEventListener('click', ericsFunction)
+        function ericsFunction() {
+            console.log('Hello World')
+        }
+
+
+
     ////////////////////////////////////////////////////////////////////////////
     ///           WHEN THE PUBLISH BUTTON GETS CLICKED                      ///
     //////////////////////////////////////////////////////////////////////////

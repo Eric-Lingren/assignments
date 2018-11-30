@@ -25,6 +25,19 @@ class ThemeChanger extends Component {
         })
     }
 
+    return (
+        {
+        props.greeting === 'friend' ? 
+        <div>
+            <h1>Hello, you are a friend</h1>
+        </div>
+        :
+        <div> 
+            <h1> Goodbye, you are the worst.</h1>
+        </div>
+        }
+    )
+    
     render(){
         return (
             <div>
@@ -47,3 +60,8 @@ export const withTheme = (C) => props => (
 )
 
 export default ThemeChanger
+
+
+
+axios.get("url", { headers {'x-mashape..' : "sdajksdjkasjdskksjdiw", "acept" : 
+"application/json"}}).tbhr
