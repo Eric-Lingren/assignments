@@ -1,0 +1,25 @@
+.navContainer{
+    border: 1px solid black;
+    display: flex;
+    justify-content: space-evenly;
+    height: 6vh;
+    align-items: center;
+    font-size: 1.2em;
+    background-color: #000;
+    opacity: .6;
+    
+}
+
+.navLinks{
+    color: #FFF;
+    font-weight: bold;
+    padding-left: 5px;
+    padding-right: 5px;
+    text-decoration: none;
+    border-bottom: #FFF 3px solid;
+}
+
+.navLinks:hover{
+    color: green;
+    border-bottom: green 3px solid;
+}
