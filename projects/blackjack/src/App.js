@@ -169,50 +169,35 @@ class App extends Component {
 
 //  Function adjusts the players total to refelc aces being either 1 or 11
   adjustPlayerCountWithAces = () => {
-    console.log('player has ace? ' + this.state.playerHasAce)
-    console.log('player total PRE ace adjustment ' + this.state.playerHandTotalPreAces)
+    //console.log('player has ace? ' + this.state.playerHasAce)
+    //console.log('player total PRE ace adjustment ' + this.state.playerHandTotalPreAces)
     let playerTotalPreAces = this.state.playerHandTotalPreAces
       
     if (this.state.playerHasAce === true && playerTotalPreAces <= 11){
-        let finalPlayerTotal = playerTotalPreAces + 10;
-       console.log( 'player total with ace Adjusted is ' + finalPlayerTotal)
-
+      let finalPlayerTotal = playerTotalPreAces + 10;
+      //console.log( 'player total with ace Adjusted is ' + finalPlayerTotal)
       this.setState(() => ({
         playerHandTotalPostAces: finalPlayerTotal 
       }), () =>  this.didPlayerBust() )
 
-        if(finalPlayerTotal === 21){
-          console.log('you Win!')
-        }
     } else {
-      console.log('player total without ace or with high ace is ' + playerTotalPreAces)
-
+      //console.log('player total without ace or with high ace is ' + playerTotalPreAces)
       this.setState(() => ({
         playerHandTotalPostAces: playerTotalPreAces 
       }), () =>  this.didPlayerBust() )
 
-        if(playerTotalPreAces === 21){
-          console.log('you win!')
-        }
     }
   }
 
 
   didPlayerBust = () => {
-    // const hand = this.state.playerHandValues
-    // console.log(this.state.playerHasAce)
-    // console.log(this.state.playerHandTotal)
-
+    //  Player Busts.  Hands Reset
     if (this.state.playerHandTotalPostAces > 21){
       setTimeout(this.resetHand, 2000)
-      } 
-    // else if(this.state.playerHandTotal > 21 && this.state.playerHasAce === true){
-    //     this.setState(prevState => {
-    //       return{
-    //         playerHandTotal: prevState - 10
-    //       }
-    //     })
-    // }
+      // Player gets 21 and win.  hands reset
+    } else if (this.state.playerHandTotalPostAces === 21){
+      setTimeout(this.resetHand, 2000)
+    }
   }
 
   resetHand = () => {

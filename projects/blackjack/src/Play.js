@@ -5,6 +5,15 @@ import DisplayACard from './DisplayACard'
 const Play = (props) => {
 const { dealHand, dealOneCard, dealerHandImages, playerHandImages, countDealerTotal, countPlayerTotal, playerHandTotal} = props;
 
+function tableStatus(){
+    if(playerHandTotal < 21){
+        return <h1>Dealer Stands on 17</h1>
+    }else if(playerHandTotal === 21){
+        return <h1>You Win!</h1>
+    } else{
+        return <h1>You Busted</h1>
+    }
+}
     return (
         <div className='playContainer'>
             <div className='table'>
@@ -13,7 +22,7 @@ const { dealHand, dealOneCard, dealerHandImages, playerHandImages, countDealerTo
                 </div>
                 <h2>Dealer Total: {countDealerTotal}</h2>
                 {
-                    playerHandTotal <= 21 ? <h1>Dealer Stands on 17</h1> : <h1>You Busted</h1>
+                    tableStatus()
                 }
                 
             <button onClick={dealHand} >Deal Hand</button>
