@@ -94,21 +94,16 @@ class App extends Component {
       const cardImage = response.data.cards[0].image
       const cardValue = response.data.cards[0].value
       //console.log(cardValue)
-      this.setState({
-          remainingCards: remainingCards 
-      })
+      // this.setState({
+      //     remainingCards: remainingCards 
+      // })
       this.setState(prevState => {
         return {
           playerHand: [...prevState.playerHand, oneCardDealt],
           playerHandImages: [...prevState.playerHandImages, cardImage],
           playerHandValues: [...prevState.playerHandValues, cardValue],
         }
-      })
-      this.countPlayerTotal()
-      console.log('player hand is currently ' + this.state.playerHand)
-      console.log('player hand is VALUES are currently ' + this.state.playerHandValues)
-      console.log('player hand is total ' + this.state.playerHandTotal)
-      // console.log('there are cards left  ' + this.state.remainingCards)
+      }, () => this.countPlayerTotal())
       
     })
   }
@@ -156,13 +151,34 @@ class App extends Component {
     const reducer = (accumulator, currentValue) => accumulator + currentValue;
     let playerHandTotal = numericalHand.reduce(reducer);
 
-    this.setState({
+    this.setState(() => ({
       playerHandTotal: playerHandTotal 
-    })
+    }), () =>  this.didPlayerBust() )
+    
   }
 
-  render() {
+  didPlayerBust = () => {
+    if (this.state.playerHandTotal > 21){
+      setTimeout(this.resetHand, 2000)
+    }
+  }
+
+  resetHand = () => {
+      this.setState({
+        dealerHand: [],
+        dealerHandValues: [],
+        dealerHandTotal: '',
+        dealerHandImages: [],
+        playerHand: [],
+        playerHandValues: [],
+        playerHandTotal: '',
+        playerHandImages: [],
+      })
     
+  }
+
+
+  render() {
     return (
       <div>
         <Navbar />
@@ -178,7 +194,8 @@ class App extends Component {
               dealerHandImages={this.state.dealerHandImages} 
               playerHandImages={this.state.playerHandImages} 
               dealerHandValues={this.state.dealerHandValues} 
-              playerHandValues={this.state.playerHandValues} 
+              playerHandValues={this.state.playerHandValues}
+              playerHandTotal={this.state.playerHandTotal} 
               />}/>
           <Route path="/train" component={Train}/>
           <Route path="/learn" component={Learn}/>
