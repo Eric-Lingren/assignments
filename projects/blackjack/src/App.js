@@ -21,14 +21,17 @@ class App extends Component {
       dealerHandImages: [],
       playerHand: [],
       playerHandValues: [],
+      dealerHandTotalPreAces: '',
+      dealerHandTotalPostAces: '',
       playerHandTotalPreAces: '',
       playerHandTotalPostAces: '',
       playerHandImages: [],
       dealtCard: '',
       playerHasAce: false,
+      dealerHasAce: false,
     }
   }
-
+ 
   componentDidMount(){
     axios.get('https://deckofcardsapi.com/api/deck/new/shuffle/?deck_count=1').then(response => {
       const deckID = response.data.deck_id;
@@ -53,6 +56,7 @@ class App extends Component {
         let cardValue = pickACard.value
         // console.log('the card just dealt was ' + card)
         // console.log('the card value is ' + cardValue)
+        //  Deales an even amount of cards to the dealer and player
         if (this.state.dealerHand.length <= this.state.playerHand.length){
           this.setState(prevState => {
             return {
@@ -88,6 +92,7 @@ class App extends Component {
     
   }
 
+  //  Deal card to player when they choose to hit
   dealOneCard = (e) => {
     e.preventDefault();
     axios.get(`https://deckofcardsapi.com/api/deck/${this.state.deckID}/draw/?count=1`).then(response => {
@@ -111,6 +116,7 @@ class App extends Component {
   }
 
   countDealerTotal = () => {
+    console.log('Count Dealer Total ran')
     const hand = this.state.dealerHandValues
     const numericalHand = [];
     //console.log(hand)
@@ -121,17 +127,24 @@ class App extends Component {
         value = 10
         //console.log(value)
        numericalHand.push(value)
-      } else{
+      } else if (value === 'ACE'){
+        value = 1
+        numericalHand.push(value);
+        this.setState({
+          dealerHasAce: true
+        })
+      }else{
         const stringToNumberValue = parseInt(value)
         numericalHand.push(stringToNumberValue)
       }
     })
     const reducer = (accumulator, currentValue) => accumulator + currentValue;
     let dealerHandTotal = numericalHand.reduce(reducer);
-
-    this.setState({
-      dealerHandTotal: dealerHandTotal 
-    })
+    
+    //  Sets the state for the count of dealer hand with aces only being worth 1
+    this.setState(() => ({
+      dealerHandTotalPreAces: dealerHandTotal 
+    }), () => this.adjustDealerCountWithAces() );
   }
   
   countPlayerTotal = () => {
@@ -167,7 +180,7 @@ class App extends Component {
 
 
 
-//  Function adjusts the players total to refelc aces being either 1 or 11
+//  Function adjusts the players total to refelct aces being either 1 or 11
   adjustPlayerCountWithAces = () => {
     //console.log('player has ace? ' + this.state.playerHasAce)
     //console.log('player total PRE ace adjustment ' + this.state.playerHandTotalPreAces)
@@ -189,6 +202,31 @@ class App extends Component {
     }
   }
 
+  //  Function adjusts the dealer total to refelct aces being either 1 or 11
+  adjustDealerCountWithAces = () => {
+    console.log('Dealer adjust for aces count ran')
+    // console.log('dealer has ace? ' + this.state.dealerHasAce)
+    // console.log('dealer total PRE ace adjustment ' + this.state.dealerHandTotalPreAces)
+    let dealerTotalPreAces = this.state.dealerHandTotalPreAces
+      
+    if (this.state.dealerHasAce === true && dealerTotalPreAces <= 11){
+      let finalDealerTotal = dealerTotalPreAces + 10;
+      // console.log( 'dealer total with ace Adjusted is ' + finalDealerTotal)
+      this.setState(() => ({
+        dealerHandTotalPostAces: finalDealerTotal 
+      }), () =>  this.didDealerBust() 
+      )
+
+    } else {
+      //console.log('dealer total without ace or with high ace is ' + dealerTotalPreAces)
+      this.setState(() => ({
+        dealerHandTotalPostAces: dealerTotalPreAces 
+      }), () =>  this.didDealerBust() 
+      )
+
+    }
+  }
+
 
   didPlayerBust = () => {
     //  Player Busts.  Hands Reset
@@ -200,7 +238,19 @@ class App extends Component {
     }
   }
 
+  didDealerBust = () => {
+    //  Dealer Busts.  Hands Reset.  Player Wins
+    if (this.state.dealerHandTotalPostAces > 21){
+      setTimeout(this.resetHand, 2000)
+      // Player gets 21 and win.  hands reset
+    } 
+    //  else if (this.state.playerHandTotalPostAces === 21){
+    //   setTimeout(this.resetHand, 2000)
+    // }
+  }
+
   resetHand = () => {
+    console.log('reset hand function ran')
       this.setState({
         dealerHand: [],
         dealerHandValues: [],
@@ -210,11 +260,44 @@ class App extends Component {
         playerHandValues: [],
         playerHandTotal: '',
         playerHandImages: [],
-        playerHasAce: false
+        playerHasAce: false,
+        dealerHasAce: false,
+        dealerHandTotalPostAces: '',
+        playerHandTotalPostAces: '',
       })
     
   }
 
+  playerStands = () => {
+    //  When player stands need to check the value of the dealer hand.  
+    let dealerHas = this.state.dealerHandTotalPostAces
+    //  If dealer is over 21, they bust and player wins. (i think this is already checked in other functions.  need to validate.)
+    //  If dealer hand value is lower than 17, need to deal themself another card.
+
+    if(this.state.dealerHandTotalPostAces < 17){
+      console.log('dealer has less than 17')
+      axios.get(`https://deckofcardsapi.com/api/deck/${this.state.deckID}/draw/?count=1`).then(response => {
+        const oneCardDealt = response.data.cards[0].code;
+        const remainingCards = response.data.remaining;
+        const cardImage = response.data.cards[0].image
+        const cardValue = response.data.cards[0].value
+
+        this.setState(prevState => {
+          return {
+            remainingCards: remainingCards,
+            dealerHand: [...prevState.dealerHand, oneCardDealt],
+            dealerHandImages: [...prevState.dealerHandImages, cardImage],
+            dealerHandValues: [...prevState.dealerHandValues, cardValue],
+          }
+        }, () => this.countDealerTotal())
+        console.log('dealer hand total is ' + this.state.dealerHandTotalPostAces)
+      })
+    }
+
+    
+  //  If dealer card total is greater than player hand, player looses.
+  //    If dealer card total is less than player hand total, player wins.
+}
 
   render() {
     return (
@@ -227,11 +310,13 @@ class App extends Component {
               <Play {...props} 
               dealHand={this.dealHand}
               dealOneCard={this.dealOneCard} 
-              countDealerTotal={this.state.dealerHandTotal}
+              playerStands={this.playerStands} 
+              //countDealerTotal={this.state.dealerHandTotal}
               countPlayerTotal={this.state.playerHandTotal}
               dealerHandImages={this.state.dealerHandImages} 
               playerHandImages={this.state.playerHandImages} 
               dealerHandValues={this.state.dealerHandValues} 
+              dealerHandTotal={this.state.dealerHandTotalPostAces} 
               playerHandValues={this.state.playerHandValues}
               playerHandTotal={this.state.playerHandTotalPostAces} 
               />}/>
