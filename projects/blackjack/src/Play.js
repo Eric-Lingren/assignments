@@ -18,7 +18,7 @@ const { dealHand, dealOneCard, dealerHandImages, playerHandImages, countDealerTo
                 
             <button onClick={dealHand} >Deal Hand</button>
                 <button onClick={dealOneCard} >Hit</button>
-                <h2>Player Total: {countPlayerTotal} </h2>
+                <h2>Player Total: {playerHandTotal} </h2>
                 <div className='playerHand'>
                     {playerHandImages.map(dealtCard => <DisplayACard card={dealtCard} />)}                 
                 </div>

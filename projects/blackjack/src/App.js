@@ -21,9 +21,11 @@ class App extends Component {
       dealerHandImages: [],
       playerHand: [],
       playerHandValues: [],
-      playerHandTotal: '',
+      playerHandTotalPreAces: '',
+      playerHandTotalPostAces: '',
       playerHandImages: [],
       dealtCard: '',
+      playerHasAce: false,
     }
   }
 
@@ -143,24 +145,74 @@ class App extends Component {
         value = 10
         //console.log(value)
        numericalHand.push(value)
-      } else{
+      } else if (value === 'ACE'){
+        value = 1
+        numericalHand.push(value);
+        this.setState({
+          playerHasAce: true
+        })
+      }else{
         const stringToNumberValue = parseInt(value)
         numericalHand.push(stringToNumberValue)
       }
     })
     const reducer = (accumulator, currentValue) => accumulator + currentValue;
-    let playerHandTotal = numericalHand.reduce(reducer);
+    let playerHandTotal = numericalHand.reduce(reducer);  
 
+    //  Sets the state for the count of that player hand with aces only being worth 1
     this.setState(() => ({
-      playerHandTotal: playerHandTotal 
-    }), () =>  this.didPlayerBust() )
-    
+      playerHandTotalPreAces: playerHandTotal
+    }), () => this.adjustPlayerCountWithAces() );
   }
 
-  didPlayerBust = () => {
-    if (this.state.playerHandTotal > 21){
-      setTimeout(this.resetHand, 2000)
+
+
+//  Function adjusts the players total to refelc aces being either 1 or 11
+  adjustPlayerCountWithAces = () => {
+    console.log('player has ace? ' + this.state.playerHasAce)
+    console.log('player total PRE ace adjustment ' + this.state.playerHandTotalPreAces)
+    let playerTotalPreAces = this.state.playerHandTotalPreAces
+      
+    if (this.state.playerHasAce === true && playerTotalPreAces <= 11){
+        let finalPlayerTotal = playerTotalPreAces + 10;
+       console.log( 'player total with ace Adjusted is ' + finalPlayerTotal)
+
+      this.setState(() => ({
+        playerHandTotalPostAces: finalPlayerTotal 
+      }), () =>  this.didPlayerBust() )
+
+        if(finalPlayerTotal === 21){
+          console.log('you Win!')
+        }
+    } else {
+      console.log('player total without ace or with high ace is ' + playerTotalPreAces)
+
+      this.setState(() => ({
+        playerHandTotalPostAces: playerTotalPreAces 
+      }), () =>  this.didPlayerBust() )
+
+        if(playerTotalPreAces === 21){
+          console.log('you win!')
+        }
     }
+  }
+
+
+  didPlayerBust = () => {
+    // const hand = this.state.playerHandValues
+    // console.log(this.state.playerHasAce)
+    // console.log(this.state.playerHandTotal)
+
+    if (this.state.playerHandTotalPostAces > 21){
+      setTimeout(this.resetHand, 2000)
+      } 
+    // else if(this.state.playerHandTotal > 21 && this.state.playerHasAce === true){
+    //     this.setState(prevState => {
+    //       return{
+    //         playerHandTotal: prevState - 10
+    //       }
+    //     })
+    // }
   }
 
   resetHand = () => {
@@ -173,6 +225,7 @@ class App extends Component {
         playerHandValues: [],
         playerHandTotal: '',
         playerHandImages: [],
+        playerHasAce: false
       })
     
   }
@@ -195,7 +248,7 @@ class App extends Component {
               playerHandImages={this.state.playerHandImages} 
               dealerHandValues={this.state.dealerHandValues} 
               playerHandValues={this.state.playerHandValues}
-              playerHandTotal={this.state.playerHandTotal} 
+              playerHandTotal={this.state.playerHandTotalPostAces} 
               />}/>
           <Route path="/train" component={Train}/>
           <Route path="/learn" component={Learn}/>
