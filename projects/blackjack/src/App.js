@@ -214,8 +214,7 @@ class App extends Component {
       // console.log( 'dealer total with ace Adjusted is ' + finalDealerTotal)
       this.setState(() => ({
         dealerHandTotalPostAces: finalDealerTotal 
-      }), () =>  this.didDealerBust() 
-      )
+      }), () =>  this.didDealerBust() )
 
     } else {
       //console.log('dealer total without ace or with high ace is ' + dealerTotalPreAces)
@@ -229,6 +228,7 @@ class App extends Component {
 
 
   didPlayerBust = () => {
+    console.log('did player bust function ran')
     //  Player Busts.  Hands Reset
     if (this.state.playerHandTotalPostAces > 21){
       setTimeout(this.resetHand, 2000)
@@ -239,11 +239,15 @@ class App extends Component {
   }
 
   didDealerBust = () => {
+    console.log('did dealer bust function ran')
     //  Dealer Busts.  Hands Reset.  Player Wins
     if (this.state.dealerHandTotalPostAces > 21){
+      console.log('dealer busted')
       setTimeout(this.resetHand, 2000)
-      // Player gets 21 and win.  hands reset
-    } 
+      //  If dealer didnt bust run the player stands function again
+    } else {
+      // this.playerStands()
+    }
     //  else if (this.state.playerHandTotalPostAces === 21){
     //   setTimeout(this.resetHand, 2000)
     // }
@@ -268,33 +272,56 @@ class App extends Component {
     
   }
 
+  dealerHits = () => {
+    console.log('dealer hits function ran')
+    axios.get(`https://deckofcardsapi.com/api/deck/${this.state.deckID}/draw/?count=1`).then(response => {
+      const oneCardDealt = response.data.cards[0].code;
+      const remainingCards = response.data.remaining;
+      const cardImage = response.data.cards[0].image
+      const cardValue = response.data.cards[0].value
+
+      this.setState(prevState => {
+        return {
+          remainingCards: remainingCards,
+          dealerHand: [...prevState.dealerHand, oneCardDealt],
+          dealerHandImages: [...prevState.dealerHandImages, cardImage],
+          dealerHandValues: [...prevState.dealerHandValues, cardValue],
+        }
+      }, () => this.countDealerTotal() )
+      //console.log('dealer hand total is ' + this.state.dealerHandTotalPostAces)
+    });
+  }
+
+checkWhoWon = () => {
+  console.log('check who won function ran')
+  if (this.state.dealerHandTotalPostAces >= 17 && this.state.dealerHandTotalPostAces <= 21){
+    //  check the player total vs player totals
+    if(this.state.dealerHandTotalPostAces > this.state.playerHandTotalPostAces){
+      console.log('DEALER WINS');
+      setTimeout(this.resetHand, 2000)
+    } else if (this.state.dealerHandTotalPostAces === this.state.playerHandTotalPostAces){
+      console.log('PUSH')
+      setTimeout(this.resetHand, 2000)
+    } else {
+      console.log('PLAYER WINS')
+      setTimeout(this.resetHand, 2000)
+    }
+  }
+}
   playerStands = () => {
     //  When player stands need to check the value of the dealer hand.  
-    let dealerHas = this.state.dealerHandTotalPostAces
-    //  If dealer is over 21, they bust and player wins. (i think this is already checked in other functions.  need to validate.)
-    //  If dealer hand value is lower than 17, need to deal themself another card.
-
-    if(this.state.dealerHandTotalPostAces < 17){
-      console.log('dealer has less than 17')
-      axios.get(`https://deckofcardsapi.com/api/deck/${this.state.deckID}/draw/?count=1`).then(response => {
-        const oneCardDealt = response.data.cards[0].code;
-        const remainingCards = response.data.remaining;
-        const cardImage = response.data.cards[0].image
-        const cardValue = response.data.cards[0].value
-
-        this.setState(prevState => {
-          return {
-            remainingCards: remainingCards,
-            dealerHand: [...prevState.dealerHand, oneCardDealt],
-            dealerHandImages: [...prevState.dealerHandImages, cardImage],
-            dealerHandValues: [...prevState.dealerHandValues, cardValue],
-          }
-        }, () => this.countDealerTotal())
-        console.log('dealer hand total is ' + this.state.dealerHandTotalPostAces)
-      })
-    }
-
     
+    //  If dealer hand value is lower than 17, need to deal themself enough cards until they are over 17.
+    console.log(this.state.dealerHandTotalPostAces)
+    if (this.state.dealerHandTotalPostAces < 17){
+      console.log('dealer has less than 17')
+      this.dealerHits()
+    }
+    
+    //console.log('check again the dealer hand total is ' + this.state.dealerHandTotalPostAces)
+   this.checkWhoWon()
+    //  Dealer doesnt draw another card, we need to check who won
+   
   //  If dealer card total is greater than player hand, player looses.
   //    If dealer card total is less than player hand total, player wins.
 }
