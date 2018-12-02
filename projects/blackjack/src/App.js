@@ -7,7 +7,6 @@ import Play from './Play'
 import Learn from './Learn'
 import Train from './Train'
 
-
 class App extends Component {
   constructor(){
     super()
@@ -29,19 +28,17 @@ class App extends Component {
       dealtCard: '',
       playerHasAce: false,
       dealerHasAce: false,
+      playerClickedStand: false,
     }
   }
  
   componentDidMount(){
     axios.get('https://deckofcardsapi.com/api/deck/new/shuffle/?deck_count=1').then(response => {
       const deckID = response.data.deck_id;
-      //const numberOfDecks = response.data;
-      //console.log(deckID)
       this.setState({
         deckID: deckID,
       })
     })
-    
   }
 
   dealHand = (e) => {
@@ -49,14 +46,10 @@ class App extends Component {
     axios.get(`https://deckofcardsapi.com/api/deck/${this.state.deckID}/draw/?count=4`).then(response => {
       const dealtCards = response.data.cards;
       const remainingCards = response.data.remaining
-    //console.log(response.data.cards[0].value)
       dealtCards.forEach(pickACard => {
         let card = pickACard.code
         let cardImage = pickACard.image
         let cardValue = pickACard.value
-        // console.log('the card just dealt was ' + card)
-        // console.log('the card value is ' + cardValue)
-        //  Deales an even amount of cards to the dealer and player
         if (this.state.dealerHand.length <= this.state.playerHand.length){
           this.setState(prevState => {
             return {
@@ -65,175 +58,146 @@ class App extends Component {
               dealerHandValues: [...prevState.dealerHandValues, cardValue],
             }
           })
-          // console.log('dealer hand images are' + this.state.dealerHandImages)
-          // console.log('dealer hand is currently ' + this.state.dealerHand)
-          //console.log('dealer hand values are currently ' + this.state.dealerHandValues)
         } else {
-            this.setState(prevState => {
-              return {
-                playerHand: [...prevState.playerHand, card],
-                playerHandImages: [...prevState.playerHandImages, cardImage],
-                playerHandValues: [...prevState.playerHandValues, cardValue],
-              }
-            })
-          // console.log('player hand is currently ' + this.state.playerHand)
-          // console.log('player hand values are ' + this.state.playerHandValues)
+          this.setState(prevState => {
+            return {
+              playerHand: [...prevState.playerHand, card],
+              playerHandImages: [...prevState.playerHandImages, cardImage],
+              playerHandValues: [...prevState.playerHandValues, cardValue],
+            }
+          })
         }
       });
       this.setState({
         remainingCards: remainingCards
       })
-      
-      //console.log('there are cards left  ' + this.state.remainingCards)
-      
       this.countDealerTotal()
       this.countPlayerTotal()
     })
-    
   }
 
-  //  Deal card to player when they choose to hit
-  dealOneCard = (e) => {
-    e.preventDefault();
-    axios.get(`https://deckofcardsapi.com/api/deck/${this.state.deckID}/draw/?count=1`).then(response => {
-      const oneCardDealt = response.data.cards[0].code;
-      const remainingCards = response.data.remaining;
-      const cardImage = response.data.cards[0].image
-      const cardValue = response.data.cards[0].value
-      //console.log(cardValue)
-      // this.setState({
-      //     remainingCards: remainingCards 
-      // })
-      this.setState(prevState => {
-        return {
-          playerHand: [...prevState.playerHand, oneCardDealt],
-          playerHandImages: [...prevState.playerHandImages, cardImage],
-          playerHandValues: [...prevState.playerHandValues, cardValue],
-        }
-      }, () => this.countPlayerTotal())
-      
-    })
-  }
-
+ //  Counts the dealers hand total with aces being valued at 1
   countDealerTotal = () => {
     console.log('Count Dealer Total ran')
     const hand = this.state.dealerHandValues
     const numericalHand = [];
-    //console.log(hand)
     hand.forEach(value => {
-      //console.log(value)
       if (value === 'JACK' ||value === 'QUEEN' || value === 'KING' ){
-        //console.log(value)
         value = 10
-        //console.log(value)
        numericalHand.push(value)
       } else if (value === 'ACE'){
-        value = 1
-        numericalHand.push(value);
-        this.setState({
-          dealerHasAce: true
-        })
-      }else{
+          value = 1
+          numericalHand.push(value);
+          this.setState({
+            dealerHasAce: true
+          })
+      } else {
         const stringToNumberValue = parseInt(value)
         numericalHand.push(stringToNumberValue)
-      }
-    })
+      } })
     const reducer = (accumulator, currentValue) => accumulator + currentValue;
     let dealerHandTotal = numericalHand.reduce(reducer);
-    
     //  Sets the state for the count of dealer hand with aces only being worth 1
     this.setState(() => ({
       dealerHandTotalPreAces: dealerHandTotal 
     }), () => this.adjustDealerCountWithAces() );
   }
+
+  //  Function that adjusts the dealer total to refelct aces being either 1 or 11
+  adjustDealerCountWithAces = () => {
+    console.log('Function for Dealer adjust for aces count ran')
+
+    let dealerTotalPreAces = this.state.dealerHandTotalPreAces
+    if (this.state.dealerHasAce === true && dealerTotalPreAces <= 11){
+      let finalDealerTotal = dealerTotalPreAces + 10;
+      this.setState(() => ({
+        dealerHandTotalPostAces: finalDealerTotal 
+      }), () =>  this.didDealerBust() )
+    } else {
+      this.setState(() => ({
+        dealerHandTotalPostAces: dealerTotalPreAces 
+      }), () =>  this.didDealerBust() 
+      )
+    }
+  }
   
+//  Counts the players hand total with aces being valued at 1
   countPlayerTotal = () => {
+    console.log('count player total function ran');
     const hand = this.state.playerHandValues
     const numericalHand = [];
-    //console.log(hand)
     hand.forEach(value => {
-      //console.log(value)
       if (value === 'JACK' ||value === 'QUEEN' || value === 'KING' ){
-        //console.log(value)
         value = 10
-        //console.log(value)
-       numericalHand.push(value)
+        numericalHand.push(value)
       } else if (value === 'ACE'){
-        value = 1
-        numericalHand.push(value);
-        this.setState({
-          playerHasAce: true
-        })
-      }else{
+          value = 1
+          numericalHand.push(value);
+          this.setState({
+            playerHasAce: true
+          })
+      } else {
         const stringToNumberValue = parseInt(value)
         numericalHand.push(stringToNumberValue)
-      }
-    })
+      } })
     const reducer = (accumulator, currentValue) => accumulator + currentValue;
     let playerHandTotal = numericalHand.reduce(reducer);  
-
     //  Sets the state for the count of that player hand with aces only being worth 1
     this.setState(() => ({
       playerHandTotalPreAces: playerHandTotal
     }), () => this.adjustPlayerCountWithAces() );
   }
 
-
-
 //  Function adjusts the players total to refelct aces being either 1 or 11
   adjustPlayerCountWithAces = () => {
-    //console.log('player has ace? ' + this.state.playerHasAce)
-    //console.log('player total PRE ace adjustment ' + this.state.playerHandTotalPreAces)
-    let playerTotalPreAces = this.state.playerHandTotalPreAces
-      
+    console.log('adjust player count with aces function ran')
+    let playerTotalPreAces = this.state.playerHandTotalPreAces  
     if (this.state.playerHasAce === true && playerTotalPreAces <= 11){
       let finalPlayerTotal = playerTotalPreAces + 10;
-      //console.log( 'player total with ace Adjusted is ' + finalPlayerTotal)
       this.setState(() => ({
         playerHandTotalPostAces: finalPlayerTotal 
       }), () =>  this.didPlayerBust() )
-
     } else {
-      //console.log('player total without ace or with high ace is ' + playerTotalPreAces)
       this.setState(() => ({
         playerHandTotalPostAces: playerTotalPreAces 
       }), () =>  this.didPlayerBust() )
-
     }
   }
 
-  //  Function adjusts the dealer total to refelct aces being either 1 or 11
-  adjustDealerCountWithAces = () => {
-    console.log('Dealer adjust for aces count ran')
-    // console.log('dealer has ace? ' + this.state.dealerHasAce)
-    // console.log('dealer total PRE ace adjustment ' + this.state.dealerHandTotalPreAces)
-    let dealerTotalPreAces = this.state.dealerHandTotalPreAces
-      
-    if (this.state.dealerHasAce === true && dealerTotalPreAces <= 11){
-      let finalDealerTotal = dealerTotalPreAces + 10;
-      // console.log( 'dealer total with ace Adjusted is ' + finalDealerTotal)
-      this.setState(() => ({
-        dealerHandTotalPostAces: finalDealerTotal 
-      }), () =>  this.didDealerBust() )
+  
 
-    } else {
-      //console.log('dealer total without ace or with high ace is ' + dealerTotalPreAces)
-      this.setState(() => ({
-        dealerHandTotalPostAces: dealerTotalPreAces 
-      }), () =>  this.didDealerBust() 
-      )
+ //  Deal card to player when they choose to hit
+ dealOneCard = (e) => {
+  e.preventDefault();
+  axios.get(`https://deckofcardsapi.com/api/deck/${this.state.deckID}/draw/?count=1`).then(response => {
+    const oneCardDealt = response.data.cards[0].code;
+    const remainingCards = response.data.remaining;
+    const cardImage = response.data.cards[0].image
+    const cardValue = response.data.cards[0].value
+    // this.setState({
+    //     remainingCards: remainingCards 
+    // })
+    this.setState(prevState => {
+      return {
+        playerHand: [...prevState.playerHand, oneCardDealt],
+        playerHandImages: [...prevState.playerHandImages, cardImage],
+        playerHandValues: [...prevState.playerHandValues, cardValue],
+      }
+      //  Once state is set from the new card, re-run the player hand total functions
+    }, () => this.countPlayerTotal())
+  })
+}
 
-    }
-  }
-
-
+//  Checks to see if the player went over 21
   didPlayerBust = () => {
     console.log('did player bust function ran')
     //  Player Busts.  Hands Reset
     if (this.state.playerHandTotalPostAces > 21){
+      console.log('player busted.  you loose')
       setTimeout(this.resetHand, 2000)
       // Player gets 21 and win.  hands reset
     } else if (this.state.playerHandTotalPostAces === 21){
+      console.log('player got 21!')
       setTimeout(this.resetHand, 2000)
     }
   }
@@ -242,15 +206,11 @@ class App extends Component {
     console.log('did dealer bust function ran')
     //  Dealer Busts.  Hands Reset.  Player Wins
     if (this.state.dealerHandTotalPostAces > 21){
-      console.log('dealer busted')
+      console.log('dealer busted.  Player Wins!')
       setTimeout(this.resetHand, 2000)
-      //  If dealer didnt bust run the player stands function again
-    } else {
-      // this.playerStands()
+    } else if (this.state.playerClickedStand === true){
+      this.playerStands()
     }
-    //  else if (this.state.playerHandTotalPostAces === 21){
-    //   setTimeout(this.resetHand, 2000)
-    // }
   }
 
   resetHand = () => {
@@ -268,8 +228,8 @@ class App extends Component {
         dealerHasAce: false,
         dealerHandTotalPostAces: '',
         playerHandTotalPostAces: '',
+        playerClickedStand: false,
       })
-    
   }
 
   dealerHits = () => {
@@ -288,13 +248,12 @@ class App extends Component {
           dealerHandValues: [...prevState.dealerHandValues, cardValue],
         }
       }, () => this.countDealerTotal() )
-      //console.log('dealer hand total is ' + this.state.dealerHandTotalPostAces)
     });
   }
 
 checkWhoWon = () => {
   console.log('check who won function ran')
-  if (this.state.dealerHandTotalPostAces >= 17 && this.state.dealerHandTotalPostAces <= 21){
+  
     //  check the player total vs player totals
     if(this.state.dealerHandTotalPostAces > this.state.playerHandTotalPostAces){
       console.log('DEALER WINS');
@@ -306,20 +265,24 @@ checkWhoWon = () => {
       console.log('PLAYER WINS')
       setTimeout(this.resetHand, 2000)
     }
-  }
 }
+
   playerStands = () => {
     //  When player stands need to check the value of the dealer hand.  
-    
+    this.setState({
+      playerClickedStand: true
+    });
     //  If dealer hand value is lower than 17, need to deal themself enough cards until they are over 17.
     console.log(this.state.dealerHandTotalPostAces)
     if (this.state.dealerHandTotalPostAces < 17){
       console.log('dealer has less than 17')
-      this.dealerHits()
+      setTimeout(this.dealerHits, 500)
+    } else {
+      this.checkWhoWon()
     }
     
     //console.log('check again the dealer hand total is ' + this.state.dealerHandTotalPostAces)
-   this.checkWhoWon()
+   //
     //  Dealer doesnt draw another card, we need to check who won
    
   //  If dealer card total is greater than player hand, player looses.
