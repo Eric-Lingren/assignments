@@ -76,6 +76,24 @@ class App extends Component {
     })
   }
 
+  //  Check if the dealer or player got a blackjack on the first 2 card
+initialBlackjack = () => {
+  console.log('checking for begining of game blackjacks')
+  //  if both player and deal start with 21, it is a push.
+  if (this.dealerHandTotalPostAces === 21 &&  this.playerHandTotalPostAces === 21){
+    console.log('PUSH');
+    this.checkWhoWon();
+  //  if dealer starts with 21 and player does not, player looses
+  } else if (this.dealerHandTotalPostAces === 21 &&  this.playerHandTotalPostAces !== 21){
+    console.log('Dealer has Blackjack.  Player looses.');
+    this.checkWhoWon();
+  //  if player starts with 21 and dealer does not, player wins.
+  } else if (this.dealerHandTotalPostAces !== 21 &&  this.playerHandTotalPostAces === 21){
+    console.log('Player has Blackjack.  Winner Winner Chicken Dinner!');
+    this.checkWhoWon();
+  }
+}
+
  //  Counts the dealers hand total with aces being valued at 1
   countDealerTotal = () => {
     console.log('Count Dealer Total ran')
@@ -171,7 +189,7 @@ class App extends Component {
   e.preventDefault();
   axios.get(`https://deckofcardsapi.com/api/deck/${this.state.deckID}/draw/?count=1`).then(response => {
     const oneCardDealt = response.data.cards[0].code;
-    const remainingCards = response.data.remaining;
+    //const remainingCards = response.data.remaining;
     const cardImage = response.data.cards[0].image
     const cardValue = response.data.cards[0].value
     // this.setState({
@@ -191,19 +209,23 @@ class App extends Component {
 //  Checks to see if the player went over 21
   didPlayerBust = () => {
     console.log('did player bust function ran')
+    //  Check if both the dealer and player only have 2 cards.  if so, we need to check for initial blackjacks.
+    if (this.state.dealerHand.length === 2 && this.state.playerHand.length === 2){
+      this.initialBlackjack()
+    }
     //  Player Busts.  Hands Reset
-    if (this.state.playerHandTotalPostAces > 21){
+    else if (this.state.playerHandTotalPostAces > 21){
       console.log('player busted.  you loose')
       setTimeout(this.resetHand, 2000)
-      // Player gets 21 and win.  hands reset
-    } else if (this.state.playerHandTotalPostAces === 21){
-      console.log('player got 21!')
-      setTimeout(this.resetHand, 2000)
+      // Player chose to sand and didnt bust, check for game winner
+    } else if (this.state.playerClickedStand === true){
+      this.playerStands()
     }
   }
 
   didDealerBust = () => {
-    console.log('did dealer bust function ran')
+    console.log('did dealer bust function ran');
+   
     //  Dealer Busts.  Hands Reset.  Player Wins
     if (this.state.dealerHandTotalPostAces > 21){
       console.log('dealer busted.  Player Wins!')
@@ -280,13 +302,6 @@ checkWhoWon = () => {
     } else {
       this.checkWhoWon()
     }
-    
-    //console.log('check again the dealer hand total is ' + this.state.dealerHandTotalPostAces)
-   //
-    //  Dealer doesnt draw another card, we need to check who won
-   
-  //  If dealer card total is greater than player hand, player looses.
-  //    If dealer card total is less than player hand total, player wins.
 }
 
   render() {

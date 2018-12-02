@@ -4,7 +4,7 @@ const DisplayCard = (props) => {
     const {card} = props;
 
     return(
-            <img className='displayCard' src={card}></img>
+            <img className='displayCard' src={card} alt='card displayed'></img>
     )
 }
 

@@ -3,7 +3,7 @@ import './css/play.css'
 import DisplayACard from './DisplayACard'
 
 const Play = (props) => {
-const { dealHand, dealOneCard, dealerHandImages, playerHandImages, countDealerTotal, countPlayerTotal, playerHandTotal, dealerHandTotal, playerStands, } = props;
+const { dealHand, dealOneCard, dealerHandImages, playerHandImages, playerHandTotal, dealerHandTotal, playerStands, } = props;
 
 function tableStatus(){
     if(playerHandTotal < 21){
