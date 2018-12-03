@@ -57,6 +57,7 @@ class App extends Component {
       count: 0,
       countArray: [],
       countArrayValues: [],
+      playerBaseBet: 50,
     }
   }
  
@@ -88,8 +89,8 @@ class App extends Component {
               countArray: [...prevState.countArray, cardValue],
               cardsDealt: prevState.cardsDealt + 1,
               decksPlayed: ((this.state.cardsDealt / 52).toFixed(2) ),
-              //remainingCards: ((this.state.deckCount * 52) - (this.state.cardsDealt)),
               remainingDecks: (this.state.deckCount - this.state.decksPlayed),
+              trueCount: ((this.state.count / this.state.remainingDecks).toFixed(1)),
             }
           })
         } else {
@@ -101,8 +102,8 @@ class App extends Component {
               countArray: [...prevState.countArray, cardValue],
               cardsDealt: prevState.cardsDealt + 1,
               decksPlayed: ((this.state.cardsDealt / 52).toFixed(2) ),
-              //remainingCards: ((this.state.deckCount * 52) - (this.state.cardsDealt)),
               remainingDecks: (this.state.deckCount - this.state.decksPlayed),
+              trueCount: ((this.state.count / this.state.remainingDecks).toFixed(1)),
             }
           })
         }
@@ -258,6 +259,7 @@ initialBlackjack = () => {
         decksPlayed: ((this.state.cardsDealt / 52).toFixed(2) ),
         remainingCards: remainingCards,
         remainingDecks: (this.state.deckCount - this.state.decksPlayed),
+        trueCount: ((this.state.count / this.state.remainingDecks).toFixed(1)),
       }
       //  Once state is set from the new card, re-run the player hand total functions
     }, () => this.countPlayerTotal())
@@ -352,6 +354,7 @@ initialBlackjack = () => {
           decksPlayed: ((this.state.cardsDealt / 52).toFixed(2) ),
           remainingCards: remainingCards,
           remainingDecks: (this.state.deckCount - this.state.decksPlayed),
+          trueCount: ((this.state.count / this.state.remainingDecks).toFixed(1)),
         }
       }, () => this.countDealerTotal() )
     });
@@ -582,6 +585,8 @@ whatsTheCountGame = () => {
               decksPlayed={this.state.decksPlayed}
               remainingCards={this.state.remainingCards}
               remainingDecks={this.state.remainingDecks}
+              trueCount={this.state.trueCount}
+              playerBaseBet={this.state.playerBaseBet}
               />}/>
           <Route path="/train" component={Train}/>
           <Route path="/learn" component={Learn}/>
