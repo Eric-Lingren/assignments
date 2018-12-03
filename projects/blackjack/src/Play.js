@@ -10,7 +10,7 @@ import fiveHundredDollar from './css/images/$500.png';
 
 
 const Play = (props) => {
-const { dealHand, dealOneCard, dealerHandImages, playerHandImages, playerHandTotal, dealerHandTotal, playerStands, playerDoubles, playerDoubleBet, playerSplits, playerBet, playerBankroll, bet1, bet5, bet25, bet50, bet100, bet500, playerClickedStand, playerClickedDouble, dealerWins, playerWins, playerBust, dealerBust, clearBet, gameCount, whatsTheCountGame,  } = props;
+const { dealHand, dealOneCard, dealerHandImages, playerHandImages, playerHandTotal, dealerHandTotal, playerStands, playerDoubles, playerDoubleBet, playerSplits, playerBet, playerBankroll, bet1, bet5, bet25, bet50, bet100, bet500, playerClickedStand, playerClickedDouble, dealerWins, playerWins, playerBust, dealerBust, clearBet, gameCount, whatsTheCountGame, cardsDealt, decksPlayed, remainingCards, remainingDecks, } = props;
 
     function tableStatus(){
         // console.log('did dealer win: ' + dealerWins);
@@ -68,8 +68,13 @@ const { dealHand, dealOneCard, dealerHandImages, playerHandImages, playerHandTot
                 <h2 className='playerDouble'>Double: ${dbl}</h2>
                 <h2 className='playerBankroll'>Player Bankroll: ${playerBankroll} </h2>
                 <div className='countStats'>
-                    <h2>Count stats:</h2>
-                    <h3>Count: {gameCount} </h3>
+                    <h2>Count Stats:</h2>
+                    <h3>Running Count: {gameCount} </h3>
+                    <h3>True Count: {gameCount} </h3>
+                    <h3>Cards Dealt: {cardsDealt} </h3>
+                    <h3>Decks Played: {decksPlayed} </h3>
+                    <h3>Remaining Cards: {remainingCards} </h3>
+                    <h3>Remaining Decks: {remainingDecks} </h3>
                 </div>
                 
                 

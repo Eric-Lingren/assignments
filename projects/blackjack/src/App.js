@@ -9,6 +9,12 @@ import Train from './Train'
 
 //  Neded to shuffle deck
 //  Need to reduce bet size
+//  need to choose play rules:
+    // number of decks
+    // hit or stand on soft 17
+    // Cut point
+    // surrender 
+
 
 
 
@@ -16,9 +22,13 @@ class App extends Component {
   constructor(){
     super()
     this.state = {
-      deckCount: '',
+      deckCount: 2,
       deckID: '',
-      remainingCards: '',
+      cardsDealt: 0,
+      decksPlayed: 0,
+      remainingCards: 0,
+      remainingDecks: 0,
+      trueCount: 0,
       dealerHand: [],
       dealerHandValues: [],
       dealerHandTotal: '',
@@ -51,7 +61,7 @@ class App extends Component {
   }
  
   componentDidMount(){
-    axios.get('https://deckofcardsapi.com/api/deck/new/shuffle/?deck_count=1').then(response => {
+    axios.get(`https://deckofcardsapi.com/api/deck/new/shuffle/?deck_count=${this.state.deckCount}`).then(response => {
       const deckID = response.data.deck_id;
       this.setState({
         deckID: deckID,
@@ -76,6 +86,10 @@ class App extends Component {
               dealerHandImages: [...prevState.dealerHandImages, cardImage],
               dealerHandValues: [...prevState.dealerHandValues, cardValue],
               countArray: [...prevState.countArray, cardValue],
+              cardsDealt: prevState.cardsDealt + 1,
+              decksPlayed: ((this.state.cardsDealt / 52).toFixed(2) ),
+              //remainingCards: ((this.state.deckCount * 52) - (this.state.cardsDealt)),
+              remainingDecks: (this.state.deckCount - this.state.decksPlayed),
             }
           })
         } else {
@@ -85,6 +99,10 @@ class App extends Component {
               playerHandImages: [...prevState.playerHandImages, cardImage],
               playerHandValues: [...prevState.playerHandValues, cardValue],
               countArray: [...prevState.countArray, cardValue],
+              cardsDealt: prevState.cardsDealt + 1,
+              decksPlayed: ((this.state.cardsDealt / 52).toFixed(2) ),
+              //remainingCards: ((this.state.deckCount * 52) - (this.state.cardsDealt)),
+              remainingDecks: (this.state.deckCount - this.state.decksPlayed),
             }
           })
         }
@@ -224,7 +242,7 @@ initialBlackjack = () => {
   //e.preventDefault();
   axios.get(`https://deckofcardsapi.com/api/deck/${this.state.deckID}/draw/?count=1`).then(response => {
     const oneCardDealt = response.data.cards[0].code;
-    //const remainingCards = response.data.remaining;
+    const remainingCards = response.data.remaining;
     const cardImage = response.data.cards[0].image
     const cardValue = response.data.cards[0].value
     // this.setState({
@@ -236,6 +254,10 @@ initialBlackjack = () => {
         playerHandImages: [...prevState.playerHandImages, cardImage],
         playerHandValues: [...prevState.playerHandValues, cardValue],
         countArray: [...prevState.countArray, cardValue],
+        cardsDealt: prevState.cardsDealt + 1,
+        decksPlayed: ((this.state.cardsDealt / 52).toFixed(2) ),
+        remainingCards: remainingCards,
+        remainingDecks: (this.state.deckCount - this.state.decksPlayed),
       }
       //  Once state is set from the new card, re-run the player hand total functions
     }, () => this.countPlayerTotal())
@@ -322,11 +344,14 @@ initialBlackjack = () => {
 
       this.setState(prevState => {
         return {
-          remainingCards: remainingCards,
           dealerHand: [...prevState.dealerHand, oneCardDealt],
           dealerHandImages: [...prevState.dealerHandImages, cardImage],
           dealerHandValues: [...prevState.dealerHandValues, cardValue],
           countArray: [...prevState.countArray, cardValue],
+          cardsDealt: prevState.cardsDealt + 1,
+          decksPlayed: ((this.state.cardsDealt / 52).toFixed(2) ),
+          remainingCards: remainingCards,
+          remainingDecks: (this.state.deckCount - this.state.decksPlayed),
         }
       }, () => this.countDealerTotal() )
     });
@@ -553,6 +578,10 @@ whatsTheCountGame = () => {
               playerBust={this.state.playerBust}
               gameCount={this.state.count}
               whatsTheCountGame={this.whatsTheCountGame}
+              cardsDealt={this.state.cardsDealt}
+              decksPlayed={this.state.decksPlayed}
+              remainingCards={this.state.remainingCards}
+              remainingDecks={this.state.remainingDecks}
               />}/>
           <Route path="/train" component={Train}/>
           <Route path="/learn" component={Learn}/>

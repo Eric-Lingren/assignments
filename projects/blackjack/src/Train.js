@@ -112,7 +112,7 @@ dealCard = () => {
                 <h1>Training page</h1>
                 <h2>Self Paced Count</h2>
                 <div className='deckDisplay'>
-                    <img src={this.state.cardsDealtImages}></img>
+                    <img src={this.state.cardsDealtImages} alt='card'></img>
                 </div>
                 <button onClick={this.dealCard}>start</button>
                 <h2>The count is: {this.state.count}</h2>
@@ -120,7 +120,7 @@ dealCard = () => {
 
                 <h2>SpeedCount</h2>
                 <div className='deckDisplay'>
-                    <img src={this.state.cardsDealtImages2}></img>
+                    <img src={this.state.cardsDealtImages2} alt='card'></img>
                 </div>
                 <button onClick={this.speedCount}>start</button>
                 <h2>The count is: {this.state.count2}</h2>
