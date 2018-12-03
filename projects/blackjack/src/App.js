@@ -7,6 +7,12 @@ import Play from './Play'
 import Learn from './Learn'
 import Train from './Train'
 
+//  Neded to shuffle deck
+//  Need to reduce bet size
+//  Bet doesnt work all the time
+//  pull check who won function over to the play to render outputs on the table.
+
+
 class App extends Component {
   constructor(){
     super()
@@ -34,6 +40,10 @@ class App extends Component {
       playerClickedSplit: false,
       playerBet: 0,
       playerBankroll: 1000,
+      dealerWins: false,
+      playerWins: false,
+      playerBust: true,
+      dealerBust: true,
     }
   }
  
@@ -97,7 +107,11 @@ initialBlackjack = () => {
   //  if player starts with 21 and dealer does not, player wins.
   } else if (this.state.playerHandTotalPostAces === 21){
     console.log('Player has Blackjack.  Winner Winner Chicken Dinner!');
-    this.checkWhoWon();
+    //  increase bankroll by bet amount + 50%
+    this.setState(prevState => {
+      return {
+        playerBankroll: prevState.playerBankroll + (this.state.playerBet * 1.5)
+      }}, () => setTimeout(this.resetHand, 2000));
   }
 }
 
@@ -226,7 +240,11 @@ initialBlackjack = () => {
     //  Player Busts.  Hands Reset
     else if (this.state.playerHandTotalPostAces > 21){
       console.log('player busted.  you loose')
-      setTimeout(this.resetHand, 2000)
+      this.setState(prevState => {
+        return {
+          playerBust: true,
+          playerBankroll: prevState.playerBankroll - this.state.playerBet
+        }}, () => setTimeout(this.resetHand, 2000));
       // Player chose to sand and didnt bust, check for game winner
     } else if (this.state.playerClickedStand === true){
       this.playerStands()
@@ -241,7 +259,12 @@ initialBlackjack = () => {
     //  Dealer Busts.  Hands Reset.  Player Wins
     if (this.state.dealerHandTotalPostAces > 21){
       console.log('dealer busted.  Player Wins!')
-      setTimeout(this.resetHand, 2000)
+      //  Increase player bankroll by bet amount
+      this.setState(prevState => {
+        return {
+          dealerBust: true,
+          playerBankroll: prevState.playerBankroll + this.state.playerBet
+        }}, () => setTimeout(this.resetHand, 2000));
     } else if (this.state.playerClickedStand === true){
       this.playerStands()
     }
@@ -265,6 +288,11 @@ initialBlackjack = () => {
           playerClickedStand: false,
           playerClickedDouble: false,
           playerClickedSplit: false,
+          checkWhoWonFunctionRan: false,
+          dealerWins: false,
+          playerWins: false,
+          playerBust: false,
+          dealerBust: false,
       })
   }
 
@@ -287,34 +315,44 @@ initialBlackjack = () => {
     });
   }
 
+  //  check the player total vs player totals
 checkWhoWon = () => {
   console.log('check who won function ran')
-  
-    //  check the player total vs player totals
+ 
+    //  If Dealer Wins:
     if(this.state.dealerHandTotalPostAces > this.state.playerHandTotalPostAces){
       console.log('DEALER WINS');
       //  reduce bankroll by bet amount
+      console.log( 'player bet this hand is :' + this.state.playerBet )
+      console.log( 'player bankroll this hand is :' +  this.state.playerBankroll )
       this.setState(prevState => {
         return {
+          dealerWins: true,
+          playerWins: false,
           playerBankroll: prevState.playerBankroll - this.state.playerBet
-        }
-      }, () => setTimeout(this.resetHand, 2000))
+        }}, () => setTimeout(this.resetHand, 2000));
+    //  If it is a tie:
     } else if (this.state.dealerHandTotalPostAces === this.state.playerHandTotalPostAces){
       console.log('PUSH')
+      console.log( 'player bet this hand is :' + this.state.playerBet )
+      console.log( 'player bankroll this hand is :' +  this.state.playerBankroll )
       //  Bankroll stays the same 
       this.setState(prevState => {
         return {
           playerBankroll: prevState.playerBankroll
-        }
-      }, () => setTimeout(this.resetHand, 2000))
+        }}, () => setTimeout(this.resetHand, 2000));
+    //  If Player wins
     } else {
       console.log('PLAYER WINS')
+      console.log( 'player bet this hand is :' + this.state.playerBet )
+      console.log( 'player bankroll this hand is :' +   this.state.playerBankroll )
       //  increase bankroll by bet amount
       this.setState(prevState => {
         return {
+          dealerWins: false,
+          playerWins: true,
           playerBankroll: prevState.playerBankroll + this.state.playerBet
-        }
-      }, () => setTimeout(this.resetHand, 2000))
+        }}, () => setTimeout(this.resetHand, 2000));
     }
 }
 
@@ -424,6 +462,7 @@ bet500 = () => {
               dealHand={this.dealHand}
               dealOneCard={this.dealOneCard} 
               playerStands={this.playerStands} 
+              playerClickedStand={this.state.playerClickedStand} 
               playerDoubles={this.playerDoubles} 
               playerSplits={this.playerSplits} 
               //countDealerTotal={this.state.dealerHandTotal}
@@ -441,7 +480,11 @@ bet500 = () => {
               bet25={this.bet25} 
               bet50={this.bet50} 
               bet100={this.bet100} 
-              bet500={this.bet500} 
+              bet500={this.bet500}
+              dealerWins={this.state.dealerWins}
+              playerWins={this.state.playerWins}
+              dealerBust={this.state.dealerBust}
+              playerBust={this.state.playerBust}
               />}/>
           <Route path="/train" component={Train}/>
           <Route path="/learn" component={Learn}/>
