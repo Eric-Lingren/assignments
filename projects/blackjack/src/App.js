@@ -29,6 +29,7 @@ class App extends Component {
       playerHasAce: false,
       dealerHasAce: false,
       playerClickedStand: false,
+      playerClickedDouble: false,
     }
   }
  
@@ -80,15 +81,16 @@ class App extends Component {
 initialBlackjack = () => {
   console.log('checking for begining of game blackjacks')
   //  if both player and deal start with 21, it is a push.
-  if (this.dealerHandTotalPostAces === 21 &&  this.playerHandTotalPostAces === 21){
+  
+  if (this.state.dealerHandTotalPostAces === 21 &&  this.state.playerHandTotalPostAces === 21){
     console.log('PUSH');
     this.checkWhoWon();
   //  if dealer starts with 21 and player does not, player looses
-  } else if (this.dealerHandTotalPostAces === 21 &&  this.playerHandTotalPostAces !== 21){
+  } else if (this.state.dealerHandTotalPostAces === 21){
     console.log('Dealer has Blackjack.  Player looses.');
     this.checkWhoWon();
   //  if player starts with 21 and dealer does not, player wins.
-  } else if (this.dealerHandTotalPostAces !== 21 &&  this.playerHandTotalPostAces === 21){
+  } else if (this.state.playerHandTotalPostAces === 21){
     console.log('Player has Blackjack.  Winner Winner Chicken Dinner!');
     this.checkWhoWon();
   }
@@ -185,8 +187,8 @@ initialBlackjack = () => {
   
 
  //  Deal card to player when they choose to hit
- dealOneCard = (e) => {
-  e.preventDefault();
+ dealOneCard = () => {
+  //e.preventDefault();
   axios.get(`https://deckofcardsapi.com/api/deck/${this.state.deckID}/draw/?count=1`).then(response => {
     const oneCardDealt = response.data.cards[0].code;
     //const remainingCards = response.data.remaining;
@@ -220,6 +222,8 @@ initialBlackjack = () => {
       // Player chose to sand and didnt bust, check for game winner
     } else if (this.state.playerClickedStand === true){
       this.playerStands()
+    } else if( this.state.playerClickedDouble === true ){
+      this.playerStands()
     }
   }
 
@@ -251,6 +255,7 @@ initialBlackjack = () => {
         dealerHandTotalPostAces: '',
         playerHandTotalPostAces: '',
         playerClickedStand: false,
+        playerClickedDouble: false,
       })
   }
 
@@ -304,6 +309,28 @@ checkWhoWon = () => {
     }
 }
 
+playerDoubles = () => {
+  console.log('Player choose to DOUBLE DOWN function ran')
+  //  Need to check if player is on their first 2 cards.  Double is not allowed if they have more than 2 cards.
+  //  If player chooses to double, they do not have the option to hit afterwards.  So we will need to set state of a varible //  to check if double has been set, and if so, disable the hit function for this hand.
+  if (this.state.playerHand.length === 2){
+    console.log('you ARE alowed to double')
+    //  Need to set state that the player chose to double so we can run a check on that in another function
+    this.setState({
+      playerClickedDouble: true,
+    })
+    //  Player gets dealt only one card.  then we need to run the stand function.
+    this.dealOneCard()
+  }else {
+    alert('You are not alowed to double right now');
+  }
+}
+
+playerSplits = () => {
+  console.log('Player choose to SPLIT function ran')
+  //  Need to check if player is ont heir first 2 cards.  Split is not allowed if they have more than 2 cards per hand. 
+}
+
   render() {
     return (
       <div>
@@ -316,6 +343,8 @@ checkWhoWon = () => {
               dealHand={this.dealHand}
               dealOneCard={this.dealOneCard} 
               playerStands={this.playerStands} 
+              playerDoubles={this.playerDoubles} 
+              playerSplits={this.playerSplits} 
               //countDealerTotal={this.state.dealerHandTotal}
               countPlayerTotal={this.state.playerHandTotal}
               dealerHandImages={this.state.dealerHandImages} 

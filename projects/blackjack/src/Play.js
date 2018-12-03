@@ -3,7 +3,7 @@ import './css/play.css'
 import DisplayACard from './DisplayACard'
 
 const Play = (props) => {
-const { dealHand, dealOneCard, dealerHandImages, playerHandImages, playerHandTotal, dealerHandTotal, playerStands, } = props;
+const { dealHand, dealOneCard, dealerHandImages, playerHandImages, playerHandTotal, dealerHandTotal, playerStands, playerDoubles, playerSplits} = props;
 
 function tableStatus(){
     if(playerHandTotal < 21){
@@ -28,6 +28,8 @@ function tableStatus(){
                 <button onClick={dealHand} >Deal Hand</button>
                 <button onClick={dealOneCard} >Hit</button>
                 <button onClick={playerStands} > Stand </button>
+                <button onClick={playerDoubles} > Double </button>
+                <button onClick={playerSplits} > Split </button>
                 <h2>Player Total: {playerHandTotal} </h2>
                 <div className='playerHand'>
                     {playerHandImages.map(dealtCard => <DisplayACard card={dealtCard} />)}                 
