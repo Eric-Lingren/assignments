@@ -1,0 +1,9 @@
+.trainingWrapper{
+    background-color: green;
+    height: 90vh;
+}
+.deckDisplay{
+    height: 300px; 
+    background-color: grey;
+    width: 250px;
+}
