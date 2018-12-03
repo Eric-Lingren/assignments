@@ -20,6 +20,7 @@ class App extends Component {
       dealerHandImages: [],
       playerHand: [],
       playerHandValues: [],
+      playerNumericalHandValues: [],
       dealerHandTotalPreAces: '',
       dealerHandTotalPostAces: '',
       playerHandTotalPreAces: '',
@@ -30,6 +31,9 @@ class App extends Component {
       dealerHasAce: false,
       playerClickedStand: false,
       playerClickedDouble: false,
+      playerClickedSplit: false,
+      playerBet: 0,
+      playerBankroll: 1000,
     }
   }
  
@@ -44,6 +48,7 @@ class App extends Component {
 
   dealHand = (e) => {
     e.preventDefault();
+    console.log('Player bet is ' + this.state.playerBet)
     axios.get(`https://deckofcardsapi.com/api/deck/${this.state.deckID}/draw/?count=4`).then(response => {
       const dealtCards = response.data.cards;
       const remainingCards = response.data.remaining
@@ -150,15 +155,18 @@ initialBlackjack = () => {
       if (value === 'JACK' ||value === 'QUEEN' || value === 'KING' ){
         value = 10
         numericalHand.push(value)
+        this.state.playerNumericalHandValues.push(value)
       } else if (value === 'ACE'){
           value = 1
           numericalHand.push(value);
+          this.state.playerNumericalHandValues.push(value)
           this.setState({
             playerHasAce: true
           })
       } else {
         const stringToNumberValue = parseInt(value)
         numericalHand.push(stringToNumberValue)
+        this.state.playerNumericalHandValues.push(stringToNumberValue)
       } })
     const reducer = (accumulator, currentValue) => accumulator + currentValue;
     let playerHandTotal = numericalHand.reduce(reducer);  
@@ -242,20 +250,21 @@ initialBlackjack = () => {
   resetHand = () => {
     console.log('reset hand function ran')
       this.setState({
-        dealerHand: [],
-        dealerHandValues: [],
-        dealerHandTotal: '',
-        dealerHandImages: [],
-        playerHand: [],
-        playerHandValues: [],
-        playerHandTotal: '',
-        playerHandImages: [],
-        playerHasAce: false,
-        dealerHasAce: false,
-        dealerHandTotalPostAces: '',
-        playerHandTotalPostAces: '',
-        playerClickedStand: false,
-        playerClickedDouble: false,
+          dealerHand: [],
+          dealerHandValues: [],
+          dealerHandTotal: '',
+          dealerHandImages: [],
+          playerHand: [],
+          playerHandValues: [],
+          playerHandTotal: '',
+          playerHandImages: [],
+          playerHasAce: false,
+          dealerHasAce: false,
+          dealerHandTotalPostAces: '',
+          playerHandTotalPostAces: '',
+          playerClickedStand: false,
+          playerClickedDouble: false,
+          playerClickedSplit: false,
       })
   }
 
@@ -284,13 +293,28 @@ checkWhoWon = () => {
     //  check the player total vs player totals
     if(this.state.dealerHandTotalPostAces > this.state.playerHandTotalPostAces){
       console.log('DEALER WINS');
-      setTimeout(this.resetHand, 2000)
+      //  reduce bankroll by bet amount
+      this.setState(prevState => {
+        return {
+          playerBankroll: prevState.playerBankroll - this.state.playerBet
+        }
+      }, () => setTimeout(this.resetHand, 2000))
     } else if (this.state.dealerHandTotalPostAces === this.state.playerHandTotalPostAces){
       console.log('PUSH')
-      setTimeout(this.resetHand, 2000)
+      //  Bankroll stays the same 
+      this.setState(prevState => {
+        return {
+          playerBankroll: prevState.playerBankroll
+        }
+      }, () => setTimeout(this.resetHand, 2000))
     } else {
       console.log('PLAYER WINS')
-      setTimeout(this.resetHand, 2000)
+      //  increase bankroll by bet amount
+      this.setState(prevState => {
+        return {
+          playerBankroll: prevState.playerBankroll + this.state.playerBet
+        }
+      }, () => setTimeout(this.resetHand, 2000))
     }
 }
 
@@ -327,10 +351,67 @@ playerDoubles = () => {
 }
 
 playerSplits = () => {
-  console.log('Player choose to SPLIT function ran')
-  //  Need to check if player is ont heir first 2 cards.  Split is not allowed if they have more than 2 cards per hand. 
+  console.log('Player choose to SPLIT function ran');
+  console.log(this.state.playerNumericalHandValues)
+  //  Need to check if player is on their first 2 cards.  Split is not allowed if they have more than 2 cards per hand. 
+  if (this.state.playerHand.length === 2 && this.state.playerNumericalHandValues[0] === this.state.playerNumericalHandValues[1]){
+    console.log('you ARE alowed to split');
+    //  Need to set state that the player chose to double so we can run a check on that in another function
+    this.setState({
+      playerClickedSplit: true,
+    })
+  }else {
+    alert('You are not alowed to split right now');
+  }
+  //  Check if those 2 cards are the same value.  If they are, the player can split.
 }
 
+
+////////   Adding to player bets
+
+bet1 = () => {
+  console.log('player wants to bet 1')
+  this.setState(prevState => {
+    return {
+      playerBet: prevState.playerBet + 1
+    }
+  })
+}
+bet5 = () => {
+  this.setState(prevState => {
+    return {
+      playerBet: prevState.playerBet + 5
+    }
+  })
+}
+bet25 = () => {
+  this.setState(prevState => {
+    return {
+      playerBet: prevState.playerBet + 25
+    }
+  })
+}
+bet50 = () => {
+  this.setState(prevState => {
+    return {
+      playerBet: prevState.playerBet + 50
+    }
+  })
+}
+bet100 = () => {
+  this.setState(prevState => {
+    return {
+      playerBet: prevState.playerBet + 100
+    }
+  })
+}
+bet500 = () => {
+  this.setState(prevState => {
+    return {
+      playerBet: prevState.playerBet + 500
+    }
+  })
+}
   render() {
     return (
       <div>
@@ -353,6 +434,14 @@ playerSplits = () => {
               dealerHandTotal={this.state.dealerHandTotalPostAces} 
               playerHandValues={this.state.playerHandValues}
               playerHandTotal={this.state.playerHandTotalPostAces} 
+              playerBet={this.state.playerBet}
+              playerBankroll={this.state.playerBankroll}
+              bet1={this.bet1} 
+              bet5={this.bet5} 
+              bet25={this.bet25} 
+              bet50={this.bet50} 
+              bet100={this.bet100} 
+              bet500={this.bet500} 
               />}/>
           <Route path="/train" component={Train}/>
           <Route path="/learn" component={Learn}/>
