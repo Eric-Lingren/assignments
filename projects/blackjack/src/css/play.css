@@ -40,8 +40,12 @@ button{
 }
 .playerBet{
   position: absolute; 
-  top: 100px;
+  top: 70px;
 }
+.playerDouble{
+    position: absolute; 
+    top: 100px;
+  }
 .playerBankroll{
     position: absolute; 
     top: 130px;

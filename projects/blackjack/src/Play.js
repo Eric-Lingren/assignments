@@ -10,49 +10,32 @@ import fiveHundredDollar from './css/images/$500.png';
 
 
 const Play = (props) => {
-const { dealHand, dealOneCard, dealerHandImages, playerHandImages, playerHandTotal, dealerHandTotal, playerStands, playerDoubles, playerSplits, playerBet, playerBankroll, bet1, bet5, bet25, bet50, bet100, bet500, playerClickedStand, dealerWins, playerWins, playerBust, dealerBust, } = props;
+const { dealHand, dealOneCard, dealerHandImages, playerHandImages, playerHandTotal, dealerHandTotal, playerStands, playerDoubles, playerDoubleBet, playerSplits, playerBet, playerBankroll, bet1, bet5, bet25, bet50, bet100, bet500, playerClickedStand, playerClickedDouble, dealerWins, playerWins, playerBust, dealerBust, clearBet, } = props;
 
-function tableStatus(){
-    console.log('did dealer win: '+ dealerWins)
-    console.log('did player win: '+ playerWins)
-    
-    if((playerHandTotal && dealerWins) || (playerHandTotal && playerBust)){
-        return <h1>Dealer Wins</h1>
-    } else if( (playerHandTotal && playerWins) || (playerHandTotal && dealerBust) ){
-        return <h1>Player Wins</h1>
-    } else if(playerHandTotal && playerHandTotal === dealerHandTotal && playerClickedStand ){
-        return <h1>Push</h1>
-    } else { 
-        return <h1>Dealer Stands on 17</h1>
-    // }else if(playerHandTotal === 21 || dealerHandTotal > 21 || dealerHandTotal < playerHandTotal){
-    //     return <h1>You Win!</h1>
-    // } else if(dealerHandTotal === playerHandTotal){
-    //     return <h1>Push!</h1>
+    function tableStatus(){
+        console.log('did dealer win: ' + dealerWins);
+        console.log('did player bust: ' +  playerBust); 
+        if((playerHandTotal && dealerWins) || (playerHandTotal && playerBust)){
+            return <h1>Dealer Wins</h1>
+        } else if( (playerHandTotal && playerWins) || (playerHandTotal && dealerBust) ){
+            return <h1>Player Wins</h1>
+        } else if(playerHandTotal && playerHandTotal === dealerHandTotal && playerClickedStand ){
+            return <h1>Push</h1>
+        } else { 
+            return <h1>Dealer Stands on 17</h1>
+        }
     }
-}
-
- //  check the player total vs player totals
-//  function tableStatus() {
-//      console.log('player clicked stand ' + playerClickedStand)
-//      console.log('check won function ran ' + checkWhoWonFunctionRan)
-//     if (playerClickedStand !== true){
-//         return <h1>Dealer Stands on 17</h1>
-//     }
-//       //  If Dealer Wins:
-//       else if(playerClickedStand === true && checkWhoWonFunctionRan === true && dealerHandTotal > playerHandTotal){
-//         return <h1>YOU BUST!</h1>
-        
-//       //  If it is a tie:
-//       } else if (playerClickedStand === true && checkWhoWonFunctionRan === true && dealerHandTotal  === playerHandTotal){
-//         return <h1>PUSH</h1>
-
-//       //  If Player wins
-//       } else {
-//         return <h1>YOU WIN!</h1>
-//       }
-//   }
-
     const stat = tableStatus()
+
+    function doubleDown(){
+        console.log('did player click double: ' + playerClickedDouble)
+        if (playerClickedDouble){
+            return playerDoubleBet
+        }
+    }
+    const dbl = doubleDown()
+
+
     return (
         <div className='playContainer'>
             <div className='table'>
@@ -69,6 +52,7 @@ function tableStatus(){
                 <button onClick={playerStands} > Stand </button>
                 <button onClick={playerDoubles} > Double </button>
                 <button onClick={playerSplits} > Split </button>
+                <button onClick={clearBet} > Clear Bet </button>
                 <h2>Player Total: {playerHandTotal} </h2>
                 <img src={oneDollar} onClick={bet1} alt='chip' className='pokerChip'></img>
                 <img src={fiveDollar} onClick={bet5} alt='chip' className='pokerChip'></img>
@@ -80,6 +64,7 @@ function tableStatus(){
                     {playerHandImages.map(dealtCard => <DisplayACard card={dealtCard} />)}                 
                 </div>
                 <h2 className='playerBet'>Player Bet: ${playerBet} </h2>
+                <h2 className='playerDouble'>Double: ${dbl}</h2>
                 <h2 className='playerBankroll'>Player Bankroll: ${playerBankroll} </h2>
                 
                 

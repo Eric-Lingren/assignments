@@ -9,8 +9,7 @@ import Train from './Train'
 
 //  Neded to shuffle deck
 //  Need to reduce bet size
-//  Bet doesnt work all the time
-//  pull check who won function over to the play to render outputs on the table.
+
 
 
 class App extends Component {
@@ -39,11 +38,12 @@ class App extends Component {
       playerClickedDouble: false,
       playerClickedSplit: false,
       playerBet: 0,
+      playerDoubleBet: 0,
       playerBankroll: 1000,
       dealerWins: false,
       playerWins: false,
-      playerBust: true,
-      dealerBust: true,
+      playerBust: false,
+      dealerBust: false,
     }
   }
  
@@ -293,6 +293,7 @@ initialBlackjack = () => {
           playerWins: false,
           playerBust: false,
           dealerBust: false,
+          playerDoubleBet: 0,
       })
   }
 
@@ -329,7 +330,7 @@ checkWhoWon = () => {
         return {
           dealerWins: true,
           playerWins: false,
-          playerBankroll: prevState.playerBankroll - this.state.playerBet
+          playerBankroll: prevState.playerBankroll - (this.state.playerBet + this.state.playerDoubleBet)
         }}, () => setTimeout(this.resetHand, 2000));
     //  If it is a tie:
     } else if (this.state.dealerHandTotalPostAces === this.state.playerHandTotalPostAces){
@@ -351,7 +352,7 @@ checkWhoWon = () => {
         return {
           dealerWins: false,
           playerWins: true,
-          playerBankroll: prevState.playerBankroll + this.state.playerBet
+          playerBankroll: prevState.playerBankroll + (this.state.playerBet + this.state.playerDoubleBet)
         }}, () => setTimeout(this.resetHand, 2000));
     }
 }
@@ -380,6 +381,7 @@ playerDoubles = () => {
     //  Need to set state that the player chose to double so we can run a check on that in another function
     this.setState({
       playerClickedDouble: true,
+      playerDoubleBet: this.state.playerBet,
     })
     //  Player gets dealt only one card.  then we need to run the stand function.
     this.dealOneCard()
@@ -450,6 +452,13 @@ bet500 = () => {
     }
   })
 }
+
+clearBet = () => {
+  this.setState({
+      playerBet: 0
+  })
+}
+
   render() {
     return (
       <div>
@@ -464,7 +473,10 @@ bet500 = () => {
               playerStands={this.playerStands} 
               playerClickedStand={this.state.playerClickedStand} 
               playerDoubles={this.playerDoubles} 
+              playerClickedDouble={this.state.playerClickedDouble} 
+              playerDoubleBet={this.state.playerDoubleBet} 
               playerSplits={this.playerSplits} 
+              clearBet={this.clearBet}
               //countDealerTotal={this.state.dealerHandTotal}
               countPlayerTotal={this.state.playerHandTotal}
               dealerHandImages={this.state.dealerHandImages} 
