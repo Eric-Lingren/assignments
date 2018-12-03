@@ -10,11 +10,11 @@ import fiveHundredDollar from './css/images/$500.png';
 
 
 const Play = (props) => {
-const { dealHand, dealOneCard, dealerHandImages, playerHandImages, playerHandTotal, dealerHandTotal, playerStands, playerDoubles, playerDoubleBet, playerSplits, playerBet, playerBankroll, bet1, bet5, bet25, bet50, bet100, bet500, playerClickedStand, playerClickedDouble, dealerWins, playerWins, playerBust, dealerBust, clearBet, } = props;
+const { dealHand, dealOneCard, dealerHandImages, playerHandImages, playerHandTotal, dealerHandTotal, playerStands, playerDoubles, playerDoubleBet, playerSplits, playerBet, playerBankroll, bet1, bet5, bet25, bet50, bet100, bet500, playerClickedStand, playerClickedDouble, dealerWins, playerWins, playerBust, dealerBust, clearBet, gameCount, whatsTheCountGame,  } = props;
 
     function tableStatus(){
-        console.log('did dealer win: ' + dealerWins);
-        console.log('did player bust: ' +  playerBust); 
+        // console.log('did dealer win: ' + dealerWins);
+        // console.log('did player bust: ' +  playerBust); 
         if((playerHandTotal && dealerWins) || (playerHandTotal && playerBust)){
             return <h1>Dealer Wins</h1>
         } else if( (playerHandTotal && playerWins) || (playerHandTotal && dealerBust) ){
@@ -28,7 +28,7 @@ const { dealHand, dealOneCard, dealerHandImages, playerHandImages, playerHandTot
     const stat = tableStatus()
 
     function doubleDown(){
-        console.log('did player click double: ' + playerClickedDouble)
+        //console.log('did player click double: ' + playerClickedDouble)
         if (playerClickedDouble){
             return playerDoubleBet
         }
@@ -53,6 +53,7 @@ const { dealHand, dealOneCard, dealerHandImages, playerHandImages, playerHandTot
                 <button onClick={playerDoubles} > Double </button>
                 <button onClick={playerSplits} > Split </button>
                 <button onClick={clearBet} > Clear Bet </button>
+                <button onClick={whatsTheCountGame} > Show Count</button>
                 <h2>Player Total: {playerHandTotal} </h2>
                 <img src={oneDollar} onClick={bet1} alt='chip' className='pokerChip'></img>
                 <img src={fiveDollar} onClick={bet5} alt='chip' className='pokerChip'></img>
@@ -66,6 +67,10 @@ const { dealHand, dealOneCard, dealerHandImages, playerHandImages, playerHandTot
                 <h2 className='playerBet'>Player Bet: ${playerBet} </h2>
                 <h2 className='playerDouble'>Double: ${dbl}</h2>
                 <h2 className='playerBankroll'>Player Bankroll: ${playerBankroll} </h2>
+                <div className='countStats'>
+                    <h2>Count stats:</h2>
+                    <h3>Count: {gameCount} </h3>
+                </div>
                 
                 
             </div>

@@ -45,8 +45,16 @@ button{
 .playerDouble{
     position: absolute; 
     top: 100px;
-  }
+}
 .playerBankroll{
     position: absolute; 
     top: 130px;
-  }
+}
+.countStats{
+    background-color: cornflowerblue;
+    width: 20%;
+    position: absolute;
+    right: 0;
+    top: 40%;
+
+}

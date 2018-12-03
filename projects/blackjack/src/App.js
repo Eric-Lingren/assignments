@@ -44,6 +44,9 @@ class App extends Component {
       playerWins: false,
       playerBust: false,
       dealerBust: false,
+      count: 0,
+      countArray: [],
+      countArrayValues: [],
     }
   }
  
@@ -58,7 +61,7 @@ class App extends Component {
 
   dealHand = (e) => {
     e.preventDefault();
-    console.log('Player bet is ' + this.state.playerBet)
+    // console.log('Player bet is ' + this.state.playerBet)
     axios.get(`https://deckofcardsapi.com/api/deck/${this.state.deckID}/draw/?count=4`).then(response => {
       const dealtCards = response.data.cards;
       const remainingCards = response.data.remaining
@@ -72,6 +75,7 @@ class App extends Component {
               dealerHand: [...prevState.dealerHand, card],
               dealerHandImages: [...prevState.dealerHandImages, cardImage],
               dealerHandValues: [...prevState.dealerHandValues, cardValue],
+              countArray: [...prevState.countArray, cardValue],
             }
           })
         } else {
@@ -80,6 +84,7 @@ class App extends Component {
               playerHand: [...prevState.playerHand, card],
               playerHandImages: [...prevState.playerHandImages, cardImage],
               playerHandValues: [...prevState.playerHandValues, cardValue],
+              countArray: [...prevState.countArray, cardValue],
             }
           })
         }
@@ -98,15 +103,15 @@ initialBlackjack = () => {
   //  if both player and deal start with 21, it is a push.
   
   if (this.state.dealerHandTotalPostAces === 21 &&  this.state.playerHandTotalPostAces === 21){
-    console.log('PUSH');
+    //console.log('PUSH');
     this.checkWhoWon();
   //  if dealer starts with 21 and player does not, player looses
   } else if (this.state.dealerHandTotalPostAces === 21){
-    console.log('Dealer has Blackjack.  Player looses.');
+    //console.log('Dealer has Blackjack.  Player looses.');
     this.checkWhoWon();
   //  if player starts with 21 and dealer does not, player wins.
   } else if (this.state.playerHandTotalPostAces === 21){
-    console.log('Player has Blackjack.  Winner Winner Chicken Dinner!');
+    //console.log('Player has Blackjack.  Winner Winner Chicken Dinner!');
     //  increase bankroll by bet amount + 50%
     this.setState(prevState => {
       return {
@@ -124,15 +129,18 @@ initialBlackjack = () => {
       if (value === 'JACK' ||value === 'QUEEN' || value === 'KING' ){
         value = 10
        numericalHand.push(value)
+  
       } else if (value === 'ACE'){
           value = 1
           numericalHand.push(value);
+    
           this.setState({
             dealerHasAce: true
           })
       } else {
         const stringToNumberValue = parseInt(value)
         numericalHand.push(stringToNumberValue)
+  
       } })
     const reducer = (accumulator, currentValue) => accumulator + currentValue;
     let dealerHandTotal = numericalHand.reduce(reducer);
@@ -170,10 +178,12 @@ initialBlackjack = () => {
         value = 10
         numericalHand.push(value)
         this.state.playerNumericalHandValues.push(value)
+  
       } else if (value === 'ACE'){
           value = 1
           numericalHand.push(value);
           this.state.playerNumericalHandValues.push(value)
+    
           this.setState({
             playerHasAce: true
           })
@@ -181,6 +191,7 @@ initialBlackjack = () => {
         const stringToNumberValue = parseInt(value)
         numericalHand.push(stringToNumberValue)
         this.state.playerNumericalHandValues.push(stringToNumberValue)
+  
       } })
     const reducer = (accumulator, currentValue) => accumulator + currentValue;
     let playerHandTotal = numericalHand.reduce(reducer);  
@@ -224,6 +235,7 @@ initialBlackjack = () => {
         playerHand: [...prevState.playerHand, oneCardDealt],
         playerHandImages: [...prevState.playerHandImages, cardImage],
         playerHandValues: [...prevState.playerHandValues, cardValue],
+        countArray: [...prevState.countArray, cardValue],
       }
       //  Once state is set from the new card, re-run the player hand total functions
     }, () => this.countPlayerTotal())
@@ -233,13 +245,16 @@ initialBlackjack = () => {
 //  Checks to see if the player went over 21
   didPlayerBust = () => {
     console.log('did player bust function ran')
+
+    //console.log('COUNT ARRAY IS: ' + this.state.countArray)
+
     //  Check if both the dealer and player only have 2 cards.  if so, we need to check for initial blackjacks.
     if (this.state.dealerHand.length === 2 && this.state.playerHand.length === 2){
       this.initialBlackjack()
     }
     //  Player Busts.  Hands Reset
     else if (this.state.playerHandTotalPostAces > 21){
-      console.log('player busted.  you loose')
+      //console.log('player busted.  you loose')
       this.setState(prevState => {
         return {
           playerBust: true,
@@ -255,10 +270,10 @@ initialBlackjack = () => {
 
   didDealerBust = () => {
     console.log('did dealer bust function ran');
-   
+   //console.log('COUNT ARRAY IS: ' + this.state.countArray)
     //  Dealer Busts.  Hands Reset.  Player Wins
     if (this.state.dealerHandTotalPostAces > 21){
-      console.log('dealer busted.  Player Wins!')
+      //console.log('dealer busted.  Player Wins!')
       //  Increase player bankroll by bet amount
       this.setState(prevState => {
         return {
@@ -311,6 +326,7 @@ initialBlackjack = () => {
           dealerHand: [...prevState.dealerHand, oneCardDealt],
           dealerHandImages: [...prevState.dealerHandImages, cardImage],
           dealerHandValues: [...prevState.dealerHandValues, cardValue],
+          countArray: [...prevState.countArray, cardValue],
         }
       }, () => this.countDealerTotal() )
     });
@@ -322,10 +338,10 @@ checkWhoWon = () => {
  
     //  If Dealer Wins:
     if(this.state.dealerHandTotalPostAces > this.state.playerHandTotalPostAces){
-      console.log('DEALER WINS');
+      // console.log('DEALER WINS');
       //  reduce bankroll by bet amount
-      console.log( 'player bet this hand is :' + this.state.playerBet )
-      console.log( 'player bankroll this hand is :' +  this.state.playerBankroll )
+      // console.log( 'player bet this hand is :' + this.state.playerBet )
+      // console.log( 'player bankroll this hand is :' +  this.state.playerBankroll )
       this.setState(prevState => {
         return {
           dealerWins: true,
@@ -334,9 +350,9 @@ checkWhoWon = () => {
         }}, () => setTimeout(this.resetHand, 2000));
     //  If it is a tie:
     } else if (this.state.dealerHandTotalPostAces === this.state.playerHandTotalPostAces){
-      console.log('PUSH')
-      console.log( 'player bet this hand is :' + this.state.playerBet )
-      console.log( 'player bankroll this hand is :' +  this.state.playerBankroll )
+      // console.log('PUSH')
+      // console.log( 'player bet this hand is :' + this.state.playerBet )
+      // console.log( 'player bankroll this hand is :' +  this.state.playerBankroll )
       //  Bankroll stays the same 
       this.setState(prevState => {
         return {
@@ -344,9 +360,9 @@ checkWhoWon = () => {
         }}, () => setTimeout(this.resetHand, 2000));
     //  If Player wins
     } else {
-      console.log('PLAYER WINS')
-      console.log( 'player bet this hand is :' + this.state.playerBet )
-      console.log( 'player bankroll this hand is :' +   this.state.playerBankroll )
+      // console.log('PLAYER WINS')
+      // console.log( 'player bet this hand is :' + this.state.playerBet )
+      // console.log( 'player bankroll this hand is :' +   this.state.playerBankroll )
       //  increase bankroll by bet amount
       this.setState(prevState => {
         return {
@@ -363,9 +379,9 @@ checkWhoWon = () => {
       playerClickedStand: true
     });
     //  If dealer hand value is lower than 17, need to deal themself enough cards until they are over 17.
-    console.log(this.state.dealerHandTotalPostAces)
+    //console.log(this.state.dealerHandTotalPostAces)
     if (this.state.dealerHandTotalPostAces < 17){
-      console.log('dealer has less than 17')
+      //console.log('dealer has less than 17')
       setTimeout(this.dealerHits, 500)
     } else {
       this.checkWhoWon()
@@ -377,7 +393,7 @@ playerDoubles = () => {
   //  Need to check if player is on their first 2 cards.  Double is not allowed if they have more than 2 cards.
   //  If player chooses to double, they do not have the option to hit afterwards.  So we will need to set state of a varible //  to check if double has been set, and if so, disable the hit function for this hand.
   if (this.state.playerHand.length === 2){
-    console.log('you ARE alowed to double')
+    //console.log('you ARE alowed to double')
     //  Need to set state that the player chose to double so we can run a check on that in another function
     this.setState({
       playerClickedDouble: true,
@@ -392,10 +408,10 @@ playerDoubles = () => {
 
 playerSplits = () => {
   console.log('Player choose to SPLIT function ran');
-  console.log(this.state.playerNumericalHandValues)
+  //console.log(this.state.playerNumericalHandValues)
   //  Need to check if player is on their first 2 cards.  Split is not allowed if they have more than 2 cards per hand. 
   if (this.state.playerHand.length === 2 && this.state.playerNumericalHandValues[0] === this.state.playerNumericalHandValues[1]){
-    console.log('you ARE alowed to split');
+    //console.log('you ARE alowed to split');
     //  Need to set state that the player chose to double so we can run a check on that in another function
     this.setState({
       playerClickedSplit: true,
@@ -410,7 +426,7 @@ playerSplits = () => {
 ////////   Adding to player bets
 
 bet1 = () => {
-  console.log('player wants to bet 1')
+  //console.log('player wants to bet 1')
   this.setState(prevState => {
     return {
       playerBet: prevState.playerBet + 1
@@ -459,6 +475,44 @@ clearBet = () => {
   })
 }
 
+
+
+whatsTheCountGame = () => {
+  //  if card value is 10 or greater, count is subtracted by 1
+  console.log('check the count function ran')
+  let myCountingArray=[]
+  this.state.countArray.forEach(element => {
+    let numbericalElement = 0
+    
+    if (element === 'ACE' || element === 'KING' || element === 'QUEEN' ||element === 'JACK'){
+      numbericalElement = 10
+      myCountingArray.push(numbericalElement)
+    } else{
+      const numbericalElement = parseInt(element)
+      myCountingArray.push(numbericalElement)
+    }
+  });
+  let myConvertedCountArray = [];
+  
+  myCountingArray.forEach( number => {
+    if (number < 7){
+      let countNumber = 1
+      myConvertedCountArray.push(countNumber)
+    } else if(number >= 10){
+      let countNumber = -1
+      myConvertedCountArray.push(countNumber)
+    } else{
+      let countNumber = 0
+      myConvertedCountArray.push(countNumber)
+    }
+  })
+  const reducer = (accumulator, currentValue) => accumulator + currentValue;
+    let gameCount = myConvertedCountArray.reduce(reducer);  
+    this.setState({
+      count: gameCount
+    })
+}
+
   render() {
     return (
       <div>
@@ -497,6 +551,8 @@ clearBet = () => {
               playerWins={this.state.playerWins}
               dealerBust={this.state.dealerBust}
               playerBust={this.state.playerBust}
+              gameCount={this.state.count}
+              whatsTheCountGame={this.whatsTheCountGame}
               />}/>
           <Route path="/train" component={Train}/>
           <Route path="/learn" component={Learn}/>

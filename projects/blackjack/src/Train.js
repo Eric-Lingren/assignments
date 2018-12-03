@@ -49,13 +49,14 @@ dealCard = () => {
   }
 
   whatsTheCount = () => {
-
+    //  if card value is 10 or greater, count is subtracted by 1
     if (this.state.currentCardValue === '10' || this.state.currentCardValue === 'JACK' || this.state.currentCardValue === 'QUEEN' || this.state.currentCardValue === 'KING' || this.state.currentCardValue === 'ACE'){
         this.setState(prevState => {
             return{
                 count: prevState.count -1
             }
         })
+        //  if card value is 6 or less, count is added by 1
     } else if(this.state.currentCardValue < 7){
         this.setState(prevState => {
             return{
@@ -63,7 +64,6 @@ dealCard = () => {
             }
         })
     }
-    //  if card value is 6 or less, count is added by 1
   }
  
   
