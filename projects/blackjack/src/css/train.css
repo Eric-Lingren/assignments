@@ -1,6 +1,10 @@
+.html, body{
+    height: 100%;
+    
+}
 .trainingWrapper{
     background-image: linear-gradient( #0f9b0f, #52c234, #52c234, #0f9b0f);
-    height: 95vh;
+    height: 100vh;
     margin-top: 0;
     padding-top: 0;
 }
@@ -13,24 +17,26 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: center;   
-    padding-top: 5%;
+    align-items: center; 
+    height: 100vh;
     
 }
 .trainingDrillsHeader{
-    padding-bottom: 3%;
     font-size: 3em;
+    margin-top: -7%;
 }
 .trainLinks{
     color: #FFF;
-    font-size: 3vh;
+    font-size: 2em;
     margin: 1vh;
     transition: .3s ease-out;
+    text-decoration: none;
+    border-bottom: white 3px solid;
  
 }
 
 .trainLinks:hover{
-    font-size: 4vh;
+    font-size: 2.5em;
     transition: .3s ease-out;
    
 }
@@ -49,4 +55,12 @@
 }
 .toggleCount{
     cursor: pointer;
+}
+.runningCountTrueCountForm{
+    display: flex;
+    flex-direction: column
+}
+.checkButton{
+    border-radius: 5px;
+    padding: 3px;
 }

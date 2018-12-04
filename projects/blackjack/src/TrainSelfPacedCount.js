@@ -86,9 +86,9 @@ dealCard = () => {
         return ( 
             <div className='trainingWrapper'>
                 <div className='container'>
-                    <h1>Self Paced Count Training</h1>
+                    <h1>Self Paced Count</h1>
                     <div className='deckDisplay'>
-                        <img src={this.state.cardsDealtImages} alt='card'></img>
+                        <img src={this.state.cardsDealtImages} alt='Cards Displayed Here'></img>
                     </div>
                     <button onClick={this.dealCard}>Deal Card</button>
                     <h2 onClick={this.hideShowRunningCount} className='toggleCount'>{this.hideShowCountDiv()} </h2>
