@@ -21,7 +21,7 @@ class TrainSelfPacedCount extends Component {
             deckID: deckID,
           })
         })
-      }
+    }
 
 
 dealCard = () => {

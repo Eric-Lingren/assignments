@@ -48,7 +48,7 @@ class TrainSpeedCount extends Component {
     setTimeout( ()=> { 
         clearInterval(timerId)
         this.countIsFinished()
-    }, 5000)  
+    }, 15000)  
     }
     
       whatsTheCount = () => {
@@ -103,7 +103,7 @@ class TrainSpeedCount extends Component {
                         Cards Per Second: <input name='cardsPerSecond' type='number' value={this.state.cardsPerSecond} placeholder='Cards Per Second' onChange={this.handleChange}></input>
                     </form>
                     <div className='deckDisplay'>
-                        <img src={this.state.cardsDealtImages} alt='card'></img>
+                        <img src={this.state.cardsDealtImages} alt='Cards Displayed Here'></img>
                     </div>
                     <button onClick={this.dealCard}>start</button>
                     <h2 className={this.state.runningCountVisible ? 'showCountDiv' : 'hideCountDiv' }>The count is: {this.state.count}</h2>
