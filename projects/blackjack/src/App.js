@@ -34,7 +34,9 @@ class App extends Component {
       dealerHandTotal: '',
       dealerHandImages: [],
       playerHand: [],
+      playerHand2: [],
       playerHandValues: [],
+      playerHandValues2: [],
       playerNumericalHandValues: [],
       playerNumericalHandValues2: [],
       dealerHandTotalPreAces: '',
@@ -57,11 +59,14 @@ class App extends Component {
       dealerWins: false,
       playerWins: false,
       playerBust: false,
+      playerBust2: false,
       dealerBust: false,
       count: 0,
       countArray: [],
       countArrayValues: [],
       playerBaseBet: 50,
+      showCountDiv: false,
+      showAdviceDiv: false,
     }
   }
  
@@ -196,6 +201,9 @@ initialBlackjack = () => {
   countPlayerTotal = () => {
     console.log('count player total function ran');
     const hand = this.state.playerHandValues
+    const hand2 = this.state.playerHandValues2
+    console.log('player hand 1 is ' + hand)
+    console.log('player hand 2 is ' + hand2)
     const numericalHand = [];
     hand.forEach(value => {
       if (value === 'JACK' ||value === 'QUEEN' || value === 'KING' ){
@@ -324,10 +332,13 @@ initialBlackjack = () => {
           dealerHandTotal: '',
           dealerHandImages: [],
           playerHand: [],
+          playerHand2: [],
           playerHandValues: [],
+          playerHandValues2: [],
           playerNumericalHandValues: [],
           playerNumericalHandValues2: [],
           playerHandTotal: '',
+          playerHandTotal2: '',
           playerHandImages: [],
           playerHandImages2: [],
           playerHasAce: false,
@@ -343,6 +354,7 @@ initialBlackjack = () => {
           dealerWins: false,
           playerWins: false,
           playerBust: false,
+          playerBust2: false,
           dealerBust: false,
           playerDoubleBet: 0,
       })
@@ -456,13 +468,17 @@ playerSplits = () => {
   
   //console.log(this.state.playerNumericalHandValues)
   //  Need to check if player is on their first 2 cards.  Split is not allowed if they have more than 2 cards per hand. 
-  if (this.state.playerNumericalHandValues.length === 2 && this.state.playerNumericalHandValues[0] === this.state.playerNumericalHandValues[1]){
+  if (this.state.playerNumericalHandValues.length === 2 ){
+    ////  ADD THIS LINE BACK ITO THE IF STATEMENT ABOVE !!  REMOVED FOR TESTING SPLITS!!
+    // && this.state.playerNumericalHandValues[0] === this.state.playerNumericalHandValues[1]
     //console.log('you ARE alowed to split');
     //  Need to set state that the player chose to double so we can run a check on that in another function
     this.setState({
       playerClickedSplit: true,
     })
     this.state.playerNumericalHandValues2.push(this.state.playerNumericalHandValues.pop());
+    this.state.playerHand2.push(this.state.playerHand.pop());
+    this.state.playerHandValues2.push(this.state.playerHandValues2.pop());
     this.state.playerHandImages2.push(this.state.playerHandImages.pop());
     console.log('PLAYER HAND NUMERICAL VALUES AFTER SPLIT IS :  ' + this.state.playerNumericalHandValues)
     console.log('PLAYER HAND NUMERICAL VALUES 2 AFTER SPLIT IS :  ' + this.state.playerNumericalHandValues2)
@@ -477,6 +493,9 @@ playerSplits = () => {
 calculateSplitHandTotals = () => {
   let numericalHand1 = this.state.playerNumericalHandValues
   let numericalHand2 = this.state.playerNumericalHandValues2
+
+  console.log(numericalHand1)
+  console.log(numericalHand2)
   const reducer = (accumulator, currentValue) => accumulator + currentValue;
     let playerHandTotal1 = numericalHand1.reduce(reducer);  
     let playerHandTotal2 = numericalHand2.reduce(reducer);  
@@ -496,16 +515,50 @@ adjustPlayerSplitCountWithAces = () => {
     this.setState(() => ({
       playerHandTotalPostAces: finalPlayerTotal1,
       playerHandTotal2PostAces: finalPlayerTotal2,
-    }), () =>  this.didPlayerBust() )
+    }), () =>  this.didPlayerBustSplitHand1() )
   } else {
     this.setState(() => ({
       playerHandTotalPostAces: playerTotalPreAces1,
       playerHandTotal2PostAces: playerTotalPreAces2
-    }), () =>  this.didPlayerBust() )
+    }), () =>  this.didPlayerBustSplitHand1() )
   }
 }
 
-////////   Adding to player bets
+didPlayerBustSplitHand1 = () => {
+  console.log('playerHandTotal1PostAces : '+  this.state.playerHandTotalPostAces)
+  console.log('playerHandTotal2PostAces : '+  this.state.playerHandTotal2PostAces)
+//  Play hand 1 first
+  if (this.state.playerHandTotalPostAces < 21){
+    console.log('Hand 1 didnt bust')
+
+  }
+}
+
+// playerHitsSplitHand1 = () => {
+//   axios.get(`https://deckofcardsapi.com/api/deck/${this.state.deckID}/draw/?count=1`).then(response => {
+//     const oneCardDealt = response.data.cards[0].code;
+//     const remainingCards = response.data.remaining;
+//     const cardImage = response.data.cards[0].image
+//     const cardValue = response.data.cards[0].value
+//   console.log('cardValue' + cardValue)
+//     this.setState(prevState => {
+//       return {
+//         playerHand: [...prevState.playerHand, oneCardDealt],
+//         playerHandImages: [...prevState.playerHandImages, cardImage],
+//         playerHandValues: [...prevState.playerHandValues, cardValue],
+//         countArray: [...prevState.countArray, cardValue],
+//         cardsDealt: prevState.cardsDealt + 1,
+//         decksPlayed: ((this.state.cardsDealt / 52).toFixed(2) ),
+//         remainingCards: remainingCards,
+//         remainingDecks: ( (this.state.deckCount - this.state.decksPlayed).toFixed(2) ),
+//         trueCount: ((this.state.count / this.state.remainingDecks).toFixed(1)),
+//       }
+//       //  Once state is set from the new card, re-run the player hand total functions
+//     }, () => this.calculateSplitHandTotals()) 
+//     this.whatsTheCountGame()
+//   })
+// }
+////////   Adding to player bets    //////////////////
 
 bet1 = () => {
   //console.log('player wants to bet 1')
@@ -588,11 +641,37 @@ whatsTheCountGame = () => {
       myConvertedCountArray.push(countNumber)
     }
   })
+
   const reducer = (accumulator, currentValue) => accumulator + currentValue;
     let gameCount = myConvertedCountArray.reduce(reducer);  
     this.setState({
       count: gameCount
     })
+}
+hideShowCount = () => {
+    console.log('hide show count ran')
+  if(this.state.showCountDiv === false){
+    this.setState({
+      showCountDiv: true,
+    })
+  } else{
+    this.setState({
+      showCountDiv: false,
+    })
+  }
+}
+
+hideShowAdvice = () => {
+  console.log('hide show advice ran')
+if(this.state.showAdviceDiv === false){
+  this.setState({
+    showAdviceDiv: true,
+  })
+} else{
+  this.setState({
+    showAdviceDiv: false,
+  })
+}
 }
 
   render() {
@@ -637,13 +716,16 @@ whatsTheCountGame = () => {
               dealerBust={this.state.dealerBust}
               playerBust={this.state.playerBust}
               gameCount={this.state.count}
-              whatsTheCountGame={this.whatsTheCountGame}
+              hideShowCount={this.hideShowCount}
               cardsDealt={this.state.cardsDealt}
               decksPlayed={this.state.decksPlayed}
               remainingCards={this.state.remainingCards}
               remainingDecks={this.state.remainingDecks}
               trueCount={this.state.trueCount}
               playerBaseBet={this.state.playerBaseBet}
+              showCountDiv={this.state.showCountDiv}
+              showAdviceDiv={this.state.showAdviceDiv}
+              hideShowAdvice={this.hideShowAdvice}
               />}/>
           <Route path="/train" component={Train}/>
           <Route path="/learn" component={Learn}/>

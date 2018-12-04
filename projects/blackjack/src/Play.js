@@ -11,7 +11,7 @@ import fiveHundredDollar from './css/images/$500.png';
 
 
 const Play = (props) => {
-const { dealHand, dealOneCard, dealerHandImages, playerHandImages, playerHandImages2, playerHandTotal, dealerHandTotal, playerStands, playerDoubles, playerDoubleBet, playerSplits, playerBet, playerBankroll, bet1, bet5, bet25, bet50, bet100, bet500, playerClickedStand, playerClickedDouble, playerClickedSplit, dealerWins, playerWins, playerBust, dealerBust, clearBet, gameCount, whatsTheCountGame, cardsDealt, decksPlayed, remainingCards, remainingDecks, trueCount, playerBaseBet, playerHand2Total, } = props;
+const { dealHand, dealOneCard, dealerHandImages, playerHandImages, playerHandImages2, playerHandTotal, dealerHandTotal, playerStands, playerDoubles, playerDoubleBet, playerSplits, playerBet, playerBankroll, bet1, bet5, bet25, bet50, bet100, bet500, playerClickedStand, playerClickedDouble, playerClickedSplit, dealerWins, playerWins, playerBust, dealerBust, clearBet, gameCount, hideShowCount, cardsDealt, decksPlayed, remainingCards, remainingDecks, trueCount, playerBaseBet, playerHand2Total, showCountDiv, showAdviceDiv, hideShowAdvice, } = props;
 
     function tableStatus(){
         // console.log('did dealer win: ' + dealerWins);
@@ -50,6 +50,25 @@ const { dealHand, dealOneCard, dealerHandImages, playerHandImages, playerHandIma
         return <h2>Player Total Hand 2: {playerHand2Total} </h2>
         }
     }
+
+    function showCount(){
+        if (showCountDiv){
+            return <span>Hide Count</span>
+        }else {
+            return <span>Show Count</span>
+        }
+    }
+
+    function showAdvice(){
+        if (showAdviceDiv){
+            return <span>Hide Advice</span>
+        }else {
+            return <span>Show Advice</span>
+        }
+    }
+
+    const showTheCount = showCount()
+    const showTheAdvice = showAdvice()
     const splitTheseCards = splitHands()
     const betSize = optimalBetSize()
     return (
@@ -69,7 +88,8 @@ const { dealHand, dealOneCard, dealerHandImages, playerHandImages, playerHandIma
                 <button onClick={playerDoubles} > Double </button>
                 <button onClick={playerSplits} > Split </button>
                 <button onClick={clearBet} > Clear Bet </button>
-                <button onClick={whatsTheCountGame} > Show Count</button>
+                <button onClick={hideShowCount} > {showTheCount}</button>
+                <button onClick={hideShowAdvice} > {showTheAdvice}</button>
                 <h2>Player Total: {playerHandTotal} </h2>
                 {splitTheseCards}
                 <img src={oneDollar} onClick={bet1} alt='chip' className='pokerChip'></img>
@@ -87,7 +107,7 @@ const { dealHand, dealOneCard, dealerHandImages, playerHandImages, playerHandIma
                 <h2 className='playerBet'>Player Bet: ${playerBet} </h2>
                 <h2 className='playerDouble'>Double: ${dbl}</h2>
                 <h2 className='playerBankroll'>Player Bankroll: ${playerBankroll} </h2>
-                <div className='countStats'>
+                <div className={showCountDiv ? 'showCountStats' : 'hideCountStats'}>
                     <h2>Count Stats:</h2>
                     <h3>Running Count: {gameCount} </h3>
                     <h3>True Count: {trueCount} </h3>
@@ -96,6 +116,9 @@ const { dealHand, dealOneCard, dealerHandImages, playerHandImages, playerHandIma
                     <h3>Remaining Cards: {remainingCards} </h3>
                     <h3>Remaining Decks: {remainingDecks} </h3>
                     <h3>Optimal Bet: {betSize }</h3>
+                </div>
+                <div className={showAdviceDiv ? 'showAdvice' : 'hideAdvice'}>
+                    <h2>Help:</h2>
                 </div>
                 
                 

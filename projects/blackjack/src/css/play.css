@@ -50,7 +50,7 @@ button{
     position: absolute; 
     top: 130px;
 }
-.countStats{
+.showCountStats{
     background-color: cornflowerblue;
     width: 20%;
     position: absolute;
@@ -58,7 +58,32 @@ button{
     top: 40%;
 
 }
+.hideCountStats{
+    background-color: cornflowerblue;
+    width: 20%;
+    position: absolute;
+    right: 0;
+    top: 40%;
+    opacity: 0;
+}
 
 .splitHand{
-    
+
+}
+.showAdvice{
+    height: 100px;
+    width: 20%;
+    background-color: lightsalmon;
+    position: absolute;
+    right: 0;
+    top: 10%;
+}
+.hideAdvice{
+    height: 100px;
+    width: 20%;
+    background-color: lightsalmon;
+    position: absolute;
+    right: 0;
+    top: 10%;
+    opacity: 0;
 }
