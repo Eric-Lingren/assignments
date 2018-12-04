@@ -36,11 +36,15 @@ class App extends Component {
       playerHand: [],
       playerHandValues: [],
       playerNumericalHandValues: [],
+      playerNumericalHandValues2: [],
       dealerHandTotalPreAces: '',
       dealerHandTotalPostAces: '',
       playerHandTotalPreAces: '',
+      playerHandTotal2PreAces: '',
       playerHandTotalPostAces: '',
+      playerHandTotal2PostAces: '',
       playerHandImages: [],
+      playerHandImages2: [],
       dealtCard: '',
       playerHasAce: false,
       dealerHasAce: false,
@@ -89,7 +93,7 @@ class App extends Component {
               countArray: [...prevState.countArray, cardValue],
               cardsDealt: prevState.cardsDealt + 1,
               decksPlayed: ((this.state.cardsDealt / 52).toFixed(2) ),
-              remainingDecks: (this.state.deckCount - this.state.decksPlayed),
+              remainingDecks: ( (this.state.deckCount - this.state.decksPlayed).toFixed(2) ),
               trueCount: ((this.state.count / this.state.remainingDecks).toFixed(1)),
             }
           })
@@ -102,7 +106,7 @@ class App extends Component {
               countArray: [...prevState.countArray, cardValue],
               cardsDealt: prevState.cardsDealt + 1,
               decksPlayed: ((this.state.cardsDealt / 52).toFixed(2) ),
-              remainingDecks: (this.state.deckCount - this.state.decksPlayed),
+              remainingDecks: ( (this.state.deckCount - this.state.decksPlayed).toFixed(2) ),
               trueCount: ((this.state.count / this.state.remainingDecks).toFixed(1)),
             }
           })
@@ -113,6 +117,7 @@ class App extends Component {
       })
       this.countDealerTotal()
       this.countPlayerTotal()
+      this.whatsTheCountGame()
     })
   }
 
@@ -258,12 +263,14 @@ initialBlackjack = () => {
         cardsDealt: prevState.cardsDealt + 1,
         decksPlayed: ((this.state.cardsDealt / 52).toFixed(2) ),
         remainingCards: remainingCards,
-        remainingDecks: (this.state.deckCount - this.state.decksPlayed),
+        remainingDecks: ( (this.state.deckCount - this.state.decksPlayed).toFixed(2) ),
         trueCount: ((this.state.count / this.state.remainingDecks).toFixed(1)),
       }
       //  Once state is set from the new card, re-run the player hand total functions
-    }, () => this.countPlayerTotal())
+    }, () => this.countPlayerTotal()) 
+    this.whatsTheCountGame()
   })
+  
 }
 
 //  Checks to see if the player went over 21
@@ -318,12 +325,17 @@ initialBlackjack = () => {
           dealerHandImages: [],
           playerHand: [],
           playerHandValues: [],
+          playerNumericalHandValues: [],
+          playerNumericalHandValues2: [],
           playerHandTotal: '',
           playerHandImages: [],
+          playerHandImages2: [],
           playerHasAce: false,
           dealerHasAce: false,
           dealerHandTotalPostAces: '',
           playerHandTotalPostAces: '',
+          playerHandTotal2PreAces: '',
+          playerHandTotal2PostAces: '',
           playerClickedStand: false,
           playerClickedDouble: false,
           playerClickedSplit: false,
@@ -353,10 +365,11 @@ initialBlackjack = () => {
           cardsDealt: prevState.cardsDealt + 1,
           decksPlayed: ((this.state.cardsDealt / 52).toFixed(2) ),
           remainingCards: remainingCards,
-          remainingDecks: (this.state.deckCount - this.state.decksPlayed),
+          remainingDecks: ( (this.state.deckCount - this.state.decksPlayed).toFixed(2) ),
           trueCount: ((this.state.count / this.state.remainingDecks).toFixed(1)),
         }
       }, () => this.countDealerTotal() )
+      this.whatsTheCountGame()
     });
   }
 
@@ -436,20 +449,61 @@ playerDoubles = () => {
 
 playerSplits = () => {
   console.log('Player choose to SPLIT function ran');
+  console.log('PLAYER HAND IS :  ' + this.state.playerHand)
+  console.log('PLAYER HAND VALUES IS :  ' + this.state.playerHandValues)
+  console.log('PLAYER HAND NUMERICAL VALUES BEFORE SPLIT IS :  ' + this.state.playerNumericalHandValues)
+  console.log('PLAYER HAND NUMERICAL VALUES 2 BEFORE SPLIT IS :  ' + this.state.playerNumericalHandValues2)
+  
   //console.log(this.state.playerNumericalHandValues)
   //  Need to check if player is on their first 2 cards.  Split is not allowed if they have more than 2 cards per hand. 
-  if (this.state.playerHand.length === 2 && this.state.playerNumericalHandValues[0] === this.state.playerNumericalHandValues[1]){
+  if (this.state.playerNumericalHandValues.length === 2 && this.state.playerNumericalHandValues[0] === this.state.playerNumericalHandValues[1]){
     //console.log('you ARE alowed to split');
     //  Need to set state that the player chose to double so we can run a check on that in another function
     this.setState({
       playerClickedSplit: true,
     })
+    this.state.playerNumericalHandValues2.push(this.state.playerNumericalHandValues.pop());
+    this.state.playerHandImages2.push(this.state.playerHandImages.pop());
+    console.log('PLAYER HAND NUMERICAL VALUES AFTER SPLIT IS :  ' + this.state.playerNumericalHandValues)
+    console.log('PLAYER HAND NUMERICAL VALUES 2 AFTER SPLIT IS :  ' + this.state.playerNumericalHandValues2)
+
+    this.calculateSplitHandTotals()
+
   }else {
     alert('You are not alowed to split right now');
-  }
-  //  Check if those 2 cards are the same value.  If they are, the player can split.
+  } 
 }
 
+calculateSplitHandTotals = () => {
+  let numericalHand1 = this.state.playerNumericalHandValues
+  let numericalHand2 = this.state.playerNumericalHandValues2
+  const reducer = (accumulator, currentValue) => accumulator + currentValue;
+    let playerHandTotal1 = numericalHand1.reduce(reducer);  
+    let playerHandTotal2 = numericalHand2.reduce(reducer);  
+    //  Sets the state for the count of that player hand with aces only being worth 1
+    this.setState(() => ({
+      playerHandTotalPreAces: playerHandTotal1,
+      playerHandTotal2PreAces: playerHandTotal2
+    }), () => this.adjustPlayerSplitCountWithAces() );
+}
+
+adjustPlayerSplitCountWithAces = () => {
+  let playerTotalPreAces1 = this.state.playerHandTotalPreAces  
+  let playerTotalPreAces2 = this.state.playerHandTotal2PreAces
+  if (this.state.playerHasAce === true && playerTotalPreAces1 <= 11){
+    let finalPlayerTotal1 = playerTotalPreAces1 + 10;
+    let finalPlayerTotal2 = playerTotalPreAces2 + 10;
+    this.setState(() => ({
+      playerHandTotalPostAces: finalPlayerTotal1,
+      playerHandTotal2PostAces: finalPlayerTotal2,
+    }), () =>  this.didPlayerBust() )
+  } else {
+    this.setState(() => ({
+      playerHandTotalPostAces: playerTotalPreAces1,
+      playerHandTotal2PostAces: playerTotalPreAces2
+    }), () =>  this.didPlayerBust() )
+  }
+}
 
 ////////   Adding to player bets
 
@@ -557,16 +611,19 @@ whatsTheCountGame = () => {
               playerDoubles={this.playerDoubles} 
               playerClickedDouble={this.state.playerClickedDouble} 
               playerDoubleBet={this.state.playerDoubleBet} 
+              playerClickedSplit={this.state.playerClickedSplit} 
               playerSplits={this.playerSplits} 
               clearBet={this.clearBet}
               //countDealerTotal={this.state.dealerHandTotal}
               countPlayerTotal={this.state.playerHandTotal}
               dealerHandImages={this.state.dealerHandImages} 
               playerHandImages={this.state.playerHandImages} 
+              playerHandImages2={this.state.playerHandImages2} 
               dealerHandValues={this.state.dealerHandValues} 
               dealerHandTotal={this.state.dealerHandTotalPostAces} 
               playerHandValues={this.state.playerHandValues}
               playerHandTotal={this.state.playerHandTotalPostAces} 
+              playerHand2Total={this.state.playerHandTotal2PostAces} 
               playerBet={this.state.playerBet}
               playerBankroll={this.state.playerBankroll}
               bet1={this.bet1} 

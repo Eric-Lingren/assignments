@@ -1,6 +1,7 @@
 import React from 'react'
 import './css/play.css'
 import DisplayACard from './DisplayACard'
+import SplitHand from './SplitHand'
 import oneDollar from './css/images/$1.png';
 import fiveDollar from './css/images/$5.png';
 import twentyFiveDollar from './css/images/$25.png';
@@ -10,7 +11,7 @@ import fiveHundredDollar from './css/images/$500.png';
 
 
 const Play = (props) => {
-const { dealHand, dealOneCard, dealerHandImages, playerHandImages, playerHandTotal, dealerHandTotal, playerStands, playerDoubles, playerDoubleBet, playerSplits, playerBet, playerBankroll, bet1, bet5, bet25, bet50, bet100, bet500, playerClickedStand, playerClickedDouble, dealerWins, playerWins, playerBust, dealerBust, clearBet, gameCount, whatsTheCountGame, cardsDealt, decksPlayed, remainingCards, remainingDecks, trueCount, playerBaseBet, } = props;
+const { dealHand, dealOneCard, dealerHandImages, playerHandImages, playerHandImages2, playerHandTotal, dealerHandTotal, playerStands, playerDoubles, playerDoubleBet, playerSplits, playerBet, playerBankroll, bet1, bet5, bet25, bet50, bet100, bet500, playerClickedStand, playerClickedDouble, playerClickedSplit, dealerWins, playerWins, playerBust, dealerBust, clearBet, gameCount, whatsTheCountGame, cardsDealt, decksPlayed, remainingCards, remainingDecks, trueCount, playerBaseBet, playerHand2Total, } = props;
 
     function tableStatus(){
         // console.log('did dealer win: ' + dealerWins);
@@ -44,6 +45,12 @@ const { dealHand, dealOneCard, dealerHandImages, playerHandImages, playerHandTot
         
     }
 
+    function splitHands(){
+        if(playerClickedSplit){
+        return <h2>Player Total Hand 2: {playerHand2Total} </h2>
+        }
+    }
+    const splitTheseCards = splitHands()
     const betSize = optimalBetSize()
     return (
         <div className='playContainer'>
@@ -64,6 +71,7 @@ const { dealHand, dealOneCard, dealerHandImages, playerHandImages, playerHandTot
                 <button onClick={clearBet} > Clear Bet </button>
                 <button onClick={whatsTheCountGame} > Show Count</button>
                 <h2>Player Total: {playerHandTotal} </h2>
+                {splitTheseCards}
                 <img src={oneDollar} onClick={bet1} alt='chip' className='pokerChip'></img>
                 <img src={fiveDollar} onClick={bet5} alt='chip' className='pokerChip'></img>
                 <img src={twentyFiveDollar} onClick={bet25} alt='chip' className='pokerChip'></img>
@@ -73,6 +81,9 @@ const { dealHand, dealOneCard, dealerHandImages, playerHandImages, playerHandTot
                 <div className='playerHand'>
                     {playerHandImages.map(dealtCard => <DisplayACard card={dealtCard} />)}                 
                 </div>
+                <SplitHand playerClickedSplit={playerClickedSplit} splitCards={playerHandImages2} />
+                {/* <Hand playerClickedSplit={playerClickedSplit} playerHandImages={playerHandImages} card={dealtCard} /> */}
+                
                 <h2 className='playerBet'>Player Bet: ${playerBet} </h2>
                 <h2 className='playerDouble'>Double: ${dbl}</h2>
                 <h2 className='playerBankroll'>Player Bankroll: ${playerBankroll} </h2>
