@@ -1,12 +1,12 @@
 .navContainer{
+    background-color: #000000;
     border: 1px solid black;
     display: flex;
     justify-content: space-evenly;
-    height: 35px;
+    height: 5vh;
     align-items: center;
-    background-color: #000;
     opacity: .6;
-    
+    border-bottom: white solid 2px;
 }
 
 .navLinks{
@@ -20,6 +20,5 @@
 }
 
 .navLinks:hover{
-    color: green;
-    border-bottom: green 3px solid;
+    font-size: 1.5em;
 }

@@ -6,6 +6,11 @@ import Home from './Home'
 import Play from './Play'
 import Learn from './Learn'
 import Train from './Train'
+import TrainBasicStrategy from './TrainBasicStrategy'
+import TrainSelfPacedCount from './TrainSelfPacedCount'
+import TrainSpeedCount from './TrainSpeedCount'
+import TrainRunningCountTrueCount from './TrainRunningCountTrueCount'
+import TrainBetSizing from './TrainBetSizing'
 
 //  Neded to shuffle deck
 //  Need to reduce bet size
@@ -729,6 +734,11 @@ if(this.state.showAdviceDiv === false){
               />}/>
           <Route path="/train" component={Train}/>
           <Route path="/learn" component={Learn}/>
+          <Route path="/TrainBasicStrategy" component={TrainBasicStrategy}/>
+          <Route path="/TrainSelfPacedCount" component={TrainSelfPacedCount}/>
+          <Route path="/TrainSpeedCount" component={TrainSpeedCount}/>
+          <Route path="/TrainRunningCountTrueCount" component={TrainRunningCountTrueCount}/>
+          <Route path="/TrainBetSizing" component={TrainBetSizing}/>
         </Switch>
        
         
