@@ -41,7 +41,7 @@ class TrainRunningCountSpeedCount extends Component {
         console.log('check was clicked')
         const deck = this.state.randomDeck;
         const count = this.state.randomCount;
-        const correctAnswer = (Math.floor( count / deck));
+        const correctAnswer = (Math.round( count / deck));
         this.setState({
             answer: correctAnswer,
         }, () => this.checkAnswer() )
@@ -73,10 +73,10 @@ class TrainRunningCountSpeedCount extends Component {
         return ( 
             <div className='trainingWrapper'>
                 <div className='container'>
-                    <h1>Running Count To True Count</h1>
-                    <h2>Running Count is: {this.state.randomCount} </h2>
-                    <h2>Decks Left: {this.state.randomDeck}</h2>
-                    <h2>What's the true count? (round down) </h2>
+                    <h1 >Running Count To True Count</h1>
+                    <h2 className='subTitle'>Running Count is: {this.state.randomCount} </h2>
+                    <h2 className='subTitle'>Decks Left: {this.state.randomDeck}</h2>
+                    <h2>What's the true count? (round) </h2>
                     <form className='runningCountTrueCountForm'>
                         <input type='number' name='guess' value={this.state.guess} onChange={this.handleChange} placeholder='Enter True Count' ></input><br></br>
                        

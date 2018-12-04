@@ -7,6 +7,8 @@
     height: 100vh;
     margin-top: 0;
     padding-top: 0;
+    display: flex;
+    justify-content: center;
 }
 .deckDisplay{
     height: 315px; 
@@ -34,7 +36,11 @@
     border-bottom: white 3px solid;
  
 }
-
+.drillHeader{
+    margin-top: 0;
+    padding-top: 0;
+    
+}
 .trainLinks:hover{
     font-size: 2.5em;
     transition: .3s ease-out;
@@ -43,15 +49,17 @@
 .container{
     display: flex;
     flex-direction: column;
-    align-content: center;
     align-items: center;
-    justify-content: center;
+    margin-top: 30px;
+    
 }
 .showCountDiv{
     opacity: 1;
+    margin: 0;
 }
 .hideCountDiv{
     opacity: 0;
+    margin: 0;
 }
 .toggleCount{
     cursor: pointer;
@@ -63,4 +71,13 @@
 .checkButton{
     border-radius: 5px;
     padding: 3px;
+    margin: 3px;
+}
+.subTitle{
+    margin: 0;
+    padding: 0;
+}
+.betButtonContainer{
+    
+    align-items: center;
 }
