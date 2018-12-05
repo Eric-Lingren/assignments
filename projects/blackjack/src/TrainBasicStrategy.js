@@ -12,6 +12,12 @@ class TrainBasicStrategy extends Component {
             playerCard2: '',
             playerImage1: '',
             playerImage2: '',
+            playerCard1IsAce : false,
+            playerCard2IsAce : false,
+            pCard1Number: '',
+            pCard2Number: '',
+            dHand: '',
+            pHand: '',
         }
     }
     componentDidMount(){
@@ -31,10 +37,6 @@ dealCard = () => {
     const dealerCardImage = response.data.cards[0].image
     const playerCardImage1 = response.data.cards[1].image
     const playerCardImage2 = response.data.cards[2].image
-      
-      console.log(dealerCardValue)
-    //   console.log(playerCardValue1 )
-    //   console.log(playerCardValue2)
 
       this.setState({
           dealerHand: dealerCardValue,
@@ -55,36 +57,83 @@ dealCard = () => {
     let pCard1Number = 0
     const pCard2 = this.state.playerCard2;
     let pCard2Number = 0
-    
-    console.log('Dealer Card Value: ' + dCard)
-    console.log('Player card 1 value: ' + pCard1)
-    console.log('Player Card 2 Value: ' + pCard2)
+
+    //  Sets the proper numberical values to dealer hand for future evaluation
     if (dCard === 'JACK' ||dCard === 'QUEEN' || dCard === 'KING' ){
         dCardNumber  = 10
+        this.setState({
+            dHand: dCardNumber
+        })
     } else if (dCard === 'ACE') {
         dCardNumber  = 11
+        this.setState({
+            dhand: dCardNumber
+        })
     } else {
         dCardNumber  = dCard
+        this.setState({
+            dhand: dCardNumber
+        })
     }
 
+    //  Sets the proper numberical values to player card 1 for future evaluation
     if (pCard1 === 'JACK' ||pCard1 === 'QUEEN' || pCard1 === 'KING' ){
         pCard1Number  = 10
+    } else if (pCard1 === 'ACE' ) {
+        pCard1Number  = 11
+        this.setState({
+            playerCard1IsAce: true,
+        })
     } else {
         pCard1Number = pCard1 
     }
 
+    //  Sets the proper numberical values to player card 2 for future evaluation
     if (pCard2 === 'JACK' ||pCard2 === 'QUEEN' || pCard2 === 'KING' ){
         pCard2Number  = 10
+    } else if (pCard2 === 'ACE' ) {
+        pCard2Number  = 11
+        this.setState({
+            playerCard2IsAce: true,
+        })
     } else {
         pCard2Number = pCard2 
     }
-    console.log('adjusted Card 1 value is ' + pCard1Number)
-    console.log('adjusted Card 2 value is ' + pCard2Number)
-    const pHand = parseInt(pCard1Number) +  parseInt(pCard2Number)
-    console.log('Player HAND Value: ' + pHand)
 
+    //  Sums the 2 player cards into 1 hand value
+    const pHand = parseInt(pCard1Number) +  parseInt(pCard2Number)
     const dHand = dCardNumber
-    console.log('Dealer HAND Value: ' + dHand)
+
+    //  Sets state of values parsed above for other functions to access.
+    this.setState({
+        pHand: pHand,
+        dHand: dHand,
+        pCard1Number: pCard1Number,
+        pCard2Number: pCard2Number,
+    }, () => this.whatCheckHandFunctionToRun() )
+  }
+
+  whatCheckHandFunctionToRun = () => {
+    const pCard1Number = this.state.pCard1Number
+    const pCard2Number = this.state.pCard2Number
+
+    if (pCard1Number === pCard2Number ){
+        //  run split check
+        this.checkSplitHand()
+    } else if (pCard1Number === 11 || pCard2Number === 11){
+        //  Run soft hands check
+        this.checkSoftHand()
+    } else {
+        //  Run hard hands check
+        this.checkHardHand()
+    }
+  }
+
+
+  checkHardHand = () => {
+    console.log('check HARD hands function ran')
+    const pHand = this.state.pHand;
+    const dHand = this.state.dHand;
 
     if (pHand <= 8 ){
         console.log('the correct Play is HIT')
@@ -133,8 +182,94 @@ dealCard = () => {
     }  else if (pHand === 16 && dHand <= 11){
         console.log('the correct Play is SURRENDER (else hit)')
     }
-
   }
+
+  checkSoftHand = () => {
+    console.log('check Soft hands function ran')
+    const pHand = this.state.pHand;
+    const dHand = this.state.dHand;
+
+    if (pHand >= 19){
+        console.log('the correct play is STAND')
+    } else if(pHand === 13 && dHand <= 4){
+        console.log('the correct play is HIT')
+    } else if (pHand === 13 && dHand <= 6){
+        console.log('the correct play is DOUBLE.  Else Hit.')
+    } else if(pHand === 13 && dHand <= 11){
+        console.log('the correct play is HIT')
+    } else if(pHand === 14 && dHand <= 4){
+        console.log('the correct play is HIT')
+    } else if (pHand === 14 && dHand <= 6){
+        console.log('the correct play is DOUBLE.  Else Hit.')
+    } else if(pHand === 14 && dHand <= 11){
+        console.log('the correct play is HIT')
+    } else if(pHand === 15 && dHand <= 3){
+        console.log('the correct play is HIT')
+    } else if (pHand === 15 && dHand <= 6){
+        console.log('the correct play is DOUBLE.  Else Hit.')
+    } else if(pHand === 15 && dHand <= 11){
+        console.log('the correct play is HIT')
+    }  else if(pHand === 16 && dHand <= 3){
+        console.log('the correct play is HIT')
+    } else if (pHand === 16 && dHand <= 6){
+        console.log('the correct play is DOUBLE.  Else Hit.')
+    } else if(pHand === 16 && dHand <= 11){
+        console.log('the correct play is HIT')
+    } else if(pHand === 17 && dHand === 2){
+        console.log('the correct play is HIT')
+    } else if (pHand === 17 && dHand <= 6){
+        console.log('the correct play is DOUBLE.  Else Hit.')
+    } else if(pHand === 17 && dHand <= 11){
+        console.log('the correct play is HIT')
+    } else if(pHand === 18 && dHand === 2){
+        console.log('the correct play is STAND')
+    } else if (pHand === 18 && dHand <= 6){
+        console.log('the correct play is DOUBLE.  Else Stand.')
+    } else if(pHand === 18 && dHand <= 8){
+        console.log('the correct play is STAND')
+    } else if(pHand === 18 && dHand <= 11){
+        console.log('the correct play is HIT')
+    }
+  }
+
+
+  checkSplitHand = () => {
+    console.log('check SPLIT hands function ran')
+    const pHand = this.state.pHand;
+    const dHand = this.state.dHand;
+
+    if(pHand === 22){
+        console.log('the correct play is SPLIT')
+    } else if (pHand === 20){
+        console.log('the correct play is STAND')
+    } else if (pHand === 16){
+        console.log('the correct play is SPLIT')
+    } else if((pHand === 4 || pHand === 6) && dHand <= 7){
+        console.log('the correct play is SPLIT')
+    } else if((pHand === 4 || pHand === 6) && dHand <= 11){
+        console.log('the correct play is HIT')
+    } else if(pHand === 8 && dHand <= 4){
+        console.log('the correct play is HIT')
+    } else if (pHand === 8 && dHand <= 6){
+        console.log('the correct play is SPLIT')
+    } else if (pHand === 8 && dHand <= 11){
+        console.log('the correct play is HIT')
+    } else if (pHand === 12 && dHand <= 6){
+        console.log('the correct play is SPLIT')
+    } else if (pHand === 12 && dHand <= 11){
+        console.log('the correct play is HIT')
+    } else if (pHand === 14 && dHand <= 7){
+        console.log('the correct play is SPLIT')
+    } else if (pHand === 14 && dHand <= 11){
+        console.log('the correct play is HIT')
+    } else if (pHand === 18 & (dHand === 7 || dHand === 10 || dHand === 11 ) ){
+        console.log('the correct play is STAND')
+    }  else if (pHand === 18 && dHand <= 9 ){
+        console.log('the correct play is SPLIT')
+    }
+
+}
+
 
     render() {
 
@@ -143,15 +278,15 @@ dealCard = () => {
                 <div className='basicStrategyWrapper'>
                 <h1>Train Basic Strategy</h1>
                 <h3 className='handDescription'>Dealer Hand</h3>
-                    <div className='dealerHand'>
+                    <div className='dealerHandBS'>
                         
-                       <img src={this.state.dealerImages}></img>
+                       <img className='cardBS' src={this.state.dealerImages}></img>
 
                     </div>
-                    <div className='playerHand'>
+                    <div className='playerHandBS'>
                     
-                      <img src={this.state.playerImage1}></img>
-                      <img src={this.state.playerImage2}></img>
+                      <img  className='cardBS' src={this.state.playerImage1}></img>
+                      <img  className='cardBS' src={this.state.playerImage2}></img>
                     </div>
                     <h3 className='handDescription'>Player Hand</h3>
                     <div className='basicStrategyButtonWrapper'>
