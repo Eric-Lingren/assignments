@@ -22,7 +22,8 @@ class TrainBasicStrategy extends Component {
             options: ['HIT', 'STAND', 'DOUBLE', 'SPLIT', 'SURRENDER'],
             playerGuess: '',
             buttonList: '',
-            buttonClass: 'checkButton'
+            buttonClass: 'checkButton',
+            bottomMargin: '18px'
         }
     }
     componentDidMount(){
@@ -476,7 +477,7 @@ checkButton = (e) => {
         }
     })
 
-    this.setState({buttonList: butts, buttonClass: 'checkButtonOff'})
+    this.setState({buttonList: butts, buttonClass: 'checkButtonOff', bottomMargin: '0px'})
 }
 
 
@@ -498,7 +499,7 @@ checkButton = (e) => {
                     </div>
                     <h3 className='handDescription'>Player Hand</h3>
                     <div className='basicStrategyButtonWrapper'>
-                        <h2>Choose the correct play:</h2>
+                        <h2 style={{marginBottom: this.state.bottomMargin}}>Choose the correct play:</h2>
                         <button className={this.state.buttonClass} onClick={this.checkButton} id='buttonHit' name='HIT' value='HIT' >Hit</button>
                         <button className={this.state.buttonClass} onClick={this.checkButton} id='buttonStand' name='STAND' value='STAND' >Stand</button>
                         <button className={this.state.buttonClass} onClick={this.checkButton} id='buttonDouble' name='DOUBLE' value='DOUBLE' >Double</button>

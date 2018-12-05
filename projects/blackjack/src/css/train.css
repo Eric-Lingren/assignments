@@ -120,10 +120,14 @@
 
 .checkButtonOff {
     display:none;
+    
+
 }
 #correct {
     background-color: #0f9b0f;
+   
 }
 #wrong {
     background-color: red;
+    margin-top: -3px;
 }
