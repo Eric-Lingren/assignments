@@ -142,11 +142,11 @@
 
 }
 #correct {
-    background-color: #0f9b0f;
+    background-color: #05FF00;
    
 }
 #wrong {
-    background-color: red;
+    background-color: #FF530D;
     margin-top: -3px;
 }
 .cardsPerSecondSpan{

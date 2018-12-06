@@ -48,7 +48,7 @@ class TrainSpeedCount extends Component {
     setTimeout( ()=> { 
         clearInterval(timerId)
         this.countIsFinished()
-    }, 15000)  
+    }, 10000)  
     }
     
       whatsTheCount = () => {
@@ -75,7 +75,7 @@ class TrainSpeedCount extends Component {
             this.setState({
                 runningCountVisible: true
             }) 
-          }, 1000)
+          }, 1500)
         
       }
     

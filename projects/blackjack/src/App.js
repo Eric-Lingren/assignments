@@ -72,7 +72,9 @@ class App extends Component {
       playerBaseBet: 50,
       showCountDiv: false,
       showAdviceDiv: false,
-      playerAdvantage: ''
+      playerAdvantage: '',
+      dealerCardFaceShowing: false,
+      dealerCardBackShowing: false,
     }
   }
  
@@ -106,7 +108,8 @@ class App extends Component {
               decksPlayed: ((this.state.cardsDealt / 52).toFixed(2) ),
               remainingDecks: ( (this.state.deckCount - this.state.decksPlayed).toFixed(2) ),
               trueCount: ((this.state.count / this.state.remainingDecks).toFixed(1)),
-              playerAdvantage: (-0.5 + (this.state.trueCount * 0.5) ),
+              playerAdvantage: ( (-0.5 + (this.state.trueCount * 0.5)).toFixed(2) ),
+              dealerCardBackShowing: true
             }
           })
         } else {
@@ -120,7 +123,7 @@ class App extends Component {
               decksPlayed: ((this.state.cardsDealt / 52).toFixed(2) ),
               remainingDecks: ( (this.state.deckCount - this.state.decksPlayed).toFixed(2) ),
               trueCount: ((this.state.count / this.state.remainingDecks).toFixed(1)),
-              playerAdvantage: (-0.5 + (this.state.trueCount * 0.5) ),
+              playerAdvantage: ( (-0.5 + (this.state.trueCount * 0.5)).toFixed(2) ),
             }
           })
         }
@@ -281,7 +284,7 @@ initialBlackjack = () => {
         remainingCards: remainingCards,
         remainingDecks: ( (this.state.deckCount - this.state.decksPlayed).toFixed(2) ),
         trueCount: ((this.state.count / this.state.remainingDecks).toFixed(1)),
-        playerAdvantage: (-0.5 + (this.state.trueCount * 0.5) ),
+        playerAdvantage: ( (-0.5 + (this.state.trueCount * 0.5)).toFixed(2) ),
       }
       //  Once state is set from the new card, re-run the player hand total functions
     }, () => this.countPlayerTotal()) 
@@ -366,6 +369,7 @@ initialBlackjack = () => {
           playerBust2: false,
           dealerBust: false,
           playerDoubleBet: 0,
+          dealerCardBackShowing: false,
       })
   }
 
@@ -388,7 +392,7 @@ initialBlackjack = () => {
           remainingCards: remainingCards,
           remainingDecks: ( (this.state.deckCount - this.state.decksPlayed).toFixed(2) ),
           trueCount: ((this.state.count / this.state.remainingDecks).toFixed(1)),
-          playerAdvantage: (-0.5 + (this.state.trueCount * 0.5) ),
+          playerAdvantage: ( (-0.5 + (this.state.trueCount * 0.5)).toFixed(2) ),
         }
       }, () => this.countDealerTotal() )
       this.whatsTheCountGame()
@@ -439,7 +443,8 @@ checkWhoWon = () => {
   playerStands = () => {
     //  When player stands need to check the value of the dealer hand.  
     this.setState({
-      playerClickedStand: true
+      playerClickedStand: true,
+      dealerCardBackShowing: false,
     });
     //  If dealer hand value is lower than 17, need to deal themself enough cards until they are over 17.
     //console.log(this.state.dealerHandTotalPostAces)
@@ -737,6 +742,7 @@ if(this.state.showAdviceDiv === false){
               showAdviceDiv={this.state.showAdviceDiv}
               hideShowAdvice={this.hideShowAdvice}
               playerAdvantage={this.state.playerAdvantage}
+              dealerCardBackShowing={this.state.dealerCardBackShowing}
               />}/>
           <Route path="/train" component={Train}/>
           <Route path="/learn" component={Learn}/>

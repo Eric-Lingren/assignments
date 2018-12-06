@@ -173,7 +173,7 @@ button{
     margin: 3px;
     border: 2px solid black;
     position: relative;
-    top: 75%;
+    top: 67%;
     opacity: .8;
     transition: .3s ease-out;
 }
@@ -210,6 +210,7 @@ button{
     border: 2px solid black;
     opacity: .8;
     transition: .3s ease-out;
+    margin-top: 5%;
 }
 .clearBetButton:hover{
     transition: .3s ease-out;
@@ -219,7 +220,7 @@ button{
 }
 
 .bankOptions{
-    height: 300px;
+    height: 500px;
     width: 240px;
     position: absolute;
     left: 0%;
@@ -234,8 +235,16 @@ button{
     border: 2px solid black;
     opacity: .6;
     width: 90%;
-    margin-top: 5%;
+    margin-top: 90%;
 
+}
+.deckInfo{
+    background-color: white;
+    border-radius: 20px;
+    border: 2px solid black;
+    opacity: .6;
+    width: 90%;
+    margin-top: 0%;
 }
 .tableOutcome{
     color: white;
@@ -245,3 +254,14 @@ button{
     margin-bottom: 0;
     padding-bottom: 0;
 }
+.cardBackVisible{
+    width: 32%;
+    height: auto;
+    opacity: 1;
+}
+.cardBackHidden{
+    width: 10%;
+    height: auto;
+    opacity: 0;
+}
+

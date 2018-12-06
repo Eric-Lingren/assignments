@@ -8,10 +8,11 @@ import twentyFiveDollar from './css/images/$25.png';
 import fiftyDollar from './css/images/$50.png';
 import hundredDollar from './css/images/$100.png';
 import fiveHundredDollar from './css/images/$500.png';
+import cardBack from './css/images/cardBack.png'
 
 
 const Play = (props) => {
-const { dealHand, dealOneCard, dealerHandImages, playerHandImages, playerHandImages2, playerHandTotal, dealerHandTotal, playerStands, playerDoubles, playerDoubleBet, playerSplits, playerBet, playerBankroll, bet1, bet5, bet25, bet50, bet100, bet500, playerClickedStand, playerClickedDouble, playerClickedSplit, dealerWins, playerWins, playerBust, dealerBust, clearBet, gameCount, hideShowCount, cardsDealt, decksPlayed, remainingCards, remainingDecks, trueCount, playerBaseBet, playerHand2Total, showCountDiv, showAdviceDiv, hideShowAdvice, playerAdvantage } = props;
+const { dealHand, dealOneCard, dealerHandImages, playerHandImages, playerHandImages2, playerHandTotal, dealerHandTotal, playerStands, playerDoubles, playerDoubleBet, playerSplits, playerBet, playerBankroll, bet1, bet5, bet25, bet50, bet100, bet500, playerClickedStand, playerClickedDouble, playerClickedSplit, dealerWins, playerWins, playerBust, dealerBust, clearBet, gameCount, hideShowCount, cardsDealt, decksPlayed, remainingCards, remainingDecks, trueCount, playerBaseBet, playerHand2Total, showCountDiv, showAdviceDiv, hideShowAdvice, playerAdvantage, dealerCardBackShowing } = props;
 
     function tableStatus(){
         // console.log('did dealer win: ' + dealerWins);
@@ -76,6 +77,7 @@ const { dealHand, dealOneCard, dealerHandImages, playerHandImages, playerHandIma
             <div className='table'>
                 <div className='dealerHand'>
                 {dealerHandImages.map(dealtCard => <DisplayACard card={dealtCard} />)}
+                <img className={dealerCardBackShowing? 'cardBackVisible' : 'cardBackHidden'} src={cardBack } alt=''></img>
                 </div>
 
                 <div className='statsContainer'>
@@ -90,9 +92,7 @@ const { dealHand, dealOneCard, dealerHandImages, playerHandImages, playerHandIma
                         <h3 className='handTotals'>Running Count: {gameCount} </h3>
                         <h3 className='handTotals'>True Count: {trueCount} </h3>
                         <h3 className='handTotals'>Cards Dealt: {cardsDealt} </h3>
-                        <h3 className='handTotals'>Decks Played: {decksPlayed} </h3>
                         <h3 className='handTotals'>Remaining Cards: {remainingCards} </h3>
-                        <h3 className='handTotals'>Remaining Decks: {remainingDecks} </h3>
                         <h3 className='handTotals'>Player Advantage: {playerAdvantage}% </h3>
                         <h3 className='handTotals'>Optimal Bet: {betSize }</h3> 
                     </div>
@@ -129,12 +129,18 @@ const { dealHand, dealOneCard, dealerHandImages, playerHandImages, playerHandIma
                 {/* <Hand playerClickedSplit={playerClickedSplit} playerHandImages={playerHandImages} card={dealtCard} /> */}
                 
                 <div className='bankOptions'>
-                    <button className='clearBetButton' onClick={clearBet} > Clear Bet </button>
+                    <div className='deckInfo' >
+                        <h2 className='helpTitle'>Deck Stats</h2>
+                        <h3 className='handTotals'>Decks Played: {decksPlayed}</h3>
+                        <h3 className='handTotals'>Remaining Decks: {remainingDecks} </h3>
+                    </div>
+                    
                     <div className='bankStats'>
                         <h2  className='helpTitle'>Player Bankroll: ${playerBankroll} </h2>
                         <h3  className='handTotals'>Player Bet: ${playerBet} </h3>
                         <h3  className='handTotals'>Double Bet: ${dbl}</h3>
                     </div>
+                    <button className='clearBetButton' onClick={clearBet} > Clear Bet </button>
                 </div>
                 
             </div>
