@@ -60,7 +60,7 @@ class App extends Component {
       playerClickedSplit: false,
       playerBet: 0,
       playerDoubleBet: 0,
-      playerBankroll: 1000,
+      playerBankroll: 15000,
       dealerWins: false,
       playerWins: false,
       playerBust: false,

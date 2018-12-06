@@ -7,12 +7,13 @@
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
-    height: 95vh;
-    margin-top: 0%;
+    height: 150vh;
+    margin-top: -5%;
     padding-top: 0;
     width: 100%;
 }
 .dealerHand{
+    margin-top: 5%;
     height: 30vh;
     width: 30vw;
     margin-left: 40%;
@@ -67,29 +68,40 @@ button{
     margin-left: 8%;
 }
 .showCountStats{
-    background-color: cornflowerblue;
-    width: 20%;
+    background-color: white;
+    padding: 3%;
+    padding-bottom: 0;
+    margin-bottom: 0;
     position: absolute;
-    right: 0;
-    top: 40%;
+    margin-right: 10%;
+    top: 35%;
+    border-radius: 20px;
+    border: 2px solid black;
+    opacity: .6;
+    width: 80%;
 
 }
 .hideCountStats{
     background-color: cornflowerblue;
     width: 20%;
     position: absolute;
-    right: 0;
     top: 40%;
     opacity: 0;
 }
 
 .showAdvice{
     height: 100px;
-    width: 20%;
-    background-color: lightsalmon;
+    background-color: white;
+    padding: 3%;
+    padding-bottom: 0;
+    margin-bottom: 0;
     position: absolute;
-    right: 0;
-    top: 10%;
+    margin-right: 10%;
+    top: 12%;
+    width: 180px;
+    border-radius: 20px;
+    border: 2px solid black;
+    opacity: .6;
 }
 .hideAdvice{
     height: 100px;
@@ -102,4 +114,82 @@ button{
 }
 .h1TablePlaceholder{
     opacity: 0;
+    font-size: 3em;
+    margin-bottom: 0;
+    padding-bottom: 0;
+}
+
+.statsContainer{
+    height: 600px;
+    width: 240px;
+    position: absolute;
+    left: 83%;
+    top: 10%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+}
+.centerTableOptions{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 3%
+
+}
+.helpTitle{
+    margin: 0;
+    padding-left: 0px;
+    text-align: center;
+    border-bottom: 3px solid black
+}
+.handTotals{
+    margin: 0;
+    padding: 4px;
+    
+}
+.showCountButton{
+    border-radius: 5px;
+    padding: 3px;
+    margin: 3px;
+    border: 2px solid black;
+    position: relative;
+    top: 70%;
+}
+.dealHandButton{
+    background-color: black;
+    color: white;
+    border-radius: 5px;
+    padding: 5px;
+    margin: 3px;
+    border: 2px solid white;
+}
+
+.bankOptions{
+    height: 300px;
+    width: 240px;
+    position: absolute;
+    left: 0%;
+    top: 10%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.bankStats{
+    background-color: white;
+    border-radius: 20px;
+    border: 2px solid black;
+    opacity: .6;
+    width: 90%;
+    margin-top: 5%;
+
+}
+.tableOutcome{
+    color: white;
+    text-shadow: 2px 2px 5px black;
+    text-align: center;
+    font-size: 3em;
+    margin-bottom: 0;
+    padding-bottom: 0;
 }

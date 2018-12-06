@@ -17,11 +17,11 @@ const { dealHand, dealOneCard, dealerHandImages, playerHandImages, playerHandIma
         // console.log('did dealer win: ' + dealerWins);
         // console.log('did player bust: ' +  playerBust); 
         if((playerHandTotal && dealerWins) || (playerHandTotal && playerBust)){
-            return <h1>Dealer Wins</h1>
+            return <h1 className='tableOutcome'>Dealer Wins</h1>
         } else if( (playerHandTotal && playerWins) || (playerHandTotal && dealerBust) ){
-            return <h1>Player Wins</h1>
+            return <h1 className='tableOutcome'>Player Wins</h1>
         } else if(playerHandTotal && playerHandTotal === dealerHandTotal && playerClickedStand ){
-            return <h1>Push</h1>
+            return <h1 className='tableOutcome'>Push</h1>
         } else { 
             return <h1 className='h1TablePlaceholder'>Nothing Here</h1>
         }
@@ -61,9 +61,9 @@ const { dealHand, dealOneCard, dealerHandImages, playerHandImages, playerHandIma
 
     function showAdvice(){
         if (showAdviceDiv){
-            return <span>Hide Advice</span>
+            return <span>Hide Help</span>
         }else {
-            return <span>Show Advice</span>
+            return <span>Show Help</span>
         }
     }
 
@@ -78,25 +78,39 @@ const { dealHand, dealOneCard, dealerHandImages, playerHandImages, playerHandIma
                 {dealerHandImages.map(dealtCard => <DisplayACard card={dealtCard} />)}
                 </div>
 
-                <div>
-                    <h2>Dealer Total: {dealerHandTotal}</h2>
-                    <button className='playButtons' onClick={dealHand} >Deal Hand</button>
+                <div className='statsContainer'>
+                <button className='playButtons' onClick={hideShowAdvice} > {showTheAdvice}</button>
+                <div className={showAdviceDiv ? 'showAdvice' : 'hideAdvice'}>
+                    <h2 className='helpTitle'>Help</h2>
+                    <h3 className='handTotals'>Dealer Total: {dealerHandTotal}</h3>
+                    <h3 className='handTotals'>Player Total: {playerHandTotal} </h3>
+                </div>
+                    <div className={showCountDiv ? 'showCountStats' : 'hideCountStats'}>
+                        <h2 className='helpTitle'>Count Stats:</h2>
+                        <h3 className='handTotals'>Running Count: {gameCount} </h3>
+                        <h3 className='handTotals'>True Count: {trueCount} </h3>
+                        <h3 className='handTotals'>Cards Dealt: {cardsDealt} </h3>
+                        <h3 className='handTotals'>Decks Played: {decksPlayed} </h3>
+                        <h3 className='handTotals'>Remaining Cards: {remainingCards} </h3>
+                        <h3 className='handTotals'>Remaining Decks: {remainingDecks} </h3>
+                        <h3 className='handTotals'>Optimal Bet: {betSize }</h3> 
+                    </div>
+                    <button className='showCountButton' onClick={hideShowCount} > {showTheCount}</button>
+                </div>
+
+                <div className='centerTableOptions'>
+                    
+                    <button className='dealHandButton' onClick={dealHand} >Deal Hand</button><br></br>
+                    <div>
                     <button className='playButtons' onClick={dealOneCard} >Hit</button>
                     <button className='playButtons' onClick={playerStands} > Stand </button>
                     <button className='playButtons' onClick={playerDoubles} > Double </button>
                     <button className='playButtons' onClick={playerSplits} > Split </button>
                     { stat }
-                    <h2>Player Total: {playerHandTotal} </h2>
+                    </div>
+                    
                 </div>
-                
-                
-                
-                
-                <button className='playButtons' onClick={clearBet} > Clear Bet </button>
-
-                <button className='playButtons' onClick={hideShowCount} > {showTheCount}</button>
-                <button className='playButtons' onClick={hideShowAdvice} > {showTheAdvice}</button>
-                
+              
                 {splitTheseCards}
                 <div className='chipContainer'>
                     <img src={oneDollar} onClick={bet1} alt='chip' className='pokerChip'></img>
@@ -113,24 +127,14 @@ const { dealHand, dealOneCard, dealerHandImages, playerHandImages, playerHandIma
                 <SplitHand playerClickedSplit={playerClickedSplit} splitCards={playerHandImages2} />
                 {/* <Hand playerClickedSplit={playerClickedSplit} playerHandImages={playerHandImages} card={dealtCard} /> */}
                 
-                
-                <h2 className='playerBankroll'>Player Bankroll: ${playerBankroll} </h2>
-                <div className={showCountDiv ? 'showCountStats' : 'hideCountStats'}>
-                    <h2>Count Stats:</h2>
-                    <h3>Running Count: {gameCount} </h3>
-                    <h3>True Count: {trueCount} </h3>
-                    <h3>Cards Dealt: {cardsDealt} </h3>
-                    <h3>Decks Played: {decksPlayed} </h3>
-                    <h3>Remaining Cards: {remainingCards} </h3>
-                    <h3>Remaining Decks: {remainingDecks} </h3>
-                    <h3>Optimal Bet: {betSize }</h3>
-                    
+                <div className='bankOptions'>
+                    <button className='playButtons' onClick={clearBet} > Clear Bet </button>
+                    <div className='bankStats'>
+                        <h2  className='helpTitle'>Player Bankroll: ${playerBankroll} </h2>
+                        <h3  className='handTotals'>Player Bet: ${playerBet} </h3>
+                        <h3  className='handTotals'>Double Bet: ${dbl}</h3>
+                    </div>
                 </div>
-                <div className={showAdviceDiv ? 'showAdvice' : 'hideAdvice'}>
-                    <h2>Help:</h2>
-                </div>
-                <h2 className='playerBet'>Player Bet: ${playerBet} </h2>
-                <h2 className='playerDouble'>Double: ${dbl}</h2>
                 
             </div>
 
