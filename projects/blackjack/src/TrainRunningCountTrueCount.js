@@ -78,7 +78,7 @@ class TrainRunningCountSpeedCount extends Component {
                     <h2 className='subTitle'>Decks Left: {this.state.randomDeck}</h2>
                     <h2>What's the true count? (round) </h2>
                     <form className='runningCountTrueCountForm'>
-                        <input type='number' name='guess' value={this.state.guess} onChange={this.handleChange} placeholder='Enter True Count' ></input><br></br>
+                        <input className='runCountTrueCountInput' type='number' name='guess' value={this.state.guess} onChange={this.handleChange} placeholder='Enter True Count' ></input><br></br>
                        
                     </form>
                     <button className='checkButton' onClick={this.clickNew}>New</button>

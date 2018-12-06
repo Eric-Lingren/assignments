@@ -90,7 +90,7 @@ dealCard = () => {
                     <div className='deckDisplay'>
                         <img src={this.state.cardsDealtImages} alt='Cards Displayed Here'></img>
                     </div>
-                    <button onClick={this.dealCard}>Deal Card</button>
+                    <button className='checkButton' onClick={this.dealCard}>Deal Card</button>
                     <h2 onClick={this.hideShowRunningCount} className='toggleCount'>{this.hideShowCountDiv()} </h2>
                     <h2 className={this.state.runningCountVisible ? 'hideCountDiv' : 'showCountDiv' }> The Running Count is: {this.state.count} </h2>
                     

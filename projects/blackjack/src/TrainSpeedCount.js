@@ -100,12 +100,12 @@ class TrainSpeedCount extends Component {
                 <div className='container'>
                     <h1>Speed Count Training</h1>
                     <form>
-                        Cards Per Second: <input name='cardsPerSecond' type='number' value={this.state.cardsPerSecond} placeholder='Cards Per Second' onChange={this.handleChange}></input>
+                        <span className='cardsPerSecondSpan'>Cards Per Second:</span> <input className='cardsPerSecondInput' name='cardsPerSecond' type='number' value={this.state.cardsPerSecond} placeholder='Cards Per Second' onChange={this.handleChange}></input>
                     </form>
                     <div className='deckDisplay'>
                         <img src={this.state.cardsDealtImages} alt='Cards Displayed Here'></img>
                     </div>
-                    <button onClick={this.dealCard}>start</button>
+                    <button className='checkButton' onClick={this.dealCard}>Start</button>
                     <h2 className={this.state.runningCountVisible ? 'showCountDiv' : 'hideCountDiv' }>The count is: {this.state.count}</h2>
                 </div>
             </div>

@@ -131,3 +131,24 @@
     background-color: red;
     margin-top: -3px;
 }
+.cardsPerSecondSpan{
+    font-size: 1.5em;
+    font-weight: 500;
+    margin-left: 15%;
+}
+.cardsPerSecondInput{
+    padding: 3px;
+    font-size: 1.3em;
+    width: 30%;
+    border-radius: 5px;
+    border: black solid 1px;
+}
+
+.runCountTrueCountInput{
+    padding: 3px;
+    font-size: 1.3em;
+    width: 40%;
+    border-radius: 5px;
+    border: black solid 1px;
+    margin-left: 27%;
+}

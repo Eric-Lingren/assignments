@@ -8,3 +8,20 @@ h1{
     margin-top: 0;
     padding-top: 0; 
 }
+
+.homeWrapper{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.homeText{
+    color: #FFF;
+}
+.homeLogo{
+    width: 50%;
+    height: auto;
+    border-radius: 50px;
+    border: 1px white solid;
+    box-shadow: 5px 10px 20px;
+}

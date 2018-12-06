@@ -23,7 +23,7 @@ const { dealHand, dealOneCard, dealerHandImages, playerHandImages, playerHandIma
         } else if(playerHandTotal && playerHandTotal === dealerHandTotal && playerClickedStand ){
             return <h1>Push</h1>
         } else { 
-            return <h1>Dealer Stands on 17</h1>
+            return <h1 className='h1TablePlaceholder'>Nothing Here</h1>
         }
     }
     const stat = tableStatus()
@@ -77,35 +77,43 @@ const { dealHand, dealOneCard, dealerHandImages, playerHandImages, playerHandIma
                 <div className='dealerHand'>
                 {dealerHandImages.map(dealtCard => <DisplayACard card={dealtCard} />)}
                 </div>
-                <h2>Dealer Total: {dealerHandTotal}</h2>
-                {
-                    stat
-                }
+
+                <div>
+                    <h2>Dealer Total: {dealerHandTotal}</h2>
+                    <button className='playButtons' onClick={dealHand} >Deal Hand</button>
+                    <button className='playButtons' onClick={dealOneCard} >Hit</button>
+                    <button className='playButtons' onClick={playerStands} > Stand </button>
+                    <button className='playButtons' onClick={playerDoubles} > Double </button>
+                    <button className='playButtons' onClick={playerSplits} > Split </button>
+                    { stat }
+                    <h2>Player Total: {playerHandTotal} </h2>
+                </div>
                 
-                <button onClick={dealHand} >Deal Hand</button>
-                <button onClick={dealOneCard} >Hit</button>
-                <button onClick={playerStands} > Stand </button>
-                <button onClick={playerDoubles} > Double </button>
-                <button onClick={playerSplits} > Split </button>
-                <button onClick={clearBet} > Clear Bet </button>
-                <button onClick={hideShowCount} > {showTheCount}</button>
-                <button onClick={hideShowAdvice} > {showTheAdvice}</button>
-                <h2>Player Total: {playerHandTotal} </h2>
+                
+                
+                
+                <button className='playButtons' onClick={clearBet} > Clear Bet </button>
+
+                <button className='playButtons' onClick={hideShowCount} > {showTheCount}</button>
+                <button className='playButtons' onClick={hideShowAdvice} > {showTheAdvice}</button>
+                
                 {splitTheseCards}
-                <img src={oneDollar} onClick={bet1} alt='chip' className='pokerChip'></img>
-                <img src={fiveDollar} onClick={bet5} alt='chip' className='pokerChip'></img>
-                <img src={twentyFiveDollar} onClick={bet25} alt='chip' className='pokerChip'></img>
-                <img src={fiftyDollar} onClick={bet50} alt='chip' className='pokerChip'></img>
-                <img src={hundredDollar} onClick={bet100} alt='chip' className='pokerChip'></img>
-                <img src={fiveHundredDollar} onClick={bet500} alt='chip' className='pokerChip'></img>
+                <div className='chipContainer'>
+                    <img src={oneDollar} onClick={bet1} alt='chip' className='pokerChip'></img>
+                    <img src={fiveDollar} onClick={bet5} alt='chip' className='pokerChip'></img>
+                    <img src={twentyFiveDollar} onClick={bet25} alt='chip' className='pokerChip'></img>
+                    <img src={fiftyDollar} onClick={bet50} alt='chip' className='pokerChip'></img>
+                    <img src={hundredDollar} onClick={bet100} alt='chip' className='pokerChip'></img>
+                    <img src={fiveHundredDollar} onClick={bet500} alt='chip' className='pokerChip'></img>
+                </div>
+
                 <div className='playerHand'>
                     {playerHandImages.map(dealtCard => <DisplayACard card={dealtCard} />)}                 
                 </div>
                 <SplitHand playerClickedSplit={playerClickedSplit} splitCards={playerHandImages2} />
                 {/* <Hand playerClickedSplit={playerClickedSplit} playerHandImages={playerHandImages} card={dealtCard} /> */}
                 
-                <h2 className='playerBet'>Player Bet: ${playerBet} </h2>
-                <h2 className='playerDouble'>Double: ${dbl}</h2>
+                
                 <h2 className='playerBankroll'>Player Bankroll: ${playerBankroll} </h2>
                 <div className={showCountDiv ? 'showCountStats' : 'hideCountStats'}>
                     <h2>Count Stats:</h2>
@@ -116,11 +124,13 @@ const { dealHand, dealOneCard, dealerHandImages, playerHandImages, playerHandIma
                     <h3>Remaining Cards: {remainingCards} </h3>
                     <h3>Remaining Decks: {remainingDecks} </h3>
                     <h3>Optimal Bet: {betSize }</h3>
+                    
                 </div>
                 <div className={showAdviceDiv ? 'showAdvice' : 'hideAdvice'}>
                     <h2>Help:</h2>
                 </div>
-                
+                <h2 className='playerBet'>Player Bet: ${playerBet} </h2>
+                <h2 className='playerDouble'>Double: ${dbl}</h2>
                 
             </div>
 

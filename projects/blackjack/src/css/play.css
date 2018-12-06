@@ -3,25 +3,26 @@
     justify-content: center;
 }
 .table{
-    background-image: linear-gradient( #0f9b0f, #52c234, #52c234, #0f9b0f);
+    background-image: url('./images/blackjackTable2.jpg');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
     height: 95vh;
-    margin-top: 0;
+    margin-top: 0%;
     padding-top: 0;
     width: 100%;
 }
 .dealerHand{
-    background-color: grey;
     height: 30vh;
     width: 30vw;
-    margin-left: auto;
+    margin-left: 40%;
     margin-right: auto;
     display: flex;
 }
 .playerHand{
-    background-color: grey;
     height: 30vh;
     width: 30vw;
-    margin-left: 0;
+    margin-left: 40%;
     margin-right: auto;
     display: flex;
 }
@@ -30,26 +31,40 @@ button{
     padding: 10px;
     font-size: 2em;
 }
+.playButtons{
+    border-radius: 5px;
+    padding: 3px;
+    margin: 3px;
+    border: 2px solid black;
+}
 .displayCard{
     height: auto;
     width: 30%;
+}
+.chipContainer{
+   margin-left: 1%;
 }
 .pokerChip{
     width: 5vw;
     height: auto;
     float: left;
+    margin-top: 6%;
+    border: 1px solid white;
+    border-radius: 50%;
+    margin-left: 4px;
+}
+.pokerChip:hover{
+    border: 3px solid white;
 }
 .playerBet{
-  position: absolute; 
-  top: 70px;
+  
 }
 .playerDouble{
-    position: absolute; 
-    top: 100px;
+    
 }
 .playerBankroll{
-    position: absolute; 
-    top: 130px;
+    margin-top: -7%;
+    margin-left: 8%;
 }
 .showCountStats{
     background-color: cornflowerblue;
@@ -68,9 +83,6 @@ button{
     opacity: 0;
 }
 
-.splitHand{
-
-}
 .showAdvice{
     height: 100px;
     width: 20%;
@@ -86,5 +98,8 @@ button{
     position: absolute;
     right: 0;
     top: 10%;
+    opacity: 0;
+}
+.h1TablePlaceholder{
     opacity: 0;
 }
