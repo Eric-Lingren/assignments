@@ -18,14 +18,15 @@
 .trainLinksContainer{
     display: flex;
     flex-direction: column;
-    justify-content: center;
     align-items: center; 
-    height: 100vh;
+    height: 80vh;
+    margin-top: 5%;
     
 }
 .trainingDrillsHeader{
     font-size: 3em;
     margin-top: -7%;
+    text-shadow: 2px 2px 2px white;
 }
 .trainLinks{
     color: #FFF;
@@ -44,6 +45,7 @@
 .trainLinks:hover{
     font-size: 2.5em;
     transition: .3s ease-out;
+    text-shadow: 2px 2px 2px black;
    
 }
 .container{

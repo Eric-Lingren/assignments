@@ -17,6 +17,9 @@ h1{
 }
 .homeText{
     color: #FFF;
+    text-shadow: 5px 5px 10px black;
+    margin-bottom: 10px;
+    margin-top: 10px;
 }
 .homeLogo{
     width: 50%;

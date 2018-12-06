@@ -5,8 +5,9 @@
     justify-content: space-evenly;
     height: 5vh;
     align-items: center;
-    opacity: .6;
+    opacity: .9;
     border-bottom: white solid 2px;
+    z-index: -1;
 }
 
 .navLinks{
@@ -17,8 +18,10 @@
     text-decoration: none;
     border-bottom: #FFF 3px solid;
     font-size: 1.2em;
+    transition: .3s ease-out;
 }
 
 .navLinks:hover{
     font-size: 1.5em;
+    transition: .3s ease-out;
 }
