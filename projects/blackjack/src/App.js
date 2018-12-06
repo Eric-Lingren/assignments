@@ -27,7 +27,7 @@ class App extends Component {
   constructor(){
     super()
     this.state = {
-      deckCount: 2,
+      deckCount: 6,
       deckID: '',
       cardsDealt: 0,
       decksPlayed: 0,
