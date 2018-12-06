@@ -72,6 +72,7 @@ class App extends Component {
       playerBaseBet: 50,
       showCountDiv: false,
       showAdviceDiv: false,
+      playerAdvantage: ''
     }
   }
  
@@ -105,6 +106,7 @@ class App extends Component {
               decksPlayed: ((this.state.cardsDealt / 52).toFixed(2) ),
               remainingDecks: ( (this.state.deckCount - this.state.decksPlayed).toFixed(2) ),
               trueCount: ((this.state.count / this.state.remainingDecks).toFixed(1)),
+              playerAdvantage: (-0.5 + (this.state.trueCount * 0.5) ),
             }
           })
         } else {
@@ -118,6 +120,7 @@ class App extends Component {
               decksPlayed: ((this.state.cardsDealt / 52).toFixed(2) ),
               remainingDecks: ( (this.state.deckCount - this.state.decksPlayed).toFixed(2) ),
               trueCount: ((this.state.count / this.state.remainingDecks).toFixed(1)),
+              playerAdvantage: (-0.5 + (this.state.trueCount * 0.5) ),
             }
           })
         }
@@ -278,6 +281,7 @@ initialBlackjack = () => {
         remainingCards: remainingCards,
         remainingDecks: ( (this.state.deckCount - this.state.decksPlayed).toFixed(2) ),
         trueCount: ((this.state.count / this.state.remainingDecks).toFixed(1)),
+        playerAdvantage: (-0.5 + (this.state.trueCount * 0.5) ),
       }
       //  Once state is set from the new card, re-run the player hand total functions
     }, () => this.countPlayerTotal()) 
@@ -384,6 +388,7 @@ initialBlackjack = () => {
           remainingCards: remainingCards,
           remainingDecks: ( (this.state.deckCount - this.state.decksPlayed).toFixed(2) ),
           trueCount: ((this.state.count / this.state.remainingDecks).toFixed(1)),
+          playerAdvantage: (-0.5 + (this.state.trueCount * 0.5) ),
         }
       }, () => this.countDealerTotal() )
       this.whatsTheCountGame()
@@ -731,6 +736,7 @@ if(this.state.showAdviceDiv === false){
               showCountDiv={this.state.showCountDiv}
               showAdviceDiv={this.state.showAdviceDiv}
               hideShowAdvice={this.hideShowAdvice}
+              playerAdvantage={this.state.playerAdvantage}
               />}/>
           <Route path="/train" component={Train}/>
           <Route path="/learn" component={Learn}/>

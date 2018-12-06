@@ -65,7 +65,7 @@ class TrainBetSizing extends Component {
         return ( 
             <div className='trainingWrapper'>
                 <div className='container'>
-                    <h1>Proper Bet Sizing</h1>
+                    <h1 className='trainDrillSubtitle'>Proper Bet Sizing Drill</h1>
                     <h2 className='subTitle'>Your minumum bet size is 1 unit.</h2>
                     <h2 className='subTitle'>Select the correct betting unit size based on the true count:</h2>
                     <h2>True count is: {this.state.randomCount} </h2>

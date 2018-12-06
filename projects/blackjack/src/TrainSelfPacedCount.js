@@ -86,7 +86,7 @@ dealCard = () => {
         return ( 
             <div className='trainingWrapper'>
                 <div className='container'>
-                    <h1>Self Paced Count</h1>
+                    <h1 className='trainDrillSubtitle'>Self Paced Count Drill</h1>
                     <div className='deckDisplay'>
                         <img src={this.state.cardsDealtImages} alt='Cards Displayed Here'></img>
                     </div>

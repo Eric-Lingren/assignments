@@ -485,7 +485,7 @@ checkButton = (e) => {
         return ( 
             <div className='trainingWrapper'>
                 <div className='basicStrategyWrapper'>
-                <h1>Train Basic Strategy</h1>
+                <h1 className='trainDrillSubtitle'>Basic Strategy Drill</h1>
                 <h3 className='handDescription'>Dealer Hand</h3>
                     <div className='dealerHandBS'>
                         
