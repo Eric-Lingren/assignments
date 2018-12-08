@@ -1,6 +1,8 @@
 const express = require('express')
 const app = express()
 const uuid = require('uuid/v4')
+const cors = require('cors')
+// const config = require('./config')
 
 // simulated database
 
@@ -30,6 +32,7 @@ const bountiesCollection = [
 
 // Middleware
 app.use(express.json())
+app.use(cors())
 
 
 
@@ -84,6 +87,6 @@ app.put('/bounties/:_id', (req, res) => {
 
 // Server
 app.listen(4000, () => {
-    console.log('Listening on port 4000')
+    console.log(`Listening on port 4000 `)
 })
 
