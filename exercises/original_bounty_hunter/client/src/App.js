@@ -23,6 +23,8 @@ componentDidMount(){
   })
 }
 
+\
+
 handleChange = event => {
   this.setState({ 
       [event.target.name]: event.target.value,
@@ -45,7 +47,9 @@ handleSubmit = () => {
   })
 }
 
-
+this.setState(prevState => {
+  data: [...prevState, newObj]
+})
 
   render() {
     return (
