@@ -4,7 +4,7 @@ const textContainer = document.getElementById('text-container')
 const p1 = document.getElementById('p1')
 let w = window.innerWidth
 
-// music.play();
+music.play();
 
 TweenMax.to(santa, 10, {x: w+1000, ease:Linear.easeNone, repeat:-1});
 
@@ -27,5 +27,5 @@ function carousel() {
   slideIndex++;
   if (slideIndex > x.length) {slideIndex = 1} 
   x[slideIndex-1].style.display = "block"; 
-  setTimeout(carousel, 5000); // Change image every 2 seconds
+  setTimeout(carousel, 2550); // Change image every 2 seconds
 }
