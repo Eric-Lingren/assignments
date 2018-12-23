@@ -1,0 +1,123 @@
+html, body{
+    margin: 0;
+    padding: 0;
+    
+    height: 100%;
+    width: 100%;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+.page-wrapper{
+    background-image: url(./snowGif.gif);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-color: #000;
+    height: 100%;
+    width: 100%;
+    
+}
+#santa{
+    position: absolute;
+    top: 0px;
+    left: -1000px;
+    height: auto;
+    width: 25vw;
+
+}
+/* 
+#text-container{
+    background-color: rgba(255,255,255, .4);
+    width: 60%;
+    padding: 1vw;
+    border-radius: 2vw;
+    margin-top: -30vh;
+}
+.lyrics{
+    font-size: 3vw;
+    opacity: 0;
+} */
+
+
+.lyric-container{
+    margin-left: 25%;
+    margin-top: 20vh;
+}
+p.timer {
+    position:absolute;
+    top:0;
+    left:0;
+}
+  
+.show {
+    position:absolute;
+    top:10px;
+    left:50px;
+}
+
+.hide {
+    position:absolute;
+    top:40px;
+    left:50px;
+}
+
+.staggeredFade {
+    margin:0;
+    padding:0;
+    list-style:none;
+    font-family:arial;
+    text-transform:uppercase;
+    width:100%;
+    height:100px;
+}
+
+li {
+    text-align:center;
+    line-height:40px;
+    position:absolute;
+    visibility:hidden;
+    color: white;
+    font-size: 3vw;
+    text-shadow: 5px 5px #000;
+
+}
+
+#photo-container{
+    height: 400px;
+    width: 300px;
+    margin-top: 10vh;
+    margin-left: auto;
+    margin-right: auto;
+}
+.mySlides{
+    border: 2px solid white;
+    height: 300px;
+    width: auto;
+    margin-left: -30%;
+    -webkit-box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
+    -moz-box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
+    box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
+
+}
+
+@media only screen and (max-width: 450px) {
+    li {
+        font-size: 6vw;
+        margin-left: -45vw;
+    }#santa{
+        left: -500px;
+        height: auto;
+        width: 50vw;
+    }.lyric-container{
+        margin-left: 50%;
+        margin-top: 15vh;
+    }.mySlides{
+        height: auto;
+        width: 390px;
+    }
+    #photo-container{
+        margin-left: 25%;
+    }
+  }
