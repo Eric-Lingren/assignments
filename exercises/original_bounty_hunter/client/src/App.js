@@ -47,9 +47,9 @@ handleSubmit = () => {
   })
 }
 
-this.setState(prevState => {
-  data: [...prevState, newObj]
-})
+// this.setState(prevState => {
+//   data: [...prevState, newObj]
+// })
 
   render() {
     return (
